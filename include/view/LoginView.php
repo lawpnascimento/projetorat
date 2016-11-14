@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>PROJETO RAT</title>
-  
+  <meta charset="utf-8">
   <script src="../../lib/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="../../js/login.js"></script>
   <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />

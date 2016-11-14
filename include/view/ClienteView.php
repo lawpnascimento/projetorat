@@ -4,7 +4,7 @@
   <title>PROJETO RAT</title>
   <meta charset="utf-8">
   <script type="text/javascript" src="../../js/cliente.js"></script>
-  <script src="../../js/geral.js"></script>
+  <script type="text/javascript" src="../../js/geral.js"></script>
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/menu.css">
 </head>
@@ -40,7 +40,7 @@
               </form> 
                     <!-- DIV PARA MENSAGEM DO CADASTRO -->
                     <div id="divMensagemCadastro" class="alert alert-danger" style="display:none;">
-                      <p id="htmlErro"></p>
+                      <p id="htmlMensagem"></p>
                     </div>
             </div>
 

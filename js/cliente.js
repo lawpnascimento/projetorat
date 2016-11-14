@@ -4,9 +4,8 @@ function submitCliente() {
   var txbEmail = document.getElementById("txbEmail").value;
           
     if(validaCampos(txbNome, txbResp, txbEmail)){
-        document.getElementById("htmlErro").innerHTML = msgErro;
-      //JQuery para alterar o tipo do css de none para display
-          $("#divMensagemCadastro").css("display","block");
+          $("#htmlMensagem").html(msgErro);
+          $("#divMensagemCadastro").css("display","block"); //JQuery para alterar o tipo do css de none para display
     }
     else {
       $.ajax({
@@ -24,9 +23,14 @@ function submitCliente() {
 
           //Se der tudo ok no envio...
           success: function (callback) {
-            
-            alert(callback); 
-            $("#btnConsultar").click();
+          //mensagemSucess();
+             $("#htmlMensagem").html("Cliente inserido com sucesso!");
+             $("#divMensagemCadastro").css("display","block");
+             $("#divMensagemCadastro").removeClass("alert alert-danger");
+             $("#divMensagemCadastro").addClass("alert alert-success");
+             $("#btnConsultar").click();
+             var form = $("#formCliente");
+             limpaCampos(form);
           }
       });  
     }
@@ -53,7 +57,6 @@ function buscaCliente(){
 
         //Se der tudo ok no envio...
         success: function (callback) {
-            alert(callback);
             var json = $.parseJSON(callback);
             var cliente = null;
             var grid = "";
@@ -107,43 +110,6 @@ function buscaCliente(){
     });
 
 }
-
-//JQuery para consultar (Abre um ajax com método POST para o controller chamar a persistencia, ler arquivo json e retornar o callback (body da tabela))
-/*
-$("#btnConsultar").click(function(){
-  $.ajax({
-          //Tipo de envio POST ou GET
-          type: "POST",
-          dataType: "text",
-          data: {
-             action: "consultar"
-          },
-
-          url: "../controller/ClienteController.php",
-
-          //Se der tudo ok no envio...
-          success: function (callback) {
-            
-            var json = $.parseJSON(callback); 
-            var grid = "";
-            for (var i = 0; i < json.length; i++) {
-                var cliente = json[i];
-
-                grid = grid + "<tr>";
-                grid = grid + "<td>" + cliente.nome + "</td>";
-                grid = grid + "<td>" + cliente.resp + "</td>";
-                grid = grid + "<td>" + cliente.email + "</td>";
-                grid = grid + "</tr>";
-
-             }
-
-             $("#grdCliente").html(grid);
-              
-          }
-      });  
-    
-});
-*/
 
 //JQuery para chamar função de limpar tela (geral) passando o parametro do formulario
 $("#btnCancelar").click(function(){
