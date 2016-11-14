@@ -1,0 +1,35 @@
+<?php
+require_once("../model/ProjetoModel.php");
+require_once("../persistencia/ProjetoPersistencia.php");
+
+switch($_POST["action"]){
+	case 'inserir':
+		$model = new ProjetoModel();
+		$model->setProjeto($_POST["projeto"]);
+		$model->setProduto($_POST["produto"]);
+		$model->setdataInicio($_POST["dataInicio"]);
+		$model->setCliente($_POST["cliente"]);
+
+		$persistencia = new ProjetoPersistencia();
+		$persistencia->setModel($model);
+		$persistencia->inserirProjeto();
+
+		break;
+
+	case 'clientedropdown':
+
+       
+
+        $persistencia = new ProjetoPersistencia();
+
+       
+
+        $retorno = $persistencia->buscaClienteDropDown();
+
+        echo $retorno;
+
+        break;
+}
+
+
+?>
