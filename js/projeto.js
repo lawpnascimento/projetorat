@@ -25,10 +25,9 @@ function submitProjeto() {
 
           //Se der tudo ok no envio...
           success: function (callback) {
-             $("#htmlMensagem").html("Cliente inserido com sucesso!");
+             $("#htmlMensagem").html("Projeto inserido com sucesso!");
              mensagemSucess();
-             $("#btnConsultar").click();
-             var form = $("#formCliente");
+             var form = $("#formProjeto");
              limpaCampos(form);
 
             var json = JSON.stringify(callback);

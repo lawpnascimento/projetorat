@@ -28,7 +28,7 @@ class ClientePersistencia{
 	public function inserirCliente(){
 		$this->getConexao()->conectaBanco();
 
-		$nome = $this->getModel()->getNome();
+		    $nome = $this->getModel()->getNome();
         $resp = $this->getModel()->getResp();
         $email = $this->getModel()->getEmail();
 		
@@ -80,39 +80,28 @@ class ClientePersistencia{
         $responsavel = $this->getModel()->getResp();
         $email = $this->getModel()->getEmail();
 
-            $sSql = "SELECT   cli.codCli
-                        	 ,cli.nomCli
-                       		 ,cli.nomRes
-                      		 ,cli.emlRes
+            $sSql = "SELECT cli.codCli
+                           ,cli.nomCli
+                           ,cli.nomRes
+                           ,cli.emlRes
                        FROM tbcliente cli";
 
         $resultado = mysql_query($sSql);
 
-        $qtdLinhas = mysql_num_rows($resultado);
+        $rows = array();
 
-        $contador = 0;
-
-        $retorno = '[';
-        while ($linha = mysql_fetch_assoc($resultado)) {
-
-            $contador = $contador + 1;
-
-            $retorno = $retorno . '{ "codCli": "'.$linha["codCli"].'"
-                                   , "nomCli" : "'.$linha["nomCli"].'"
-                                   , "nomRes" : "'.$linha["nomRes"].'"
-                                   , "emlRes" : "'.$linha["emlRes"].'"}';
-            //Para não concatenar a virgula no final do json
-            if($qtdLinhas != $contador)
-                $retorno = $retorno . ',';
-
+        while($r = mysqli_fetch_assoc($sSql)) {
+              $rows[] = $r;
         }
-        $retorno = $retorno . "]";
 
-        file_put_contents("teste.json", $retorno);
+        print json_encode($rows);
+
+        file_put_contents("teste.json", $rows);
 
         $this->getConexao()->fechaConexao();
 
-        return $retorno;
+        return $resultado;
+
 
     }
 

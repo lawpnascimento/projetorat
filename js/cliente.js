@@ -24,9 +24,10 @@ function submitCliente() {
           //Se der tudo ok no envio...
           success: function (callback) {
           //mensagemSucess();
-             $("#htmlMensagem").html("Projeto inserido com sucesso!");
+             $("#htmlMensagem").html("Cliente inserido com sucesso!");
              mensagemSucess();
-             var form = $("#formProjeto");
+             $("#btnConsultar").click();
+             var form = $("#formCliente");
              limpaCampos(form);
           }
       });  
@@ -121,7 +122,7 @@ function buscarCliente() {
             nome: txbNome,
             resp: txbResp,
             email: txbEmail,
-            action: "consultar"
+            action: "buscar"
         },
 
         url: "../controller/ClienteController.php",

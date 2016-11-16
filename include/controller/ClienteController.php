@@ -21,7 +21,7 @@ switch($_POST["action"]){
 		$persistencia->consultarCliente();
 		break;
 
-
+	//select na tabela do cliente e concatena em json
 	case 'buscar':
      	$model = new ClienteModel();
      	$persistencia = new ClientePersistencia();

@@ -7,6 +7,7 @@
   
   <script src="../../lib/jquery/jquery.min.js"></script>
   <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../js/geral.js"></script>
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/menu.css">
 </head>

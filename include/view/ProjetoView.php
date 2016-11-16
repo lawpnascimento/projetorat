@@ -4,9 +4,6 @@
   <title>PROJETO RAT</title>
   <meta charset="utf-8">
   <script type="text/javascript" src="../../js/projeto.js"></script>
-  <script type="text/javascript" src="../../js/geral.js"></script>
-  <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../css/menu.css">
 </head>
 <body>
 
@@ -31,7 +28,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <label for="datainicio">Data Inicio*</label>
                         <input id="txbDataIni" type="date" class="form-control" name="txbDataIni"></input>
                     </div>
