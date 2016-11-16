@@ -68,42 +68,7 @@ function consultarCliente(){
                   grid = grid + "<td>" + cliente.emlRes + "</td>";
                   grid = grid + "</tr>";
             }
-
             $("#grdCliente").html(grid);
-
-            //Carregando a grid
-            /*if(cdAnimal == null){
-
-                var grid = "";
-                for (var i = 0; i < json.length; i++) {
-                    animal = json[i];
-
-                    grid = grid + "<tr>";
-                    grid = grid + "<td>" + animal.dsNome + "</td>";
-                    grid = grid + "<td>" + animal.dsRaca + "</td>";
-                    grid = grid + "<td>" + animal.nrIdade + "</td>";
-                    grid = grid + "<td>" + animal.dsPorte + "</td>";
-                    grid = grid + "<td href='javascript:void(0);' onClick='buscaAnimais(" + animal.cdAnimal + ")'><a>Editar</a></td>";
-                    grid = grid + "</tr>";
-                }
-                $("#tbanimal").html(grid);
-            }
-            //Carregando valor para atualizar
-            else
-            {
-                formularioModoAtualizar();
-                for (var i = 0; i < json.length; i++) {
-                    animal = json[i];
-
-                    $("#txbNome").val(animal.dsNome);
-                    $("#txbRaca").val(animal.dsRaca);
-                    $("#txbIdade").val(animal.nrIdade);
-
-                    $("#ddlPorte:first-child").text(animal.dsPorte);
-                    $("#ddlPorte:first-child").val(animal.cdPorte);
-                    $("#hdfcdAnimal").val(animal.cdAnimal);
-                }
-            }*/
         }
     });
 
@@ -131,7 +96,6 @@ function buscarCliente() {
         success: function (callback) {
 
              alert(callback);
-
   }
   
         });

@@ -4,7 +4,7 @@
   <title>PROJETO RAT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <script src="../../lib/jquery/jquery.min.js"></script>
   <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../../js/geral.js"></script>
@@ -17,22 +17,43 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="Principal.php">Projeto RAT</a>
+      <a class="navbar-brand" href="Principal.php"> Projeto RAT</a>
     </div>
-<!--Itens na barra de navegação-->   
-    <ul class="nav navbar-nav">
-      <li class="dropdown">
-      <a href=# class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastro</a><span class="caret"></span>
-        <!--Dropdown-->   
-        <div class="dropdown-content">
-          <a id="cliente">Cliente</a>
-          <a id="projeto">Projeto</a>
-      </li>
-      <li><a href="#">Operações</a></li>
-      <li><a href="#">Consultas</a></li>
-      <li><a href="#">Relatórios</a></li>
-      <li align=><a href="LoginView.php">Sair</a></li>
-    </ul>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastro<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a id="cliente">Cliente</a>
+            </li>
+              <li class="divider"/>
+            <li>
+              <a id="projeto">Projeto</a>
+            </li>
+          </ul>
+        </li>  
+      </ul>  
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#">Operações</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#">Consultas</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#">Relatórios</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="LoginView.php">Sair</a>
+        </li>
+    </div>
   </div>
 </nav>
   

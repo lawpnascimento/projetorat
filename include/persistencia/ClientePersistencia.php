@@ -63,11 +63,11 @@ class ClientePersistencia{
    }
 
    public function consultarCliente(){
-   		$file = fopen("../controller/cliente.json","r");
+   		$file = fopen("../controller/teste.json","r");
 		if(!$file)
 	      echo("ERRO: Não foi possível abrir o arquivo");
 	    else{
-	      $buff = fread ($file,filesize("../controller/cliente.json"));
+	      $buff = fread ($file,filesize("../controller/teste.json"));
 	      echo $buff;
 	    }
 		
@@ -80,7 +80,7 @@ class ClientePersistencia{
         $responsavel = $this->getModel()->getResp();
         $email = $this->getModel()->getEmail();
 
-            $sSql = "SELECT   cli.codCli
+            $sSql = "SELECT cli.codCli
                         	 ,cli.nomCli
                        		 ,cli.nomRes
                       		 ,cli.emlRes
