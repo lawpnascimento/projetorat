@@ -17,21 +17,21 @@
         <div class="panel-body" >
             <form id="formProjeto" class="form-horizontal" role="form">
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="projeto">Projeto*</label>
-                        <input id="txbProjeto" type="text" class="form-control" name="txbProjeto" placeholder="Nome do projeto" maxlength="25"></input>
+                        <input id="txbProjeto" type="text" class="form-control" name="txbProjeto" placeholder="Nome do projeto" maxlength="30"></input>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="produto">Produto*</label>
-                        <input id="txbProduto" type="text" class="form-control" name="txbProduto" placeholder="Nome do produto" maxlength="25"></input>
+                        <input id="txbProduto" type="text" class="form-control" name="txbProduto" placeholder="Nome do produto" maxlength="30"></input>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="datainicio">Data Inicio*</label>
                         <input id="txbDataIni" type="date" class="form-control" name="txbDataIni"></input>
                     </div>
@@ -51,6 +51,10 @@
                     </div>
                 </div>
               </form>
+              <!-- DIV PARA MENSAGEM DO CADASTRO -->
+                <div id="divMensagemCadastro" class="alert alert-danger" style="display:none;">
+                <p id="htmlMensagem"></p>
+              </div>
             </div>
 
 <!--Botoes-->
@@ -58,7 +62,7 @@
   <div id="actions" class="row">
     <div class="col-md-12">
       <button style="margin-left: 25px" class="btn btn-primary" onclick="submitProjeto()">Salvar</button>
-      <input type="button" value="Cancelar" class="btn btn-default" onclick="resetForm()">
+      <button id="btnCancelar" class="btn btn-default">Cancelar</button>
     </div>
   </div>
 </body>

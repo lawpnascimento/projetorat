@@ -20,7 +20,8 @@
     </div>
 <!--Itens na barra de navegação-->   
     <ul class="nav navbar-nav">
-      <li class="dropdown"><a href=#>Cadastro</a>
+      <li class="dropdown">
+      <a href=# class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastro</a><span class="caret"></span>
         <!--Dropdown-->   
         <div class="dropdown-content">
           <a id="cliente">Cliente</a>

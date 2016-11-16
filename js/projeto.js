@@ -1,88 +1,50 @@
 function submitProjeto() {
-  var txbProjeto = document.getElementById("txbProjeto").value;
-  var txbProduto = document.getElementById("txbProduto").value; 
-  var txbDataIni = document.getElementById("txbDataIni").value;
+  var txbProjeto = $('#txbProjeto').val();
+  var txbProduto = $('#txbProduto').val();
+  var txbDataIni = $('#txbDataIni').val();
   var cbbCliente = $("#cbbCliente").val();
    
-  $.ajax({
-      //Tipo de envio POST ou GET
-      type: "POST",
-      dataType: "text",
-      data: {
-            projeto: txbProjeto,
-            produto: txbProduto,
-            dataInicio: txbDataIni,
-            cliente: cbbCliente,
-          action: "inserir"
-      },
+    if(validaCampos(txbProjeto, txbProduto, txbDataIni)){
+          $("#htmlMensagem").html(msgErro);
+          $("#divMensagemCadastro").css("display","block"); //JQuery para alterar o tipo do css de none para display
+    }
+    else {
+      $.ajax({
+          //Tipo de envio POST ou GET
+          type: "POST",
+          dataType: "text",
+          data: {
+                projeto: txbProjeto,
+                produto: txbProduto,
+                dataInicio: txbDataIni,
+                cliente: cbbCliente,
+              action: "inserir"
+          },
 
-      url: "../controller/ProjetoController.php",
+          url: "../controller/ProjetoController.php",
 
-      //Se der tudo ok no envio...
-      success: function (callback) {
-        alert("chegou");
-        //var json = $.parseJSON(callback);
-        var json = JSON.stringify(callback);
-/*              for (var i = 0; i < json.length; i++) {
-                var perfil = json[i];
-          }*/
-      }
-  }); 
+          //Se der tudo ok no envio...
+          success: function (callback) {
+             $("#htmlMensagem").html("Cliente inserido com sucesso!");
+             mensagemSucess();
+             $("#btnConsultar").click();
+             var form = $("#formCliente");
+             limpaCampos(form);
+
+            var json = JSON.stringify(callback);
+
+          }
+      }); 
+    }
 }
 
-function resetForm() {
-    document.getElementById("formProjeto").reset();
-}
-
-/*TESTE - JQuery para alimentar combobox
-$($.parseJSON(cliente.json)).map(function () {
-    return $('<option>').val(this.value).text(this.label);
-}).appendTo('#cbbCliente');*/
-
-/*
-function buscaClienteDropdown(){
-
-    $.ajax({
-        //Tipo de envio POST ou GET
-        type: "POST",
-        dataType: "text",
-        data: {
-            action: "portedropdown"
-        },
-
-        url: "../controller/ProjetoController.php",
-
-        //Se der tudo ok no envio...
-        success: function (dados) {
-            var json = $.parseJSON(dados);
-
-            var dropdown = "";
-            for (var i = 0; i < json.length; i++) {
-
-                var porte = json[i];
-
-                dropdown = dropdown + '<li role="presentation" value="' + porte.cdPorte  + '"><a role="menuitem" tabindex="-1" href="#">' + porte.dsPorte + '</a></li>';
-
-            }
-            $("#ulPorte").html(dropdown);
-
-            $("#ulPorte li a").click(function(){
-
-                $("#ddlPorte:first-child").text($(this).text());
-
-                $("#ulPorte li").each(function(){
-
-                    if ($(this).text() == $("#ddlPorte").text().trim()){
-                        $("#ddlPorte").val($(this).val());
-                    }
-                });
-
-            });
-        }
-
-    });
-}
-*/
+//JQuery para chamar função de limpar tela (geral) passando o parametro do formulario
+$("#btnCancelar").click(function(){
+//JQuery para limpar tela de erro
+  $("#divMensagemCadastro").css("display","none");
+  var form = $("#formProjeto");
+  limpaCampos(form);
+});
 
 function buscaClienteDropdown(){
   $.ajax({
@@ -124,4 +86,25 @@ function buscaClienteDropdown(){
         }
 
     });
+}
+
+$(document).ready(function(){
+  var today = new Date();
+  document.getElementById("txbDataIni").value = [today.getDate(), today.getMonth()+1, today.getFullYear()].join('-');
+});
+
+function validaCampos(projeto, produto, dataini){
+    msgErro = "";
+    if(projeto == ""){
+        msgErro = msgErro + "<b>Projeto</b> &eacute; um campo de preenchimento obrigat&oacute;rio";
+    }
+    if(produto == ""){
+        msgErro = msgErro + "</br><b>Produto</b> &eacute; um campo de preenchimento obrigat&oacute;rio";
+    }
+    if(dataini == ""){
+        msgErro = msgErro + "</br><b>Data Inicial</b> &eacute; um campo de preenchimento obrigat&oacute;rio";
+    }
+
+    return msgErro;
+
 }

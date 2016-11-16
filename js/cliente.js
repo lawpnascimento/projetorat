@@ -24,12 +24,9 @@ function submitCliente() {
           //Se der tudo ok no envio...
           success: function (callback) {
           //mensagemSucess();
-             $("#htmlMensagem").html("Cliente inserido com sucesso!");
-             $("#divMensagemCadastro").css("display","block");
-             $("#divMensagemCadastro").removeClass("alert alert-danger");
-             $("#divMensagemCadastro").addClass("alert alert-success");
-             $("#btnConsultar").click();
-             var form = $("#formCliente");
+             $("#htmlMensagem").html("Projeto inserido com sucesso!");
+             mensagemSucess();
+             var form = $("#formProjeto");
              limpaCampos(form);
           }
       });  
