@@ -71,9 +71,13 @@
   <hr />
   <div id="actions" class="row">
     <div class="col-md-12">
+      <!--INSERT-->
       <button id="btnSalvar" style="margin-left: 25px" class="btn btn-primary" onclick="submitCliente()">Salvar</button>
       <button id="btnCancelar" class="btn btn-default">Cancelar</button>
-      <button id="btnConsultar" style="margin-left: 25px" class="btn btn-primary" onclick="buscaCliente()">Consultar</button>
+      <!--POPULAR GRID-->
+      <button id="btnConsultar" style="margin-left: 25px" class="btn btn-primary" onclick="consultarCliente()">Consultar</button>
+      <!--SELECT (JSON)-->
+      <button id="btnBuscar" style="margin-left: 25px" class="btn btn-primary">Buscar</button>
     </div>
   </div>
 </body>

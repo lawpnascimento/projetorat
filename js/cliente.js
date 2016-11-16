@@ -1,7 +1,7 @@
 function submitCliente() {
-  var txbNome = document.getElementById("txbNome").value;
-  var txbResp = document.getElementById("txbResp").value; 
-  var txbEmail = document.getElementById("txbEmail").value;
+  var txbNome = $('#txbNome').val();
+  var txbResp = $('#txbResp').val();
+  var txbEmail = $('#txbEmail').val();
           
     if(validaCampos(txbNome, txbResp, txbEmail)){
           $("#htmlMensagem").html(msgErro);
@@ -37,10 +37,10 @@ function submitCliente() {
 
 }
 
-function buscaCliente(){
-  var txbNome = document.getElementById("txbNome").value;
-  var txbResp = document.getElementById("txbResp").value; 
-  var txbEmail = document.getElementById("txbEmail").value;
+function consultarCliente(){
+  var txbNome = $('#txbNome').val();
+  var txbResp = $('#txbResp').val();
+  var txbEmail = $('#txbEmail').val();
 
   $.ajax({
         //Tipo de envio POST ou GET
@@ -110,6 +110,39 @@ function buscaCliente(){
     });
 
 }
+
+function buscarCliente() {
+  var txbNome = $('#txbNome').val();
+  var txbResp = $('#txbResp').val();
+  var txbEmail = $('#txbEmail').val();
+
+  $.ajax({
+
+        type: "POST",
+        dataType: "text",
+        data: {
+            nome: txbNome,
+            resp: txbResp,
+            email: txbEmail,
+            action: "consultar"
+        },
+
+        url: "../controller/ClienteController.php",
+
+        //Se der tudo ok no envio...
+        success: function (callback) {
+
+             alert(callback);
+
+  }
+  
+        });
+
+}
+
+$("#btnBuscar").click(function () {
+      buscarCliente();
+    });
 
 //JQuery para chamar função de limpar tela (geral) passando o parametro do formulario
 $("#btnCancelar").click(function(){

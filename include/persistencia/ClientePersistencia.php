@@ -73,5 +73,48 @@ class ClientePersistencia{
 		
 	}    
 
+   public function buscarCliente(){
+        $this->getConexao()->conectaBanco();
+
+        $cliente = $this->getModel()->getCliente();
+        $responsavel = $this->getModel()->getResp();
+        $email = $this->getModel()->getEmail();
+
+            $sSql = "SELECT cli.codCli
+                        	 ,cli.nomCli
+                       		 ,cli.nomRes
+                      		 ,cli.emlRes
+                       FROM tbcliente cli";
+
+        $resultado = mysql_query($sSql);
+
+        $qtdLinhas = mysql_num_rows($resultado);
+
+        $contador = 0;
+
+        $retorno = '[';
+        while ($linha = mysql_fetch_assoc($resultado)) {
+
+            $contador = $contador + 1;
+
+            $retorno = $retorno . '{ "codCli": "'.$linha["codCli"].'"
+                                   , "nomCli" : "'.$linha["nomCli"].'"
+                                   , "nomRes" : "'.$linha["nomRes"].'"
+                                   , "emlRes" : "'.$linha["emlRes"].'"}';
+            //Para não concatenar a virgula no final do json
+            if($qtdLinhas != $contador)
+                $retorno = $retorno . ',';
+
+        }
+        $retorno = $retorno . "]";
+        
+        file_put_contents("teste.json", $retorno);
+
+        $this->getConexao()->fechaConexao();
+
+        return $retorno;
+
+    }
+
 }
 ?>
