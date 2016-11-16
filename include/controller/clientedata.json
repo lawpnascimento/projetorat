@@ -7,4 +7,7 @@
                                    , "emlRes" : "joao@seniorjoinville.com.br"},{ "codCli": "3"
                                    , "nomCli" : "Senior"
                                    , "nomRes" : "Joao"
-                                   , "emlRes" : "joao@senior.com.br"}]
+                                   , "emlRes" : "joao@senior.com.br"},{ "codCli": "6"
+                                   , "nomCli" : "Empresa"
+                                   , "nomRes" : "Responsavel"
+                                   , "emlRes" : "email@email.com"}]

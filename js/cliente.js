@@ -26,7 +26,6 @@ function submitCliente() {
           //mensagemSucess();
              $("#htmlMensagem").html("Cliente inserido com sucesso!");
              mensagemSucess();
-             $("#btnConsultar").click();
              var form = $("#formCliente");
              limpaCampos(form);
           }
@@ -55,6 +54,7 @@ function consultarCliente(){
 
         //Se der tudo ok no envio...
         success: function (callback) {
+           $("#divMensagemCadastro").css("display","none");
             var json = $.parseJSON(callback);
             var cliente = null;
             var grid = "";
@@ -94,8 +94,9 @@ function buscarCliente() {
 
         //Se der tudo ok no envio...
         success: function (callback) {
-
-             alert(callback);
+            $("#htmlMensagem").html("JSON gerado com sucesso!");
+             mensagemSucess();
+             
   }
   
         });

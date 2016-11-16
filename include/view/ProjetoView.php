@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label for="datainicio">Data Inicio*</label>
                         <input id="txbDataIni" type="date" class="form-control" name="txbDataIni"></input>
                     </div>
