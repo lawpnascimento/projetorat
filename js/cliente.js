@@ -1,11 +1,22 @@
-function submitCliente() {
-  var txbNome = $('#txbNome').val();
-  var txbResp = $('#txbResp').val();
-  var txbEmail = $('#txbEmail').val();
-          
-    if(validaCampos(txbNome, txbResp, txbEmail)){
-          $("#htmlMensagem").html(msgErro);
-          $("#divMensagemCadastro").css("display","block"); //JQuery para alterar o tipo do css de none para display
+$("#document").ready(function() {
+  $("#formCliente #btnCadastrar").click(function () {
+
+    var txbRazaoSocial = $("#txbRazaoSocial").val();
+    var txbNomeFantasia = $("#txbNomeFantasia").val();
+    var txbCnpj = $("#txbCnpj").val();
+    var txbInscricao = $("#txbInscricao").val();
+    var txbCep = $("#txbCep").val();
+    var txbUf = $("#txbUf").val();
+    var txbCidade = $("#txbCidade").val();
+    var txbBairro = $("#txbBairro").val();
+    var txbRua = $("#txbRua").val();
+    var txbNumero = $("#txbNumero").val();
+    var txbTelefone = $("#txbTelefone").val();
+
+    var msgErro = validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbUf, txbCidade, txbBairro, txbRua, txbNumero, txbTelefone);
+
+    if(msgErro !== ""){
+      jbkrAlert.alerta('Alerta!',msgErro);
     }
     else {
       $.ajax({
@@ -13,126 +24,84 @@ function submitCliente() {
           type: "POST",
           dataType: "text",
           data: {
-               nome: txbNome,
-               resp: txbResp,
-               email: txbEmail,
-             action: "inserir"
+            razaoSocial: txbRazaoSocial,
+            nomeFantasia: txbNomeFantasia,
+            cnpj: txbCnpj,
+            inscricao: txbInscricao,
+            cep: txbCep,
+            uf: txbUf,
+            cidade: txbCidade,
+            bairro: txbBairro,
+            rua: txbRua,
+            numero: txbNumero,
+            telefone: txbTelefone,
+            action: "cadastrar"
           },
 
           url: "../controller/ClienteController.php",
 
           //Se der tudo ok no envio...
-          success: function (callback) {
-          //mensagemSucess();
-             $("#htmlMensagem").html("Cliente inserido com sucesso!");
-             mensagemSucess();
-             var form = $("#formCliente");
-             limpaCampos(form);
+          success: function (dados) {
+              alert(dados);
+              jbkrAlert.sucesso('Cliente', 'Cliente cadastrado com sucesso!');
+            /*  $("#formCliente #btnCancelar").trigger("click");*/
           }
-      });  
+      });
     }
 
-}
 
-function consultarCliente(){
-  var txbNome = $('#txbNome').val();
-  var txbResp = $('#txbResp').val();
-  var txbEmail = $('#txbEmail').val();
+  });
+});
 
-  $.ajax({
+function buscaClientes(){
+    $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            nome: txbNome,
-            resp: txbResp,
-            email: txbEmail,
-            action: "consultar"
-        },
-
-        url: "../controller/ClienteController.php",
-
-        //Se der tudo ok no envio...
-        success: function (callback) {
-           $("#divMensagemCadastro").css("display","none");
-            var json = $.parseJSON(callback);
-            var cliente = null;
-            var grid = "";
-
-            for (var i = 0; i < json.length; i++) {
-                  cliente = json[i];
-
-                  grid = grid + "<tr>";
-                  grid = grid + "<td>" + cliente.nomCli + "</td>";
-                  grid = grid + "<td>" + cliente.nomRes + "</td>";
-                  grid = grid + "<td>" + cliente.emlRes + "</td>";
-                  grid = grid + "</tr>";
-            }
-            $("#grdCliente").html(grid);
-        }
-    });
-
-}
-
-function buscarCliente() {
-  var txbNome = $('#txbNome').val();
-  var txbResp = $('#txbResp').val();
-  var txbEmail = $('#txbEmail').val();
-
-  $.ajax({
-
-        type: "POST",
-        dataType: "text",
-        data: {
-            nome: txbNome,
-            resp: txbResp,
-            email: txbEmail,
             action: "buscar"
         },
 
         url: "../controller/ClienteController.php",
 
         //Se der tudo ok no envio...
-        success: function (callback) {
-            $("#htmlMensagem").html("JSON gerado com sucesso!");
-             mensagemSucess();
-             
-  }
-  
-        });
+        success: function (dados) {
+          var json = $.parseJSON(dados);
+          var cliente = null;
+
+          //Carregando a grid
+          var grid = "";
+          for (var i = 0; i < json.length; i++) {
+            cliente = json[i];
+
+            grid = grid + "<tr>";
+            grid = grid + "<td>" + cliente.desRazaoSocial  + "</td>";
+            grid = grid + "<td>" + cliente.nomCli + "</td>";
+            grid = grid + "<td>" + cliente.numCNPJ         + "</td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaClientes(" + cliente.codCli + ")'><a>Editar</a></td>";
+            grid = grid + "</tr>";
+
+          }
+
+          $("#grdCliente").html(grid);
+
+        }
+    });
 
 }
 
-$("#btnBuscar").click(function () {
-      buscarCliente();
-    });
-
-//JQuery para chamar função de limpar tela (geral) passando o parametro do formulario
-$("#btnCancelar").click(function(){
-//JQuery para limpar tela de erro
-  $("#divMensagemCadastro").css("display","none");
-  var form = $("#formCliente");
-  limpaCampos(form);
-});
-
-function validaCampos(nome, resp, email){
+function validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbUf, txbCidade, txbBairro, txbRua, txbNumero, txbTelefone){
     msgErro = "";
-    if(nome == ""){
-        msgErro = msgErro + "<b>Nome</b> &eacute; um campo de preenchimento obrigat&oacute;rio";
+    if(txbRazaoSocial === ""){
+        msgErro = msgErro + "<b>Razão Social</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(resp == ""){
-        msgErro = msgErro + "</br><b>Respons&aacute;vel</b> &eacute; um campo de preenchimento obrigat&oacute;rio";
+    if(txbNomeFantasia === ""){
+        msgErro = msgErro + "<b>Nome Fantasia</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(email == ""){
-        msgErro = msgErro + "</br><b>E-mail</b> &eacute; um campo de preenchimento obrigat&oacute;rio";
+    if(txbCidade === ""){
+        msgErro = msgErro + "<b>Cidade</b> é um campo de preenchimento obrigatorio";
     }
-// Validação de e-mail   
- else {
-         if(!validaEmail(email)){
-        msgErro = msgErro + "</br><b>E-mail</b> invalido";
-      }
-    }
+
     return msgErro;
 
 }
-

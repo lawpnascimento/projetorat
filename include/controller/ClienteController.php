@@ -4,11 +4,20 @@ require_once("../persistencia/ClientePersistencia.php");
 
 switch($_POST["action"]){
 
-	case 'inserir':
+	case 'cadastrar':
 		$model = new ClienteModel();
-		$model->setNome($_POST["nome"]);
-		$model->setResp($_POST["resp"]);
-		$model->setEmail($_POST["email"]);
+
+		$model->setRazaoSocial($_POST["razaoSocial"]);
+		$model->setNomeFantasia($_POST["nomeFantasia"]);
+		$model->setCnpj($_POST["cnpj"]);
+		$model->setInscricao($_POST["inscricao"]);
+		$model->setCep($_POST["cep"]);
+		$model->setUf($_POST["uf"]);
+		$model->setCidade($_POST["cidade"]);
+		$model->setBairro($_POST["bairro"]);
+		$model->setRua($_POST["rua"]);
+		$model->setNumero($_POST["numero"]);
+		$model->setTelefone($_POST["telefone"]);
 
 		$persistencia = new ClientePersistencia();
 		$persistencia->setModel($model);
@@ -23,19 +32,15 @@ switch($_POST["action"]){
 
 	//select na tabela do cliente e concatena em json
 	case 'buscar':
-     	$model = new ClienteModel();
-     	$persistencia = new ClientePersistencia();
+   	$model = new ClienteModel();
+   	$persistencia = new ClientePersistencia();
 
-		$model->setNome($_POST["nome"]);
-		$model->setResp($_POST["resp"]);
-		$model->setEmail($_POST["email"]);
+  	/*$persistencia->setModel($model);*/
 
-      	$persistencia->setModel($model);
+   	$retorno = $persistencia->buscaClientes();
 
-     	$retorno = $persistencia->buscarCliente();
-
-      	echo $retorno;
-     	break;
+  	echo $retorno;
+   	break;
 }
 
 

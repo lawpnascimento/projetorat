@@ -17,7 +17,7 @@ class ClientePersistencia{
 	}
 
 	public function setModel($model){
-		
+
 		$this->model = $model;
 	}
 
@@ -28,73 +28,101 @@ class ClientePersistencia{
 	public function inserirCliente(){
 		$this->getConexao()->conectaBanco();
 
-		$nome = $this->getModel()->getNome();
-        $resp = $this->getModel()->getResp();
-        $email = $this->getModel()->getEmail();
-		
-		$sSql = "INSERT INTO tbcliente (nomCli, nomRes, emlRes)
-                          VALUES ('". $nome ."'
-                                 ,'". $resp ."'
-                                 ,'". $email ."')";
+		$razaoSocial = $this->getModel()->getRazaoSocial();
+		$nomeFantasia = $this->getModel()->getNomeFantasia();
+		$cnpj = $this->getModel()->getCnpj();
+		$inscricao = $this->getModel()->getInscricao();
+		$cep = $this->getModel()->getCep();
+		$uf = $this->getModel()->getUf();
+		$cidade = $this->getModel()->getCidade();
+		$bairro = $this->getModel()->getBairro();
+		$rua = $this->getModel()->getRua();
+		$numero = $this->getModel()->getNumero();
+		$telefone = $this->getModel()->getTelefone();
 
-        $this->getConexao()->query($sSql);
+		$sSql =  "INSERT INTO cliente (desRazaoSocial
+																	,nomCli
+																	,numCNPJ
+																	,iesCli
+																	,numCEP
+																	,desUF
+																	,desCid
+															 	  ,desBai
+																  ,desEnd
+																  ,numEnd
+																  ,telCli)
+													VALUES ('". $razaoSocial ."'
+														 		 ,'". $nomeFantasia ."'
+																 ,'". $cnpj ."'
+																 ,'". $inscricao ."'
+																 ,'". $cep ."'
+																 ,'". $uf ."'
+																 ,'". $cidade ."'
+																 ,'". $bairro ."'
+																 ,'". $rua ."'
+																 ,'". $numero ."'
+																 ,'". $telefone ."')";
 
-        $this->getConexao()->fechaConexao();
-   }
+		$this->getConexao()->query($sSql);
 
-   public function consultarCliente(){
-   		$file = fopen("../controller/clientedata.json","r");
-		if(!$file)
-	      echo("ERRO: Não foi possível abrir o arquivo");
-	    else{
-	      $buff = fread ($file,filesize("../controller/clientedata.json"));
-	      echo $buff;
-	    }
-		
-	}    
+    $this->getConexao()->fechaConexao();
+  }
 
-   public function buscarCliente(){
-        $this->getConexao()->conectaBanco();
+	public function buscaClientes(){
+		$this->getConexao()->conectaBanco();
 
-        $nome = $this->getModel()->getNome();
-        $responsavel = $this->getModel()->getResp();
-        $email = $this->getModel()->getEmail();
 
-            $sSql = "SELECT cli.codCli
-                        	 ,cli.nomCli
-                       		 ,cli.nomRes
-                      		 ,cli.emlRes
-                       FROM tbcliente cli";
+		$sSql = "SELECT codCli
+									 ,desRazaoSocial
+									 ,nomCli
+									 ,numCNPJ
+									 ,iesCli
+									 ,numCEP
+									 ,desUF
+									 ,desCid
+								   ,desBai
+								   ,desEnd
+								   ,numEnd
+								   ,telCli
+						 	 FROM cliente
+							ORDER BY nomCli";
 
-        $resultado = mysql_query($sSql);
+		$resultado = mysql_query($sSql);
 
-        $qtdLinhas = mysql_num_rows($resultado);
+		$qtdLinhas = mysql_num_rows($resultado);
 
-        $contador = 0;
+		$contador = 0;
 
-        $retorno = '[';
-        while ($linha = mysql_fetch_assoc($resultado)) {
+		$retorno = '[';
+		while ($linha = mysql_fetch_assoc($resultado)) {
 
-            $contador = $contador + 1;
+			$contador = $contador + 1;
 
-            $retorno = $retorno . '{ "codCli": "'.$linha["codCli"].'"
-                                   , "nomCli" : "'.$linha["nomCli"].'"
-                                   , "nomRes" : "'.$linha["nomRes"].'"
-                                   , "emlRes" : "'.$linha["emlRes"].'"}';
-            //Para não concatenar a virgula no final do json
-            if($qtdLinhas != $contador)
-                $retorno = $retorno . ',';
+			$retorno = $retorno . '{"codCli": "'.$linha["codCli"].'"
+														, "desRazaoSocial" : "'.$linha["desRazaoSocial"].'"
+														, "nomCli" : "'.$linha["nomCli"].'"
+														, "numCNPJ" : "'.$linha["numCNPJ"].'"
+														, "iesCli" : "'.$linha["iesCli"].'"
+														, "numCEP" : "'.$linha["numCEP"].'"
+														, "desUF" : "'.$linha["desUF"].'"
+														, "desCid" : "'.$linha["desCid"].'"
+														, "desBai" : "'.$linha["desBai"].'"
+														, "desEnd" : "'.$linha["desEnd"].'"
+														, "numEnd" : "'.$linha["numEnd"].'"
+														, "telCli" : "'.$linha["telCli"].'"}';
 
-        }
-        $retorno = $retorno . "]";
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
 
-        file_put_contents("clientedata.json", $retorno);
+		}
+		$retorno = $retorno . "]";
 
-        $this->getConexao()->fechaConexao();
+		$this->getConexao()->fechaConexao();
 
-        return $retorno;
+		return $retorno;
 
-    }
+	}
 
 }
 ?>
