@@ -14,7 +14,7 @@
     <div class="container-fluid">
       <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="panel-title">Cadastrado de Cliente</div>
+            <div class="panel-title">Cadastro de Cliente</div>
         </div>
         <div class="panel-body" >
           <form id="formCliente" class="form-horizontal" role="form">

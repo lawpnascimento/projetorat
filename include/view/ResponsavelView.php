@@ -3,75 +3,64 @@
   <head>
     <title>PROJETO RAT</title>
     <meta charset="utf-8">
-    <script type="text/javascript" src="../../js/cliente.js"></script>
+    <script type="text/javascript" src="../../js/responsavel.js"></script>
     <script type="text/javascript" src="../../js/geral.js"></script>
     <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/menu.css">
+    <script type="text/javascript" src="../../js/alerta.js"></script>
+    <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
   </head>
   <body>
-    <!--Tabela (campos)-->
-    <div id="main" class="container-fluid">
-     <h3 class="page-header">Cadastro de Cliente</h3>
-    </div>
-    <div class="panel-body" >
-      <form id="formCliente" class="form-horizontal" role="form">
-        <div class="form-group">
-          <div class="col-md-4">
-            <label for="nome">Empresa*</label>
-            <input id="txbNome" type="text" class="form-control" name="txbNome" placeholder="Nome da empresa" maxlength="30"></input>
-          </div>
+    <div class="container-fluid">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">Cadastro de Responsavel</div>
         </div>
-
-        <div class="form-group">
-          <div class="col-md-4">
-            <label for="resp">Responsavel*</label>
-            <input id="txbResp" type="text" class="form-control" name="txbResp" placeholder="Nome do responsavel" maxlength="40"></input>
-          </div>
+        <div class="panel-body" >
+          <form id="formResponsavel" class="form-horizontal" role="form">
+            <fieldset>
+              <div class="form-group">
+                <div class="col-md-4">
+                  <label for="nomRes">Nome do Responsavel*</label>
+                  <input id="txbnomRes" type="text" class="form-control" name="txbNomRes" placeholder="Nome do Responsavel" maxlength="40"></input>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-4">
+                  <label for="email">E-mail*</label>
+                  <input id="txbEmail" type="text" class="form-control" name="txbEmail" placeholder="Endereco de e-mail" maxlength="40"></input>
+                </div>
+              </div>
+            </fieldset>
+            <!--Combo box-->
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="nomecliente">Nome do Cliente*</label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbCliente" data-toggle="dropdown" aria-expanded="true" name="Cliente">
+                                Cliente
+                                <span class="caret"></span>
+                            </button>
+                            <ul id="ulCliente" class="dropdown-menu" role="menu" aria-labelledby="cbbCliente">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+              </form>
+            <br />
+            <br />
+            <!-- BOTÕES -->
+            <div id="actions" class="row">
+              <div class="col-md-12">
+                <button id="btnCadastrar" type="button" class="btn btn-success"> Cadastrar</button>
+                <button id="btnBuscar" type="button" class="btn btn-info">Buscar</button>
+                <button id="btnAtualizar" type="button" style="display:none;" class="btn btn-primary">Atualizar</button>
+                <button id="btnExcluir" type="button" style="display:none;" class="btn btn-danger">Excluir</button>
+                <button id="btnCancelar" type="button" class="btn btn-warning">Cancelar</button>
+              </div>
+            </div>
+          </form>
         </div>
-
-        <div class="form-group">
-          <div class="col-md-4">
-            <label for="email">E-mail*</label>
-            <!-- type= email nao valida automatico -->
-            <input id="txbEmail" type="text" class="form-control" name="txbEmail" placeholder="E-mail do responsavel" maxlength="30"></input>
-          </div>
-        </div>
-      </form>
-      <!-- DIV PARA MENSAGEM DO CADASTRO -->
-      <div id="divMensagemCadastro" class="alert alert-danger" style="display:none;">
-        <p id="htmlMensagem"></p>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <!-- Tabela da consulta -->
-      <table class="table">
-        <thead>
-          <tr>
-            <th>
-              Nome
-            </th>
-            <th>
-              Responsavel
-            </th>
-            <th>
-              E-mail
-            </th>
-          </tr>
-        </thead>
-        <tbody id="grdCliente"></tbody>
-      </table>
-    </div>
-
-    <div id="actions" class="row">
-      <div class="col-md-12">
-        <!--INSERT-->
-        <button id="btnSalvar" style="margin-left: 25px" class="btn btn-primary" onclick="submitCliente()">Salvar</button>
-        <button id="btnCancelar" class="btn btn-default">Cancelar</button>
-        <!--POPULAR GRID-->
-        <button id="btnConsultar" style="margin-left: 25px" class="btn btn-primary" onclick="consultarCliente()">Consultar</button>
-        <!--SELECT (JSON)-->
-        <button id="btnBuscar" style="margin-left: 25px" class="btn btn-primary">Buscar</button>
       </div>
     </div>
   </body>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
   <title>PROJETO RAT</title>
@@ -30,6 +30,9 @@
                     <li class="divider"/>
                   <li>
                     <a id="projeto">Projeto</a>
+                  </li>
+                  <li>
+                    <a id="responsavel">Responsavel</a>
                   </li>
                 </ul>
               </li>

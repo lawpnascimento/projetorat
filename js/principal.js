@@ -32,4 +32,22 @@ $(document).ready(function(){
     });
 
   });
+
+  $("#responsavel").click(function(){
+    $.ajax({
+
+        type: "POST",
+        dataType: "text",
+
+        url: "ResponsavelView.php",
+
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+            buscaClientes();
+
+        }
+    });
+
+  });
+
 });
