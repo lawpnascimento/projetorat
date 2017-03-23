@@ -40,7 +40,7 @@ class ClientePersistencia{
 		$numero = $this->getModel()->getNumero();
 		$telefone = $this->getModel()->getTelefone();
 
-		$sSql =  "INSERT INTO cliente (desRazaoSocial
+		$sSql =  "INSERT INTO tbcliente (desRazaoSocial
 																	,nomCli
 																	,numCNPJ
 																	,iesCli
@@ -84,7 +84,7 @@ class ClientePersistencia{
 								   ,desEnd
 								   ,numEnd
 								   ,telCli
-						 	 FROM cliente
+						 	 FROM tbcliente
 							ORDER BY nomCli";
 
 		$resultado = mysql_query($sSql);

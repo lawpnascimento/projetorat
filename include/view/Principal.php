@@ -39,7 +39,11 @@
             </ul>
             <ul class="nav navbar-nav">
               <li>
-                <a href="#">Operações</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Operacoes<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                   <a id="lancar">Lancar RAT</a>
+                </ul>
               </li>
             </ul>
             <ul class="nav navbar-nav">

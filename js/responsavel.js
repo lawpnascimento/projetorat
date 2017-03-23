@@ -1,6 +1,6 @@
 $("#document").ready(function() {
   $("#formResponsavel #btnCadastrar").click(function () {
-
+    alert('teste');
     var txbNomRes = $("#txbNomRes").val();
     var txbEmail = $("#txbEmail").val();
     var txbCnpj = $("#cbbCliente").val();
@@ -77,3 +77,18 @@ function buscaClienteDropdown(){
     });
 }
 
+function validaCampos(txbNomRes, txbEmail, cbbCliente){
+    msgErro = "";
+    if(txbNomRes === ""){
+        msgErro = msgErro + "<b>Nome do responsavel</b> é um campo de preenchimento obrigatorio<br/>";
+    }
+    if(txbEmail === ""){
+        msgErro = msgErro + "<b>E-mail</b> é um campo de preenchimento obrigatorio<br/>";
+    }
+    if(cbbCliente === ""){
+        msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio";
+    }
+
+    return msgErro;
+
+}

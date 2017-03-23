@@ -22,11 +22,11 @@
               <legend class="scheduler-border">Empresa</legend>
               <div class="form-group">
                 <div class="col-md-4">
-                  <label for="razaoSocial">Razão Social</label>
+                  <label for="razaoSocial">Razão Social*</label>
                   <input id="txbRazaoSocial" type="text" class="form-control" name="txbRazaoSocial" placeholder="Razão Social" maxlength="40"></input>
                 </div>
                 <div class="col-md-4">
-                  <label for="nomeFantasia">Nome Fantasia</label>
+                  <label for="nomeFantasia">Nome Fantasia*</label>
                   <input id="txbNomeFantasia" type="text" class="form-control" name="txbNomeFantasia" placeholder="Nome Fantasia" maxlength="40"></input>
                 </div>
               </div>
@@ -46,8 +46,8 @@
               <legend class="scheduler-border">Endereço</legend>
               <div class="form-group">
                 <div class="col-md-4">
-                  <label for="cep">CEP</label>
-                  <input id="txbCep" type="text" class="form-control" name="txbCep" placeholder="CEP" maxlength="8"></input>
+                  <label for="cidade">Cidade*</label>
+                  <input id="txbCidade" type="text" class="form-control" name="txbCidade" placeholder="Nome da Cidade" maxlength="50"></input>
                 </div>
                 <div class="col-md-4">
                   <label for="UF">UF</label>
@@ -56,8 +56,8 @@
               </div>
               <div class="form-group">
                 <div class="col-md-4">
-                  <label for="cidade">Cidade</label>
-                  <input id="txbCidade" type="text" class="form-control" name="txbCidade" placeholder="Nome da Cidade" maxlength="50"></input>
+                  <label for="cep">CEP</label>
+                  <input id="txbCep" type="text" class="form-control" name="txbCep" placeholder="CEP" maxlength="8"></input>
                 </div>
                 <div class="col-md-4">
                   <label for="bairro">Bairro</label>
