@@ -18,6 +18,7 @@
         </div>
         <div class="panel-body" >
           <form id="formCliente" class="form-horizontal" role="form">
+            <input type="hidden" id="hidCodCli">
             <fieldset>
               <legend class="scheduler-border">Empresa</legend>
               <div class="form-group">
@@ -97,7 +98,7 @@
           </form>
         </div>
       </div>
-      <div class="panel panel-default">
+      <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
         <!-- Tabela da consulta -->
         <table class="table">
           <thead>

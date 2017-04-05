@@ -41,27 +41,27 @@ class ClientePersistencia{
 		$telefone = $this->getModel()->getTelefone();
 
 		$sSql =  "INSERT INTO tbcliente (desRazaoSocial
-																	,nomCli
-																	,numCNPJ
-																	,iesCli
-																	,numCEP
-																	,desUF
-																	,desCid
-															 	  ,desBai
-																  ,desEnd
-																  ,numEnd
-																  ,telCli)
-													VALUES ('". $razaoSocial ."'
-														 		 ,'". $nomeFantasia ."'
-																 ,'". $cnpj ."'
-																 ,'". $inscricao ."'
-																 ,'". $cep ."'
-																 ,'". $uf ."'
-																 ,'". $cidade ."'
-																 ,'". $bairro ."'
-																 ,'". $rua ."'
-																 ,'". $numero ."'
-																 ,'". $telefone ."')";
+																		,nomCli
+																		,numCNPJ
+																		,iesCli
+																		,numCEP
+																		,desUF
+																		,desCid
+																 	  ,desBai
+																	  ,desEnd
+																	  ,numEnd
+																	  ,telCli)
+														VALUES ('". $razaoSocial ."'
+															 		 ,'". $nomeFantasia ."'
+																	 ,'". $cnpj ."'
+																	 ,'". $inscricao ."'
+																	 ,'". $cep ."'
+																	 ,'". $uf ."'
+																	 ,'". $cidade ."'
+																	 ,'". $bairro ."'
+																	 ,'". $rua ."'
+																	 ,'". $numero ."'
+																	 ,'". $telefone ."')";
 
 		$this->getConexao()->query($sSql);
 
@@ -71,21 +71,98 @@ class ClientePersistencia{
 	public function buscaClientes(){
 		$this->getConexao()->conectaBanco();
 
+		$codigo = $this->getModel()->getCodigo();
+		$razaoSocial = $this->getModel()->getRazaoSocial();
+		$nomeFantasia = $this->getModel()->getNomeFantasia();
+		$cnpj = $this->getModel()->getCnpj();
+		$inscricao = $this->getModel()->getInscricao();
+		$cep = $this->getModel()->getCep();
+		$uf = $this->getModel()->getUf();
+		$cidade = $this->getModel()->getCidade();
+		$bairro = $this->getModel()->getBairro();
+		$rua = $this->getModel()->getRua();
+		$numero = $this->getModel()->getNumero();
+		$telefone = $this->getModel()->getTelefone();
 
-		$sSql = "SELECT codCli
-									 ,desRazaoSocial
-									 ,nomCli
-									 ,numCNPJ
-									 ,iesCli
-									 ,numCEP
-									 ,desUF
-									 ,desCid
-								   ,desBai
-								   ,desEnd
-								   ,numEnd
-								   ,telCli
-						 	 FROM tbcliente
-							ORDER BY nomCli";
+		if($codigo == null){
+
+			$sSql = "SELECT codCli
+										 ,desRazaoSocial
+										 ,nomCli
+										 ,numCNPJ
+										 ,iesCli
+										 ,numCEP
+										 ,desUF
+										 ,desCid
+									   ,desBai
+									   ,desEnd
+									   ,numEnd
+									   ,telCli
+							 	 FROM tbcliente
+								WHERE 1 = 1";
+
+			if($razaoSocial != null){
+					$sSql = $sSql . " AND UPPER(desRazaoSocial) LIKE UPPER('%" . $razaoSocial ."%')";
+			}
+
+			if($nomeFantasia != null){
+					$sSql = $sSql . " AND UPPER(nomCli) LIKE UPPER('%" . $nomeFantasia ."%')";
+			}
+
+			if($cnpj != null){
+					$sSql = $sSql . " AND numCNPJ = '" . $cnpj ."'";
+			}
+
+			if($inscricao != null){
+					$sSql = $sSql . " AND UPPER(iesCli) LIKE UPPER('%" . $inscricao ."%')";
+			}
+
+			if($cep != null){
+					$sSql = $sSql . " AND numCEP = '" . $cep ."'";
+			}
+
+			if($uf != null){
+					$sSql = $sSql . " AND UPPER(desUF) LIKE UPPER('%" . $uf ."%')";
+			}
+
+			if($cidade != null){
+					$sSql = $sSql . " AND UPPER(desCid) LIKE UPPER('%" . $cidade ."%')";
+			}
+
+			if($bairro != null){
+					$sSql = $sSql . " AND UPPER(desBai) LIKE UPPER('%" . $bairro ."%')";
+			}
+
+			if($rua != null){
+					$sSql = $sSql . " AND UPPER(desEnd) LIKE UPPER('%" . $rua ."%')";
+			}
+
+			if($numero != null){
+					$sSql = $sSql . " AND numEnd = ". intval($numero);
+			}
+
+			if($telefone != null){
+					$sSql = $sSql . " AND telCli = '" . $telefone ."'";
+			}
+
+			$sSql = $sSql . " ORDER BY nomCli";
+		}else{
+			$sSql = "SELECT codCli
+										 ,desRazaoSocial
+										 ,nomCli
+										 ,numCNPJ
+										 ,iesCli
+										 ,numCEP
+										 ,desUF
+										 ,desCid
+									   ,desBai
+									   ,desEnd
+									   ,numEnd
+									   ,telCli
+							 	 FROM tbcliente
+							  WHERE codCli = " . $codigo . "
+								ORDER BY nomCli";
+		}
 
 		$resultado = mysql_query($sSql);
 
@@ -122,6 +199,41 @@ class ClientePersistencia{
 
 		return $retorno;
 
+	}
+
+	public function Atualizar(){
+			$this->getConexao()->conectaBanco();
+
+			$codigo = $this->getModel()->getCodigo();
+			$razaoSocial = $this->getModel()->getRazaoSocial();
+			$nomeFantasia = $this->getModel()->getNomeFantasia();
+			$cnpj = $this->getModel()->getCnpj();
+			$inscricao = $this->getModel()->getInscricao();
+			$cep = $this->getModel()->getCep();
+			$uf = $this->getModel()->getUf();
+			$cidade = $this->getModel()->getCidade();
+			$bairro = $this->getModel()->getBairro();
+			$rua = $this->getModel()->getRua();
+			$numero = $this->getModel()->getNumero();
+			$telefone = $this->getModel()->getTelefone();
+
+			$sSql = "UPDATE tbcliente
+									SET desRazaoSocial = '" . $razaoSocial ."'
+										 ,nomCli = '" . $nomeFantasia ."'
+										 ,numCNPJ = '" . $cnpj ."'
+										 ,iesCli = " . $inscricao ."
+										 ,numCEP = " . $cep ."
+										 ,desUF = " . $uf ."
+										 ,desCid = " . $cidade ."
+										 ,desBai = " . $bairro ."
+										 ,desEnd = " . $rua ."
+										 ,numEnd = " . $numero ."
+										 ,telCli = " . $telefone ."
+								WHERE codcli = " . $codigo;
+
+			$this->getConexao()->query($sSql);
+
+			$this->getConexao()->fechaConexao();
 	}
 
 }
