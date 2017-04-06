@@ -6,7 +6,6 @@
     <script type="text/javascript" src="../../js/responsavel.js"></script>
     <script type="text/javascript" src="../../js/geral.js"></script>
     <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/menu.css">
     <script type="text/javascript" src="../../js/alerta.js"></script>
     <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
   </head>
@@ -22,7 +21,7 @@
               <div class="form-group">
                 <div class="col-md-4">
                   <label for="nomRes">Nome do Responsavel*</label>
-                  <input id="txbnomRes" type="text" class="form-control" name="txbNomRes" placeholder="Nome do Responsavel" maxlength="40"></input>
+                  <input id="txbNomRes" type="text" class="form-control" name="txbNomRes" placeholder="Nome do Responsavel" maxlength="40"></input>
                 </div>
               </div>
               <div class="form-group">
@@ -37,7 +36,7 @@
                     <div class="col-md-2">
                         <label for="nomecliente">Nome do Cliente*</label>
                         <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbCliente" data-toggle="dropdown" aria-expanded="true" name="Cliente">
+                            <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbCliente" data-toggle="dropdown" aria-expanded="false" name="Cliente">
                                 Cliente
                                 <span class="caret"></span>
                             </button>
@@ -46,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-              </form>
+
             <br />
             <br />
             <!-- BOTÕES -->

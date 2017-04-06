@@ -1,6 +1,6 @@
 <?php
 
-class ProjetoModel {
+class ResponsavelModel {
 
 	private $nome;
 	private $email;

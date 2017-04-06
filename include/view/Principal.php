@@ -8,10 +8,11 @@
   <script type="text/javascript" src="../../js/geral.js"></script>
   <script type="text/javascript" src="../../js/principal.js"></script>
   <script type="text/javascript" src="../../js/cliente.js"></script>
+  <script type="text/javascript" src="../../js/responsavel.js"></script>
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../css/menu.css">
 </head>
 <body>
+
   <div class="container-fluid">
     <header class="row">
       <nav class="navbar navbar-default">

@@ -1,9 +1,8 @@
 $("#document").ready(function() {
   $("#formResponsavel #btnCadastrar").click(function () {
-    alert('teste');
     var txbNomRes = $("#txbNomRes").val();
     var txbEmail = $("#txbEmail").val();
-    var txbCnpj = $("#cbbCliente").val();
+    var cbbCliente = $("#cbbCliente").val();
 
     var msgErro = validaCampos(txbNomRes, txbEmail, cbbCliente);
 
@@ -18,7 +17,7 @@ $("#document").ready(function() {
           data: {
             nomRes: txbNomRes,
             email: txbEmail,
-            cliente: cbbCliente,
+            codCli: cbbCliente,
             action: "cadastrar"
           },
 
@@ -26,7 +25,6 @@ $("#document").ready(function() {
 
           //Se der tudo ok no envio...
           success: function (dados) {
-              alert(dados);
               jbkrAlert.sucesso('Responsavel', 'Responsavel cadastrado com sucesso!');
           }
       });
@@ -44,7 +42,7 @@ function buscaClienteDropdown(){
             action: "clientedropdown"
         },
 
-        url: "../controller/ReponsavelController.php",
+        url: "../controller/ResponsavelController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {

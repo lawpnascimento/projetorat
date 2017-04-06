@@ -7,10 +7,10 @@ switch($_POST["action"]){
 	case 'cadastrar':
 		$model = new ResponsavelModel();
 
-		$model->setNome($_POST["nome"]);
+		$model->setNome($_POST["nomRes"]);
 		$model->setEmail($_POST["email"]);
-		$model->setCliente($_POST["cliente"]);
-
+		$model->setCliente($_POST["codCli"]);
+	
 		$persistencia = new ResponsavelPersistencia();
 		$persistencia->setModel($model);
 		$persistencia->inserirResponsavel();
