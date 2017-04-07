@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>PROJETO RAT</title>
@@ -9,6 +9,7 @@
   <script type="text/javascript" src="../../js/principal.js"></script>
   <script type="text/javascript" src="../../js/cliente.js"></script>
   <script type="text/javascript" src="../../js/responsavel.js"></script>
+    <script type="text/javascript" src="../../js/rat.js"></script>
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
@@ -43,7 +44,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Operacoes<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                   <a id="lancar">Lancar RAT</a>
+                   <a id="rat">Lancar RAT</a>
                 </ul>
               </li>
             </ul>

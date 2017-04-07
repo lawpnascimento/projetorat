@@ -49,4 +49,20 @@ $(document).ready(function(){
 
   });
 
+    $("#rat").click(function(){
+    $.ajax({
+
+        type: "POST",
+        dataType: "text",
+
+        url: "RATView.php",
+
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+    });
+
+  });
+
+
 });
