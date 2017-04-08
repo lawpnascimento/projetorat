@@ -2,9 +2,18 @@
 
 class ResponsavelModel {
 
+	private $codigo;
 	private $nome;
 	private $email;
-	//private $cliente;
+	private $cliente;
+
+	public function setCodigo($codigo){
+ 		$this->codigo = $codigo;
+  }
+
+  public function getCodigo(){
+ 		return $this->codigo;
+  }
 
 	public function setNome($nome){
 		$this->nome = $nome;

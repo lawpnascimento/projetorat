@@ -221,14 +221,14 @@ class ClientePersistencia{
 									SET desRazaoSocial = '" . $razaoSocial ."'
 										 ,nomCli = '" . $nomeFantasia ."'
 										 ,numCNPJ = '" . $cnpj ."'
-										 ,iesCli = " . $inscricao ."
-										 ,numCEP = " . $cep ."
-										 ,desUF = " . $uf ."
-										 ,desCid = " . $cidade ."
-										 ,desBai = " . $bairro ."
-										 ,desEnd = " . $rua ."
-										 ,numEnd = " . $numero ."
-										 ,telCli = " . $telefone ."
+										 ,iesCli = '" . $inscricao ."'
+										 ,numCEP = '" . $cep ."'
+										 ,desUF = '" . $uf ."'
+										 ,desCid = '" . $cidade ."'
+										 ,desBai = '" . $bairro ."'
+										 ,desEnd = '" . $rua ."'
+										 ,numEnd = '" . $numero ."'
+										 ,telCli = '" . $telefone ."'
 								WHERE codcli = " . $codigo;
 
 			$this->getConexao()->query($sSql);

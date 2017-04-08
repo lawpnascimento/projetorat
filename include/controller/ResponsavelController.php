@@ -10,7 +10,7 @@ switch($_POST["action"]){
 		$model->setNome($_POST["nomRes"]);
 		$model->setEmail($_POST["email"]);
 		$model->setCliente($_POST["codCli"]);
-	
+
 		$persistencia = new ResponsavelPersistencia();
 		$persistencia->setModel($model);
 		$persistencia->inserirResponsavel();
@@ -18,12 +18,46 @@ switch($_POST["action"]){
 		break;
 
 	case 'clientedropdown':
-        $persistencia = new ResponsavelPersistencia();
-        $retorno = $persistencia->buscaClienteDropDown();
+    $persistencia = new ResponsavelPersistencia();
+    $retorno = $persistencia->buscaClienteDropDown();
 
-        echo $retorno;
+    echo $retorno;
 
-        break;
+    break;
+		case 'buscar':
+	   	$model = new ResponsavelModel();
+
+			if(isset($_POST["codigo"])){
+					$model->setCodigo($_POST["codigo"]);
+			}
+
+			$model->setNome($_POST["nomRes"]);
+			$model->setEmail($_POST["email"]);
+			$model->setCliente($_POST["codCli"]);
+
+	   	$persistencia = new ResponsavelPersistencia();
+
+	  	$persistencia->setModel($model);
+
+	   	$retorno = $persistencia->buscaResponsavel();
+
+	  	echo $retorno;
+	   	break;
+		case 'atualizar':
+			$model = new ResponsavelModel();
+
+			$model->setCodigo($_POST["codigo"]);
+			$model->setNome($_POST["nomRes"]);
+			$model->setEmail($_POST["email"]);
+			$model->setCliente($_POST["codCli"]);
+
+			$persistencia = new ResponsavelPersistencia();
+
+			$persistencia->setModel($model);
+
+			$persistencia->Atualizar();
+
+			break;
 }
 
 

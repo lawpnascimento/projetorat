@@ -44,6 +44,7 @@ $(document).ready(function(){
         success: function(callback){
             $("#divPrincipal").html(callback);
             buscaClienteDropdown();
+            buscaResponsavel();
         }
     });
 

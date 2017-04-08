@@ -17,6 +17,7 @@
         </div>
         <div class="panel-body" >
           <form id="formResponsavel" class="form-horizontal" role="form">
+            <input type="hidden" id="hidCodRes">
             <fieldset>
               <div class="form-group">
                 <div class="col-md-4">
@@ -60,6 +61,25 @@
             </div>
           </form>
         </div>
+      </div>
+      <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
+        <!-- Tabela da consulta -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Cliente
+              </th>
+              <th>
+                Responsável
+              </th>
+              <th>
+                E-mail
+              </th>
+            </tr>
+          </thead>
+          <tbody id="grdResponsavel"></tbody>
+        </table>
       </div>
     </div>
   </body>
