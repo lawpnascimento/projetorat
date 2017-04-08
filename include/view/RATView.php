@@ -8,6 +8,7 @@
     <script type="text/javascript" src="../../js/alerta.js"></script>
     <script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/rat.css">
     <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
   </head>
     <body>
@@ -19,7 +20,7 @@
           <div class="container">
 
           <div id="content" align="left">
-          <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+          <ul id="tabs" class="nav nav-pills nav-justified" data-tabs="tabs">
             <li class="active"><a href="#red" data-toggle="tab">Geral</a></li>
             <li><a href="#orange" data-toggle="tab">Atividades</a></li>
             <li><a href="#yellow" data-toggle="tab">Despesas</a></li>

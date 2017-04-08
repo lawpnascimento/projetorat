@@ -8,9 +8,11 @@
 <body>
 
 <!--Tabela (campos)-->
-<div id="main" class="container-fluid">
- <h3 class="page-header">Cadastro de Projeto</h3>
-</div>
+<div class="container-fluid">
+<div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">Cadastro de Projeto</div>
+        </div>
         <div class="panel-body" >
             <form id="formProjeto" class="form-horizontal" role="form">
                 <div class="form-group">
@@ -58,9 +60,10 @@
   <hr />
   <div id="actions" class="row">
     <div class="col-md-12">
-      <button style="margin-left: 25px" class="btn btn-primary" onclick="submitProjeto()">Salvar</button>
+      <button style="margin-left: 25px" class="btn btn-success" onclick="submitProjeto()">Cadastrar</button>
       <button id="btnCancelar" class="btn btn-default">Cancelar</button>
     </div>
+  </div>
   </div>
 </body>
 </html>

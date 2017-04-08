@@ -33,6 +33,7 @@
                   <li>
                     <a id="projeto">Projeto</a>
                   </li>
+                  <li class="divider"/>
                   <li>
                     <a id="responsavel">Responsavel</a>
                   </li>
