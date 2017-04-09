@@ -37,6 +37,10 @@
                   <li>
                     <a id="responsavel">Responsavel</a>
                   </li>
+                  <li class="divider"/>
+                  <li>
+                    <a id="despesa">Despesa</a>
+                  </li>
                 </ul>
               </li>
             </ul>

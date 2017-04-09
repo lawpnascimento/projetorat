@@ -65,5 +65,20 @@ $(document).ready(function(){
 
   });
 
+    $("#despesa").click(function(){
+    $.ajax({
+
+        type: "POST",
+        dataType: "text",
+
+        url: "DespesaView.php",
+
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+    });
+
+  });
+
 
 });
