@@ -23,33 +23,30 @@ class LoginPersistencia {
 	}
 
 	public function validaLogin(){
-	    $login = $this->getModel()->getLogin();
-        $senha = $this->getModel()->getSenha();
+    $login = $this->getModel()->getLogin();
+    $senha = $this->getModel()->getSenha();
 
-		$sSql = "select usu.cdUsuario
-									 ,usu.dsNome
-									 ,usu.cdPerfil
-									 ,usu.dsSobrenome
-									 ,(select emp.nmEmpresa
-				 					    from tbempresa emp
-										 where emp.cdEmpresa = 1) nmEmpresa
-									 ,usu.idSituacao idSituacao
-                   from tbUsuario usu
-                  where usu.dsLogin = '" . $login . "'" .
-                  " and usu.dsSenha = '" . $senha . "'";
+		$sSql = "SELECT usu.codUsu codUsu
+								 	 ,usu.Perfil_codPer codPer
+								 	 ,usu.nomUsu nomUsu
+								 	 ,usu.senUsu senUsu
+									 ,usu.codSit codSit
+									 ,usu.desEml desEml
+							 FROM tbusuario usu
+					    WHERE usu.nomUsu = '" . $login . "'" .
+							" AND usu.senUsu = '" . $senha . "'";
 
 		$this->getConexao()->conectaBanco();
 
 		if( $oDados = $this->getConexao()->fetch_query($sSql) ) {
-            $_SESSION["cdusuario"] = $oDados->cdUsuario;
-            $_SESSION["nome"] = $oDados->dsNome;
-						$_SESSION["cdperfil"] = $oDados->cdPerfil;
-						$_SESSION["dssobrenome"] = $oDados->dsSobrenome;
-						$_SESSION["nmEmpresa"] = $oDados->nmEmpresa;
-						$_SESSION["idSituacao"] = $oDados->idSituacao;
+      $_SESSION["codUsu"] = $oDados->codUsu;
+		  $_SESSION["codSit"] = $oDados->codSit;
+      $_SESSION["nomUsu"] = $oDados->nomUsu;
+			$_SESSION["codPer"] = $oDados->codPer;
+			$_SESSION["desEml"] = $oDados->desEml;
 			$logado = true;
 		} else {
-            Session_destroy();
+      Session_destroy();
 
 			$logado = false;
 		}

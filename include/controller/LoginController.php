@@ -24,7 +24,7 @@ $oPersistencia->setModel($oModel);
 
 $bLogou = $oPersistencia->validaLogin();
 
-if($_SESSION["idSituacao"] == "A"){
+if($_SESSION["codSit"] == "1"){
   if($bLogou) {
   	echo '{ "mensagem": "Login realizado com sucesso", "status" : "0" }';
   } else {
