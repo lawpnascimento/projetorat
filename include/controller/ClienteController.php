@@ -23,6 +23,7 @@ switch($_POST["action"]){
 		$persistencia->setModel($model);
 		$persistencia->inserirCliente();
 		break;
+
 	case 'atualizar':
 		$model = new ClienteModel();
 
@@ -46,6 +47,7 @@ switch($_POST["action"]){
 		$persistencia->Atualizar();
 
 		break;
+		
 	//select na tabela do cliente e concatena em json
 	case 'buscar':
    	$model = new ClienteModel();

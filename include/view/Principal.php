@@ -49,6 +49,10 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                   <li>
                     <a id="despesa">Despesa</a>
                   </li>
+                  <li class="divider"/>
+                  <li>
+                    <a id="produto">Produto</a>
+                  </li>
                 </ul>
               </li>
             </ul>

@@ -80,5 +80,20 @@ $(document).ready(function(){
 
   });
 
+    $("#produto").click(function(){
+    $.ajax({
+
+        type: "POST",
+        dataType: "text",
+
+        url: "ProdutoView.php",
+
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+    });
+
+  });
+
 
 });
