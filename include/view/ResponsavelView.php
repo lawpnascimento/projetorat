@@ -18,35 +18,32 @@
         <div class="panel-body" >
           <form id="formResponsavel" class="form-horizontal" role="form">
             <input type="hidden" id="hidCodRes">
-            <fieldset>
-              <div class="form-group">
-                <div class="col-md-4">
-                  <label for="nomRes">Nome do Responsavel*</label>
-                  <input id="txbNomRes" type="text" class="form-control" name="txbNomRes" placeholder="Nome do Responsavel" maxlength="40"></input>
-                </div>
+            <div class="form-group">
+              <div class="col-md-4">
+                <label for="nomRes">Nome do Responsavel*</label>
+                <input id="txbNomRes" type="text" class="form-control" name="txbNomRes" placeholder="Nome do Responsavel" maxlength="40"></input>
               </div>
-              <div class="form-group">
-                <div class="col-md-4">
-                  <label for="email">E-mail*</label>
-                  <input id="txbEmail" type="text" class="form-control" name="txbEmail" placeholder="Endereco de e-mail" maxlength="40"></input>
-                </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-4">
+                <label for="email">E-mail*</label>
+                <input id="txbEmail" type="text" class="form-control" name="txbEmail" placeholder="Endereco de e-mail" maxlength="40"></input>
               </div>
-            </fieldset>
+            </div>
             <!--Combo box-->
-                <div class="form-group">
-                    <div class="col-md-2">
-                        <label for="nomecliente">Nome do Cliente*</label>
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbCliente" data-toggle="dropdown" aria-expanded="false" name="Cliente">
-                                Cliente
-                                <span class="caret"></span>
-                            </button>
-                            <ul id="ulCliente" class="dropdown-menu" role="menu" aria-labelledby="cbbCliente">
-                            </ul>
-                        </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="nomecliente">Nome do Cliente*</label>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbCliente" data-toggle="dropdown" aria-expanded="false" name="Cliente">
+                            Cliente
+                            <span class="caret"></span>
+                        </button>
+                        <ul id="ulCliente" class="dropdown-menu" role="menu" aria-labelledby="cbbCliente">
+                        </ul>
                     </div>
                 </div>
-
+            </div>
             <br />
             <br />
             <!-- BOTÕES -->

@@ -9,7 +9,8 @@
   <script type="text/javascript" src="../../js/principal.js"></script>
   <script type="text/javascript" src="../../js/cliente.js"></script>
   <script type="text/javascript" src="../../js/responsavel.js"></script>
-    <script type="text/javascript" src="../../js/rat.js"></script>
+  <script type="text/javascript" src="../../js/rat.js"></script>
+  <script type="text/javascript" src="../../js/usuario.js"></script>
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
@@ -24,22 +25,28 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastro<span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastros<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a id="cliente">Cliente</a>
+                    <a id="usuario">Usuários</a>
+                  </li>
                   </li>
                     <li class="divider"/>
                   <li>
-                    <a id="projeto">Projeto</a>
+                  <li>
+                    <a id="cliente">Clientes</a>
+                  </li>
+                    <li class="divider"/>
+                  <li>
+                    <a id="projeto">Projetos</a>
                   </li>
                   <li class="divider"/>
                   <li>
-                    <a id="responsavel">Responsavel</a>
+                    <a id="responsavel">Responsaveis</a>
                   </li>
                   <li class="divider"/>
                   <li>
-                    <a id="despesa">Despesa</a>
+                    <a id="despesa">Despesas</a>
                   </li>
                 </ul>
               </li>

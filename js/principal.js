@@ -50,7 +50,7 @@ $(document).ready(function(){
 
   });
 
-    $("#rat").click(function(){
+  $("#rat").click(function(){
     $.ajax({
 
         type: "POST",
@@ -65,7 +65,7 @@ $(document).ready(function(){
 
   });
 
-    $("#despesa").click(function(){
+  $("#despesa").click(function(){
     $.ajax({
 
         type: "POST",
@@ -75,6 +75,36 @@ $(document).ready(function(){
 
         success: function(callback){
             $("#divPrincipal").html(callback);
+        }
+    });
+
+  });
+
+  $("#usuario").click(function(){
+    $.ajax({
+
+        type: "POST",
+        dataType: "text",
+
+        url: "UsuarioView.php",
+
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+            buscaPerfilDropdown();
+            buscaUsuario();
+
+            $("#ulSituacao li a").click(function(){
+
+                $("#cbbSituacao:first-child").text($(this).text());
+
+                $("#ulSituacao li").each(function(){
+
+                    if ($(this).text() == $("#cbbSituacao").text().trim()){
+                        $("#cbbSituacao").val($(this).val());
+                    }
+                });
+
+            });
         }
     });
 
