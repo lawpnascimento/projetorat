@@ -139,7 +139,7 @@ class UsuarioPersistencia{
 								ORDER BY usu.nomUsu";
 
     }
-  
+
 		$resultado = mysql_query($sSql);
 
 		$qtdLinhas = mysql_num_rows($resultado);
@@ -176,16 +176,20 @@ class UsuarioPersistencia{
 	public function Atualizar(){
 			$this->getConexao()->conectaBanco();
 
-			$codigo = intval($this->getModel()->getCodigo());
-			$nome = $this->getModel()->getNome();
+			$codigo = $this->getModel()->getCodigo();
+	    $nome = $this->getModel()->getNome();
+	    $senha = $this->getModel()->getSenha();
 	    $email = $this->getModel()->getEmail();
-	    $cliente = $this->getModel()->getCliente();
+	    $perfil = $this->getModel()->getPerfil();
+	    $situacao = $this->getModel()->getSituacao();
 
-			$sSql = "UPDATE tbresponsavel
-									SET emlRes = '" . $email ."'
-										 ,nomRes = '" . $nome ."'
-										 ,cliente_codCli = " . $cliente ."
-								WHERE codRes = " . $codigo;
+			$sSql = "UPDATE tbusuario
+									SET nomUsu = '" . $nome ."'
+										 ,senUsu = '" . $senha ."'
+										 ,desEml = '" . $email ."'
+										 ,Perfil_codPer = '" . $perfil ."'
+										 ,codSit = '" . $situacao ."'
+								WHERE codUsu = " . $codigo;
 
 			$this->getConexao()->query($sSql);
 

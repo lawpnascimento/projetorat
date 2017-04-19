@@ -37,24 +37,26 @@ $("#document").ready(function() {
 
   });
 
-  $("#formResponsavel #btnCancelar").click(function(){
+  $("#formUsuario #btnCancelar").click(function(){
     limpaCampos($(this).closest("form"));
     formularioModoInserir();
     buscaUsuario();
   });
 
-  $("#formResponsavel #btnBuscar").click(function () {
+  $("#formUsuario #btnBuscar").click(function () {
     buscaUsuario();
 
   });
 
-  $("#formResponsavel #btnAtualizar").click(function () {
-    var codigo = $("#hidCodRes").val();
-    var txbNomRes = $("#txbNomRes").val();
-    var txbEmail = $("#txbEmail").val();
-    var cbbCliente = $("#cbbCliente").val();
+  $("#formUsuario #btnAtualizar").click(function () {
+    var codigo = $("#hidCodUsu").val();
+    var txbNomUsu = $("#txbNomUsu").val();
+    var txbSenUsu = $("#txbSenUsu").val();
+    var txbDesEml = $("#txbDesEml").val();
+    var cbbPerfil = $("#cbbPerfil").val();
+    var cbbSituacao = $("#cbbSituacao").val();
 
-    var msgErro = validaCampos(txbNomRes, txbEmail, cbbCliente);
+    var msgErro = validaCampos(txbNomUsu, "senha", txbDesEml, cbbPerfil, cbbSituacao);
 
     if(msgErro !== ""){
         jbkrAlert.alerta('Alerta!',msgErro);
@@ -66,18 +68,20 @@ $("#document").ready(function() {
         dataType: "text",
         data: {
           codigo: codigo,
-          nomRes: txbNomRes,
-          email: txbEmail,
-          codCli: cbbCliente,
+          nomUsu: txbNomUsu,
+          senUsu: txbSenUsu,
+          desEml: txbDesEml,
+          codPer: cbbPerfil,
+          codSit: cbbSituacao,
           action: "atualizar"
         },
 
-        url: "../controller/ResponsavelController.php",
+        url: "../controller/UsuarioController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-          jbkrAlert.sucesso('Responsavel', 'Responsavel atualizado com sucesso!');
-          $("#formResponsavel #btnCancelar").trigger("click");
+          jbkrAlert.sucesso('Usuário', 'Usuário atualizado com sucesso!');
+          $("#formUsuario #btnCancelar").trigger("click");
         }
       });
     }

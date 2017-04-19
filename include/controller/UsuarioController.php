@@ -50,14 +50,16 @@ switch($_POST["action"]){
 
    	break;
 	case 'atualizar':
-		$model = new ResponsavelModel();
+		$model = new UsuarioModel();
 
 		$model->setCodigo($_POST["codigo"]);
-		$model->setNome($_POST["nomRes"]);
-		$model->setEmail($_POST["email"]);
-		$model->setCliente($_POST["codCli"]);
+		$model->setNome($_POST["nomUsu"]);
+		$model->setSenha($_POST["senUsu"]);
+		$model->setEmail($_POST["desEml"]);
+		$model->setPerfil($_POST["codPer"]);
+		$model->setSituacao($_POST["codSit"]);
 
-		$persistencia = new ResponsavelPersistencia();
+		$persistencia = new UsuarioPersistencia();
 
 		$persistencia->setModel($model);
 
