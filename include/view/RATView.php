@@ -3,12 +3,10 @@
   <head>
     <title>PROJETO RAT</title>
     <meta charset="utf-8">
-    <script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="../../lib/jquery/jquery.mask.js"></script>
     <script type="text/javascript" src="../../js/geral.js"></script>
     <script type="text/javascript" src="../../js/alerta.js"></script>
     <script type="text/javascript" src="../../js/rat.js"></script>
-    <script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/rat.css">
     <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
@@ -45,11 +43,11 @@
               <div class="form-group">
                 <div class="col-md-4">
                   <label for="cliente">Cliente*</label>
-                  <input id="txbCliente" type="text" class="form-control" name="txbCliente" placeholder="Nome do Reponsável"></input>
+                  <input id="txbCliente" type="text" class="form-control" name="txbCliente" placeholder="Nome do Cliente"></input>
                 </div>
                 <div class="col-md-4">
                   <label for="inscricao">Responsavel*</label>
-                  <input id="txbInscricao" type="text" class="form-control" name="txbInscricao" placeholder="Nome do Reponsável"></input>
+                  <input id="txbResponsavel" type="text" class="form-control" name="txbResponsavel" placeholder="Nome do Reponsável"></input>
                 </div>
               </div>
             </fieldset>
@@ -113,7 +111,7 @@
                 <legend class="scheduler-border">Resumo do RAT</legend>
                  <div class="col-md-3">
                    <ul>
-                     <li>Cliente:</li>
+                     <li id="LabelResumoCliente"></li>
                      <li>Responsável:</li>
                    </ul>
                  </div>

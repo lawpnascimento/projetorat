@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lang>
+	
+	<message original="Me">
+		Eu
+	</message>
+	
+	<message original="says">
+		mandou uma mensagem
+	</message>
+	
+	<message original="Chat">
+		Chat
+	</message>
+	
+	<message original="No online users.">
+		0 usuários online.
+	</message>
+	
+	<message original="Sent at">
+		Enviado em
+	</message>
+	
+	<message original="Online friends">
+		usuários online
+	</message>
+	
+</lang>

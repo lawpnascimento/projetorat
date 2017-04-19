@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="../../js/cliente.js"></script>
     <script type="text/javascript" src="../../js/geral.js"></script>
-    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript" src="../../js/alerta.js"></script>
+    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
     <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
   </head>
   <body>

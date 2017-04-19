@@ -82,33 +82,37 @@ $(document).ready(function(){
 
   $("#usuario").click(function(){
     $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "UsuarioView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        buscaPerfilDropdown();
+        buscaUsuario();
 
-        type: "POST",
-        dataType: "text",
+        $("#ulSituacao li a").click(function(){
 
-        url: "UsuarioView.php",
+          $("#cbbSituacao:first-child").text($(this).text());
 
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-            buscaPerfilDropdown();
-            buscaUsuario();
+          $("#ulSituacao li").each(function(){
 
-            $("#ulSituacao li a").click(function(){
-
-                $("#cbbSituacao:first-child").text($(this).text());
-
-                $("#ulSituacao li").each(function(){
-
-                    if ($(this).text() == $("#cbbSituacao").text().trim()){
-                        $("#cbbSituacao").val($(this).val());
-                    }
-                });
-
-            });
-        }
+            if ($(this).text() == $("#cbbSituacao").text().trim()){
+              $("#cbbSituacao").val($(this).val());
+            }
+          });
+        });
+      }
     });
-
   });
 
-
+  $("#produto").click(function(){
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "ProdutoView.php",
+      success: function(callback){
+          $("#divPrincipal").html(callback);
+      }
+    });
+  });
 });

@@ -112,6 +112,7 @@ $("#document").ready(function() {
     buscaClientes();
 
   });
+  
 });
 
 function buscaClientes(codigo){

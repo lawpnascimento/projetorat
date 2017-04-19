@@ -1,7 +1,7 @@
 <?php
 
 class ClienteModel {
-  private $codigo;
+    private $codigo;
 	private $razaoSocial;
 	private $nomeFantasia;
 	private $cnpj;
@@ -14,13 +14,13 @@ class ClienteModel {
 	private $numero;
 	private $telefone;
 
- public function setCodigo($codigo){
-	 $this->codigo = $codigo;
- }
+	 public function setCodigo($codigo){
+		 $this->codigo = $codigo;
+	 }
 
- public function getCodigo(){
-	 return $this->codigo;
- }
+	 public function getCodigo(){
+		 return $this->codigo;
+	 }
 
 	public function setRazaoSocial($razaoSocial){
 		$this->razaoSocial = $razaoSocial;

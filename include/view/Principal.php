@@ -1,3 +1,8 @@
+<?php
+session_start();
+$_SESSION['userid'] = "1" // You may want to set it on login
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +17,12 @@
   <script type="text/javascript" src="../../js/rat.js"></script>
   <script type="text/javascript" src="../../js/usuario.js"></script>
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
+    <!-- start orangechat code -->
+    <link type="text/css" rel="stylesheet" media="all" href="../../orangechat/orangechat/orangecss.php" />
+    <script type="text/javascript" src="../../orangechat/orangechat/orangejs.php"></script>
+  <!-- end orangechat code -->
 </head>
 <body>
-
   <div class="container-fluid">
     <header class="row">
       <nav class="navbar navbar-default">
@@ -47,6 +55,10 @@
                   <li class="divider"/>
                   <li>
                     <a id="despesa">Despesas</a>
+                  </li>
+                  <li class="divider"/>
+                  <li>
+                    <a id="produto">Produto</a>
                   </li>
                 </ul>
               </li>
