@@ -4,10 +4,8 @@
     <title>Usuários</title>
     <meta charset="utf-8">
     <script type="text/javascript" src="../../js/usuario.js"></script>
-    <script type="text/javascript" src="../../js/geral.js"></script>
-    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript" src="../../js/alerta.js"></script>
-    <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
+    <link rel="stylesheet" href="../../css/alerta.css">
   </head>
   <body>
     <div class="container-fluid">
@@ -20,14 +18,14 @@
             <input type="hidden" id="hidCodUsu"></input>
             <div class="form-group">
               <div class="col-md-4">
-                <label for="nomUsu">Usuário</label>
-                <input id="txbNomUsu" type="text" class="form-control" name="txbNomUsu" placeholder="Usuário" maxlength="50"></input>
+                <label for="nomUsu">Usuário*</label>
+                <input id="txbNomUsu" type="text" class="form-control" name="txbNomUsu" placeholder="Nome do usuário" maxlength="50"></input>
               </div>
             </div>
             <div class="form-group">
               <div class="col-md-4">
-                <label for="email">Senha</label>
-                <input id="txbSenUsu" type="text" class="form-control" name="txbSenUsu" placeholder="Endereco de e-mail" maxlength="50"></input>
+                <label for="email">Senha*</label>
+                <input id="txbSenUsu" type="text" class="form-control" name="txbSenUsu" placeholder="Senha do usuário" maxlength="50"></input>
               </div>
             </div>
             <div class="form-group">
@@ -39,7 +37,7 @@
             <!--Combo box-->
             <div class="form-group">
               <div class="col-md-2">
-                <label for="perfil">Perfil</label>
+                <label for="perfil">Perfil*</label>
                 <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbPerfil" data-toggle="dropdown" aria-expanded="false" name="Perfil">
                       Perfil
@@ -50,7 +48,7 @@
                 </div>
               </div>
               <div class="col-md-2">
-                <label for="perfil">Situação</label>
+                <label for="perfil">Situação*</label>
                 <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbSituacao" data-toggle="dropdown" aria-expanded="false" name="Situacao">
                       Situação
@@ -58,7 +56,7 @@
                   </button>
                   <ul id="ulSituacao" class="dropdown-menu" role="menu" aria-labelledby="cbbSituacao">
                     <li role="presentation" value="1"><a role="menuitem" tabindex="-1" href="#">Ativo</a></li>
-                    <li role="presentation" value="0"><a role="menuitem" tabindex="-1" href="#">Inátivo</a></li>
+                    <li role="presentation" value="0"><a role="menuitem" tabindex="-1" href="#">Inativo</a></li>
                   </ul>
                 </div>
               </div>

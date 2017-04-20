@@ -3,13 +3,8 @@
   <head>
     <title>PROJETO RAT</title>
     <meta charset="utf-8">
-    <script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="../../lib/jquery/jquery.mask.js"></script>
-    <script type="text/javascript" src="../../js/geral.js"></script>
-    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
-    <script type="text/javascript" src="../../js/alerta.js"></script>
     <script type="text/javascript" src="../../js/despesa.js"></script>
-    <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
+    <script type="text/javascript" src="../../js/alerta.js"></script>
   </head>
   <body>
     <div class="container-fluid">
@@ -47,6 +42,28 @@
           </form>
         </div>
       </div>
+
+      <!-- Tabela da consulta -->
+      <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Código da Despesa
+              </th>
+              <th>
+                Descrição da Despesa
+              </th>
+              <th>
+                Valor Unitário
+              </th>
+            </tr>
+          </thead>
+          <tbody id="grdDespesa"></tbody>
+        </table>
+      </div>
+      <hr/>
+
     </div>
   </body>
 </html>

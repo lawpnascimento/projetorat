@@ -155,9 +155,9 @@ class UsuarioPersistencia{
 														, "nomUsu" : "'.$linha["nomUsu"].'"
 														, "senUsu" : "'.$linha["senUsu"].'"
 														, "codSit" : "'.$linha["codSit"].'"
-                            , "desEml" : "'.$linha["desEml"].'"
-                            , "codPer" : "'.$linha["codPer"].'"
-                            , "desPer" : "'.$linha["desPer"].'"
+							                            , "desEml" : "'.$linha["desEml"].'"
+							                            , "codPer" : "'.$linha["codPer"].'"
+							                            , "desPer" : "'.$linha["desPer"].'"
 														, "desSit" : "'.$linha["desSit"].'"}';
 
 			//Para não concatenar a virgula no final do json

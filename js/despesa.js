@@ -2,7 +2,7 @@ $("#document").ready(function(){
 	$("#txbValorUnitario").mask('#.##0,00', {reverse: true});
 
     $("#formDespesa #btnCadastrar").click(function () {
-
+      
     var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
     var txbValorUnitario = $("#txbValorUnitario").val();
 
@@ -33,10 +33,68 @@ $("#document").ready(function(){
       });
     }
 
-
   });
 
-		});
+    $("#formDespesa #btnBuscar").click(function () {
+    buscaDespesas();
+
+   });
+
+});
+
+function buscaDespesas(codigo){
+    var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
+    var txbValorUnitario = $("#txbValorUnitario").val();
+
+  $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+          codigo: codigo,
+          descricao: txbDescricaoDespesa,
+          valorUnitario: txbValorUnitario,
+
+          action: "buscar"
+      },
+
+      url: "../controller/DespesaController.php",
+
+      //Se der tudo ok no envio...
+      success: function (dados) {
+        var json = $.parseJSON(dados);
+        var produto = null;
+
+        //Carregando a grid
+        if(codigo == null){
+          var grid = "";
+          for (var i = 0; i < json.length; i++) {
+            produto = json[i];
+
+            grid = grid + "<tr>";
+            grid = grid + "<td>" + despesa.codDsp + "</td>";
+            grid = grid + "<td>" + despesa.desDsp + "</td>";
+            grid = grid + "<td>" + despesa.vlrDsp + "</td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaDespesas(" + despesa.desDsp + ")'><a>Editar</a></td>";
+            grid = grid + "</tr>";
+
+          }
+
+          $("#grdDespesa").html(grid);
+        }else{
+          formularioModoAtualizar();
+          for (var j = 0; j < json.length; j++) {
+              produto = json[j];
+              $("#hidCodDsp").val(despesa.desDsp);
+              $("#txbDescricaoDespesa").val(despesa.desDsp);
+          }
+
+        }
+
+      }
+  });
+
+}
 
 function validaCampos(txbDescricaoDespesa, txbValorUnitario){
     msgErro = "";

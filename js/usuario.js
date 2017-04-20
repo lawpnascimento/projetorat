@@ -206,10 +206,10 @@ function validaCampos(txbNomUsu, txbSenUsu, txbDesEml, cbbPerfil, cbbSituacao){
         msgErro = msgErro + "<b>Senha</b> é um campo de preenchimento obrigatorio<br/>";
     }
     if(txbDesEml === ""){
-        msgErro = msgErro + "<b>E-mail</b> é um campo de preenchimento obrigatorio";
+        msgErro = msgErro + "<b>E-mail</b> é um campo de preenchimento obrigatorio<br/>";
     }
     if(cbbPerfil === ""){
-        msgErro = msgErro + "<b>Perfil</b> é um campo de preenchimento obrigatorio";
+        msgErro = msgErro + "<b>Perfil</b> é um campo de preenchimento obrigatorio<br/>";
     }
     if(cbbSituacao === ""){
         msgErro = msgErro + "<b>Situação</b> é um campo de preenchimento obrigatorio";

@@ -68,8 +68,9 @@ function buscaProdutos(codigo){
           var grid = "";
           for (var i = 0; i < json.length; i++) {
             produto = json[i];
-
+            
             grid = grid + "<tr>";
+            grid = grid + "<td>" + produto.codPro  + "</td>";
             grid = grid + "<td>" + produto.desPro  + "</td>";
             grid = grid + "<td href='javascript:void(0);' onClick='buscaProdutos(" + produto.desPro + ")'><a>Editar</a></td>";
             grid = grid + "</tr>";

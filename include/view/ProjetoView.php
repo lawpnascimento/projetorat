@@ -4,6 +4,8 @@
   <title>PROJETO RAT</title>
   <meta charset="utf-8">
   <script type="text/javascript" src="../../js/projeto.js"></script>
+  <script type="text/javascript" src="../../js/alerta.js"></script>
+  <link rel="stylesheet" href="../../css/alerta.css">
 </head>
 <body>
 

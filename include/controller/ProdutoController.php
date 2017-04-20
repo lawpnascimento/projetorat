@@ -5,7 +5,6 @@ require_once("../persistencia/ProdutoPersistencia.php");
 switch($_POST["action"]){
 
 	case 'cadastrar':
-
 		$model = new ProdutoModel();
 
 		$model->setDescricao($_POST["descricao"]);
@@ -25,13 +24,13 @@ switch($_POST["action"]){
 
 		$model->setDescricao($_POST["descricao"]);
 
-	$persistencia = new ProdutoPersistencia();
-  	$persistencia->setModel($model);
-   	$retorno = $persistencia->buscaProdutos();
+		$persistencia = new ProdutoPersistencia();
+	  	$persistencia->setModel($model);
+	   	$retorno = $persistencia->buscaProdutos();
 
-  	echo $retorno;
+	  	echo $retorno;
 
-   	break;
+	   	break;
 }
 
 

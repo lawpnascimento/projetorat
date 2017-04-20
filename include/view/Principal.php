@@ -9,6 +9,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
   <title>PROJETO RAT</title>
   <meta charset="utf-8">
   <script src="../../lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="../../lib/jquery/jquery.mask.js"></script>
   <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../../js/geral.js"></script>
   <script type="text/javascript" src="../../js/principal.js"></script>
@@ -16,7 +17,9 @@ $_SESSION['userid'] = "1" // You may want to set it on login
   <script type="text/javascript" src="../../js/responsavel.js"></script>
   <script type="text/javascript" src="../../js/rat.js"></script>
   <script type="text/javascript" src="../../js/usuario.js"></script>
+  <script type="text/javascript" src="../../js/alerta.js"></script>
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/alerta.css">
     <!-- start orangechat code -->
     <link type="text/css" rel="stylesheet" media="all" href="../../orangechat/orangechat/orangecss.php" />
     <script type="text/javascript" src="../../orangechat/orangechat/orangejs.php"></script>
@@ -79,7 +82,18 @@ $_SESSION['userid'] = "1" // You may want to set it on login
             </ul>
             <ul class="nav navbar-nav">
               <li>
-                <a href="#">Relatórios</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Relatórios<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <li>
+                    <a id="rat">Relatório de Comissões</a>
+                    </li>
+                 <li class="divider"/>
+                    <li>
+                    <a id="rat">Relatório de Despesas</a>
+                    </li>
+                  </ul>
+                </li>
               </li>
             </ul>
             <ul class="nav navbar-nav">

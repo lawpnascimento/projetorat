@@ -1,9 +1,16 @@
 <?php
 
 class DespesaModel {
-
+	private $codigo;
 	private $descricao;
 	private $valorUnitario;
+
+	public function setCodigo($codigo){
+		 $this->codigo = $codigo;
+	}
+	public function getCodigo(){
+		 return $this->codigo;
+	}
 
 	public function setDescricao($descricao){
 		$this->descricao = $descricao;
@@ -13,12 +20,11 @@ class DespesaModel {
 	}
 
 	public function setValorUnitario($valorUnitario){
-		$this->$valorUnitario = $valorUnitario;
+		$this->valorUnitario = $valorUnitario;
 	}
 	public function getValorUnitario(){
-		return $this->$valorUnitario;
+		return $this->valorUnitario;
 	}
-
 
 }
 ?>

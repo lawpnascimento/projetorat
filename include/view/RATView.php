@@ -3,13 +3,10 @@
   <head>
     <title>PROJETO RAT</title>
     <meta charset="utf-8">
-    <script type="text/javascript" src="../../lib/jquery/jquery.mask.js"></script>
-    <script type="text/javascript" src="../../js/geral.js"></script>
-    <script type="text/javascript" src="../../js/alerta.js"></script>
     <script type="text/javascript" src="../../js/rat.js"></script>
-    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="../../js/alerta.js"></script>
+    <link rel="stylesheet" href="../../css/alerta.css">
     <link rel="stylesheet" href="../../css/rat.css">
-    <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
   </head>
     <body>
       <div class="container-fluid">
@@ -111,7 +108,7 @@
                 <legend class="scheduler-border">Resumo do RAT</legend>
                  <div class="col-md-3">
                    <ul>
-                     <li id="LabelResumoCliente"></li>
+                     <li id="LabelResumoCliente">Cliente: </li>
                      <li>Responsável:</li>
                    </ul>
                  </div>

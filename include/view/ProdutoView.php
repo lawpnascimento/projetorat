@@ -3,11 +3,9 @@
   <head>
     <title>PROJETO RAT</title>
     <meta charset="utf-8">
-    <script type="text/javascript" src="../../js/geral.js"></script>
-    <script type="text/javascript" src="../../js/alerta.js"></script>
     <script type="text/javascript" src="../../js/produto.js"></script>
-    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
-    <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
+    <script type="text/javascript" src="../../js/alerta.js"></script>
+    <link rel="stylesheet" href="../../css/alerta.css">
   </head>
   <body>
     <div class="container-fluid">
