@@ -31,7 +31,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="Principal.php">Projeto RAT</a>
+            <a class="navbar-brand" href="Principal.php"><i class="glyphicon glyphicon-home"></i> Projeto RAT</a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -71,13 +71,23 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Operacoes<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                   <a id="rat">Lancar RAT</a>
+                    <a id="rat">Lançamento RAT</a>
+                  </li>
+                  <li class="divider"/>
+                  <li>
+                    <a id="aprovacao">Aprovação RAT</a>
+                  </li>
                 </ul>
               </li>
             </ul>
             <ul class="nav navbar-nav">
               <li>
-                <a href="#">Consultas</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Financeiro<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a id="rat">Faturamento</a>
+                  </li>
+                </ul>
               </li>
             </ul>
             <ul class="nav navbar-nav">
@@ -88,7 +98,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                     <li>
                     <a id="rat">Relatório de Comissões</a>
                     </li>
-                 <li class="divider"/>
+                  <li class="divider"/>
                     <li>
                     <a id="rat">Relatório de Despesas</a>
                     </li>
@@ -108,7 +118,6 @@ $_SESSION['userid'] = "1" // You may want to set it on login
 
 <div class="row">
   <div id="divPrincipal" role="divPrincipal">
-  View Inicial
   </div>
 </div>
 

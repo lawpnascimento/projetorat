@@ -25,7 +25,7 @@
             <div class="form-group">
               <div class="col-md-4">
                 <label for="email">Senha*</label>
-                <input id="txbSenUsu" type="text" class="form-control" name="txbSenUsu" placeholder="Senha do usuário" maxlength="50"></input>
+                <input id="txbSenUsu" type="password" class="form-control" name="txbSenUsu" placeholder="Senha do usuário" maxlength="50"></input>
               </div>
             </div>
             <div class="form-group">
