@@ -79,7 +79,7 @@
       </div>
       <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
         <!-- Tabela da consulta -->
-        <table class="table">
+        <table class="table table-hover table-condensed table-striped table-bordered">
           <thead>
             <tr>
               <th>

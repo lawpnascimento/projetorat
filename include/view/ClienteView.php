@@ -19,7 +19,7 @@
               <div class="form-group">
                 <div class="col-md-4">
                   <label for="razaoSocial">Razão Social*</label>
-                  <input id="txbRazaoSocial" type="text" class="form-control" name="txbRazaoSocial" placeholder="Razão Social" maxlength="40"></input>
+                  <input id="txbRazaoSocial" type="text" class="form-control" name="txbRazaoSocial" placeholder="Razão Social" maxlength="100"></input>
                 </div>
                 <div class="col-md-4">
                   <label for="nomeFantasia">Nome Fantasia*</label>
@@ -95,7 +95,7 @@
       </div>
       <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
         <!-- Tabela da consulta -->
-        <table class="table">
+        <table class="table table-hover table-condensed table-striped table-bordered">
           <thead>
             <tr>
               <th>

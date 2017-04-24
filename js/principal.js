@@ -115,4 +115,16 @@ $(document).ready(function(){
       }
     });
   });
+
+  $("#avaliacao").click(function(){
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "AvaliacaoView.php",
+      success: function(callback){
+          $("#divPrincipal").html(callback);
+      }
+    });
+  });
+
 });

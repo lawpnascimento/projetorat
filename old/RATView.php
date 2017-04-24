@@ -22,7 +22,7 @@
           <div id="content" align="left">
           <ul id="tabs" class="nav nav-pills nav-justified" data-tabs="tabs">
             <li class="active"><a href="#geral" data-toggle="tab">Geral</a></li>
-            <li><a href="#atividades" data-target="#atividades" data-toggle="tab">Atividades</a></li>
+            <li><a href="#atividades" data-target="#atividades, #gridAtividades" data-toggle="tab">Atividades</a></li>
             <li><a href="#despesas" data-toggle="tab">Despesas</a></li>
             <li><a href="#lancar" data-toggle="tab">Lançar</a></li>
             <li><a href="#blue" data-toggle="tab">Blue</a></li>
@@ -55,8 +55,44 @@
             </fieldset>
             </div>
 
-          <!-- TELA ATIVIDADES -->
-          <div class="tab-pane" id="atividades">
+            <!-- TELA ATIVIDADES -->
+            <div class="tab-pane" id="atividades">
+            <fieldset>
+                <div class="form-group">
+                  <div class="col-md-4">
+                    <label for="dataAtividade">Data da atividade</label>
+                    <input id="txbDataAtividade" type="date" class="form-control" name="txbDataAtividade"></input>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="horaInicial">Hora Inicial</label>
+                    <input id="txbHoraInicial" class="form-control" name="txbHoraInicial" maxlength="5"></input>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="horaFinal">Hora Final</label>
+                    <input id="txbHoraFinal" class="form-control" name="txbHoraFinal" maxlength="5"></input>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                <br />
+                  <label id="txbDescricaoAtividades" for="descricaoAtividades">Descrição das atividades</label>
+                  <textarea rows="10" cols="50" placeholder="Descrição das atividades"> </textarea>
+                </div>
+                  <div class="col-md-2">
+                    <a id="btnAdicionarRAT" href="#">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                    <a id="btnAlterarRAT" href="#">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a id="btnAlterarRAT" href="#">
+                      <span class="glyphicon glyphicon-minus"></span>
+                    </a>
+                </div>
+            </fieldset>
+            </div>
+ 
+            <!-- GRID ATIVIDADES -->
+          <div class="tab-pane" id="gridAtividades" height:200px !important;">
             <div id="table" class="table-editable">
             <span class="table-add glyphicon glyphicon-plus"></span>
             <table class="table table-condensed table-hover table-bordered">
@@ -97,53 +133,35 @@
               </tr>
             </table>
           </div>
-          </div>
+        </div>
 
             <!-- TELA DESPESA -->
-          <div class="tab-pane" id="despesas">
-              <div id="table" class="table-editable">
-                <span class="table-add glyphicon glyphicon-plus"></span>
-                <table class="table table-condensed table-hover table-bordered">
-                  <tr>
-                    <th>Data da despesa</th>
-                    <th>Tipo da despesa</th>
-                    <th>Valor Unitário</th>
-                    <th>Quantidade</th>
-                    <th>Total</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <td contenteditable="true">Stir Fry</td>
-                    <td contenteditable="true">stir-fry</td>
-                    <td contenteditable="true">stir-fry</td>
-                    <td contenteditable="true">stir-fry</td>
-                    <td></td>
-                    <td>
-                      <span class="table-remove glyphicon glyphicon-remove"></span>
-                    </td>
-                    <td>
-                      <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                      <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                    </td>
-                  </tr>
-                  <!-- This is our clonable table line -->
-                  <tr class="hide">
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td>
-                      <span class="table-remove glyphicon glyphicon-remove"></span>
-                    </td>
-                    <td>
-                      <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                      <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-          </div>
+            <div class="tab-pane" id="despesas">
+               <div class="col-md-2">
+                  <label for="dataDespesa">Data da Despesa</label>
+                  <input id="txbDataDespesa" type="date" class="form-control" name="txbDataDespesa"></input>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                    <!-- COMBO BOX DESPESA -->
+                        <label for="tipodespesa">Tipo da Despesa</label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbDespesa" data-toggle="dropdown" aria-expanded="false" name="Despesa">
+                                Despesa
+                                <span class="caret"></span>
+                            </button>
+                            <ul id="ulDespesa" class="dropdown-menu" role="menu" aria-labelledby="cbbDespesa">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                  <button id="btnAdicionarDespesa" type="button" class="btn btn-success">Adicionar despesa</button>
+                  <button id="btnAlterarDespesa" type="button" class="btn btn-primary">Alterar despesa</button>
+                  <button id="btnExcluirDespesa" type="button" class="btn btn-danger">Excluir despesa</button>
+                </div>
+            </div>
 
             <!-- TELA LANCAR -->
             <div class="tab-pane" id="lancar">

@@ -8,9 +8,9 @@ $_SESSION['userid'] = "1" // You may want to set it on login
 <head>
   <title>PROJETO RAT</title>
   <meta charset="utf-8">
-  <script src="../../lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="../../lib/jquery/jquery.mask.js"></script>
-  <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../../js/geral.js"></script>
   <script type="text/javascript" src="../../js/principal.js"></script>
   <script type="text/javascript" src="../../js/cliente.js"></script>
@@ -75,7 +75,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                   </li>
                   <li class="divider"/>
                   <li>
-                    <a id="aprovacao">Aprovação RAT</a>
+                    <a id="avaliacao">Avaliação RAT</a>
                   </li>
                 </ul>
               </li>
