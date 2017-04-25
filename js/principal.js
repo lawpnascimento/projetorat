@@ -127,4 +127,15 @@ $(document).ready(function(){
     });
   });
 
+  $("#btnPerfil").click(function(){
+      $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: "PerfilView.php",
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+      });
+  });
+
 });
