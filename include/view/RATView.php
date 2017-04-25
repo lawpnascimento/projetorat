@@ -6,7 +6,6 @@
     <script type="text/javascript" src="../../lib/jquery/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../../js/rat.js"></script>
     <script type="text/javascript" src="../../js/alerta.js"></script>
-    <script type="text/javascript" src="../../js/editableTable.js"></script>
     <link rel="stylesheet" href="../../css/alerta.css">
     <link rel="stylesheet" href="../../css/rat.css">
     <link rel="stylesheet" href="../../css/editableTable.css">
@@ -57,7 +56,7 @@
 
           <!-- TELA ATIVIDADES -->
           <div class="tab-pane" id="atividades">
-            <div id="table" class="table-editable">
+            <div id="tableAtividade" class="table-editable">
             <span class="table-add glyphicon glyphicon-plus"></span>
             <table class="table table-condensed table-hover table-bordered">
               <tr>
@@ -101,7 +100,7 @@
 
             <!-- TELA DESPESA -->
           <div class="tab-pane" id="despesas">
-              <div id="table" class="table-editable">
+              <div id="tableDespesa" class="table-editable">
                 <span class="table-add glyphicon glyphicon-plus"></span>
                 <table class="table table-condensed table-hover table-bordered">
                   <tr>
@@ -118,7 +117,7 @@
                     <td contenteditable="true">stir-fry</td>
                     <td contenteditable="true">stir-fry</td>
                     <td contenteditable="true">stir-fry</td>
-                    <td></td>
+                    <td contenteditable="true">stir-fry</td>
                     <td>
                       <span class="table-remove glyphicon glyphicon-remove"></span>
                     </td>
