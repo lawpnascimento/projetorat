@@ -24,16 +24,18 @@ $oPersistencia->setModel($oModel);
 
 $bLogou = $oPersistencia->validaLogin();
 
-if($_SESSION["codSit"] == "1"){
-  if($bLogou) {
-  	echo '{ "mensagem": "Login realizado com sucesso", "status" : "0" }';
-  } else {
-  	echo '{ "mensagem": "Usuário ou senha incorretos", "status" : "1" }';
+
+if($bLogou){
+  if($_SESSION["codSit"] == "1"){
+	   echo '{ "mensagem": "Login realizado com sucesso", "status" : "0" }';
+  }
+  else{
+     echo '{ "mensagem": "Usuário bloqueado, contatar administração", "status" : "1" }';
   }
 }
 else{
-  echo '{ "mensagem": "Usuário bloqueado, contatar administração", "status" : "1" }';
-
+   echo '{ "mensagem": "Usuário ou senha incorretos", "status" : "1" }';
 }
+
 
 ?>

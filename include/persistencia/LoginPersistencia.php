@@ -41,10 +41,10 @@ class LoginPersistencia {
 		if( $oDados = $this->getConexao()->fetch_query($sSql) ) {
      		$_SESSION["codUsu"] = $oDados->codUsu;
 		    $_SESSION["codSit"] = $oDados->codSit;
-   		    $_SESSION["nomUsu"] = $oDados->nomUsu;
-			$_SESSION["codPer"] = $oDados->codPer;
-			$_SESSION["desEml"] = $oDados->desEml;
-			$logado = true;
+   		  $_SESSION["nomUsu"] = $oDados->nomUsu;
+				$_SESSION["codPer"] = $oDados->codPer;
+				$_SESSION["desEml"] = $oDados->desEml;
+				$logado = true;
 		} else {
       Session_destroy();
 

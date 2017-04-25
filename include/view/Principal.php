@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("../../estrutura/iniciar_sessao.php");
 $_SESSION['userid'] = "1" // You may want to set it on login
 ?>
 

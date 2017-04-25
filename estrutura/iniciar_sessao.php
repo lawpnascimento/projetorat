@@ -1,15 +1,12 @@
 <?php
 //Caso o usuário não esteja autenticado, limpa os dados e redireciona
-/* 
-if (!isset($_SESSION['cdusuario'])) {
-
+if (!isset($_SESSION['codUsu'])) {
 
     //Limpa
-    unset ($_SESSION['cdusuario']);
-    unset ($_SESSION['nome']);
+    session_destroy();
 
     //Redireciona para a página de autenticação
     header('location: /projetorat/index.php');
 }
-*/
+
 ?>
