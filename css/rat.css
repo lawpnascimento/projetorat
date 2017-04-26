@@ -1,3 +1,9 @@
 #tabs {
 	margin-top: 10px;
 }
+
+#tdDescricaoAtividades {
+    max-width: 40px;
+    max-height: 15px;
+    overflow: hidden;
+}

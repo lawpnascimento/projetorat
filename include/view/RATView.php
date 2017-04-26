@@ -71,7 +71,7 @@
                 <td contenteditable="true">Stir Fry</td>
                 <td contenteditable="true">stir-fry</td>
                 <td contenteditable="true">stir-fry</td>
-                <td contenteditable="true">stir-fry</td>
+                <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)">desc</td>
                 <td>
                   <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
