@@ -15,33 +15,24 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="lastname" class="col-md-1 control-label">Sobrenome</label>
+                    <label for="lastname" class="col-md-1 control-label">Senha</label>
                     <div class="col-md-4">
-                        <input id="txbSobrenome" type="text" class="form-control" name="txbSobrenome" placeholder="Sobrenome" maxlength="50">
+                        <input id="txbSenha" type="text" class="form-control" name="txbSenha" placeholder="Senha" maxlength="50">
                     </div>
                 </div>
-                <div class="form-group">
-    								<label for="telefone" class="col-md-1 control-label">Telefone</label>
-    								<div class="col-md-4">
-    									<input id="txbTelefone" type="text" class="form-control" name="txbTelefone" placeholder="Telefone" maxlength="15">
-    								</div>
-  							</div>
                 <div class="form-group">
                     <label for="email" class="col-md-1 control-label">E-mail</label>
                     <div class="col-md-4">
                         <input id="txbEmail" type="text" class="form-control" name="txbEmail" placeholder="E-mail" maxlength="50">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="cpf" class="col-md-1 control-label">CPF</label>
-                    <div class="col-md-4">
-                        <input id="txbCpf" type="text" maxlength="11" class="form-control" name="txbCpf" placeholder="CPF">
-                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-1 col-md-4">
                         <button id="btnAtualizar" type="button" class="btn btn-primary">Atualizar</button>
                     </div>
+                    <br/>
+                    <br/>
                 </div>
             </form>
         </div>

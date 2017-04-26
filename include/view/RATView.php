@@ -21,7 +21,7 @@
           <div id="content" align="left">
           <ul id="tabs" class="nav nav-pills nav-justified" data-tabs="tabs">
             <li class="active"><a href="#geral" data-toggle="tab">Geral</a></li>
-            <li><a href="#atividades" data-target="#atividades" data-toggle="tab">Atividades</a></li>
+            <li><a href="#atividades" data-toggle="tab">Atividades</a></li>
             <li><a href="#despesas" data-toggle="tab">Despesas</a></li>
             <li><a href="#lancar" data-toggle="tab">Lançar</a></li>
             <li><a href="#blue" data-toggle="tab">Blue</a></li>
@@ -57,7 +57,7 @@
           <!-- TELA ATIVIDADES -->
           <div class="tab-pane" id="atividades">
             <div id="tableAtividade" class="table-editable">
-            <span class="table-add glyphicon glyphicon-plus"></span>
+            <span id="addAtividade" class="table-add glyphicon glyphicon-plus"></span>
             <table class="table table-condensed table-hover table-bordered">
               <tr>
                 <th>Data da atividade</th>
@@ -69,8 +69,8 @@
               </tr>
               <tr>
                 <td contenteditable="true">Stir Fry</td>
-                <td contenteditable="true">stir-fry</td>
-                <td contenteditable="true">stir-fry</td>
+                <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)">08:00</td>
+                <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)">12:00</td>
                 <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)">desc</td>
                 <td>
                   <span class="table-remove glyphicon glyphicon-remove"></span>
@@ -80,7 +80,7 @@
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
                 </td>
               </tr>
-              <!-- This is our clonable table line -->
+              <!-- Linha que será adicionada -->
               <tr class="hide">
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
@@ -126,8 +126,9 @@
                       <span class="table-down glyphicon glyphicon-arrow-down"></span>
                     </td>
                   </tr>
-                  <!-- This is our clonable table line -->
+                  <!-- Linha que será adicionada -->
                   <tr class="hide">
+                    <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>

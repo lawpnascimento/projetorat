@@ -3,7 +3,8 @@ var $tableAtividade = $('#tableAtividade');
 var $BTN = $('#export-btn');
 var $EXPORT = $('#export');
 
-$('.table-add').click(function () {
+//$('.table-add').click(function () {
+$('#addAtividade').click(function () {
   var $clone = $tableAtividade.find('tr.hide').clone(true).removeClass('hide table-line');
   $tableAtividade.find('table').append($clone);
 });
