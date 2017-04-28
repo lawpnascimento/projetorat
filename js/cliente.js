@@ -165,7 +165,7 @@ function buscaClientes(codigo){
             grid = grid + "<td>" + cliente.desRazaoSocial  + "</td>";
             grid = grid + "<td>" + cliente.nomCli + "</td>";
             grid = grid + "<td>" + cliente.numCNPJ         + "</td>";
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaClientes(" + cliente.codCli + ")'><a>Editar</a></td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaClientes(" + cliente.codCli + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
           }

@@ -1,12 +1,13 @@
 $("#document").ready(function() {
   $("#formUsuario #btnCadastrar").click(function () {
     var txbNomUsu = $("#txbNomUsu").val();
+    var txbSobrenomeUsu = $("#txbSobrenomeUsu").val();
     var txbSenUsu = $("#txbSenUsu").val();
     var txbDesEml = $("#txbDesEml").val();
     var cbbPerfil = $("#cbbPerfil").val();
     var cbbSituacao = $("#cbbSituacao").val();
 
-    var msgErro = validaCampos(txbNomUsu, txbSenUsu, txbDesEml, cbbPerfil, cbbSituacao);
+    var msgErro = validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPerfil, cbbSituacao);
 
     if(msgErro !== ""){
       jbkrAlert.alerta('Alerta!',msgErro);
@@ -18,6 +19,7 @@ $("#document").ready(function() {
           dataType: "text",
           data: {
             nomUsu: txbNomUsu,
+            sobrenomeUsu: txbSobrenomeUsu,
             senUsu: txbSenUsu,
             desEml: txbDesEml,
             codPer: cbbPerfil,
@@ -30,7 +32,7 @@ $("#document").ready(function() {
           //Se der tudo ok no envio...
           success: function (dados) {
             $("#formResponsavel #btnCancelar").trigger("click");
-            jbkrAlert.sucesso('Responsavel', 'Responsavel cadastrado com sucesso!');
+            jbkrAlert.sucesso('Usuario', 'Usuário cadastrado com sucesso!');
           }
       });
     }
@@ -51,6 +53,7 @@ $("#document").ready(function() {
   $("#formUsuario #btnAtualizar").click(function () {
     var codigo = $("#hidCodUsu").val();
     var txbNomUsu = $("#txbNomUsu").val();
+    var txbSobrenomeUsu = $("#txbSobrenomeUsu").val();
     var txbSenUsu = $("#txbSenUsu").val();
     var txbDesEml = $("#txbDesEml").val();
     var cbbPerfil = $("#cbbPerfil").val();
@@ -69,6 +72,7 @@ $("#document").ready(function() {
         data: {
           codigo: codigo,
           nomUsu: txbNomUsu,
+          sobrenomeUsu: txbSobrenomeUsu,
           senUsu: txbSenUsu,
           desEml: txbDesEml,
           codPer: cbbPerfil,
@@ -133,6 +137,7 @@ function buscaPerfilDropdown(){
 
 function buscaUsuario(codigo){
   var txbNomUsu = $("#txbNomUsu").val();
+  var txbSobrenomeUsu = $("#txbSobrenomeUsu").val();
   var txbSenUsu = $("#txbSenUsu").val();
   var txbDesEml = $("#txbDesEml").val();
   var cbbPerfil = $("#cbbPerfil").val();
@@ -145,6 +150,7 @@ function buscaUsuario(codigo){
       data: {
           codigo: codigo,
           nomUsu: txbNomUsu,
+          sobrenomeUsu: txbSobrenomeUsu,
           senUsu: txbSenUsu,
           desEml: txbDesEml,
           codPer: cbbPerfil,
@@ -167,10 +173,11 @@ function buscaUsuario(codigo){
 
             grid = grid + "<tr>";
             grid = grid + "<td>" + usuario.nomUsu  + "</td>";
+            grid = grid + "<td>" + usuario.sobrenomeUsu  + "</td>";
             grid = grid + "<td>" + usuario.desEml  + "</td>";
             grid = grid + "<td>" + usuario.desPer + "</td>";
             grid = grid + "<td>" + usuario.desSit + "</td>";
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaUsuario(" + usuario.codUsu + ")'><a>Editar</a></td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaUsuario(" + usuario.codUsu + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
           }
@@ -182,6 +189,7 @@ function buscaUsuario(codigo){
 
               $("#hidCodUsu").val(usuario.codUsu);
               $("#txbNomUsu").val(usuario.nomUsu);
+              $("#txbSobrenomeUsu").val(usuario.sobrenomeUsu);
               $("#txbDesEml").val(usuario.desEml);
               $("#cbbPerfil:first-child").text(usuario.desPer);
               $("#cbbPerfil:first-child").val(usuario.codPer);
@@ -197,10 +205,14 @@ function buscaUsuario(codigo){
 
 }
 
-function validaCampos(txbNomUsu, txbSenUsu, txbDesEml, cbbPerfil, cbbSituacao){
+function validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPerfil, cbbSituacao){
     msgErro = "";
+
     if(txbNomUsu === ""){
         msgErro = msgErro + "<b>Nome do usuário</b> é um campo de preenchimento obrigatorio<br/>";
+    }
+    if(txbSobrenomeUsu === ""){
+        msgErro = msgErro + "<b>Sobrenome do usuário</b> é um campo de preenchimento obrigatorio<br/>";
     }
     if(txbSenUsu === ""){
         msgErro = msgErro + "<b>Senha</b> é um campo de preenchimento obrigatorio<br/>";
@@ -217,4 +229,9 @@ function validaCampos(txbNomUsu, txbSenUsu, txbDesEml, cbbPerfil, cbbSituacao){
 
     return msgErro;
 
+}
+
+function validaEmail(txbDesEml) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(txbDesEml);
 }

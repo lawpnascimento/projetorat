@@ -4,6 +4,7 @@ class UsuarioModel {
 
 	private $codigo;
 	private $nome;
+	private $sobrenome;
 	private $senha;
 	private $email;
 	private $perfil;
@@ -23,6 +24,14 @@ class UsuarioModel {
 
 	public function getNome(){
 		return $this->nome;
+	}
+
+	public function setSobrenome($sobrenome){
+		$this->sobrenome = $sobrenome;
+	}
+
+	public function getSobrenome(){
+		return $this->sobrenome;
 	}
 
 	public function setSenha($senha){

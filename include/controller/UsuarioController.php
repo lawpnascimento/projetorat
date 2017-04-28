@@ -8,6 +8,7 @@ switch($_POST["action"]){
 		$model = new UsuarioModel();
 
     $model->setNome($_POST["nomUsu"]);
+    $model->setSobrenome($_POST["sobrenomeUsu"]);
     $model->setSenha($_POST["senUsu"]);
     $model->setEmail($_POST["desEml"]);
     $model->setPerfil($_POST["codPer"]);
@@ -35,6 +36,7 @@ switch($_POST["action"]){
 		}
 
     $model->setNome($_POST["nomUsu"]);
+    $model->setSobrenome($_POST["sobrenomeUsu"]);
     $model->setSenha($_POST["senUsu"]);
     $model->setEmail($_POST["desEml"]);
     $model->setPerfil($_POST["codPer"]);
@@ -52,12 +54,13 @@ switch($_POST["action"]){
 	case 'atualizar':
 		$model = new UsuarioModel();
 
-		$model->setCodigo($_POST["codigo"]);
-		$model->setNome($_POST["nomUsu"]);
-		$model->setSenha($_POST["senUsu"]);
-		$model->setEmail($_POST["desEml"]);
-		$model->setPerfil($_POST["codPer"]);
-		$model->setSituacao($_POST["codSit"]);
+	$model->setCodigo($_POST["codigo"]);
+	$model->setNome($_POST["nomUsu"]);
+	$model->setSobrenome($_POST["sobrenomeUsu"]);
+	$model->setSenha($_POST["senUsu"]);
+	$model->setEmail($_POST["desEml"]);
+	$model->setPerfil($_POST["codPer"]);
+	$model->setSituacao($_POST["codSit"]);
 
 		$persistencia = new UsuarioPersistencia();
 

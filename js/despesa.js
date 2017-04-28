@@ -75,7 +75,7 @@ function buscaDespesas(codigo){
             grid = grid + "<td>" + despesa.codDsp + "</td>";
             grid = grid + "<td>" + despesa.desDsp + "</td>";
             grid = grid + "<td>" + despesa.vlrDsp + "</td>";
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaDespesas(" + despesa.desDsp + ")'><a>Editar</a></td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaDespesas(" + despesa.desDsp + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
           }

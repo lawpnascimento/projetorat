@@ -72,7 +72,7 @@ function buscaProdutos(codigo){
             grid = grid + "<tr>";
             grid = grid + "<td>" + produto.codPro  + "</td>";
             grid = grid + "<td>" + produto.desPro  + "</td>";
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaProdutos(" + produto.desPro + ")'><a>Editar</a></td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaProdutos(" + produto.desPro + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
           }

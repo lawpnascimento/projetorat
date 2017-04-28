@@ -33,7 +33,7 @@ class LoginPersistencia {
 									 ,usu.codSit codSit
 									 ,usu.desEml desEml
 							 FROM tbusuario usu
-					    WHERE usu.nomUsu = '" . $login . "'" .
+					    WHERE usu.desEml = '" . $login . "'" .
 							" AND usu.senUsu = '" . $senha . "'";
 
 		$this->getConexao()->conectaBanco();

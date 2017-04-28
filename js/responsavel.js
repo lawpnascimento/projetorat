@@ -157,7 +157,7 @@ function buscaResponsavel(codigo){
             grid = grid + "<td>" + responsavel.nomCli  + "</td>";
             grid = grid + "<td>" + responsavel.nomRes  + "</td>";
             grid = grid + "<td>" + responsavel.emlRes + "</td>";
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaResponsavel(" + responsavel.codRes + ")'><a>Editar</a></td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaResponsavel(" + responsavel.codRes + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
           }

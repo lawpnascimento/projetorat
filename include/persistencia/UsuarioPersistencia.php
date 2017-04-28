@@ -29,13 +29,15 @@ class UsuarioPersistencia{
 		$this->getConexao()->conectaBanco();
 
     $nome = $this->getModel()->getNome();
+    $sobrenome = $this->getModel()->getSobrenome();
     $senha = $this->getModel()->getSenha();
     $email = $this->getModel()->getEmail();
     $perfil = $this->getModel()->getPerfil();
     $situacao = $this->getModel()->getSituacao();
 
-		$sSql = "INSERT INTO tbusuario (nomUsu, senUsu, desEml, Perfil_codPer, codsit)
+		$sSql = "INSERT INTO tbusuario (nomUsu, sobrenomeUsu, senUsu, desEml, Perfil_codPer, codsit)
                           VALUES ('". $nome ."'
+                         		 ,'". $sobrenome ."'
                                  ,'". $senha ."'
                                  ,'". $email ."'
                                  ,". $perfil ."
@@ -83,8 +85,9 @@ class UsuarioPersistencia{
 	public function buscaUsuario(){
 		$this->getConexao()->conectaBanco();
 
-		$codigo = $this->getModel()->getCodigo();
+	$codigo = $this->getModel()->getCodigo();
     $nome = $this->getModel()->getNome();
+    $sobrenome = $this->getModel()->getSobrenome();
     $senha = $this->getModel()->getSenha();
     $email = $this->getModel()->getEmail();
     $perfil = $this->getModel()->getPerfil();
@@ -94,6 +97,7 @@ class UsuarioPersistencia{
 
 			$sSql = "SELECT usu.codUsu codUsu
                      ,usu.nomUsu nomUsu
+                     ,usu.sobrenomeUsu sobrenomeUsu
                      ,usu.senUsu senUsu
                      ,usu.codSit codSit
                      ,usu.desEml desEml
@@ -109,6 +113,10 @@ class UsuarioPersistencia{
 					$sSql = $sSql . " AND UPPER(usu.nomUsu) LIKE UPPER('%" . $nome ."%')";
 			}
 
+			if($sobrenome != null){
+					$sSql = $sSql . " AND UPPER(usu.sobrenomeUsu) LIKE UPPER('%" . $sobrenome ."%')";
+			}
+
 			if($email != null){
 					$sSql = $sSql . " AND UPPER(usu.desEml) LIKE UPPER('%" . $email ."%')";
 			}
@@ -117,7 +125,7 @@ class UsuarioPersistencia{
 					$sSql = $sSql . " AND cli.codsit = " . $situacao ."";
 			}
 
-      if($perfil != null){
+      		if($perfil != null){
 					$sSql = $sSql . " AND cli.codPer = " . $perfil ."";
 			}
 
@@ -126,6 +134,7 @@ class UsuarioPersistencia{
 
 			$sSql = "SELECT usu.codUsu codUsu
                      ,usu.nomUsu nomUsu
+                     ,usu.sobrenomeUsu sobrenomeUsu
                      ,usu.senUsu senUsu
                      ,usu.codSit codSit
                      ,usu.desEml desEml
@@ -153,6 +162,7 @@ class UsuarioPersistencia{
 
 			$retorno = $retorno . '{"codUsu": "'.$linha["codUsu"].'"
 														, "nomUsu" : "'.$linha["nomUsu"].'"
+														, "sobrenomeUsu" : "'.$linha["sobrenomeUsu"].'"
 														, "senUsu" : "'.$linha["senUsu"].'"
 														, "codSit" : "'.$linha["codSit"].'"
 							                            , "desEml" : "'.$linha["desEml"].'"
@@ -176,8 +186,9 @@ class UsuarioPersistencia{
 	public function Atualizar(){
 			$this->getConexao()->conectaBanco();
 
-			$codigo = $this->getModel()->getCodigo();
+		$codigo = $this->getModel()->getCodigo();
 	    $nome = $this->getModel()->getNome();
+	    $sobrenome = $this->getModel()->getSobrenome();
 	    $senha = $this->getModel()->getSenha();
 	    $email = $this->getModel()->getEmail();
 	    $perfil = $this->getModel()->getPerfil();
@@ -185,6 +196,7 @@ class UsuarioPersistencia{
 
 			$sSql = "UPDATE tbusuario
 									SET nomUsu = '" . $nome ."'
+										 ,sobrenomeUsu = '" . $sobrenome ."'
 										 ,senUsu = '" . $senha ."'
 										 ,desEml = '" . $email ."'
 										 ,Perfil_codPer = '" . $perfil ."'

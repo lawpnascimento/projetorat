@@ -3,8 +3,9 @@
   <head>
     <title>Usuários</title>
     <meta charset="utf-8">
-    <script type="text/javascript" src="../../js/usuario.js"></script>
+    <script type="text/javascript" src="../../js/geral.js"></script>
     <script type="text/javascript" src="../../js/alerta.js"></script>
+    <script type="text/javascript" src="../../js/usuario.js"></script>
     <link rel="stylesheet" href="../../css/alerta.css">
   </head>
   <body>
@@ -18,20 +19,22 @@
             <input type="hidden" id="hidCodUsu"></input>
             <div class="form-group">
               <div class="col-md-4">
-                <label for="nomUsu">Usuário*</label>
-                <input id="txbNomUsu" type="text" class="form-control" name="txbNomUsu" placeholder="Nome do usuário" maxlength="50"></input>
+                <label for="nomUsu">Nome*</label>
+                <input id="txbNomUsu" type="text" class="form-control" name="txbNomUsu" placeholder="Nome" maxlength="50"></input>
               </div>
-            </div>
-            <div class="form-group">
               <div class="col-md-4">
-                <label for="email">Senha*</label>
-                <input id="txbSenUsu" type="password" class="form-control" name="txbSenUsu" placeholder="Senha do usuário" maxlength="50"></input>
+                <label for="nomUsu">Sobrenome*</label>
+                <input id="txbSobrenomeUsu" type="text" class="form-control" name="txbSobrenomeUsu" placeholder="Sobrenome" maxlength="50"></input>
               </div>
-            </div>
+            </div> 
             <div class="form-group">
               <div class="col-md-4">
                 <label for="email">E-mail*</label>
                 <input id="txbDesEml" type="text" class="form-control" name="txbDesEml" placeholder="Endereco de e-mail" maxlength="50"></input>
+              </div>
+              <div class="col-md-4">
+                <label for="email">Senha*</label>
+                <input id="txbSenUsu" type="password" class="form-control" name="txbSenUsu" placeholder="Senha do usuário" maxlength="50"></input>
               </div>
             </div>
             <!--Combo box-->
@@ -83,9 +86,11 @@
           <thead>
             <tr>
               <th>
-                Usuário
+                Nome
               </th>
-
+              <th>
+                Sobrenome
+              </th>
               <th>
                 E-mail
               </th>
