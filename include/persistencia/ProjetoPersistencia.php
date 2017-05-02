@@ -42,43 +42,48 @@ class ProjetoPersistencia{
         $this->getConexao()->query($sSql);
 
         $this->getConexao()->fechaConexao();
-
-		/* $myFile = "projeto.json";
- 		$arrData = array(); // empty array
-
- 		// json direto no array
- 		$jsonData = array('projeto' => $this->getModel()->getProjeto(), 'produto' => $this->getModel()->getProduto(), 'dataInicio' => $this->getModel()->getDataInicio());				
-
-	   // "Pusha" a resposta do usuário para array originalmente vazio
-	   array_push($arrData,$jsonData);
-	   	echo $jsonData;
-		echo $arrData;
-
-       //Convert updated array to JSON
-	   $jsonData = json_encode($arrData, JSON_PRETTY_PRINT);
-	   
-	   //grava dados do json para o arquivo projeto.json
-	   if(file_put_contents($myFile, $jsonData)) {
-	        echo 'Data successfully saved';
-	    }
-	   else 
-	        echo "Error"; */
     }
-
-   public function consultarProjeto(){
-   		$myFile = "C:/xampp/htdocs/projetorat/include/controller/cliente.json";
-		$json = file_get_contents($myFile);
-		$data = json_decode($json, TRUE);
-		echo $data;
-	}
 	
-public function buscaClienteDropDown(){
+  public function buscaClienteDropDown(){
+    $this->getConexao()->conectaBanco();
+
+    $sSql = "SELECT cli.codCli codCli
+                   ,cli.nomCli nomCli
+               FROM tbcliente cli
+               ORDER BY cli.nomCli";
+
+    $resultado = mysql_query($sSql);
+
+    $qtdLinhas = mysql_num_rows($resultado);
+
+    $contador = 0;
+
+    $retorno = '[';
+    while ($linha = mysql_fetch_assoc($resultado)) {
+
+        $contador = $contador + 1;
+
+        $retorno = $retorno . '{"codCli": "'.$linha["codCli"].'"
+                               , "nomCli" : "'.$linha["nomCli"].'"}';
+        //Para não concatenar a virgula no final do json
+        if($qtdLinhas != $contador)
+           $retorno = $retorno . ',';
+
+    }
+    $retorno = $retorno . "]";
+
+    $this->getConexao()->fechaConexao();
+
+    return $retorno;
+  }
+
+public function buscaProdutoDropDown(){
         $this->getConexao()->conectaBanco();
 
-        $sSql = "SELECT cli.codCli codCli
-                       ,cli.nomCli nomCli
-                   FROM tbcliente cli
-                  ORDER BY cli.nomCli";
+        $sSql = "SELECT pro.codPro codPro
+                       ,pro.desPro desPro
+                   FROM tbproduto pro
+                  ORDER BY pro.desPro";
 
         $resultado = mysql_query($sSql);
 
@@ -91,8 +96,8 @@ public function buscaClienteDropDown(){
 
             $contador = $contador + 1;
 
-            $retorno = $retorno . '{"codCli": "'.$linha["codCli"].'"
-                                   , "nomCli" : "'.$linha["nomCli"].'"}';
+            $retorno = $retorno . '{"codPro": "'.$linha["codPro"].'"
+                                   , "desPro" : "'.$linha["desPro"].'"}';
             //Para não concatenar a virgula no final do json
             if($qtdLinhas != $contador)
                $retorno = $retorno . ',';
@@ -104,6 +109,7 @@ public function buscaClienteDropDown(){
 
         return $retorno;
     }
+
 
 }
 

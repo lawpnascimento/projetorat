@@ -1,7 +1,7 @@
 //TABELA ATIVIDADE
 var $tableAtividade = $('#tableAtividade');
-var $BTN = $('#export-btn');
-var $EXPORT = $('#export');
+var $btnExportarAtividade = $('#btnExportarAtividade');
+var $msgExportarAtividade = $('#msgExportarAtividade');
 
 //$('.table-add').click(function () {
 $('#addAtividade').click(function () {
@@ -28,8 +28,8 @@ $('.table-down').click(function () {
 jQuery.fn.pop = [].pop;
 jQuery.fn.shift = [].shift;
 
-$BTN.click(function () {
-  var $rows = $TABLE.find('tr:not(:hidden)');
+$btnExportarAtividade.click(function () {
+  var $rows = $tableAtividade.find('tr:not(:hidden)');
   var headers = [];
   var data = [];
   
@@ -52,15 +52,15 @@ $BTN.click(function () {
   });
   
   // Output the result
-  $EXPORT.text(JSON.stringify(data));
+  $msgExportarAtividade.text(JSON.stringify(data));
 });
 
 //TABELA DESPESA
 var $tableDespesa = $('#tableDespesa');
-var $BTN = $('#export-btn');
-var $EXPORT = $('#export');
+var $btnExportarDespesa = $('#btnExportarDespesa');
+var $msgExportarDespesa = $('#msgExportarDespesa');
 
-$('.table-add').click(function () {
+$('#addDespesa').click(function () {
   var $clone = $tableDespesa.find('tr.hide').clone(true).removeClass('hide table-line');
   $tableDespesa.find('table').append($clone);
 });
@@ -84,8 +84,8 @@ $('.table-down').click(function () {
 jQuery.fn.pop = [].pop;
 jQuery.fn.shift = [].shift;
 
-$BTN.click(function () {
-  var $rows = $TABLE.find('tr:not(:hidden)');
+$btnExportarDespesa.click(function () {
+  var $rows = $tableDespesa.find('tr:not(:hidden)');
   var headers = [];
   var data = [];
   
@@ -108,11 +108,82 @@ $BTN.click(function () {
   });
   
   // Output the result
-  $EXPORT.text(JSON.stringify(data));
+  $msgExportarDespesa.text(JSON.stringify(data));
 });
 
 $("#document").ready(function(){
 	$("#LabelResumoCliente").html("TESTE");
 	$("#txbHoraInicial").mask('00:00');
 	$("#txbHoraFinal").mask('00:00');
+  $("#txbUsuario").val("teste");
 });
+
+//AUTOCOMPLETE
+/*
+$('#txbResponsavel').autocomplete({
+        minLength: 1,
+        autoFocus: true,
+        delay: 300,
+        position: {
+          my: 'left top',
+          at: 'right top'
+        },
+        appendTo: '#tabGeral',
+
+        source: function(request, response){
+          $.ajax({
+
+              type: "POST",
+              dataType: "text",
+              data: {
+                  termo: request.term
+                  action: "responsavelautocomplete"
+              },
+
+              url: "../controller/RATController.php",
+
+                 }).done(function(data){
+                 if(data.length > 0){
+              
+                 data = data.split(',');
+                 response( $.each(data, function(key, item){
+                   return({
+                    label: item
+                  });
+                }));
+              }
+            });
+          }
+      });*/
+
+function buscaRAT(codigo){
+  var txbUsuario = $("#txbUsuario").val();
+  var txbCliente = $("#txbCliente").val();
+  var txbResponsavel = $("#txbResponsavel").val();
+  var txbProjeto = $("#txbProjeto").val();
+
+  $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+          codigo: codigo,
+          usuario: txbUsuario,
+          cliente: txbCliente,
+          responsavel: txbResponsavel,
+          projeto: txbProjeto,
+
+          action: "buscar"
+      },
+
+      url: "../controller/RATController.php",
+
+      //Se der tudo ok no envio...
+      success: function (dados) {
+        var json = $.parseJSON(dados);
+      
+
+      }
+  });
+
+}

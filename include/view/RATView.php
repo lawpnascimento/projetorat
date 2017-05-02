@@ -20,42 +20,42 @@
 
           <div id="content" align="left">
           <ul id="tabs" class="nav nav-pills nav-justified" data-tabs="tabs">
-            <li class="active"><a href="#geral" data-toggle="tab">Geral</a></li>
-            <li><a href="#atividades" data-toggle="tab">Atividades</a></li>
-            <li><a href="#despesas" data-toggle="tab">Despesas</a></li>
-            <li><a href="#lancar" data-toggle="tab">Lançar</a></li>
+            <li class="active"><a href="#tabGeral" data-toggle="tab">Geral</a></li>
+            <li><a href="#tabAtividades" data-toggle="tab">Atividades</a></li>
+            <li><a href="#tabDespesas" data-toggle="tab">Despesas</a></li>
+            <li><a href="#tabLancar" data-toggle="tab">Lançar</a></li>
             <li><a href="#blue" data-toggle="tab">Blue</a></li>
           </ul>
           </div>
 
-
+          <!-- TELA GERAL -->
           <div class="tab-content">
-            <div class="tab-pane active" id="geral">
-            <fieldset>
-              <div class="form-group">
-                <div class="col-md-4">
+            <div class="tab-pane active" id="tabGeral">
+             <div class="panel-body">
+                <div class="col-md-2">
                   <label for="codigoRAT">Código do RAT*</label>
                   <input id="txbCodigoRAT" type="text" class="form-control" name="txbCodigoRAT" readonly></input>
                 </div>
-                <div class="col-md-4">
-                  <label for="consultor">Consultor*</label>
-                  <input id="txbConsultor" type="text" class="form-control" name="txbConsultor" placeholder="Nome do Consultor"></input>
+                <div class="col-md-2">
+                  <label for="usuario">Usuario*</label>
+                  <input id="txbUsuario" type="text" class="form-control" name="txbUsuario"></input>
                 </div>
-              <div class="form-group">
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <label for="cliente">Cliente*</label>
                   <input id="txbCliente" type="text" class="form-control" name="txbCliente" placeholder="Nome do Cliente"></input>
                 </div>
-                <div class="col-md-4">
-                  <label for="inscricao">Responsavel*</label>
+                <div class="col-md-2">
+                  <label for="responsavel">Responsavel*</label>
                   <input id="txbResponsavel" type="text" class="form-control" name="txbResponsavel" placeholder="Nome do Reponsável"></input>
                 </div>
+                <div class="col-md-2">
+                  <label for="projeto">Projeto*</label>
+                  <input id="txbProjeto" type="text" class="form-control" name="txbProjeto" placeholder="Nome do Projeto"></input>
+                </div>
               </div>
-            </fieldset>
             </div>
-
           <!-- TELA ATIVIDADES -->
-          <div class="tab-pane" id="atividades">
+          <div class="tab-pane" id="tabAtividades">
             <div id="tableAtividade" class="table-editable">
             <span id="addAtividade" class="table-add glyphicon glyphicon-plus"></span>
             <table class="table table-condensed table-hover table-bordered">
@@ -95,13 +95,14 @@
                 </td>
               </tr>
             </table>
+                <button id="btnExportarAtividade" class="btn btn-primary">Export Data</button>
+                <p id="msgExportarAtividade"></p>
           </div>
           </div>
-
-            <!-- TELA DESPESA -->
-          <div class="tab-pane" id="despesas">
+          <!-- TELA DESPESA -->
+          <div class="tab-pane" id="tabDespesas">
               <div id="tableDespesa" class="table-editable">
-                <span class="table-add glyphicon glyphicon-plus"></span>
+                <span id="addDespesa" class="table-add glyphicon glyphicon-plus"></span>
                 <table class="table table-condensed table-hover table-bordered">
                   <tr>
                     <th>Data da despesa</th>
@@ -142,11 +143,13 @@
                     </td>
                   </tr>
                 </table>
+                <button id="btnExportarDespesa" class="btn btn-primary">Export Data</button>
+                <p id="msgExportarDespesa"></p>
               </div>
           </div>
 
             <!-- TELA LANCAR -->
-            <div class="tab-pane" id="lancar">
+            <div class="tab-pane" id="tabLancar">
                  <div class="col-md-3">
                    <ul>
                      <li id="LabelResumoCliente">Cliente: </li>

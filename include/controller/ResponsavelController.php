@@ -24,7 +24,8 @@ switch($_POST["action"]){
     echo $retorno;
 
     break;
-		case 'buscar':
+
+	case 'buscar':
 	   	$model = new ResponsavelModel();
 
 			if(isset($_POST["codigo"])){
@@ -43,7 +44,8 @@ switch($_POST["action"]){
 
 	  	echo $retorno;
 	   	break;
-		case 'atualizar':
+	   	
+	case 'atualizar':
 			$model = new ResponsavelModel();
 
 			$model->setCodigo($_POST["codigo"]);

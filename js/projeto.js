@@ -68,6 +68,7 @@ function buscaClienteDropdown(){
                 dropdown = dropdown + '<li role="presentation" value="' + cliente.codCli  + '"><a role="menuitem" tabindex="-1" href="#">' + cliente.nomCli + '</a></li>';
 
             }
+
             $("#ulCliente").html(dropdown);
 
             $("#ulCliente li a").click(function(){
