@@ -1,12 +1,15 @@
-function submitProjeto() {
-  var txbProjeto = $('#txbProjeto').val();
-  var txbProduto = $('#txbProduto').val();
-  var txbDataIni = $('#txbDataIni').val();
-  var cbbCliente = $("#cbbCliente").val();
-   
-    if(validaCampos(txbProjeto, txbProduto, txbDataIni)){
-          $("#htmlMensagem").html(msgErro);
-          $("#divMensagemCadastro").css("display","block"); //JQuery para alterar o tipo do css de none para display
+$("#document").ready(function() {
+  $("#formProjeto #btnCadastrar").click(function () {
+
+    var txbProjeto = $("#txbProjeto").val();
+    var txbProduto = $("#txbProduto").val();
+    var txbDataInicio = $("#txbDataInicio").val();
+    var txbCliente = $("#txbCliente").val();
+
+    var msgErro = validaCampos(txbProjeto, txbProduto, txbDataInicio, txbCliente);
+
+    if(msgErro !== ""){
+      jbkrAlert.alerta('Alerta!',msgErro);
     }
     else {
       $.ajax({
@@ -14,95 +17,147 @@ function submitProjeto() {
           type: "POST",
           dataType: "text",
           data: {
-                projeto: txbProjeto,
-                produto: txbProduto,
-                dataInicio: txbDataIni,
-                cliente: cbbCliente,
-              action: "inserir"
+            projeto: txbProjeto,
+            produto: txbProduto,
+            dataInicio: txbDataInicio,
+            cliente: txbCliente,
+            action: "cadastrar"
           },
 
           url: "../controller/ProjetoController.php",
 
           //Se der tudo ok no envio...
-          success: function (callback) {
-             $("#htmlMensagem").html("Projeto inserido com sucesso!");
-             mensagemSucess();
-             var form = $("#formProjeto");
-             limpaCampos(form);
-
-            var json = JSON.stringify(callback);
-
+          success: function (dados) {
+              jbkrAlert.sucesso('Projeto', 'Projeto cadastrado com sucesso!');
+              $("#formProjeto #btnCancelar").trigger("click");
           }
-      }); 
+      });
     }
-}
 
-//JQuery para chamar função de limpar tela (geral) passando o parametro do formulario
-$("#btnCancelar").click(function(){
-//JQuery para limpar tela de erro
-  $("#divMensagemCadastro").css("display","none");
-  var form = $("#formProjeto");
-  limpaCampos(form);
-});
 
-function buscaClienteDropdown(){
-  $.ajax({
+  });
+
+  $("#formProjeto #btnCancelar").click(function(){
+    limpaCampos($(this).closest("form"));
+    formularioModoInserir();
+    buscaProjetos();
+  });
+
+  $("#formProjeto #btnAtualizar").click(function () {
+    var txbProjeto = $("#txbProjeto").val();
+    var txbProduto = $("#txbProduto").val();
+    var txbDataInicio = $("#txbDataInicio").val();
+    var txbCliente = $("#txbCliente").val();
+
+    var msgErro = validaCampos(txbProjeto, txbProduto, txbDataInicio, txbCliente);
+
+    if(msgErro !== ""){
+        jbkrAlert.alerta('Alerta!',msgErro);
+    }
+    else{
+      $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            action: "clientedropdown"
+            projeto: txbProjeto,
+            produto: txbProduto,
+            dataInicio: txbDataInicio,
+            cliente: txbCliente,
+          action: "atualizar"
         },
 
         url: "../controller/ProjetoController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            var json = $.parseJSON(dados);
-
-            var dropdown = "";
-            for (var i = 0; i < json.length; i++) {
-
-                var cliente = json[i];
-
-                dropdown = dropdown + '<li role="presentation" value="' + cliente.codCli  + '"><a role="menuitem" tabindex="-1" href="#">' + cliente.nomCli + '</a></li>';
-
-            }
-
-            $("#ulCliente").html(dropdown);
-
-            $("#ulCliente li a").click(function(){
-
-                $("#cbbCliente:first-child").text($(this).text());
-
-                $("#ulCliente li").each(function(){
-
-                    if ($(this).text() == $("#cbbCliente").text().trim()){
-                        $("#cbbCliente").val($(this).val());
-                    }
-                });
-
-            });
+          jbkrAlert.sucesso('Projeto', 'Projeto atualizado com sucesso!');
+          $("#formProjeto #btnCancelar").trigger("click");
         }
+      });
+    }
+  });
 
-    });
-}
+  $("#formProjeto #btnBuscar").click(function () {
+    buscaProjetos();
 
-$(document).ready(function(){
-  var today = new Date();
-  document.getElementById("txbDataIni").value = [today.getDate(), today.getMonth()+1, today.getFullYear()].join('-');
+  });
+  
 });
 
-function validaCampos(projeto, produto, dataini){
+function buscaProjetos(codigo){
+    var txbProjeto = $("#txbProjeto").val();
+    var txbProduto = $("#txbProduto").val();
+    var txbDataInicio = $("#txbDataInicio").val();
+    var txbCliente = $("#txbCliente").val();
+
+  $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+            codigo: codigo,
+            projeto: txbProjeto,
+            produto: txbProduto,
+            dataInicio: txbDataInicio,
+            cliente: txbCliente,
+          action: "buscar"
+      },
+
+      url: "../controller/ProjetoController.php",
+
+      //Se der tudo ok no envio...
+      success: function (dados) {
+        var json = $.parseJSON(dados);
+        var projeto = null;
+
+        //Carregando a grid
+        if(codigo == null){
+          var grid = "";
+          for (var i = 0; i < json.length; i++) {
+            projeto = json[i];
+
+            grid = grid + "<tr>";
+            grid = grid + "<td>" + projeto.desRazaoSocial  + "</td>";
+            grid = grid + "<td>" + projeto.nomCli + "</td>";
+            grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaProjetos(" + projeto.codCli + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
+            grid = grid + "</tr>";
+
+          }
+
+          $("#grdProjeto").html(grid);
+        }else{
+          formularioModoAtualizar();
+          for (var j = 0; j < json.length; j++) {
+              cliente = json[j];
+              $("#hidCodCli").val(cliente.codCli);
+              $("#txbProjeto").val(cliente.desRazaoSocial);
+              $("#txbProduto").val(cliente.nomCli);
+              $("#txbDataInicio").val(cliente.numCNPJ);
+              $("#txbCliente").val(cliente.iesCli);
+          }
+
+        }
+
+      }
+  });
+
+}
+
+function validaCampos(txbProjeto, txbProduto, txbDataInicio, txbCliente){
     msgErro = "";
-    if(projeto == ""){
-        msgErro = msgErro + "<b>Projeto</b> &eacute; um campo de preenchimento obrigat&oacute;rio";
+    if(txbProjeto === ""){
+        msgErro = msgErro + "<b>Projeto</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(produto == ""){
-        msgErro = msgErro + "</br><b>Produto</b> &eacute; um campo de preenchimento obrigat&oacute;rio";
+    if(txbProduto === ""){
+        msgErro = msgErro + "<b>Produto</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(dataini == ""){
-        msgErro = msgErro + "</br><b>Data Inicial</b> &eacute; um campo de preenchimento obrigat&oacute;rio";
+    if(txbDataInicio === ""){
+        msgErro = msgErro + "<b>Data Inicial</b> é um campo de preenchimento obrigatorio<br/>";
+    }
+    if(txbCliente === ""){
+        msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio";
     }
 
     return msgErro;

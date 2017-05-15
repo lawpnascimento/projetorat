@@ -3,11 +3,13 @@ require_once("../model/ProjetoModel.php");
 require_once("../persistencia/ProjetoPersistencia.php");
 
 switch($_POST["action"]){
-	case 'inserir':
+
+	case 'cadastrar':
 		$model = new ProjetoModel();
+
 		$model->setProjeto($_POST["projeto"]);
 		$model->setProduto($_POST["produto"]);
-		$model->setdataInicio($_POST["dataInicio"]);
+		$model->setDataInicio($_POST["dataInicio"]);
 		$model->setCliente($_POST["cliente"]);
 
 		$persistencia = new ProjetoPersistencia();
@@ -23,7 +25,6 @@ switch($_POST["action"]){
         echo $retorno;
 
         break;
-}
 
 	case 'produtodropdown':
 	

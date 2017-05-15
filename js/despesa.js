@@ -63,13 +63,13 @@ function buscaDespesas(codigo){
       //Se der tudo ok no envio...
       success: function (dados) {
         var json = $.parseJSON(dados);
-        var produto = null;
+        var despesa = null;
 
         //Carregando a grid
         if(codigo == null){
           var grid = "";
           for (var i = 0; i < json.length; i++) {
-            produto = json[i];
+            despesa = json[i];
 
             grid = grid + "<tr>";
             grid = grid + "<td>" + despesa.codDsp + "</td>";

@@ -6,7 +6,6 @@ class ProjetoModel {
 	private $produto;
 	private $dataInicio;
 	private $cliente;
-	private $produto;
 
 	public function setProjeto($projeto){
 		$this->projeto = $projeto;
@@ -38,14 +37,6 @@ class ProjetoModel {
 
     public function getCliente(){
         return $this->cliente;
-    }
-
-    public function setProduto($produto){
-        $this->produto = $produto;
-    }
-
-    public function getProduto(){
-        return $this->produto;
     }
 
 }

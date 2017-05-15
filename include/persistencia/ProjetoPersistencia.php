@@ -28,12 +28,12 @@ class ProjetoPersistencia{
 	public function inserirProjeto(){
 		$this->getConexao()->conectaBanco();
 
-		$projeto = $this->getModel()->getProjeto();
+		    $projeto = $this->getModel()->getProjeto();
         $produto = $this->getModel()->getProduto();
         $dataInicio = $this->getModel()->getDataInicio();
         $cliente = $this->getModel()->getCliente();
 		
-		$sSql = "INSERT INTO tbprojeto (nomPrj, nomPrd, codCli, datIni)
+		$sSql = "INSERT INTO tbprojeto (nomPrj, Produto_codPro, Cliente_codCli, datIni)
                           VALUES ('". $projeto ."'
                                  ,'". $produto ."'
                                  ,". $cliente ."

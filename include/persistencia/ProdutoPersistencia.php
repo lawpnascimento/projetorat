@@ -76,7 +76,7 @@ class ProdutoPersistencia{
 
 			$contador = $contador + 1;
 
-			$retorno = $retorno . '{"codCli": "'.$linha["codPro"].'"
+			$retorno = $retorno . '{"codPro": "'.$linha["codPro"].'"
 														, "desPro" : "'.$linha["desPro"].'"}';
 
 			//Para não concatenar a virgula no final do json
