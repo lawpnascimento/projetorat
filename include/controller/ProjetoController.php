@@ -16,7 +16,28 @@ switch($_POST["action"]){
 		$persistencia->setModel($model);
 		$persistencia->inserirProjeto();
 
-		break;
+	break;
+
+	case 'buscar':
+   	$model = new ProjetoModel();
+
+		if(isset($_POST["codigo"])){
+				$model->setCodigo($_POST["codigo"]);
+		}
+
+		$model->setProjeto($_POST["projeto"]);
+		$model->setProduto($_POST["produto"]);
+		$model->setDataInicio($_POST["dataInicio"]);
+		$model->setCliente($_POST["cliente"]);
+
+	$persistencia = new ClientePersistencia();
+
+	$persistencia->setModel($model);
+
+	$retorno = $persistencia->buscaClientes();
+
+	echo $retorno;
+   	break;
 
 	case 'clientedropdown':
         $persistencia = new ProjetoPersistencia();
