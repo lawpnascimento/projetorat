@@ -121,6 +121,8 @@ function buscaProjetos(codigo){
             grid = grid + "<td>" + projeto.desRazaoSocial  + "</td>";
             grid = grid + "<td>" + projeto.nomCli + "</td>";
             grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
+            grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
+            grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
             grid = grid + "<td href='javascript:void(0);' onClick='buscaProjetos(" + projeto.codCli + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 

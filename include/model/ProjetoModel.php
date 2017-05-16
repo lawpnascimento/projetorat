@@ -2,10 +2,19 @@
 
 class ProjetoModel {
 
+	private $codigo;
 	private $projeto;
 	private $produto;
 	private $dataInicio;
 	private $cliente;
+
+	public function setCodigo($codigo){
+		$this->codigo = $codigo;
+	}
+
+	public function getCodigo(){
+		return $this->codigo;
+	}
 
 	public function setProjeto($projeto){
 		$this->projeto = $projeto;

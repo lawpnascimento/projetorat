@@ -30,11 +30,11 @@ switch($_POST["action"]){
 		$model->setDataInicio($_POST["dataInicio"]);
 		$model->setCliente($_POST["cliente"]);
 
-	$persistencia = new ClientePersistencia();
+	$persistencia = new ProjetoPersistencia();
 
 	$persistencia->setModel($model);
 
-	$retorno = $persistencia->buscaClientes();
+	$retorno = $persistencia->buscarProjetos();
 
 	echo $retorno;
    	break;

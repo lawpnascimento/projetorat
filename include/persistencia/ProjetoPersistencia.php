@@ -42,8 +42,85 @@ class ProjetoPersistencia{
         $this->getConexao()->query($sSql);
 
         $this->getConexao()->fechaConexao();
-    }
+
+  }
 	
+  public function buscarProjetos(){
+    $this->getConexao()->conectaBanco();
+
+    $codigo = $this->getModel()->getCodigo();
+    $projeto = $this->getModel()->getProjeto();
+    $produto = $this->getModel()->getProduto();
+    $dataInicio = $this->getModel()->getDataInicio();
+    $cliente = $this->getModel()->getCliente();
+
+    if($codigo == null){
+
+      $sSql = "SELECT codPrj
+                     ,nomPrj
+                     ,Produto_codPro
+                     ,Cliente_codCli
+                     ,datIni
+                 FROM tbprojeto
+                WHERE 1 = 1";
+
+      if($projeto != null){
+          $sSql = $sSql . " AND UPPER(nomPrj) LIKE UPPER('%" . $projeto ."%')";
+      }
+
+      if($produto != null){
+          $sSql = $sSql . " AND UPPER(Produto_codPro) LIKE UPPER('%" . $produto ."%')";
+      }
+
+      if($dataInicio != null){
+          $sSql = $sSql . " AND UPPER(datIni) LIKE UPPER ('%" . $dataInicio . "%')";
+      }
+
+      if($cliente != null){
+          $sSql = $sSql . " AND UPPER(Cliente_codCli) LIKE UPPER('%" . $cliente ."%')";
+      }
+
+      $sSql = $sSql . " ORDER BY nomPrj";
+    }else{
+      $sSql = "SELECT codPrj
+                     ,nomPrj
+                     ,Produto_codPro
+                     ,Cliente_codCli
+                     ,datIni
+                 FROM tbprojeto
+                WHERE codPrj = " . $codigo . "
+                ORDER BY nomPrj";
+    }
+
+    $resultado = mysql_query($sSql);
+
+    $qtdLinhas = mysql_num_rows($resultado);
+
+    $contador = 0;
+
+    $retorno = '[';
+    while ($linha = mysql_fetch_assoc($resultado)) {
+
+      $contador = $contador + 1;
+
+      $retorno = $retorno . '{"codPrj": "'.$linha["codPrj"].'"
+                            , "nomPrj" : "'.$linha["nomPrj"].'"
+                            , "Produto_codPro" : "'.$linha["Produto_codPro"].'"
+                            , "Cliente_codCli" : "'.$linha["Cliente_codCli"].'"
+                            , "datIni" : "'.$linha["datIni"].'"}';
+
+      //Para não concatenar a virgula no final do json
+      if($qtdLinhas != $contador)
+          $retorno = $retorno . ',';
+
+    }
+    $retorno = $retorno . "]";
+
+    $this->getConexao()->fechaConexao();
+
+    return $retorno;
+  }
+
   public function buscaClienteDropDown(){
     $this->getConexao()->conectaBanco();
 
@@ -77,7 +154,7 @@ class ProjetoPersistencia{
     return $retorno;
   }
 
-public function buscaProdutoDropDown(){
+  public function buscaProdutoDropDown(){
         $this->getConexao()->conectaBanco();
 
         $sSql = "SELECT pro.codPro codPro
@@ -108,7 +185,7 @@ public function buscaProdutoDropDown(){
         $this->getConexao()->fechaConexao();
 
         return $retorno;
-    }
+  }
 
 
 }
