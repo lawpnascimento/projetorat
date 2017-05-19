@@ -118,12 +118,12 @@ function buscaProjetos(codigo){
             projeto = json[i];
 
             grid = grid + "<tr>";
-            grid = grid + "<td>" + projeto.desRazaoSocial  + "</td>";
-            grid = grid + "<td>" + projeto.nomCli + "</td>";
-            grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
-            grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
-            grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaProjetos(" + projeto.codCli + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
+            grid = grid + "<td>" + projeto.codPrj  + "</td>";
+            grid = grid + "<td>" + projeto.nomPrj + "</td>";
+            grid = grid + "<td>" + projeto.Produto_codPro         + "</td>";
+            grid = grid + "<td>" + projeto.Cliente_codCli         + "</td>";
+            grid = grid + "<td>" + projeto.datIni         + "</td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaProjetos(" + projeto.codPrj + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
           }

@@ -65,10 +65,10 @@
                 Produto
               </th>
               <th>
-                Data Inicio
+                Cliente
               </th>
               <th>
-                Cliente
+                Data Inicio
               </th>
             </tr>
           </thead>
