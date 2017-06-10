@@ -101,7 +101,7 @@ function buscaProjetos(codigo){
             produto: txbProduto,
             dataInicio: txbDataInicio,
             cliente: txbCliente,
-          action: "buscar"
+            action: "buscar"
       },
 
       url: "../controller/ProjetoController.php",
@@ -118,12 +118,12 @@ function buscaProjetos(codigo){
             projeto = json[i];
 
             grid = grid + "<tr>";
-            grid = grid + "<td>" + projeto.desRazaoSocial  + "</td>";
+            grid = grid + "<td>" + projeto.codPrj + "</td>";
+            grid = grid + "<td>" + projeto.nomPrj + "</td>";
+            grid = grid + "<td>" + projeto.nomPrd + "</td>";
+            grid = grid + "<td>" + projeto.datIni + "</td>";
             grid = grid + "<td>" + projeto.nomCli + "</td>";
-            grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
-            grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
-            grid = grid + "<td>" + projeto.numCNPJ         + "</td>";
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaProjetos(" + projeto.codCli + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaProjetos(" + projeto.codPrj + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
           }
@@ -133,11 +133,11 @@ function buscaProjetos(codigo){
           formularioModoAtualizar();
           for (var j = 0; j < json.length; j++) {
               cliente = json[j];
-              $("#hidCodCli").val(cliente.codCli);
-              $("#txbProjeto").val(cliente.desRazaoSocial);
-              $("#txbProduto").val(cliente.nomCli);
-              $("#txbDataInicio").val(cliente.numCNPJ);
-              $("#txbCliente").val(cliente.iesCli);
+              $("#hidCodCli").val(projeto.codPrj);
+              $("#txbProjeto").val(projeto.nomPrj);
+              $("#txbProduto").val(projeto.nomPrd);
+              $("#txbDataInicio").val(projeto.datIni);
+              $("#txbCliente").val(projeto.nomCli);
           }
 
         }

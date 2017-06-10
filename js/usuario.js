@@ -172,6 +172,7 @@ function buscaUsuario(codigo){
             usuario = json[i];
 
             grid = grid + "<tr>";
+            grid = grid + "<td>" + usuario.codUsu  + "</td>";
             grid = grid + "<td>" + usuario.nomUsu  + "</td>";
             grid = grid + "<td>" + usuario.sobrenomeUsu  + "</td>";
             grid = grid + "<td>" + usuario.desEml  + "</td>";

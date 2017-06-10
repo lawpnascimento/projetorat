@@ -24,6 +24,7 @@ switch($_POST["action"]) {
         echo $retorno;
 
         break;
+        
     case 'atualizar':
         $oModel = new PerfilModel();
 
@@ -39,10 +40,6 @@ switch($_POST["action"]) {
         $oPersistencia->setModel($oModel);
 
         $oPersistencia->Atualizar();
-
-        break;
-    case 'upload':
-        return;
 
         break;
 }

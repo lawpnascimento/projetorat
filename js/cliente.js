@@ -162,6 +162,7 @@ function buscaClientes(codigo){
             cliente = json[i];
 
             grid = grid + "<tr>";
+            grid = grid + "<td>" + cliente.codCli  + "</td>";
             grid = grid + "<td>" + cliente.desRazaoSocial  + "</td>";
             grid = grid + "<td>" + cliente.nomCli + "</td>";
             grid = grid + "<td>" + cliente.numCNPJ         + "</td>";

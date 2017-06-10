@@ -111,7 +111,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo ucfirst($_SESSION["nomUsu"]) ?><span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <?php echo ucfirst($_SESSION["nomUsu"]) ?><span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                       <li>
                           <a id="btnPerfil" href="#">Perfil</a>

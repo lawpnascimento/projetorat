@@ -99,6 +99,9 @@
           <thead>
             <tr>
               <th>
+                Código
+              </th>
+              <th>
                 Razão Social
               </th>
               <th>

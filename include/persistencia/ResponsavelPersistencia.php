@@ -79,8 +79,8 @@ class ResponsavelPersistencia{
 	public function buscaResponsavel(){
 		$this->getConexao()->conectaBanco();
 
-		$codigo = $this->getModel()->getCodigo();
-		$nome = $this->getModel()->getNome();
+	$codigo = $this->getModel()->getCodigo();
+	$nome = $this->getModel()->getNome();
     $email = $this->getModel()->getEmail();
     $cliente = $this->getModel()->getCliente();
 

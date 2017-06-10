@@ -1,7 +1,5 @@
+$("#document").ready(function() {
 buscaPerfil();
-
-validaNumero($("#txbCpf"));
-
 function buscaPerfil(cdPerfil){
     $.ajax({
         //Tipo de envio POST ou GET

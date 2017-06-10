@@ -36,6 +36,8 @@ $("#document").ready(function(){
   });
 
     $("#formDespesa #btnBuscar").click(function () {
+    limpaCampos($(this).closest("form"));
+    formularioModoInserir();
     buscaDespesas();
 
    });

@@ -36,7 +36,6 @@ switch($_POST["action"]){
 
 	$retorno = $persistencia->buscarProjetos();
 
-	echo $retorno;
    	break;
 
 	case 'clientedropdown':

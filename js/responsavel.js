@@ -154,6 +154,7 @@ function buscaResponsavel(codigo){
             responsavel = json[i];
 
             grid = grid + "<tr>";
+            grid = grid + "<td>" + responsavel.codRes  + "</td>";
             grid = grid + "<td>" + responsavel.nomCli  + "</td>";
             grid = grid + "<td>" + responsavel.nomRes  + "</td>";
             grid = grid + "<td>" + responsavel.emlRes + "</td>";

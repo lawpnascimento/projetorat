@@ -15,6 +15,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="firstname" class="col-md-1 control-label">Sobrenome</label>
+                    <div class="col-md-4">
+                        <input id="txbSobrenome" type="text" class="form-control" name="txbSobrenome" placeholder="Sobrenome" maxlength="100">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="lastname" class="col-md-1 control-label">Senha</label>
                     <div class="col-md-4">
                         <input id="txbSenha" type="text" class="form-control" name="txbSenha" placeholder="Senha" maxlength="50">
@@ -24,6 +30,12 @@
                     <label for="email" class="col-md-1 control-label">E-mail</label>
                     <div class="col-md-4">
                         <input id="txbEmail" type="text" class="form-control" name="txbEmail" placeholder="E-mail" maxlength="50">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="perfil" class="col-md-1 control-label">Perfil</label>
+                    <div class="col-md-4">
+                        <input id="txbPerfil" type="text" class="form-control" name="txbPerfil" readonly>
                     </div>
                 </div>
                 </div>

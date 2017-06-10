@@ -104,10 +104,10 @@ class ProjetoPersistencia{
       $contador = $contador + 1;
 
       $retorno = $retorno . '{"codPrj": "'.$linha["codPrj"].'"
-                            , "nomPrj" : "'.$linha["nomPrj"].'"
-                            , "Produto_codPro" : "'.$linha["Produto_codPro"].'"
-                            , "Cliente_codCli" : "'.$linha["Cliente_codCli"].'"
-                            , "datIni" : "'.$linha["datIni"].'"}';
+                                                  , "nomPrj" : "'.$linha["nomPrj"].'"
+                                                  , "Produto_codPro" : "'.$linha["Produto_codPro"].'"
+                                                  , "Cliente_codCli" : "'.$linha["Cliente_codCli"].'"
+                                                  , "datIni" : "'.$linha["datIni"].'"}';
 
       //Para não concatenar a virgula no final do json
       if($qtdLinhas != $contador)
@@ -117,7 +117,7 @@ class ProjetoPersistencia{
     $retorno = $retorno . "]";
 
     $this->getConexao()->fechaConexao();
-
+    echo $retorno;
     return $retorno;
   }
 

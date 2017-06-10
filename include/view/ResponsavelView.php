@@ -62,6 +62,9 @@
         <table class="table table-hover table-condensed table-striped table-bordered">
           <thead>
             <tr>
+             <th>
+                Código
+              </th>
               <th>
                 Cliente
               </th>
