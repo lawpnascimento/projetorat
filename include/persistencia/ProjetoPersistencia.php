@@ -80,7 +80,7 @@ class ProjetoPersistencia{
           $sSql = $sSql . " AND UPPER(Cliente_codCli) LIKE UPPER('%" . $cliente ."%')";
       }
 
-      $sSql = $sSql . " ORDER BY nomPrj";
+      $sSql = $sSql . " ORDER BY codPrj desc";
     }else{
       $sSql = "SELECT codPrj
                      ,nomPrj
@@ -89,7 +89,7 @@ class ProjetoPersistencia{
                      ,datIni
                  FROM tbprojeto
                 WHERE codPrj = " . $codigo . "
-                ORDER BY nomPrj";
+                ORDER BY codPrj desc";
     }
 
     $resultado = mysql_query($sSql);
