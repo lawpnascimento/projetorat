@@ -29,15 +29,65 @@ switch($_POST["action"]){
 
 	   	break;
 
-	/*case 'responsavelautocomplete':
+	case 'autocompletecliente':
+		$model = new RATModel();
+
+		$model->setTermo($_POST["termo"]);
+
 		$persistencia = new RATPersistencia();
-    	$retorno = $persistencia->buscaResponsavelAutoComplete();
 
-   	 	echo $retorno;
+		$persistencia->setModel($model);
 
-		break;*/
+		$retorno = $persistencia->buscaClienteAutoComplete();
 
+		echo $retorno;
 
+		break;
+
+	case 'autocompleteusuario':
+		$model = new RATModel();
+
+		$model->setTermo($_POST["termo"]);
+
+		$persistencia = new RATPersistencia();
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->buscaUsuarioAutoComplete();
+
+		echo $retorno;
+
+		break;
+
+		case 'autocompleteresponsavel':
+			$model = new RATModel();
+
+			$model->setTermo($_POST["termo"]);
+
+			$persistencia = new RATPersistencia();
+
+			$persistencia->setModel($model);
+
+			$retorno = $persistencia->buscaResponsavelAutoComplete();
+
+			echo $retorno;
+
+			break;
+
+			case 'autocompleteprojeto':
+				$model = new RATModel();
+
+				$model->setTermo($_POST["termo"]);
+
+				$persistencia = new RATPersistencia();
+
+				$persistencia->setModel($model);
+
+				$retorno = $persistencia->buscaProjetoAutoComplete();
+
+				echo $retorno;
+
+				break;
 }
 
 

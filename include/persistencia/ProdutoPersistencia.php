@@ -30,7 +30,7 @@ class ProdutoPersistencia{
 
 		$descricao = $this->getModel()->getDescricao();
 
-		$sSql =  "INSERT INTO tbproduto (desPro) 
+		$sSql =  "INSERT INTO tbproduto (desPro)
 							   VALUES ('$descricao')";
 
 		$this->getConexao()->query($sSql);
@@ -56,13 +56,13 @@ class ProdutoPersistencia{
 					$sSql = $sSql . " AND UPPER(desPro) LIKE UPPER('%" . $descricao ."%')";
 			}
 
-			$sSql = $sSql . " ORDER BY desPro";
+			$sSql = $sSql . " ORDER BY codPro DESC";
 		}else{
 			$sSql = "SELECT codPro
 										 ,desPro
 							 	 FROM tbproduto
 							  WHERE codPro = " . $codigo . "
-								ORDER BY desPro";
+								ORDER BY codPro DESC";
 		}
 
 		$resultado = mysql_query($sSql);

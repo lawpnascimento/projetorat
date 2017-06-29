@@ -112,6 +112,7 @@ $(document).ready(function(){
       url: "ProdutoView.php",
       success: function(callback){
           $("#divPrincipal").html(callback);
+          buscaProdutos();
       }
     });
   });

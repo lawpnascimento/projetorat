@@ -10,6 +10,7 @@ class RATModel {
 	private $despesa;
 	private $projeto;
 	private $situacao;
+	private $termo;
 
 
 	 public function setCodigo($codigo){
@@ -72,6 +73,14 @@ class RATModel {
 
 	public function setSituacao($situacao){
 		$this->situacao = $situacao;
+	}
+
+	public function getTermo(){
+		return $this->termo;
+	}
+
+	public function setTermo($termo){
+		$this->termo = $termo;
 	}
 
 }

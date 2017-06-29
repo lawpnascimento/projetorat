@@ -30,18 +30,16 @@ $("#document").ready(function() {
 
   });
 
-$("#formProduto #btnCancelar").click(function(){
+  $("#formProduto #btnCancelar").click(function(){
     limpaCampos($(this).closest("form"));
     buscaProdutos();
 });
 
-$("#formProduto #btnBuscar").click(function () {
+  $("#formProduto #btnBuscar").click(function () {
     buscaProdutos();
-
   });
 
 });
-
 
 function buscaProdutos(codigo){
   var txbDescricaoProduto = $("#txbDescricaoProduto").val();
@@ -68,11 +66,11 @@ function buscaProdutos(codigo){
           var grid = "";
           for (var i = 0; i < json.length; i++) {
             produto = json[i];
-            
+
             grid = grid + "<tr>";
             grid = grid + "<td>" + produto.codPro  + "</td>";
             grid = grid + "<td>" + produto.desPro  + "</td>";
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaProdutos(" + produto.desPro + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaProdutos(" + produto.codPro + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
           }
@@ -92,7 +90,6 @@ function buscaProdutos(codigo){
   });
 
 }
-
 
 function validaCampos(txbDescricaoProduto){
     msgErro = "";

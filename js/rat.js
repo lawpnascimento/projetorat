@@ -32,25 +32,25 @@ $btnExportarAtividade.click(function () {
   var $rows = $tableAtividade.find('tr:not(:hidden)');
   var headers = [];
   var data = [];
-  
+
   // Get the headers (add special header logic here)
   $($rows.shift()).find('th:not(:empty)').each(function () {
     headers.push($(this).text().toLowerCase());
   });
-  
+
   // Turn all existing rows into a loopable array
   $rows.each(function () {
     var $td = $(this).find('td');
     var h = {};
-    
+
     // Use the headers from earlier to name our hash keys
     headers.forEach(function (header, i) {
-      h[header] = $td.eq(i).text();   
+      h[header] = $td.eq(i).text();
     });
-    
+
     data.push(h);
   });
-  
+
   // Output the result
   $msgExportarAtividade.text(JSON.stringify(data));
 });
@@ -88,73 +88,160 @@ $btnExportarDespesa.click(function () {
   var $rows = $tableDespesa.find('tr:not(:hidden)');
   var headers = [];
   var data = [];
-  
+
   // Get the headers (add special header logic here)
   $($rows.shift()).find('th:not(:empty)').each(function () {
     headers.push($(this).text().toLowerCase());
   });
-  
+
   // Turn all existing rows into a loopable array
   $rows.each(function () {
     var $td = $(this).find('td');
     var h = {};
-    
+
     // Use the headers from earlier to name our hash keys
     headers.forEach(function (header, i) {
-      h[header] = $td.eq(i).text();   
+      h[header] = $td.eq(i).text();
     });
-    
+
     data.push(h);
   });
-  
+
   // Output the result
   $msgExportarDespesa.text(JSON.stringify(data));
 });
 
 $("#document").ready(function(){
-	$("#LabelResumoCliente").html("TESTE");
+	/*$("#LabelResumoCliente").html("TESTE");
 	$("#txbHoraInicial").mask('00:00');
 	$("#txbHoraFinal").mask('00:00');
-  $("#txbUsuario").val("teste");
-});
+  $("#txbUsuario").val("teste");*/
 
-//AUTOCOMPLETE
-/*
-$('#txbResponsavel').autocomplete({
-        minLength: 1,
-        autoFocus: true,
-        delay: 300,
-        position: {
-          my: 'left top',
-          at: 'right top'
-        },
-        appendTo: '#tabGeral',
-
-        source: function(request, response){
-          $.ajax({
-
-              type: "POST",
-              dataType: "text",
-              data: {
-                  termo: request.term
-                  action: "responsavelautocomplete"
-              },
-
-              url: "../controller/RATController.php",
-
-                 }).done(function(data){
-                 if(data.length > 0){
-              
-                 data = data.split(',');
-                 response( $.each(data, function(key, item){
-                   return({
-                    label: item
-                  });
-                }));
-              }
+  $('#txbCliente').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompletecliente"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
             });
-          }
-      });*/
+          }));
+        }
+      });
+    }
+  });
+
+  $('#txbUsuario').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompleteusuario"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
+  $('#txbResponsavel').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompleteresponsavel"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
+  $('#txbProjeto').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompleteprojeto"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
+});
 
 function buscaRAT(codigo){
   var txbUsuario = $("#txbUsuario").val();
@@ -181,7 +268,7 @@ function buscaRAT(codigo){
       //Se der tudo ok no envio...
       success: function (dados) {
         var json = $.parseJSON(dados);
-      
+
 
       }
   });

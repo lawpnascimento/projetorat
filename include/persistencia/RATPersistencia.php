@@ -25,13 +25,142 @@ class RATPersistencia{
         return $this->conexao;
     }
 
-	/*
-	public function buscaResponsavelAutoComplete(){
-		$this->getConexao()->conectaBanco();
 
+	public function buscaClienteAutoComplete(){
+		$this->getConexao()->conectaBanco();
+		$termo = $this->getModel()->getTermo();
+
+		$sSql = "SELECT nomCli
+						   FROM tbcliente
+						  WHERE nomCli LIKE '%". $termo ."%'";
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = null;
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . $linha["nomCli"];
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
 
 	}
-	*/
+
+	public function buscaUsuarioAutoComplete(){
+		$this->getConexao()->conectaBanco();
+		$termo = $this->getModel()->getTermo();
+
+		$sSql = "SELECT nomUsu
+						   FROM tbusuario
+						  WHERE nomUsu LIKE '%". $termo ."%'";
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = null;
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . $linha["nomUsu"];
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+
+	}
+
+	public function buscaResponsavelAutoComplete(){
+		$this->getConexao()->conectaBanco();
+		$termo = $this->getModel()->getTermo();
+
+		$sSql = "SELECT nomRes
+						   FROM tbresponsavel
+						  WHERE nomRes LIKE '%". $termo ."%'";
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = null;
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . $linha["nomRes"];
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+
+	}
+
+	public function buscaProjetoAutoComplete(){
+		$this->getConexao()->conectaBanco();
+		$termo = $this->getModel()->getTermo();
+
+		$sSql = "SELECT nomPrj
+						   FROM tbprojeto
+						  WHERE nomPrj LIKE '%". $termo ."%'";
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = null;
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . $linha["nomPrj"];
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+
+	}
 
 	public function buscaRAT(){
 		$this->getConexao()->conectaBanco();
