@@ -73,11 +73,22 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Operacoes<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a id="rat">Lançamento RAT</a>
+                    <a id="lancarat">Lançamento RAT</a>
                   </li>
                   <li class="divider"/>
                   <li>
-                    <a id="avaliacao">Avaliação RAT</a>
+                    <a id="avaliacaorat">Avaliação RAT</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Consultas<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a id="consultaatividaderat">Atividades RAT</a>
                   </li>
                 </ul>
               </li>
