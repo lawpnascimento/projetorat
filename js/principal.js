@@ -141,4 +141,16 @@ $(document).ready(function(){
       });
   });
 
+  $("#consultaatividaderat").click(function(){
+      $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: "ConsultaAtividadeRATView.php",
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+      });
+  });
+
+
 });
