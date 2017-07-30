@@ -88,7 +88,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Consultas<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a id="consultaatividaderat">Atividades RAT</a>
+                    <a id="consultarat">Consulta RAT</a>
                   </li>
                 </ul>
               </li>

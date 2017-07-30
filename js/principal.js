@@ -141,13 +141,14 @@ $(document).ready(function(){
       });
   });
 
-  $("#consultaatividaderat").click(function(){
+  $("#consultarat").click(function(){
       $.ajax({
         type: "POST",
         dataType: "text",
-        url: "ConsultaAtividadeRATView.php",
+        url: "ConsultaRATView.php",
         success: function(callback){
             $("#divPrincipal").html(callback);
+            consultaRAT();
         }
       });
   });
