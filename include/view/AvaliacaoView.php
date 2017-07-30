@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">Avaliação de RAT</div>
+            <div class="panel-title">Avaliar RAT</div>
           </div>
           Teste    
         </div>

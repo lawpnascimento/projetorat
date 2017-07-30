@@ -27,6 +27,7 @@ $(document).ready(function(){
         success: function(callback){
             $("#divPrincipal").html(callback);
             buscaClienteDropdown();
+            buscaProjetos();
 
         }
     });
@@ -50,7 +51,7 @@ $(document).ready(function(){
 
   });
 
-  $("#rat").click(function(){
+  $("#lancarat").click(function(){
     $.ajax({
 
         type: "POST",
@@ -75,6 +76,7 @@ $(document).ready(function(){
 
         success: function(callback){
             $("#divPrincipal").html(callback);
+            buscaDespesas();
         }
     });
 
@@ -117,11 +119,11 @@ $(document).ready(function(){
     });
   });
 
-  $("#avaliacao").click(function(){
+  $("#avaliacaorat").click(function(){
     $.ajax({
       type: "POST",
       dataType: "text",
-      url: "AvaliacaoView.php",
+      url: "AvaliacaoRATView.php",
       success: function(callback){
           $("#divPrincipal").html(callback);
       }
@@ -138,5 +140,17 @@ $(document).ready(function(){
         }
       });
   });
+
+  $("#consultaatividaderat").click(function(){
+      $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: "ConsultaAtividadeRATView.php",
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+      });
+  });
+
 
 });

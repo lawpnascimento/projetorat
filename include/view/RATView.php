@@ -65,19 +65,16 @@
                 <th>Hora Final</th>
                 <th>Descrição das atividades</th>
                 <th></th>
-                <th></th>
               </tr>
               <tr>
-                <td contenteditable="true">Stir Fry</td>
+                <td contenteditable="true" onkeypress="return (this.innerText.length <= 9)">01/07/2017</td>
                 <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)">08:00</td>
                 <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)">12:00</td>
-                <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)">desc</td>
-                <td>
-                  <span class="table-remove glyphicon glyphicon-remove"></span>
-                </td>
+                <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)">descdescdescdescdesc</td>
                 <td>
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                  <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
               </tr>
               <!-- Linha que será adicionada -->
@@ -87,11 +84,9 @@
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
                 <td>
-                  <span class="table-remove glyphicon glyphicon-remove"></span>
-                </td>
-                <td>
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                  <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
               </tr>
             </table>
@@ -110,21 +105,20 @@
                     <th>Valor Unitário</th>
                     <th>Quantidade</th>
                     <th>Total</th>
-                    <th></th>
+                    <th>Observações</th>
                     <th></th>
                   </tr>
                   <tr>
-                    <td contenteditable="true">Stir Fry</td>
-                    <td contenteditable="true">stir-fry</td>
-                    <td contenteditable="true">stir-fry</td>
-                    <td contenteditable="true">stir-fry</td>
-                    <td contenteditable="true">stir-fry</td>
-                    <td>
-                      <span class="table-remove glyphicon glyphicon-remove"></span>
-                    </td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
                     <td>
                       <span class="table-up glyphicon glyphicon-arrow-up"></span>
                       <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                      <span class="table-remove glyphicon glyphicon-remove"></span>
                     </td>
                   </tr>
                   <!-- Linha que será adicionada -->
@@ -134,12 +128,11 @@
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
-                    <td>
-                      <span class="table-remove glyphicon glyphicon-remove"></span>
-                    </td>
+                    <td contenteditable="true"></td>
                     <td>
                       <span class="table-up glyphicon glyphicon-arrow-up"></span>
                       <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                      <span class="table-remove glyphicon glyphicon-remove"></span>
                     </td>
                   </tr>
                 </table>
