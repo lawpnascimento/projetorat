@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once("../../estrutura/iniciar_sessao.php");
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,12 +37,8 @@
             <div class="tab-pane active" id="tabGeral">
              <div class="panel-body">
                 <div class="col-md-2">
-                  <label for="codigoRAT">Código do RAT*</label>
-                  <input id="txbCodigoRAT" type="text" class="form-control" name="txbCodigoRAT" readonly></input>
-                </div>
-                <div class="col-md-2">
                   <label for="usuario">Usuario*</label>
-                  <input id="txbUsuario" type="text" class="form-control" name="txbUsuario"></input>
+                  <input id="txbUsuario" type="text" class="form-control" name="txbUsuario" value="<?php echo ucfirst($_SESSION["nomUsu"]) ?>" readonly ></input>
                 </div>
                 <div class="col-md-2">
                   <label for="cliente">Cliente*</label>
@@ -58,8 +58,8 @@
           <div class="tab-pane" id="tabAtividades">
             <div id="tableAtividade" class="table-editable">
             <span id="addAtividade" class="table-add glyphicon glyphicon-plus"></span>
-            <table class="table table-condensed table-hover table-bordered">
-              <tr>
+            <table id="tbAtividades" class="table table-condensed table-hover table-bordered">
+              <tr class="notselect">
                 <th>Data da atividade</th>
                 <th>Hora Inicial</th>
                 <th>Hora Final</th>
@@ -67,10 +67,10 @@
                 <th></th>
               </tr>
               <tr>
-                <td contenteditable="true" onkeypress="return (this.innerText.length <= 9)">01/07/2017</td>
-                <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)">08:00</td>
-                <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)">12:00</td>
-                <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)">descdescdescdescdesc</td>
+                <td id="tdDataDaAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 9)"></td>
+                <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)"></td>
+                <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)"></td>
+                <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)"></td>
                 <td>
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
@@ -99,7 +99,7 @@
               <div id="tableDespesa" class="table-editable">
                 <span id="addDespesa" class="table-add glyphicon glyphicon-plus"></span>
                 <table class="table table-condensed table-hover table-bordered">
-                  <tr>
+                  <tr class="notselect">
                     <th>Data da despesa</th>
                     <th>Tipo da despesa</th>
                     <th>Valor Unitário</th>
@@ -122,7 +122,7 @@
                     </td>
                   </tr>
                   <!-- Linha que será adicionada -->
-                  <tr class="hide">
+                  <tr class="hide" >
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
@@ -143,26 +143,13 @@
 
             <!-- TELA LANCAR -->
             <div class="tab-pane" id="tabLancar">
-                 <div class="col-md-3">
-                   <ul>
-                     <li id="LabelResumoCliente">Cliente: </li>
-                     <li>Responsável:</li>
-                   </ul>
-                 </div>
-                 <br /><br /><br />
-                  <div class="col-md-3">
-                  <p>Confirma lançamento do RAT?</p>
-                     <button id="btnLancarRAT" type="button" class="btn btn-success">Lançar RAT</button>
-                  </div>
+              <button id="btnLancarRAT" type="button" class="btn btn-success">Lançar RAT</button>
             </div>
-
             <!-- TELA -->
             <div class="tab-pane" id="blue">
-                <h1>Blue</h1>
-                <p>blue blue blue blue blue</p>
+              <h1>Blue</h1>
+              <p>blue blue blue blue blue</p>
             </div>
-
-          
           </div>
         </div>
     </div>
