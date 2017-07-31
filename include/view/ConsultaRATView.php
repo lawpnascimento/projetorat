@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Consulta Atividade RAT</title>
+    <title>Consulta RAT</title>
     <meta charset="utf-8">
     <script type="text/javascript" src="../../js/geral.js"></script>
     <script type="text/javascript" src="../../js/alerta.js"></script>
-    <script type="text/javascript" src="../../js/usuario.js"></script>
+    <script type="text/javascript" src="../../js/ConsultaRAT.js"></script>
     <link rel="stylesheet" href="../../css/alerta.css">
   </head>
   <body>
     <div class="container-fluid">
       <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="panel-title">Consulta Atividade RAT</div>
+            <div class="panel-title">Consulta RAT</div>
         </div>
           <div class="panel-body">
           teste
@@ -36,33 +36,18 @@
                   Projeto
                 </th>
                 <th>
-                  Despesa
+                  Situação
                 </th>
                 <th>
-                  Situação
+                  Despesa
                 </th>
                 <th>
                   Atividade
                 </th>
               </tr>
               <tr>
-                <td>
-                  1
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  1
-                </td>
             </thead>
-            <tbody id="grdUsuario"></tbody>
+            <tbody id="grdConsultaRAT"></tbody>
           </table>
         </div>
       </div>
