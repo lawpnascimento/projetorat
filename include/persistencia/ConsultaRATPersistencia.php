@@ -31,11 +31,10 @@ class ConsultaRATPersistencia{
 		$codigo = $this->getModel()->getCodigo();
 		$usuario = $this->getModel()->getUsuario();
 		$cliente = $this->getModel()->getCliente();
-		$responsavel = $this->getModel()->getResponsavel();
-		$atividade = $this->getModel()->getAtividade();
-		$despesa = $this->getModel()->getDespesa();
 		$projeto = $this->getModel()->getProjeto();
 		$situacao = $this->getModel()->getSituacao();
+		//$despesa = $this->getModel()->getDespesa();
+		//$atividade = $this->getModel()->getAtividade();
 
 		if($codigo == null){
 
@@ -44,21 +43,15 @@ class ConsultaRATPersistencia{
 										 ,rat.Cliente_codCli
 										 ,rat.Projeto_codPrj
 										 ,rat.Situacao_codSit
-										 ,dsp.codDsp
-										 ,ati.codAti
 							 	 FROM tbrat rat
-							 	 JOIN tbatividade ati
-							 	 ON rat.codRat = ati.RAT_codRAT
-							 	 JOIN tbdespesa dsp
-							 	 ON rat.codRat = dsp.RAT_codRAT
 								WHERE 1 = 1";
 
 			if($usuario != null){
-					$sSql = $sSql . " AND rat.Usuario_codUsu = '" . $usuario ."')";
+					$sSql = $sSql . " AND rat.Usuario_codUsu = '" . $usuario ."'";
 			}
 
 			if($cliente != null){
-					$sSql = $sSql . " AND rat.Cliente_codCli = '" . $cliente ."')";
+					$sSql = $sSql . " AND rat.Cliente_codCli = '" . $cliente ."'";
 			}
 
 			if($projeto != null){
@@ -69,30 +62,24 @@ class ConsultaRATPersistencia{
 					$sSql = $sSql . " AND rat.Situacao_codSit = '" . $situacao ."'";
 			}
 
-			if($despesa != null){
+			/*if($despesa != null){
 					$sSql = $sSql . " AND dsp.codDsp = '" . $despesa ."'";
 			}
 
 			if($atividade != null){
 					$sSql = $sSql . " AND ati.codAti = '" . $atividade ."'";
-			}
+			}*/
 
-			$sSql = $sSql . " ORDER BY codRat desc";
+			$sSql = $sSql . " ORDER BY rat.codRat desc";
 		}else{
 			$sSql = "SELECT rat.codRat
 										 ,rat.Usuario_codUsu
 										 ,rat.Cliente_codCli
 										 ,rat.Projeto_codPrj
 										 ,rat.Situacao_codSit
-										 ,dsp.codDsp
-										 ,ati.codAti
 							 	 FROM tbrat rat
-							 	 JOIN tbatividade ati
-							 	 ON rat.codRat = ati.RAT_codRAT
-							 	 JOIN tbdespesa des
-							 	 ON rat.codRat = dsp.RAT_codRAT
-							   WHERE codRat = " . $codigo . "
-								ORDER BY codRat";
+							   WHERE rat.codRat = " . $codigo . "
+								ORDER BY rat.codRat";
 		}
 
 		$resultado = mysql_query($sSql);
@@ -107,12 +94,10 @@ class ConsultaRATPersistencia{
 			$contador = $contador + 1;
 
 			$retorno = $retorno . '{"codRat": "'.$linha["codRat"].'"
-														, "codUsu" : "'.$linha["codUsu"].'"
-														, "codCli" : "'.$linha["codCli"].'"
-														, "codPrj" : "'.$linha["codPrj"].'"
-														, "codSit" : "'.$linha["codSit"].'"
-														, "codDsp" : "'.$linha["codDsp"].'"
-														, "codAti" : "'.$linha["codAti"].'"}';
+														, "codUsu" : "'.$linha["Usuario_codUsu"].'"
+														, "codCli" : "'.$linha["Cliente_codCli"].'"
+														, "codPrj" : "'.$linha["Projeto_codPrj"].'"
+														, "codSit" : "'.$linha["Situacao_codSit"].'"}';
 
 			//Para não concatenar a virgula no final do json
 			if($qtdLinhas != $contador)

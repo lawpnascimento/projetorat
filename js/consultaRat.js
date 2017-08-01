@@ -1,16 +1,21 @@
 function consultaRAT(codigo){
 
+var vUsuario = 4;
+var vCliente = 1;
+var vResponsavel = 1;
+var vProjeto = 1;
+var vSituacao = 3;
+
   $.ajax({
       //Tipo de envio POST ou GET
       type: "POST",
       dataType: "text",
       data: {
           codigo: codigo,
-          usuario: usuario,
-          projeto: projeto,
-          situacao: situacao,
-          despesa: despesa,
-          atividade: atividade,
+          usuario: vUsuario,
+          cliente: vCliente,
+          projeto: vProjeto,
+          situacao: vSituacao,
           action: "buscar"
       },
 
@@ -29,12 +34,12 @@ function consultaRAT(codigo){
 
             grid = grid + "<tr>";
             grid = grid + "<td>" + rat.codRAT + "</td>";
-            grid = grid + "<td>" + rat.Usuario_codUsu + "</td>";
-            grid = grid + "<td>" + rat.Cliente_codCli + "</td>";
-            grid = grid + "<td>" + rat.Projeto_codPrj + "</td>";
-            grid = grid + "<td>" + rat.Situacao_codSit + "</td>";
-            grid = grid + "<td>" + des.codDes + "</td>";
-            grid = grid + "<td>" + ati.codAti + "</td>";
+            grid = grid + "<td>" + rat.codUsu + "</td>";
+            grid = grid + "<td>" + rat.codCli + "</td>";
+            grid = grid + "<td>" + rat.codPrj + "</td>";
+            grid = grid + "<td>" + rat.codSit + "</td>";
+            //grid = grid + "<td>" + des.codDes + "</td>";
+            //grid = grid + "<td>" + ati.codAti + "</td>";
             grid = grid + "</tr>";
 
           }

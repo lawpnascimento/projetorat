@@ -15,8 +15,8 @@ switch($_POST["action"]){
 			$model->setCliente($_POST["cliente"]);
 			$model->setProjeto($_POST["projeto"]);
 			$model->setSituacao($_POST["situacao"]);
-			$model->setDespesa($_POST["despesa"]);
-			$model->setAtividade($_POST["atividade"]);
+			//$model->setDespesa($_POST["despesa"]);
+			//$model->setAtividade($_POST["atividade"]);
 
 	   	$persistencia = new ConsultaRATPersistencia();
 
