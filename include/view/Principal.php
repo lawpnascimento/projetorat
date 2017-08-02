@@ -109,11 +109,19 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                 <ul class="dropdown-menu" role="menu">
                   <li>
                     <li>
-                    <a id="rat">Relatório de Comissões</a>
+                    <a>Extrato de Comissões</a>
                     </li>
                   <li class="divider"/>
                     <li>
-                    <a id="rat">Relatório de Despesas</a>
+                    <a>Atividades por Consultor</a>
+                  <li class="divider"/>
+                    </li>
+                    <li>
+                    <a>Despesas por Consultor</a>
+                    </li>
+                  <li class="divider"/>
+                    <li>
+                    <a>Despesas por Cliente</a>
                     </li>
                   </ul>
                 </li>

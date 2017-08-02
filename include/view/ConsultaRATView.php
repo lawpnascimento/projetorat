@@ -15,9 +15,24 @@
             <div class="panel-title">Consulta RAT</div>
         </div>
           <div class="panel-body">
-          teste
+            <div class="col-md-1">
+              <label for="codRat">Código</label>
+                <input id="txbCodRat" type="text" class="form-control" name="txbCodRat"></input>
+            </div>
+            <div class="col-md-2">
+              <label for="nomUsu">Usuário</label>
+                <input id="txbNomUsu" type="text" class="form-control" name="txbNomUsu" maxlength="50"></input>
+          </div>
+            <div class="col-md-2">
+              <label for="nomCli">Cliente</label>
+                <input id="txbNomCli" type="text" class="form-control" name="txbNomCli"></input>
+          </div>
+            <div class="col-md-2">
+              <label for="nomPrj">Projeto</label>
+                <input id="txbNomPrj" type="text" class="form-control" name="txbNomPrj"></input>
           </div>
       </div>
+    </div>
       <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
           <!-- Tabela da consulta -->
           <table class="table table-hover table-condensed table-striped table-bordered">
@@ -45,11 +60,9 @@
                   Atividade
                 </th>
               </tr>
-              <tr>
             </thead>
             <tbody id="grdConsultaRAT"></tbody>
           </table>
-        </div>
       </div>
   </body>
 </html>
