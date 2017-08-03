@@ -153,5 +153,17 @@ $(document).ready(function(){
       });
   });
 
+  $("#faturamento").click(function(){
+      $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: "FaturamentoView.php",
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+            consultaRAT();
+        }
+      });
+  });
+
 
 });

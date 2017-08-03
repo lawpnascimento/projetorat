@@ -67,11 +67,11 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <th></th>
               </tr>
               <tr>
-                <td id="tdDataDaAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 9)"></td>
-                <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)"></td>
-                <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)"></td>
+                <td id="tdDataDaAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 9)" class="col-sm-1"></td>
+                <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
+                <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
                 <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)"></td>
-                <td>
+                <td class="col-sm-1">
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
                   <span class="table-remove glyphicon glyphicon-remove"></span>
@@ -109,13 +109,13 @@ require_once("../../estrutura/iniciar_sessao.php");
                     <th></th>
                   </tr>
                   <tr>
+                    <td contenteditable="true" class="col-sm-1"></td>
+                    <td contenteditable="true" class="col-sm-2"></td>
+                    <td contenteditable="true" class="col-sm-1"></td>
+                    <td contenteditable="true" class="col-sm-1"></td>
+                    <td contenteditable="true" class="col-sm-1"></td>
                     <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td>
+                    <td class="col-sm-1">
                       <span class="table-up glyphicon glyphicon-arrow-up"></span>
                       <span class="table-down glyphicon glyphicon-arrow-down"></span>
                       <span class="table-remove glyphicon glyphicon-remove"></span>
