@@ -22,9 +22,9 @@
         <table class="table table-hover table-condensed table-striped table-bordered">
           <thead>
             <tr>
-              <th>Código</th>
-              <th>Usuário</th>
+              <th>Código RAT</th>
               <th>Data Lançamento</th>
+              <th>Usuário</th>
               <th>Cliente</th>
               <th>Responsável</th>
               <th>Situação</th>
@@ -32,18 +32,16 @@
             </tr>
             </thead>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
+              <td class="col-sm-1"></td>
+              <td class="col-sm-1"></td>
+              <td class="col-sm-2"></td>
+              <td class="col-sm-2"></td>
+              <td class="col-sm-2"></td>
+              <td class="col-sm-1"></td>
+              <td class="col-sm-1">
                 <a href="#">
                   <span class="glyphicon glyphicon-ok"></span> Aprovar
                 </a>
-              </td>
-              <td>
                 <a href="#">
                   <span class="glyphicon glyphicon-remove"></span> Cancelar
                 </a>

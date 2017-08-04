@@ -129,7 +129,7 @@ class UsuarioPersistencia{
 					$sSql = $sSql . " AND cli.codPer = " . $perfil ."";
 			}
 
-			$sSql = $sSql . " ORDER BY usu.nomUsu";
+			$sSql = $sSql . " ORDER BY usu.codUsu desc";
 		}else{
 
 			$sSql = "SELECT usu.codUsu codUsu
@@ -145,7 +145,7 @@ class UsuarioPersistencia{
                  JOIN tbperfil per
                    ON per.codPer = usu.Perfil_codPer
 							  WHERE usu.codUsu = " . $codigo . "
-								ORDER BY usu.nomUsu";
+								ORDER BY usu.codUsu desc";
 
     }
 

@@ -60,10 +60,11 @@ require_once("../../estrutura/iniciar_sessao.php");
             <span id="addAtividade" class="table-add glyphicon glyphicon-plus"></span>
             <table id="tbAtividades" class="table table-condensed table-hover table-bordered">
               <tr class="notselect">
-                <th>Data da atividade</th>
+                <th>Data da Atividade</th>
                 <th>Hora Inicial</th>
                 <th>Hora Final</th>
-                <th>Descrição das atividades</th>
+                <th>Descrição das Atividades</th>
+                <th>Faturar Atividade</th>
                 <th></th>
               </tr>
               <tr>
@@ -71,6 +72,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
                 <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
                 <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)"></td>
+                <td class="checkbox col-sm-1"><label><input type="checkbox" value="">Faturar</label></td>
                 <td class="col-sm-1">
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
@@ -83,6 +85,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
+                <td class="checkbox col-sm-1"><label><input type="checkbox" value="">Faturar</label></td>
                 <td>
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
