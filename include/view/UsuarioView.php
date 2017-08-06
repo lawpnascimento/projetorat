@@ -17,13 +17,14 @@
         <div class="panel-body" >
           <form id="formUsuario" class="form-horizontal" role="form">
             <input type="hidden" id="hidCodUsu"></input>
+            <legend class="scheduler-border">Ficha Cadastral</legend>
             <div class="form-group">
               <div class="col-md-4">
-                <label for="nomUsu">Nome*</label>
+                <label for="nome">Nome*</label>
                 <input id="txbNomUsu" type="text" class="form-control" name="txbNomUsu" placeholder="Nome" maxlength="50"></input>
               </div>
               <div class="col-md-4">
-                <label for="nomUsu">Sobrenome*</label>
+                <label for="sobrenome">Sobrenome*</label>
                 <input id="txbSobrenomeUsu" type="text" class="form-control" name="txbSobrenomeUsu" placeholder="Sobrenome" maxlength="50"></input>
               </div>
             </div> 
@@ -33,7 +34,7 @@
                 <input id="txbDesEml" type="text" class="form-control" name="txbDesEml" placeholder="Endereco de e-mail" maxlength="50"></input>
               </div>
               <div class="col-md-4">
-                <label for="email">Senha*</label>
+                <label for="senha">Senha*</label>
                 <input id="txbSenUsu" type="password" class="form-control" name="txbSenUsu" placeholder="Senha do usuário" maxlength="50"></input>
               </div>
             </div>
@@ -51,7 +52,7 @@
                 </div>
               </div>
               <div class="col-md-2">
-                <label for="perfil">Situação*</label>
+                <label for="situacao">Situação*</label>
                 <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbSituacao" data-toggle="dropdown" aria-expanded="false" name="Situacao">
                       Situação
@@ -64,6 +65,13 @@
                 </div>
               </div>
             </div>
+            <legend class="scheduler-border">Atividades</legend>
+            <div class="form-group">
+              <div class="col-md-2">
+                <label for="txbPerCom">Percentual de comissão</label>
+                <input id="txbPerCom" class="form-control" name="txbPerCom"></input>
+            </div>
+              </div>
 
             <br />
             <br />

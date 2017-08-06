@@ -60,12 +60,12 @@ require_once("../../estrutura/iniciar_sessao.php");
             <span id="addAtividade" class="table-add glyphicon glyphicon-plus"></span>
             <table id="tbAtividades" class="table table-condensed table-hover table-bordered">
               <tr class="notselect">
-                <th>Data da Atividade</th>
-                <th>Hora Inicial</th>
-                <th>Hora Final</th>
+                <th class="col-sm-1">Data da Atividade</th>
+                <th class="col-sm-1">Hora Inicial</th>
+                <th class="col-sm-1">Hora Final</th>
                 <th>Descrição das Atividades</th>
-                <th>Faturar Atividade</th>
-                <th></th>
+                <th class="col-sm-1">Faturar Atividade</th>
+                <th class="col-sm-1"></th>
               </tr>
               <tr>
                 <td id="tdDataDaAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 9)" class="col-sm-1"></td>
@@ -81,12 +81,12 @@ require_once("../../estrutura/iniciar_sessao.php");
               </tr>
               <!-- Linha que será adicionada -->
               <tr class="hide">
-                <td contenteditable="true"></td>
+                <td contenteditable="true" onkeypress="return (this.innerText.length <= 9)"></td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
                 <td class="checkbox col-sm-1"><label><input type="checkbox" value="">Faturar</label></td>
-                <td>
+                <td class="col-sm-1">
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
                   <span class="table-remove glyphicon glyphicon-remove"></span>
@@ -103,16 +103,16 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <span id="addDespesa" class="table-add glyphicon glyphicon-plus"></span>
                 <table class="table table-condensed table-hover table-bordered">
                   <tr class="notselect">
-                    <th>Data da despesa</th>
-                    <th>Tipo da despesa</th>
-                    <th>Valor Unitário</th>
-                    <th>Quantidade</th>
-                    <th>Total</th>
+                    <th class="col-sm-1">Data da despesa</th>
+                    <th class="col-sm-2">Tipo da despesa</th>
+                    <th class="col-sm-1">Valor Unitário</th>
+                    <th class="col-sm-1">Quantidade</th>
+                    <th class="col-sm-1">Total</th>
                     <th>Observações</th>
-                    <th></th>
+                    <th class="col-sm-1"></th>
                   </tr>
                   <tr>
-                    <td contenteditable="true" class="col-sm-1"></td>
+                    <td contenteditable="true" class="col-sm-1" onkeypress="return (this.innerText.length <= 9)"></td>
                     <td contenteditable="true" class="col-sm-2"></td>
                     <td contenteditable="true" class="col-sm-1"></td>
                     <td contenteditable="true" class="col-sm-1"></td>
@@ -126,13 +126,13 @@ require_once("../../estrutura/iniciar_sessao.php");
                   </tr>
                   <!-- Linha que será adicionada -->
                   <tr class="hide" >
+                    <td contenteditable="true" onkeypress="return (this.innerText.length <= 9)"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td>
+                    <td class="col-sm-1">
                       <span class="table-up glyphicon glyphicon-arrow-up"></span>
                       <span class="table-down glyphicon glyphicon-arrow-down"></span>
                       <span class="table-remove glyphicon glyphicon-remove"></span>

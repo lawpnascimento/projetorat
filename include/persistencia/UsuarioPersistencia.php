@@ -34,14 +34,16 @@ class UsuarioPersistencia{
     $email = $this->getModel()->getEmail();
     $perfil = $this->getModel()->getPerfil();
     $situacao = $this->getModel()->getSituacao();
+    $percentualComissao = $this->getModel()->getPercentualComissao();
 
-		$sSql = "INSERT INTO tbusuario (nomUsu, sobrenomeUsu, senUsu, desEml, Perfil_codPer, codsit)
+		$sSql = "INSERT INTO tbusuario (nomUsu, sobrenomeUsu, senUsu, desEml, Perfil_codPer, codSit, perCom)
                           VALUES ('". $nome ."'
                          		 ,'". $sobrenome ."'
                                  ,'". $senha ."'
                                  ,'". $email ."'
-                                 ,". $perfil ."
-                                 ,". $situacao .")";
+                                 ,'". $perfil ."'
+                                 ,'". $situacao ."'
+                                 ,'". $percentualComissao ."')";
 
     $this->getConexao()->query($sSql);
 
@@ -92,6 +94,7 @@ class UsuarioPersistencia{
     $email = $this->getModel()->getEmail();
     $perfil = $this->getModel()->getPerfil();
     $situacao = $this->getModel()->getSituacao();
+    $percentualComissao = $this->getModel()->getPercentualComissao();
 
 		if($codigo == null){
 
@@ -103,6 +106,7 @@ class UsuarioPersistencia{
                      ,usu.desEml desEml
                      ,per.codPer codPer
                      ,per.desPer desPer
+                     ,usu.perCom perCom
                      , if(usu.codsit = 1 ,'Ativo','Inativo') desSit
                  FROM tbusuario usu
                  JOIN tbperfil per
@@ -140,6 +144,7 @@ class UsuarioPersistencia{
                      ,usu.desEml desEml
                      ,per.codPer codPer
                      ,per.desPer desPer
+                     ,usu.perCom perCom
                      , if(usu.codsit = 1 ,'Ativo','Inativo') desSit
                  FROM tbusuario usu
                  JOIN tbperfil per
@@ -168,7 +173,8 @@ class UsuarioPersistencia{
 							                            , "desEml" : "'.$linha["desEml"].'"
 							                            , "codPer" : "'.$linha["codPer"].'"
 							                            , "desPer" : "'.$linha["desPer"].'"
-														, "desSit" : "'.$linha["desSit"].'"}';
+														, "desSit" : "'.$linha["desSit"].'"
+													    , "perCom" : "'.$linha["perCom"].'"}';
 
 			//Para não concatenar a virgula no final do json
 			if($qtdLinhas != $contador)

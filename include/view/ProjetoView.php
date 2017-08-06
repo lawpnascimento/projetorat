@@ -37,6 +37,18 @@
                   <input id="txbDataInicio" type="date" class="form-control" name="txbDataInicio"></input>
                 </div>
               </div>
+              <div class="form-group">
+                <div class="col-md-4">
+                  <label for="valorhora">Valor Hora*</label>
+                  <input id="txbValorHora" type="text" class="form-control" name="txbValorHora"></input>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-4">
+                  <label for="observacaoprojeto">Observação</label>
+                  <textarea rows="4" cols="50" id="txbObsProjeto" type="text" class="form-control" name="txbObsProjeto" maxlength="200"></textarea>
+                </div>
+              </div>
             </fieldset>
             <div id="actions" class="row">
               <div class="col-md-12">

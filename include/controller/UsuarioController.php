@@ -13,6 +13,7 @@ switch($_POST["action"]){
     $model->setEmail($_POST["desEml"]);
     $model->setPerfil($_POST["codPer"]);
     $model->setSituacao($_POST["codSit"]);
+    $model->setPercentualComissao($_POST["perCom"]);
 
 		$persistencia = new UsuarioPersistencia();
 		$persistencia->setModel($model);
@@ -41,6 +42,7 @@ switch($_POST["action"]){
     $model->setEmail($_POST["desEml"]);
     $model->setPerfil($_POST["codPer"]);
     $model->setSituacao($_POST["codSit"]);
+    $model->setPercentualComissao($_POST["perCom"]);
 
    	$persistencia = new UsuarioPersistencia();
 
@@ -61,6 +63,7 @@ switch($_POST["action"]){
 	$model->setEmail($_POST["desEml"]);
 	$model->setPerfil($_POST["codPer"]);
 	$model->setSituacao($_POST["codSit"]);
+	$model->setPercentualComissao($_POST["perCom"]);
 
 		$persistencia = new UsuarioPersistencia();
 

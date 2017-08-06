@@ -6,6 +6,7 @@ $("#document").ready(function() {
     var txbDesEml = $("#txbDesEml").val();
     var cbbPerfil = $("#cbbPerfil").val();
     var cbbSituacao = $("#cbbSituacao").val();
+    var txbPerCom = $("#txbPerCom").val();
 
     var msgErro = validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPerfil, cbbSituacao);
 
@@ -24,6 +25,7 @@ $("#document").ready(function() {
             desEml: txbDesEml,
             codPer: cbbPerfil,
             codSit: cbbSituacao,
+            perCom: txbPerCom,
             action: "cadastrar"
           },
 
@@ -142,6 +144,7 @@ function buscaUsuario(codigo){
   var txbDesEml = $("#txbDesEml").val();
   var cbbPerfil = $("#cbbPerfil").val();
   var cbbSituacao = $("#cbbSituacao").val();
+  var txbPerCom = $("#txbPerCom").val();
 
   $.ajax({
       //Tipo de envio POST ou GET
@@ -155,6 +158,7 @@ function buscaUsuario(codigo){
           desEml: txbDesEml,
           codPer: cbbPerfil,
           codSit: cbbSituacao,
+          perCom: txbPerCom,
           action: "buscar"
       },
 

@@ -1,21 +1,28 @@
+  $("#formConsultaRAT #btnBuscar").click(function () {
+    alert("Teste");
+    buscaUsuario();
+
+  });
+
 function consultaRAT(codigo){
 
-var vUsuario = 4;
-var vCliente = 1;
-var vResponsavel = 1;
-var vProjeto = 1;
-var vSituacao = 3;
+var txbCodRat = $("#txbCodRat").val();
+var txbNomUsu = $("#txbNomUsu").val();
+var txbNomCli = $("#txbNomCli").val();
+var txbNomRes = $("#txbNomRes").val();
+var txbNomPrj = $("#txbNomPrj").val();
+var txbSitRAT = $("#txbSitRAT").val();
 
   $.ajax({
       //Tipo de envio POST ou GET
       type: "POST",
       dataType: "text",
       data: {
-          codigo: codigo,
-          usuario: vUsuario,
-          cliente: vCliente,
-          projeto: vProjeto,
-          situacao: vSituacao,
+          codigo: txbCodRat,
+          usuario: txbNomUsu,
+          cliente: txbNomCli,
+          projeto: txbNomPrj,
+          situacao: txbSitRAT,
           action: "buscar"
       },
 

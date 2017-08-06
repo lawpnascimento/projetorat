@@ -9,6 +9,7 @@ class UsuarioModel {
 	private $email;
 	private $perfil;
 	private $situacao;
+	private $percentualComissao;
 
 	public function setCodigo($codigo){
  		$this->codigo = $codigo;
@@ -64,6 +65,14 @@ class UsuarioModel {
 
 	public function getSituacao(){
 		return $this->situacao;
+	}
+
+	public function setPercentualComissao($percentualComissao){
+		$this->percentualComissao = $percentualComissao;
+	}
+
+	public function getPercentualComissao(){
+		return $this->percentualComissao;
 	}
 }
 ?>
