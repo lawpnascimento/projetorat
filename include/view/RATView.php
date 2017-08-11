@@ -60,7 +60,7 @@ require_once("../../estrutura/iniciar_sessao.php");
             <span id="addAtividade" class="table-add glyphicon glyphicon-plus"></span>
             <table id="tbAtividades" class="table table-condensed table-hover table-bordered">
               <tr class="notselect">
-                <th class="col-sm-1">Data da Atividade</th>
+                <th class="col-sm-1">Data Atividade</th>
                 <th class="col-sm-1">Hora Inicial</th>
                 <th class="col-sm-1">Hora Final</th>
                 <th>Descrição das Atividades</th>
@@ -103,8 +103,9 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <span id="addDespesa" class="table-add glyphicon glyphicon-plus"></span>
                 <table class="table table-condensed table-hover table-bordered">
                   <tr class="notselect">
-                    <th class="col-sm-1">Data da despesa</th>
-                    <th class="col-sm-2">Tipo da despesa</th>
+                    <th class="col-sm-1">Data Despesa</th>
+                    <th class="col-sm-1">Código</th>
+                    <th class="col-sm-2">Tipo da Despesa</th>
                     <th class="col-sm-1">Valor Unitário</th>
                     <th class="col-sm-1">Quantidade</th>
                     <th class="col-sm-1">Total</th>
@@ -113,6 +114,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                   </tr>
                   <tr>
                     <td contenteditable="true" class="col-sm-1" onkeypress="return (this.innerText.length <= 9)"></td>
+                    <td contenteditable="true" class="col-sm-1"></td>
                     <td contenteditable="true" class="col-sm-2"></td>
                     <td contenteditable="true" class="col-sm-1"></td>
                     <td contenteditable="true" class="col-sm-1"></td>
@@ -127,6 +129,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <!-- Linha que será adicionada -->
                   <tr class="hide" >
                     <td contenteditable="true" onkeypress="return (this.innerText.length <= 9)"></td>
+                    <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>

@@ -160,10 +160,64 @@ $(document).ready(function(){
         url: "FaturamentoView.php",
         success: function(callback){
             $("#divPrincipal").html(callback);
-            consultaRAT();
         }
       });
   });
 
+    $("#extratocomissoes").click(function(){
+      $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: "RelatorioExtratoComissoesView.php",
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+      });
+  });
+
+    $("#despesasconsultor").click(function(){
+      $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: "RelatorioDespesasConsultorView.php",
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+      });
+  });
+
+    $("#despesasclientes").click(function(){
+      $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: "RelatorioDespesasClientesView.php",
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+      });
+  });
+
+    $("#atividadesclientes").click(function(){
+      $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: "RelatorioAtividadesClientesView.php",
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+        }
+      });
+  });
+
+    $("#tipodespesa").click(function(){
+      $.ajax({
+        type: "POST",
+        dataType: "text",
+        url: "TipoDespesaView.php",
+        success: function(callback){
+            $("#divPrincipal").html(callback);
+            buscaTipoDespesas();
+        }
+      });
+  });
 
 });

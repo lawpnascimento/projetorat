@@ -65,6 +65,10 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                   <li>
                     <a id="produto">Produto</a>
                   </li>
+                  <li class="divider"/>
+                  <li>
+                    <a id="tipodespesa">Tipo Despesa</a>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -109,19 +113,19 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                 <ul class="dropdown-menu" role="menu">
                   <li>
                     <li>
-                    <a>Extrato de Comissões</a>
+                    <a id="extratocomissoes">Extrato de Comissões</a>
                     </li>
                   <li class="divider"/>
                     <li>
-                    <a>Atividades por Consultor</a>
+                    <a id="atividadesclientes">Atividades por Clientes</a>
                   <li class="divider"/>
                     </li>
                     <li>
-                    <a>Despesas por Consultor</a>
+                    <a id="despesasconsultor">Despesas por Consultor</a>
                     </li>
                   <li class="divider"/>
                     <li>
-                    <a>Despesas por Cliente</a>
+                    <a id="despesasclientes">Despesas por Cliente</a>
                     </li>
                   </ul>
                 </li>

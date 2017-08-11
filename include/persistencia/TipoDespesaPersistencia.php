@@ -2,7 +2,7 @@
 
 require_once("../../estrutura/conexao.php");
 
-class DespesaPersistencia{
+class TipoDespesaPersistencia{
 	protected $model;
 	protected $conexao;
 
@@ -25,16 +25,13 @@ class DespesaPersistencia{
         return $this->conexao;
     }
 
-	public function inserirDespesa(){
+	public function inserirTipoDespesa(){
 		$this->getConexao()->conectaBanco();
 
 		$descricao = $this->getModel()->getDescricao();
-		$valorUnitario = $this->getModel()->getValorUnitario();
 
-		$sSql =  "INSERT INTO tbdespesa (desDsp
-																		,vlrUni)
-														VALUES ('". $descricao ."'
-															 		 ,'". $valorUnitario ."')";
+		$sSql =  "INSERT INTO tbtipodespesa (desTipDsp)
+														VALUES ('". $descricao ."')";
 
 	$this->getConexao()->query($sSql);
 
@@ -42,33 +39,30 @@ class DespesaPersistencia{
     
   }
 
-	public function buscaDespesas(){
+	public function buscaTipoDespesas(){
 		$this->getConexao()->conectaBanco();
 
 		$codigo = $this->getModel()->getCodigo();
 		$descricao = $this->getModel()->getDescricao();
-		$valorUnitario = $this->getModel()->getValorUnitario();
 
 		if($codigo == null){
 
-			$sSql = "SELECT codDsp
-										 ,desDsp
-										 ,vlrUni
-							 	 FROM tbdespesa
+			$sSql = "SELECT codTipDsp
+										 ,desTipDsp
+							 	 FROM tbtipodespesa
 								WHERE 1 = 1";
 
 			if($descricao != null){
-					$sSql = $sSql . " AND UPPER(desDsp) LIKE UPPER('%" . $descricao ."%')";
+					$sSql = $sSql . " AND UPPER(desTipDsp) LIKE UPPER('%" . $descricao ."%')";
 			}
 
-			$sSql = $sSql . " ORDER BY desDsp";
+			$sSql = $sSql . " ORDER BY desTipDsp";
 		}else{
-			$sSql = "SELECT codDsp
-										 ,desDsp
-										 ,vlrUni
-							 	 FROM tbdespesa
+			$sSql = "SELECT codTipDsp
+										 ,desTipDsp
+							 	 FROM tbtipodespesa
 							  WHERE codDsp = " . $codigo . "
-								ORDER BY desDsp";
+								ORDER BY desTipDsp";
 		}
 
 		$resultado = mysql_query($sSql);
@@ -82,9 +76,8 @@ class DespesaPersistencia{
 
 			$contador = $contador + 1;
 
-			$retorno = $retorno . '{"codDsp": "'.$linha["codDsp"].'"
-														, "desDsp" : "'.$linha["desDsp"].'"
-														, "vlrUni" : "'.$linha["vlrUni"].'"}';
+			$retorno = $retorno . '{"desTipDsp": "'.$linha["desTipDsp"].'"
+														, "desTipDsp" : "'.$linha["desTipDsp"].'"}';
 
 			//Para não concatenar a virgula no final do json
 			if($qtdLinhas != $contador)
