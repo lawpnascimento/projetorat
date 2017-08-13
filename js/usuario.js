@@ -60,6 +60,7 @@ $("#document").ready(function() {
     var txbDesEml = $("#txbDesEml").val();
     var cbbPerfil = $("#cbbPerfil").val();
     var cbbSituacao = $("#cbbSituacao").val();
+    var txbPerCom = $("#txbPerCom").val();
 
     var msgErro = validaCampos(txbNomUsu, "senha", txbDesEml, cbbPerfil, cbbSituacao);
 
@@ -79,6 +80,7 @@ $("#document").ready(function() {
           desEml: txbDesEml,
           codPer: cbbPerfil,
           codSit: cbbSituacao,
+          perCom: txbPerCom,
           action: "atualizar"
         },
 
@@ -181,6 +183,7 @@ function buscaUsuario(codigo){
             grid = grid + "<td>" + usuario.sobrenomeUsu  + "</td>";
             grid = grid + "<td>" + usuario.desEml  + "</td>";
             grid = grid + "<td>" + usuario.desPer + "</td>";
+            grid = grid + "<td>" + usuario.perCom + "</td>";
             grid = grid + "<td>" + usuario.desSit + "</td>";
             grid = grid + "<td href='javascript:void(0);' onClick='buscaUsuario(" + usuario.codUsu + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
@@ -200,6 +203,7 @@ function buscaUsuario(codigo){
               $("#cbbPerfil:first-child").val(usuario.codPer);
               $("#cbbSituacao:first-child").text(usuario.desSit);
               $("#cbbSituacao:first-child").val(usuario.codSit);
+              $("#txbPerCom").val(usuario.perCom);
 
           }
 

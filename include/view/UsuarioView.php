@@ -109,6 +109,9 @@
                 Perfil
               </th>
               <th>
+                % Comissão
+              </th>
+              <th>
                 Situação
               </th>
             </tr>
