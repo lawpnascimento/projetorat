@@ -68,8 +68,8 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <th class="col-sm-1"></th>
               </tr>
               <tr>
-                <td id="tdDataDaAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 9)" class="col-sm-1"></td>
-                <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
+                <td id="tdDataDaAtividade" contenteditable="true" class="col-sm-1"></td>
+                <td id="tdHoraInicial" contenteditable="true" class="col-sm-1"></td>
                 <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
                 <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)"></td>
                 <td class="checkbox col-sm-1"><label><input type="checkbox" value="">Faturar</label></td>
@@ -82,7 +82,7 @@ require_once("../../estrutura/iniciar_sessao.php");
               <!-- Linha que será adicionada -->
               <tr class="hide">
                 <td contenteditable="true" onkeypress="return (this.innerText.length <= 9)"></td>
-                <td contenteditable="true"></td>
+                <td contenteditable="true" class="col-sm-1"></td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
                 <td class="checkbox col-sm-1"><label><input type="checkbox" value="">Faturar</label></td>

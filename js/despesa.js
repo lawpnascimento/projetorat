@@ -5,8 +5,9 @@ $("#document").ready(function(){
       
     var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
     var txbValorUnitario = $("#txbValorUnitario").val();
+    var txbTipoDespesa = $("#txbTipoDespesa").val();
 
-    var msgErro = validaCampos(txbDescricaoDespesa, txbValorUnitario);
+    var msgErro = validaCampos(txbDescricaoDespesa, txbValorUnitario, txbTipoDespesa);
 
     if(msgErro !== ""){
       jbkrAlert.alerta('Alerta!',msgErro);
@@ -17,6 +18,7 @@ $("#document").ready(function(){
           type: "POST",
           dataType: "text",
           data: {
+            tipoDespesa: txbTipoDespesa,
             descricao: txbDescricaoDespesa,
             valorUnitario: txbValorUnitario,
 
@@ -47,6 +49,7 @@ $("#document").ready(function(){
 function buscaDespesas(codigo){
     var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
     var txbValorUnitario = $("#txbValorUnitario").val();
+    var txbTipoDespesa = $("#txbTipoDespesa").val();
 
   $.ajax({
       //Tipo de envio POST ou GET
@@ -54,6 +57,7 @@ function buscaDespesas(codigo){
       dataType: "text",
       data: {
           codigo: codigo,
+          tipoDespesa: txbTipoDespesa,
           descricao: txbDescricaoDespesa,
           valorUnitario: txbValorUnitario,
 
@@ -74,7 +78,8 @@ function buscaDespesas(codigo){
             despesa = json[i];
 
             grid = grid + "<tr>";
-            grid = grid + "<td>" + despesa.codDsp + "</td>";
+            grid = grid + "<td>" + despesa.codDsp + "</td>";      
+            grid = grid + "<td>" + despesa.Tipodespesa_CodTipDsp + "</td>";
             grid = grid + "<td>" + despesa.desDsp + "</td>";
             grid = grid + "<td>" + despesa.vlrUni + "</td>";
             grid = grid + "<td href='javascript:void(0);' onClick='buscaDespesas(" + despesa.desDsp + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
@@ -98,8 +103,11 @@ function buscaDespesas(codigo){
 
 }
 
-function validaCampos(txbDescricaoDespesa, txbValorUnitario){
+function validaCampos(txbTipoDespesa, txbDescricaoDespesa, txbValorUnitario){
     msgErro = "";
+    if(txbTipoDespesa === ""){
+        msgErro = msgErro + "<b>Tipo da despesa</b> é um campo de preenchimento obrigatorio<br/>";
+    }
     if(txbDescricaoDespesa === ""){
         msgErro = msgErro + "<b>Descrição da despesa</b> é um campo de preenchimento obrigatorio<br/>";
     }

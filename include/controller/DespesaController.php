@@ -9,6 +9,7 @@ switch($_POST["action"]){
 
 		$model->setDescricao($_POST["descricao"]);
 		$model->setValorUnitario($_POST["valorUnitario"]);
+		$model->setTipoDespesa($_POST["tipoDespesa"]);
 
 		$persistencia = new DespesaPersistencia();
 		$persistencia->setModel($model);
@@ -25,6 +26,7 @@ switch($_POST["action"]){
 
 		$model->setDescricao($_POST["descricao"]);
 		$model->setValorUnitario($_POST["valorUnitario"]);
+		$model->setTipoDespesa($_POST["tipoDespesa"]);
 
 		$persistencia = new DespesaPersistencia();
 	  	$persistencia->setModel($model);

@@ -28,12 +28,15 @@ class DespesaPersistencia{
 	public function inserirDespesa(){
 		$this->getConexao()->conectaBanco();
 
+		$tipoDespesa = $this->getModel()->getTipoDespesa();
 		$descricao = $this->getModel()->getDescricao();
 		$valorUnitario = $this->getModel()->getValorUnitario();
 
-		$sSql =  "INSERT INTO tbdespesa (desDsp
+		$sSql =  "INSERT INTO tbdespesa (Tipodespesa_CodTipDsp
+																		,desDsp
 																		,vlrUni)
-														VALUES ('". $descricao ."'
+														VALUES ('". $tipoDespesa ."'
+																	 ,'". $descricao ."'
 															 		 ,'". $valorUnitario ."')";
 
 	$this->getConexao()->query($sSql);
@@ -46,12 +49,14 @@ class DespesaPersistencia{
 		$this->getConexao()->conectaBanco();
 
 		$codigo = $this->getModel()->getCodigo();
+		$tipoDespesa = $this->getModel()->getTipoDespesa();
 		$descricao = $this->getModel()->getDescricao();
 		$valorUnitario = $this->getModel()->getValorUnitario();
 
 		if($codigo == null){
 
 			$sSql = "SELECT codDsp
+										 ,Tipodespesa_CodTipDsp
 										 ,desDsp
 										 ,vlrUni
 							 	 FROM tbdespesa
@@ -64,6 +69,7 @@ class DespesaPersistencia{
 			$sSql = $sSql . " ORDER BY desDsp";
 		}else{
 			$sSql = "SELECT codDsp
+										 ,Tipodespesa_CodTipDsp
 										 ,desDsp
 										 ,vlrUni
 							 	 FROM tbdespesa
@@ -83,6 +89,7 @@ class DespesaPersistencia{
 			$contador = $contador + 1;
 
 			$retorno = $retorno . '{"codDsp": "'.$linha["codDsp"].'"
+														, "Tipodespesa_CodTipDsp" : "'.$linha["Tipodespesa_CodTipDsp"].'"
 														, "desDsp" : "'.$linha["desDsp"].'"
 														, "vlrUni" : "'.$linha["vlrUni"].'"}';
 

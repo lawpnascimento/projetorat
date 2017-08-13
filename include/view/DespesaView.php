@@ -17,6 +17,12 @@
           
             <div class="form-group">
               <div class="col-md-4">
+                <label for="tipoDespesa">Tipo da despesa*</label>
+                <input id="txbTipoDespesa" type="text" class="form-control" name="txbTipoDespesa" placeholder="Tipo da despesa" maxlength="40"></input>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-4">
                 <label for="nomeDespesa">Descrição da despesa*</label>
                 <input id="txbDescricaoDespesa" type="text" class="form-control" name="txbDescricaoDespesa" placeholder="Descrição da despesa" maxlength="40"></input>
               </div>
@@ -50,6 +56,9 @@
             <tr>
               <th>
                 Código da Despesa
+              </th>
+              <th>
+                Tipo da Despesa
               </th>
               <th>
                 Descrição da Despesa

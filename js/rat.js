@@ -114,6 +114,8 @@ $btnExportarDespesa.click(function () {
 });
 
 $("#document").ready(function(){
+  $('#tdDataDaAtividade').mask('00/00/0000');
+  $('#tdHoraInicial').mask('00:00');
   $("#tabLancar #btnLancarRAT").click(function () {
 
     var txbCliente = $("#txbCliente").val();

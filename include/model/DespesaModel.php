@@ -4,6 +4,7 @@ class DespesaModel {
 	private $codigo;
 	private $descricao;
 	private $valorUnitario;
+	private $tipoDespesa;
 
 	public function setCodigo($codigo){
 		 $this->codigo = $codigo;
@@ -24,6 +25,13 @@ class DespesaModel {
 	}
 	public function getValorUnitario(){
 		return $this->valorUnitario;
+	}
+
+	public function setTipoDespesa($tipoDespesa){
+		$this->tipoDespesa = $tipoDespesa;
+	}
+	public function getTipoDespesa(){
+		return $this->tipoDespesa;
 	}
 
 }
