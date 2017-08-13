@@ -52,6 +52,10 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <label for="projeto">Projeto*</label>
                   <input id="txbProjeto" type="text" class="form-control" name="txbProjeto" placeholder="Nome do Projeto"></input>
                 </div>
+                <div class="col-md-2">
+                  <label for="produto">Produto*</label>
+                  <input id="txbProduto" type="text" class="form-control" name="txbProduto" placeholder="Nome do Produto"></input>
+                </div>
               </div>
             </div>
           <!-- TELA ATIVIDADES -->
@@ -60,7 +64,7 @@ require_once("../../estrutura/iniciar_sessao.php");
             <span id="addAtividade" class="table-add glyphicon glyphicon-plus"></span>
             <table id="tbAtividades" class="table table-condensed table-hover table-bordered">
               <tr class="notselect">
-                <th class="col-sm-1">Data Atividade</th>
+                <th class="col-sm-1">Data da Atividade</th>
                 <th class="col-sm-1">Hora Inicial</th>
                 <th class="col-sm-1">Hora Final</th>
                 <th>Descrição das Atividades</th>
@@ -68,11 +72,11 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <th class="col-sm-1"></th>
               </tr>
               <tr>
-                <td id="tdDataDaAtividade" contenteditable="true" class="col-sm-1"></td>
-                <td id="tdHoraInicial" contenteditable="true" class="col-sm-1"></td>
+                <td id="tdDataDaAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 9)" class="col-sm-1"></td>
+                <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
                 <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
                 <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)"></td>
-                <td class="checkbox col-sm-1"><label><input type="checkbox" value="">Faturar</label></td>
+                <td class="checkbox col-sm-1"><label><input type="checkbox" value="1">Faturar</label></td>
                 <td class="col-sm-1">
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
@@ -82,10 +86,10 @@ require_once("../../estrutura/iniciar_sessao.php");
               <!-- Linha que será adicionada -->
               <tr class="hide">
                 <td contenteditable="true" onkeypress="return (this.innerText.length <= 9)"></td>
-                <td contenteditable="true" class="col-sm-1"></td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
-                <td class="checkbox col-sm-1"><label><input type="checkbox" value="">Faturar</label></td>
+                <td contenteditable="true"></td>
+                <td class="checkbox col-sm-1"><label><input type="checkbox" value="1">Faturar</label></td>
                 <td class="col-sm-1">
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
@@ -103,9 +107,8 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <span id="addDespesa" class="table-add glyphicon glyphicon-plus"></span>
                 <table class="table table-condensed table-hover table-bordered">
                   <tr class="notselect">
-                    <th class="col-sm-1">Data Despesa</th>
-                    <th class="col-sm-1">Código</th>
-                    <th class="col-sm-2">Tipo da Despesa</th>
+                    <th class="col-sm-1">Data da despesa</th>
+                    <th class="col-sm-2">Tipo da despesa</th>
                     <th class="col-sm-1">Valor Unitário</th>
                     <th class="col-sm-1">Quantidade</th>
                     <th class="col-sm-1">Total</th>
@@ -114,7 +117,6 @@ require_once("../../estrutura/iniciar_sessao.php");
                   </tr>
                   <tr>
                     <td contenteditable="true" class="col-sm-1" onkeypress="return (this.innerText.length <= 9)"></td>
-                    <td contenteditable="true" class="col-sm-1"></td>
                     <td contenteditable="true" class="col-sm-2"></td>
                     <td contenteditable="true" class="col-sm-1"></td>
                     <td contenteditable="true" class="col-sm-1"></td>
@@ -129,7 +131,6 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <!-- Linha que será adicionada -->
                   <tr class="hide" >
                     <td contenteditable="true" onkeypress="return (this.innerText.length <= 9)"></td>
-                    <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>

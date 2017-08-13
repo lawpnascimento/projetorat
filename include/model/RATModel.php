@@ -11,6 +11,12 @@ class RATModel {
 	private $projeto;
 	private $situacao;
 	private $termo;
+	private $produto;
+	private $dtAtividade;
+	private $hrInicial;
+	private $hrFinal;
+  private $dsAtividade;
+  private $idFaturar;
 
 
 	 public function setCodigo($codigo){
@@ -67,6 +73,14 @@ class RATModel {
 		$this->projeto = $projeto;
 	}
 
+	public function getProduto(){
+		return $this->produto;
+	}
+
+	public function setProduto($produto){
+		$this->produto = $produto;
+	}
+
 	public function getSituacao(){
 		return $this->situacao;
 	}
@@ -81,6 +95,46 @@ class RATModel {
 
 	public function setTermo($termo){
 		$this->termo = $termo;
+	}
+
+	public function getDtAtividade(){
+		return $this->dtAtividade;
+	}
+
+	public function setDtAtividade($dtAtividade){
+		$this->dtAtividade = $dtAtividade;
+	}
+
+	public function getHrInicial(){
+		return $this->hrInicial;
+	}
+
+	public function setHrInicial($hrInicial){
+		$this->hrInicial = $hrInicial;
+	}
+
+	public function getHrFinal(){
+		return $this->hrInicial;
+	}
+
+	public function setHrFinal($hrFinal){
+		$this->hrFinal = $hrFinal;
+	}
+
+	public function getDsAtividade(){
+		return $this->dsAtividade;
+	}
+
+	public function setDsAtividade($dsAtividade){
+		$this->dsAtividade = $dsAtividade;
+	}
+
+	public function getIdFaturar(){
+		return $this->idFaturar;
+	}
+
+	public function setIdFaturar($idFaturar){
+		$this->idFaturar = $idFaturar;
 	}
 
 }

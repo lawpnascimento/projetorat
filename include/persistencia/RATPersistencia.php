@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once("../../estrutura/conexao.php");
 
 class RATPersistencia{
@@ -30,7 +31,7 @@ class RATPersistencia{
 		$this->getConexao()->conectaBanco();
 		$termo = $this->getModel()->getTermo();
 
-		$sSql = "SELECT nomCli
+		$sSql = "SELECT CONCAT(codCli,'-',nomCli) nomCli
 						   FROM tbcliente
 						  WHERE nomCli LIKE '%". $termo ."%'";
 
@@ -64,7 +65,7 @@ class RATPersistencia{
 		$this->getConexao()->conectaBanco();
 		$termo = $this->getModel()->getTermo();
 
-		$sSql = "SELECT nomUsu
+		$sSql = "SELECT CONCAT(codUsu,'-',nomUsu) nomUsu
 						   FROM tbusuario
 						  WHERE nomUsu LIKE '%". $termo ."%'";
 
@@ -98,7 +99,7 @@ class RATPersistencia{
 		$this->getConexao()->conectaBanco();
 		$termo = $this->getModel()->getTermo();
 
-		$sSql = "SELECT nomRes
+		$sSql = "SELECT CONCAT(codRes,'-',nomRes) nomRes
 						   FROM tbresponsavel
 						  WHERE nomRes LIKE '%". $termo ."%'";
 
@@ -132,7 +133,7 @@ class RATPersistencia{
 		$this->getConexao()->conectaBanco();
 		$termo = $this->getModel()->getTermo();
 
-		$sSql = "SELECT nomPrj
+		$sSql = "SELECT CONCAT(codPrj,'-',nomPrj) nomPrj
 						   FROM tbprojeto
 						  WHERE nomPrj LIKE '%". $termo ."%'";
 
@@ -149,6 +150,40 @@ class RATPersistencia{
 			$contador = $contador + 1;
 
 			$retorno = $retorno . $linha["nomPrj"];
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+
+	}
+
+	public function buscaProdutoAutoComplete(){
+		$this->getConexao()->conectaBanco();
+		$termo = $this->getModel()->getTermo();
+
+		$sSql = "SELECT CONCAT(codPro,'-',desPro) desPro
+						   FROM tbproduto
+						  WHERE desPro LIKE '%". $termo ."%'";
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = null;
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . $linha["desPro"];
 
 			//Para não concatenar a virgula no final do json
 			if($qtdLinhas != $contador)
@@ -261,6 +296,74 @@ class RATPersistencia{
 		$this->getConexao()->fechaConexao();
 
 		return $retorno;
+
+	}
+
+	public function inserirRat(){
+
+		$this->getConexao()->conectaBanco();
+
+		$usuario = $this->getModel()->getUsuario();
+		$cliente = $this->getModel()->getCliente();
+		$responsavel = $this->getModel()->getResponsavel();
+		$projeto = $this->getModel()->getProjeto();
+		$produto = $this->getModel()->getProduto();
+
+		$sSql =  "INSERT INTO tbrat (Usuario_codUsu, Cliente_codCli, Responsavel_codRes, Projeto_codPrj, Produto_codPro, Situacao_codSit)
+										VALUES (". $usuario ."
+													 ,". $cliente ."
+													 ,". $responsavel ."
+													 ,". $projeto ."
+													 ,". $produto ."
+													 ,". 1 .")";
+
+		$this->getConexao()->query($sSql);
+
+    $this->getConexao()->fechaConexao();
+
+	}
+
+	public function buscaCodigoRatInserido(){
+		$this->getConexao()->conectaBanco();
+
+		$sSql = "SELECT MAX(codRat) codRat
+							 FROM tbrat";
+
+	  $resultado = mysql_query($sSql);
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+			$retorno = $linha["codRat"];
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+	}
+
+	public function inserirAtividade(){
+
+		$this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+		$usuario = $this->getModel()->getUsuario();
+		$hrInicial = date("H:i", strtotime($this->getModel()->gethrInicial()));
+    $hrFinal = date("H:i", strtotime($this->getModel()->gethrFinal()));
+		$dtAtividade = date("d/m/y",strtotime(str_replace('/','-',$this->getModel()->getdtAtividade())));
+		$dsAtividade = $this->getModel()->getdsAtividade();
+		$idFaturar = $this->getModel()->getIdFaturar();
+
+		$sSql =  "INSERT INTO tbatividade (RAT_codRAT, Usuario_codUsu, datAti, horIni, horFin, desAti, tipFat)
+										VALUES (". $codigo ."
+													 ,". $usuario ."
+													 , STR_TO_DATE('". $dtAtividade ."','%d/%m/%Y')
+													 ,concat(hour('". $hrInicial ."'),':00:00')
+													 ,concat(hour('". $hrFinal ."'),':00:00')
+													 ,'". $dsAtividade ."'
+													 ,". $idFaturar .")";
+
+		$this->getConexao()->query($sSql);
+
+    $this->getConexao()->fechaConexao();
 
 	}
 
