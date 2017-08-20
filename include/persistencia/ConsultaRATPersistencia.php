@@ -31,17 +31,19 @@ class ConsultaRATPersistencia{
 		$codigo = $this->getModel()->getCodigo();
 		$usuario = $this->getModel()->getUsuario();
 		$cliente = $this->getModel()->getCliente();
+		$responsavel = $this->getModel()->getResponsavel();		
 		$projeto = $this->getModel()->getProjeto();
+		$produto = $this->getModel()->getProduto();
 		$situacao = $this->getModel()->getSituacao();
-		//$despesa = $this->getModel()->getDespesa();
-		//$atividade = $this->getModel()->getAtividade();
 
 		if($codigo == null){
 
 			$sSql = "SELECT rat.codRat
 										 ,rat.Usuario_codUsu
 										 ,rat.Cliente_codCli
+										 ,rat.Responsavel_codRes
 										 ,rat.Projeto_codPrj
+										 ,rat.Produto_codPro
 										 ,rat.Situacao_codSit
 							 	 FROM tbrat rat
 								WHERE 1 = 1";
@@ -54,8 +56,16 @@ class ConsultaRATPersistencia{
 					$sSql = $sSql . " AND rat.Cliente_codCli = '" . $cliente ."'";
 			}
 
+			if($responsavel != null){
+					$sSql = $sSql . " AND rat.Responsavel_codRes = '" . $responsavel ."'";
+			}
+
 			if($projeto != null){
 					$sSql = $sSql . " AND rat.Projeto_codPrj = '" . $projeto ."'";
+			}
+
+			if($produto != null){
+					$sSql = $sSql . " AND rat.Produto_codPro = '" . $produto ."'";
 			}
 
 			if($situacao != null){
@@ -75,7 +85,9 @@ class ConsultaRATPersistencia{
 			$sSql = "SELECT rat.codRat
 										 ,rat.Usuario_codUsu
 										 ,rat.Cliente_codCli
+										 ,rat.Responsavel_codRes
 										 ,rat.Projeto_codPrj
+										 ,rat.Produto_codPro
 										 ,rat.Situacao_codSit
 							 	 FROM tbrat rat
 							   WHERE rat.codRat = " . $codigo . "
@@ -96,7 +108,9 @@ class ConsultaRATPersistencia{
 			$retorno = $retorno . '{"codRat": "'.$linha["codRat"].'"
 														, "codUsu" : "'.$linha["Usuario_codUsu"].'"
 														, "codCli" : "'.$linha["Cliente_codCli"].'"
+														, "codRes" : "'.$linha["Responsavel_codRes"].'"
 														, "codPrj" : "'.$linha["Projeto_codPrj"].'"
+														, "codPro" : "'.$linha["Produto_codPro"].'"
 														, "codSit" : "'.$linha["Situacao_codSit"].'"}';
 
 			//Para não concatenar a virgula no final do json

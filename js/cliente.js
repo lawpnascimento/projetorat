@@ -101,7 +101,7 @@ $("#document").ready(function() {
 
         //Se der tudo ok no envio...
         success: function (dados) {
-          jbkrAlert.sucesso('Clientes', 'Clinte atualizado com sucesso!');
+          jbkrAlert.sucesso('Clientes', 'Cliente atualizado com sucesso!');
           $("#formCliente #btnCancelar").trigger("click");
         }
       });

@@ -15,8 +15,8 @@
         </div>
         <div class="panel-body" >
           <form id="formProjeto" class="form-horizontal" role="form">
-            <input type="hidden" id="hidCodCli">
-            <fieldset>
+            <input type="hidden" id="hidCodPrj"></input>
+          <fieldset>
               <div class="form-group">
                 <div class="col-md-4">
                   <label for="projeto">Projeto*</label>
@@ -39,17 +39,17 @@
               </div>
               <div class="form-group">
                 <div class="col-md-4">
-                  <label for="valorhora">Valor Hora*</label>
+                  <label for="ValorHora">Valor Hora*</label>
                   <input id="txbValorHora" type="text" class="form-control" name="txbValorHora"></input>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-md-4">
                   <label for="observacaoprojeto">Observação</label>
-                  <textarea rows="4" cols="50" id="txbObsProjeto" type="text" class="form-control" name="txbObsProjeto" maxlength="200"></textarea>
+                  <textarea rows="4" cols="50" id="txaObsProjeto" type="text" class="form-control" name="txaObsProjeto" maxlength="200"></textarea>
                 </div>
               </div>
-            </fieldset>
+          </fieldset>
             <div id="actions" class="row">
               <div class="col-md-12">
                 <button id="btnCadastrar" type="button" class="btn btn-success"> Cadastrar</button>
@@ -81,6 +81,9 @@
               </th>
               <th>
                 Data Inicio
+              </th>
+              <th>
+                Valor Hora
               </th>
             </tr>
           </thead>

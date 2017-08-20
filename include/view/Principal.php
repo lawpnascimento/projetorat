@@ -136,7 +136,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo ucfirst($_SESSION["nomUsu"]) ?><span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                       <li>
-                          <a id="btnPerfil" href="#">Perfil</a>
+                          <a id="perfil" href="#">Perfil</a>
                       </li>
                       <li class="divider"/>
                       <li>

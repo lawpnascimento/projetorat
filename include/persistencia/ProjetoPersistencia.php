@@ -32,12 +32,16 @@ class ProjetoPersistencia{
         $produto = $this->getModel()->getProduto();
         $dataInicio = $this->getModel()->getDataInicio();
         $cliente = $this->getModel()->getCliente();
+        $valorHora = $this->getModel()->getValorHora();
+        $obsProjeto = $this->getModel()->getObsProjeto();
 		
-		$sSql = "INSERT INTO tbprojeto (nomPrj, Produto_codPro, Cliente_codCli, datIni)
+		$sSql = "INSERT INTO tbprojeto (nomPrj, Produto_codPro, Cliente_codCli, datIni, vlrHor, obsPrj)
                           VALUES ('". $projeto ."'
                                  ,'". $produto ."'
-                                 ,". $cliente ."
-                                 ,'". $dataInicio ."')"; 
+                                 ,'". $cliente ."'
+                                 ,'". $dataInicio ."'
+                                 ,'". $valorHora ."'
+                                 ,'". $obsProjeto ."')"; 
 
         $this->getConexao()->query($sSql);
 
@@ -53,6 +57,8 @@ class ProjetoPersistencia{
     $produto = $this->getModel()->getProduto();
     $dataInicio = $this->getModel()->getDataInicio();
     $cliente = $this->getModel()->getCliente();
+    $valorHora = $this->getModel()->getValorHora();
+    $obsProjeto = $this->getModel()->getObsProjeto();
 
     if($codigo == null){
 
@@ -61,6 +67,8 @@ class ProjetoPersistencia{
                      ,Produto_codPro
                      ,Cliente_codCli
                      ,datIni
+                     ,vlrHor
+                     ,obsPrj
                  FROM tbprojeto
                 WHERE 1 = 1";
 
@@ -80,6 +88,14 @@ class ProjetoPersistencia{
           $sSql = $sSql . " AND UPPER(Cliente_codCli) LIKE UPPER('%" . $cliente ."%')";
       }
 
+      if($valorHora != null){
+          $sSql = $sSql . " AND UPPER(vlrHor) LIKE UPPER('%" . $valorHora ."%')";
+      }
+
+      if($obsProjeto != null){
+          $sSql = $sSql . " AND UPPER(obsPrj) LIKE UPPER('%" . $obsProjeto ."%')";
+      }
+
       $sSql = $sSql . " ORDER BY codPrj desc";
     }else{
       $sSql = "SELECT codPrj
@@ -87,6 +103,8 @@ class ProjetoPersistencia{
                      ,Produto_codPro
                      ,Cliente_codCli
                      ,datIni
+                     ,vlrHor
+                     ,obsPrj
                  FROM tbprojeto
                 WHERE codPrj = " . $codigo . "
                 ORDER BY codPrj desc";
@@ -107,7 +125,9 @@ class ProjetoPersistencia{
                                                   , "nomPrj" : "'.$linha["nomPrj"].'"
                                                   , "Produto_codPro" : "'.$linha["Produto_codPro"].'"
                                                   , "Cliente_codCli" : "'.$linha["Cliente_codCli"].'"
-                                                  , "datIni" : "'.$linha["datIni"].'"}';
+                                                  , "datIni" : "'.$linha["datIni"].'"
+                                                  , "vlrHor" : "'.$linha["vlrHor"].'"
+                                                }';
 
       //Para não concatenar a virgula no final do json
       if($qtdLinhas != $contador)
@@ -119,6 +139,31 @@ class ProjetoPersistencia{
     $this->getConexao()->fechaConexao();
     echo $retorno;
     return $retorno;
+  }
+
+  public function atualizarProjeto(){
+    $this->getConexao()->conectaBanco();
+
+    $codigo = $this->getModel()->getCodigo();
+    $projeto = $this->getModel()->getProjeto();
+    $produto = $this->getModel()->getProduto();
+    $dataInicio = $this->getModel()->getDataInicio();
+    $cliente = $this->getModel()->getCliente();
+    $valorHora = $this->getModel()->getValorHora();
+    $obsProjeto = $this->getModel()->getObsProjeto();
+
+    $sSql = "UPDATE tbprojeto
+                  SET  nomPrj = '" . $projeto . "'
+                       ,Produto_codPro = '" . $produto . "'
+                       ,datIni = '" . $dataInicio . "'
+                       ,Cliente_codCli = '". $cliente . "'
+                       ,vlrHor = '" . $valorHora . "'
+                       ,obsPrj = '" . $obsProjeto . "'
+                  WHERE codPrj = " . $codigo;
+
+    $this->getConexao()->query($sSql);
+
+    $this->getConexao()->fechaConexao();
   }
 
   public function buscaClienteDropDown(){

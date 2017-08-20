@@ -7,6 +7,8 @@ class ProjetoModel {
 	private $produto;
 	private $dataInicio;
 	private $cliente;
+	private $valorHora;
+	private $obsProjeto;
 
 	public function setCodigo($codigo){
 		$this->codigo = $codigo;
@@ -46,6 +48,22 @@ class ProjetoModel {
 
     public function getCliente(){
         return $this->cliente;
+    }
+
+	public function setValorHora($valorHora){
+        $this->valorHora = $valorHora;
+    }
+
+    public function getValorHora(){
+        return $this->valorHora;
+    }
+
+    public function setObsProjeto($obsProjeto){
+        $this->obsProjeto = $obsProjeto;
+    }
+
+    public function getObsProjeto(){
+        return $this->obsProjeto;
     }
 
 }

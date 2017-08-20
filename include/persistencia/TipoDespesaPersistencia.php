@@ -61,7 +61,7 @@ class TipoDespesaPersistencia{
 			$sSql = "SELECT codTipDsp
 										 ,desTipDsp
 							 	 FROM tbtipodespesa
-							  WHERE codDsp = " . $codigo . "
+							  WHERE codTipDsp = " . $codigo . "
 								ORDER BY desTipDsp";
 		}
 
@@ -76,7 +76,7 @@ class TipoDespesaPersistencia{
 
 			$contador = $contador + 1;
 
-			$retorno = $retorno . '{"desTipDsp": "'.$linha["desTipDsp"].'"
+			$retorno = $retorno . '{"codTipDsp": "'.$linha["codTipDsp"].'"
 														, "desTipDsp" : "'.$linha["desTipDsp"].'"}';
 
 			//Para não concatenar a virgula no final do json

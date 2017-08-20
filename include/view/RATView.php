@@ -56,6 +56,10 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <label for="produto">Produto*</label>
                   <input id="txbProduto" type="text" class="form-control" name="txbProduto" placeholder="Nome do Produto"></input>
                 </div>
+                <div class="col-md-2">
+                  <label for="produto">Data*</label>
+                  <input id="txbDataRat" type="date" class="form-control" name="txbDataRat"></input>
+                </div>
               </div>
             </div>
           <!-- TELA ATIVIDADES -->
@@ -64,10 +68,10 @@ require_once("../../estrutura/iniciar_sessao.php");
             <span id="addAtividade" class="table-add glyphicon glyphicon-plus"></span>
             <table id="tbAtividades" class="table table-condensed table-hover table-bordered">
               <tr class="notselect">
-                <th class="col-sm-1">Data</th>
+                <th class="col-sm-1">Data Atividade</th>
                 <th class="col-sm-1">Hora Inicial</th>
                 <th class="col-sm-1">Hora Final</th>
-                <th>Descrição das Atividades</th>
+                <th>Descrição Atividade</th>
                 <th class="col-sm-1">Faturar Ati.?</th>
                 <th class="col-sm-1"></th>
               </tr>
@@ -107,9 +111,9 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <span id="addDespesa" class="table-add glyphicon glyphicon-plus"></span>
                 <table class="table table-condensed table-hover table-bordered">
                   <tr class="notselect">
-                    <th class="col-sm-1">Data</th>
-                    <th class="col-sm-2">Descição da despesa</th>
-                    <th class="col-sm-2">Tipo da despesa</th>
+                    <th class="col-sm-1">Data Despesa</th>
+                    <th class="col-sm-2">Descrição Despesa</th>
+                    <th class="col-sm-2">Tipo Despesa</th>
                     <th class="col-sm-1">Valor Unitário</th>
                     <th class="col-sm-1">Quantidade</th>
                     <th class="col-sm-1">Total</th>

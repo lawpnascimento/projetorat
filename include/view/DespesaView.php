@@ -14,7 +14,7 @@
         </div>
         <div class="panel-body" >
           <form id="formDespesa" class="form-horizontal" role="form">
-          
+          <input type="hidden" id="hidCodDsp"></input>
             <div class="form-group">
               <div class="col-md-4">
                 <label for="tipoDespesa">Tipo da despesa*</label>

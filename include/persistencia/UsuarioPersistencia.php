@@ -32,16 +32,16 @@ class UsuarioPersistencia{
     $sobrenome = $this->getModel()->getSobrenome();
     $senha = $this->getModel()->getSenha();
     $email = $this->getModel()->getEmail();
-    $perfil = $this->getModel()->getPerfil();
+    $papel = $this->getModel()->getPapel();
     $situacao = $this->getModel()->getSituacao();
     $percentualComissao = $this->getModel()->getPercentualComissao();
 
-		$sSql = "INSERT INTO tbusuario (nomUsu, sobrenomeUsu, senUsu, desEml, Perfil_codPer, codSit, perCom)
+		$sSql = "INSERT INTO tbusuario (nomUsu, sobrenomeUsu, senUsu, desEml, Papel_codPap, codSit, perCom)
                           VALUES ('". $nome ."'
                          		 ,'". $sobrenome ."'
                                  ,'". $senha ."'
                                  ,'". $email ."'
-                                 ,'". $perfil ."'
+                                 ,'". $papel ."'
                                  ,'". $situacao ."'
                                  ,'". $percentualComissao ."')";
 
@@ -51,13 +51,13 @@ class UsuarioPersistencia{
 
   }
 
-  public function buscaPerfilDropDown(){
+  public function buscaPapelDropDown(){
     $this->getConexao()->conectaBanco();
 
-    $sSql = "SELECT per.codPer codPer
-                   ,per.desPer desPer
-               FROM tbperfil per
-              ORDER BY per.desPer";
+    $sSql = "SELECT pap.codPap codPap
+                   ,pap.desPap desPap
+               FROM tbpapel pap
+              ORDER BY pap.desPap";
 
     $resultado = mysql_query($sSql);
 
@@ -70,8 +70,8 @@ class UsuarioPersistencia{
 
         $contador = $contador + 1;
 
-        $retorno = $retorno . '{"codPer": "'.$linha["codPer"].'"
-                               , "desPer" : "'.$linha["desPer"].'"}';
+        $retorno = $retorno . '{"codPap": "'.$linha["codPap"].'"
+                               , "desPap" : "'.$linha["desPap"].'"}';
         //Para não concatenar a virgula no final do json
         if($qtdLinhas != $contador)
            $retorno = $retorno . ',';
@@ -92,7 +92,7 @@ class UsuarioPersistencia{
     $sobrenome = $this->getModel()->getSobrenome();
     $senha = $this->getModel()->getSenha();
     $email = $this->getModel()->getEmail();
-    $perfil = $this->getModel()->getPerfil();
+    $papel = $this->getModel()->getPapel();
     $situacao = $this->getModel()->getSituacao();
     $percentualComissao = $this->getModel()->getPercentualComissao();
 
@@ -104,13 +104,13 @@ class UsuarioPersistencia{
                      ,usu.senUsu senUsu
                      ,usu.codSit codSit
                      ,usu.desEml desEml
-                     ,per.codPer codPer
-                     ,per.desPer desPer
+                     ,pap.codPap codPap
+                     ,pap.desPap desPap
                      ,usu.perCom perCom
                      , if(usu.codsit = 1 ,'Ativo','Inativo') desSit
                  FROM tbusuario usu
-                 JOIN tbperfil per
-                   ON per.codPer = usu.Perfil_codPer
+                 JOIN tbpapel pap
+                   ON pap.codPap = usu.Papel_codPap
 						 	  WHERE 1 = 1";
 
 			if($nome != null){
@@ -129,8 +129,8 @@ class UsuarioPersistencia{
 					$sSql = $sSql . " AND cli.codsit = " . $situacao ."";
 			}
 
-      		if($perfil != null){
-					$sSql = $sSql . " AND cli.codPer = " . $perfil ."";
+      		if($papel != null){
+					$sSql = $sSql . " AND cli.codPap = " . $papel ."";
 			}
 
 			$sSql = $sSql . " ORDER BY usu.codUsu desc";
@@ -142,13 +142,13 @@ class UsuarioPersistencia{
                      ,usu.senUsu senUsu
                      ,usu.codSit codSit
                      ,usu.desEml desEml
-                     ,per.codPer codPer
-                     ,per.desPer desPer
+                     ,pap.codPap codPap
+                     ,pap.desPap desPap
                      ,usu.perCom perCom
                      , if(usu.codsit = 1 ,'Ativo','Inativo') desSit
                  FROM tbusuario usu
-                 JOIN tbperfil per
-                   ON per.codPer = usu.Perfil_codPer
+                 JOIN tbpapel pap
+                   ON pap.codPap = usu.Papel_codPap
 							  WHERE usu.codUsu = " . $codigo . "
 								ORDER BY usu.codUsu desc";
 
@@ -171,8 +171,8 @@ class UsuarioPersistencia{
 														, "senUsu" : "'.$linha["senUsu"].'"
 														, "codSit" : "'.$linha["codSit"].'"
 							                            , "desEml" : "'.$linha["desEml"].'"
-							                            , "codPer" : "'.$linha["codPer"].'"
-							                            , "desPer" : "'.$linha["desPer"].'"
+							                            , "codPap" : "'.$linha["codPap"].'"
+							                            , "desPap" : "'.$linha["desPap"].'"
 							                            , "perCom" : "'.$linha["perCom"].'"
 														, "desSit" : "'.$linha["desSit"].'"}';
 
@@ -197,16 +197,18 @@ class UsuarioPersistencia{
 	    $sobrenome = $this->getModel()->getSobrenome();
 	    $senha = $this->getModel()->getSenha();
 	    $email = $this->getModel()->getEmail();
-	    $perfil = $this->getModel()->getPerfil();
+	    $papel = $this->getModel()->getPapel();
 	    $situacao = $this->getModel()->getSituacao();
+	    $percentualComissao = $this->getModel()->getPercentualComissao();
 
 			$sSql = "UPDATE tbusuario
 									SET nomUsu = '" . $nome ."'
 										 ,sobrenomeUsu = '" . $sobrenome ."'
 										 ,senUsu = '" . $senha ."'
 										 ,desEml = '" . $email ."'
-										 ,Perfil_codPer = '" . $perfil ."'
+										 ,Papel_codPap = '" . $papel ."'
 										 ,codSit = '" . $situacao ."'
+										 ,perCom= '" . $percentualComissao ."'
 								WHERE codUsu = " . $codigo;
 
 			$this->getConexao()->query($sSql);

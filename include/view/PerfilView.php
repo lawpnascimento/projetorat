@@ -7,35 +7,35 @@
             <div class="panel-title">Perfil</div>
         </div>
         <div class="panel-body" >
-            <form id="signupform" class="form-horizontal" role="form">
+            <form id="formPerfil" class="form-horizontal" role="form">
                 <div class="form-group">
-                    <label for="firstname" class="col-md-1 control-label">Nome</label>
+                    <label for="txbNome" class="col-md-1 control-label">Nome</label>
                     <div class="col-md-4">
                         <input id="txbNome" type="text" class="form-control" name="txbNome" placeholder="Nome" maxlength="50">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="firstname" class="col-md-1 control-label">Sobrenome</label>
+                    <label for="txbSobrenome" class="col-md-1 control-label">Sobrenome</label>
                     <div class="col-md-4">
                         <input id="txbSobrenome" type="text" class="form-control" name="txbSobrenome" placeholder="Sobrenome" maxlength="100">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="lastname" class="col-md-1 control-label">Senha</label>
+                    <label for="txbSenha" class="col-md-1 control-label">Senha</label>
                     <div class="col-md-4">
                         <input id="txbSenha" type="text" class="form-control" name="txbSenha" placeholder="Senha" maxlength="50">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="email" class="col-md-1 control-label">E-mail</label>
+                    <label for="txbEmail" class="col-md-1 control-label">E-mail</label>
                     <div class="col-md-4">
                         <input id="txbEmail" type="text" class="form-control" name="txbEmail" placeholder="E-mail" maxlength="50">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="perfil" class="col-md-1 control-label">Perfil</label>
+                    <label for="txbPapel" class="col-md-1 control-label">Papel</label>
                     <div class="col-md-4">
-                        <input id="txbPerfil" type="text" class="form-control" name="txbPerfil" readonly>
+                        <input id="txbPapel" type="text" class="form-control" name="txbPapel" readonly>
                     </div>
                 </div>
                 </div>

@@ -1,37 +1,38 @@
 $("#document").ready(function() {
-buscaPerfil();
-function buscaPerfil(cdPerfil){
-    $.ajax({
-        //Tipo de envio POST ou GET
-        type: "POST",
-        dataType: "text",
-        data: {
-            action: "buscar"
-        },
+    buscaPerfil();
+    function buscaPerfil(cdPerfil){
+        $.ajax({
+            //Tipo de envio POST ou GET
+            type: "POST",
+            dataType: "text",
+            data: {
+                action: "buscar"
+            },
 
-        url: "../controller/PerfilController.php",
+            url: "../controller/PerfilController.php",
 
-        //Se der tudo ok no envio...
-        success: function (callback) {
-            var json = $.parseJSON(callback);
+            //Se der tudo ok no envio...
+            success: function (callback) {
+                var json = $.parseJSON(callback);
 
-            for (var i = 0; i < json.length; i++) {
+                for (var i = 0; i < json.length; i++) {
 
-                var perfil = json[i];
+                    var perfil = json[i];
 
-                $("#txbNome").val(perfil.dsNome);
-                $("#txbSobrenome").val(perfil.dsSobrenome);
-                $("#txbEmail").val(perfil.dsEmail);
-                $("#txbCpf").val(perfil.nrCpf);
-                $("#txbTelefone").val(perfil.nrTelefone);
+                    $("#txbNome").val(perfil.dsNome);
+                    $("#txbSobrenome").val(perfil.dsSobrenome);
+                    $("#txbEmail").val(perfil.dsEmail);
+                    $("#txbCpf").val(perfil.nrCpf);
+                    $("#txbTelefone").val(perfil.nrTelefone);
 
+                }
             }
-        }
-    });
+        });
 
-};
+    };
 
-$("#btnAtualizar").click(function () {
+$("#formPerfil #btnAtualizar").click(function () {
+    alert("teste");
     var txbEmail = $("#txbEmail");
     var txbNome = $("#txbNome");
     var txbSobrenome = $("#txbSobrenome");
@@ -65,6 +66,8 @@ $("#btnAtualizar").click(function () {
             }
         });
     }
+});
+
 });
 
 

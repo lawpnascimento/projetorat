@@ -11,7 +11,7 @@ switch($_POST["action"]){
     $model->setSobrenome($_POST["sobrenomeUsu"]);
     $model->setSenha($_POST["senUsu"]);
     $model->setEmail($_POST["desEml"]);
-    $model->setPerfil($_POST["codPer"]);
+    $model->setPapel($_POST["codPap"]);
     $model->setSituacao($_POST["codSit"]);
     $model->setPercentualComissao($_POST["perCom"]);
 
@@ -21,9 +21,9 @@ switch($_POST["action"]){
 
 		break;
 
-	case 'perfildropdown':
+	case 'papeldropdown':
     $persistencia = new UsuarioPersistencia();
-    $retorno = $persistencia->buscaPerfilDropDown();
+    $retorno = $persistencia->buscaPapelDropDown();
 
     echo $retorno;
 
@@ -40,7 +40,7 @@ switch($_POST["action"]){
     $model->setSobrenome($_POST["sobrenomeUsu"]);
     $model->setSenha($_POST["senUsu"]);
     $model->setEmail($_POST["desEml"]);
-    $model->setPerfil($_POST["codPer"]);
+    $model->setPapel($_POST["codPap"]);
     $model->setSituacao($_POST["codSit"]);
     $model->setPercentualComissao($_POST["perCom"]);
 
@@ -61,7 +61,7 @@ switch($_POST["action"]){
 	$model->setSobrenome($_POST["sobrenomeUsu"]);
 	$model->setSenha($_POST["senUsu"]);
 	$model->setEmail($_POST["desEml"]);
-	$model->setPerfil($_POST["codPer"]);
+	$model->setPapel($_POST["codPap"]);
 	$model->setSituacao($_POST["codSit"]);
 	$model->setPercentualComissao($_POST["perCom"]);
 

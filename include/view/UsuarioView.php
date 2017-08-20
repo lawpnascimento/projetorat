@@ -41,13 +41,13 @@
             <!--Combo box-->
             <div class="form-group">
               <div class="col-md-2">
-                <label for="perfil">Perfil*</label>
+                <label for="papel">Papel*</label>
                 <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbPerfil" data-toggle="dropdown" aria-expanded="false" name="Perfil">
-                      Perfil
+                  <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbPapel" data-toggle="dropdown" aria-expanded="false" name="Papel">
+                      Papel
                       <span class="caret"></span>
                   </button>
-                  <ul id="ulPerfil" class="dropdown-menu" role="menu" aria-labelledby="cbbPerfil">
+                  <ul id="ulPapel" class="dropdown-menu" role="menu" aria-labelledby="cbbPapel">
                   </ul>
                 </div>
               </div>
@@ -106,7 +106,7 @@
                 E-mail
               </th>
               <th>
-                Perfil
+                Papel
               </th>
               <th>
                 % Comissão

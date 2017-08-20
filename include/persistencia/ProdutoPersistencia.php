@@ -92,5 +92,20 @@ class ProdutoPersistencia{
 
 	}
 
+ 	public function atualizarProduto(){
+	    $this->getConexao()->conectaBanco();
+
+	    $codigo = $this->getModel()->getCodigo();
+	    $descricao = $this->getModel()->getDescricao();
+
+	    $sSql = "UPDATE tbproduto
+	                  SET  desPro = '" . $descricao . "'
+	                  WHERE codPro = " . $codigo;
+
+	    $this->getConexao()->query($sSql);
+
+	    $this->getConexao()->fechaConexao();
+  }
+
 }
 ?>

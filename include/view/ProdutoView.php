@@ -15,6 +15,7 @@
         </div>
         <div class="panel-body">
           <form id="formProduto" class="form-horizontal" role="form">
+            <input type="hidden" id="hidCodPro"></input>
           <fieldset>
               <div class="form-group">
                 <div class="col-md-4">

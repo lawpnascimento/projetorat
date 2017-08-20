@@ -4,11 +4,11 @@ $("#document").ready(function() {
     var txbSobrenomeUsu = $("#txbSobrenomeUsu").val();
     var txbSenUsu = $("#txbSenUsu").val();
     var txbDesEml = $("#txbDesEml").val();
-    var cbbPerfil = $("#cbbPerfil").val();
+    var cbbPapel = $("#cbbPapel").val();
     var cbbSituacao = $("#cbbSituacao").val();
     var txbPerCom = $("#txbPerCom").val();
 
-    var msgErro = validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPerfil, cbbSituacao);
+    var msgErro = validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPapel, cbbSituacao);
 
     if(msgErro !== ""){
       jbkrAlert.alerta('Alerta!',msgErro);
@@ -23,7 +23,7 @@ $("#document").ready(function() {
             sobrenomeUsu: txbSobrenomeUsu,
             senUsu: txbSenUsu,
             desEml: txbDesEml,
-            codPer: cbbPerfil,
+            codPap: cbbPapel,
             codSit: cbbSituacao,
             perCom: txbPerCom,
             action: "cadastrar"
@@ -58,11 +58,11 @@ $("#document").ready(function() {
     var txbSobrenomeUsu = $("#txbSobrenomeUsu").val();
     var txbSenUsu = $("#txbSenUsu").val();
     var txbDesEml = $("#txbDesEml").val();
-    var cbbPerfil = $("#cbbPerfil").val();
+    var cbbPapel = $("#cbbPapel").val();
     var cbbSituacao = $("#cbbSituacao").val();
     var txbPerCom = $("#txbPerCom").val();
 
-    var msgErro = validaCampos(txbNomUsu, "senha", txbDesEml, cbbPerfil, cbbSituacao);
+    var msgErro = validaCampos(txbNomUsu, "senha", txbDesEml, cbbPapel, cbbSituacao);
 
     if(msgErro !== ""){
         jbkrAlert.alerta('Alerta!',msgErro);
@@ -78,7 +78,7 @@ $("#document").ready(function() {
           sobrenomeUsu: txbSobrenomeUsu,
           senUsu: txbSenUsu,
           desEml: txbDesEml,
-          codPer: cbbPerfil,
+          codPap: cbbPapel,
           codSit: cbbSituacao,
           perCom: txbPerCom,
           action: "atualizar"
@@ -97,13 +97,13 @@ $("#document").ready(function() {
 
 });
 
-function buscaPerfilDropdown(){
+function buscaPapelDropdown(){
   $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            action: "perfildropdown"
+            action: "papeldropdown"
         },
 
         url: "../controller/UsuarioController.php",
@@ -115,21 +115,21 @@ function buscaPerfilDropdown(){
             var dropdown = "";
             for (var i = 0; i < json.length; i++) {
 
-                var perfil = json[i];
+                var papel = json[i];
 
-                dropdown = dropdown + '<li role="presentation" value="' + perfil.codPer  + '"><a role="menuitem" tabindex="-1" href="#">' + perfil.desPer + '</a></li>';
+                dropdown = dropdown + '<li role="presentation" value="' + papel.codPap  + '"><a role="menuitem" tabindex="-1" href="#">' + papel.desPap + '</a></li>';
 
             }
-            $("#ulPerfil").html(dropdown);
+            $("#ulPapel").html(dropdown);
 
-            $("#ulPerfil li a").click(function(){
+            $("#ulPapel li a").click(function(){
 
-                $("#cbbPerfil:first-child").text($(this).text());
+                $("#cbbPapel:first-child").text($(this).text());
 
-                $("#ulPerfil li").each(function(){
+                $("#ulPapel li").each(function(){
 
-                    if ($(this).text() == $("#cbbPerfil").text().trim()){
-                        $("#cbbPerfil").val($(this).val());
+                    if ($(this).text() == $("#cbbPapel").text().trim()){
+                        $("#cbbPapel").val($(this).val());
                     }
                 });
 
@@ -144,7 +144,7 @@ function buscaUsuario(codigo){
   var txbSobrenomeUsu = $("#txbSobrenomeUsu").val();
   var txbSenUsu = $("#txbSenUsu").val();
   var txbDesEml = $("#txbDesEml").val();
-  var cbbPerfil = $("#cbbPerfil").val();
+  var cbbPapel = $("#cbbPapel").val();
   var cbbSituacao = $("#cbbSituacao").val();
   var txbPerCom = $("#txbPerCom").val();
 
@@ -158,7 +158,7 @@ function buscaUsuario(codigo){
           sobrenomeUsu: txbSobrenomeUsu,
           senUsu: txbSenUsu,
           desEml: txbDesEml,
-          codPer: cbbPerfil,
+          codPap: cbbPapel,
           codSit: cbbSituacao,
           perCom: txbPerCom,
           action: "buscar"
@@ -182,7 +182,7 @@ function buscaUsuario(codigo){
             grid = grid + "<td>" + usuario.nomUsu  + "</td>";
             grid = grid + "<td>" + usuario.sobrenomeUsu  + "</td>";
             grid = grid + "<td>" + usuario.desEml  + "</td>";
-            grid = grid + "<td>" + usuario.desPer + "</td>";
+            grid = grid + "<td>" + usuario.desPap + "</td>";
             grid = grid + "<td>" + usuario.perCom + "</td>";
             grid = grid + "<td>" + usuario.desSit + "</td>";
             grid = grid + "<td href='javascript:void(0);' onClick='buscaUsuario(" + usuario.codUsu + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
@@ -199,8 +199,8 @@ function buscaUsuario(codigo){
               $("#txbNomUsu").val(usuario.nomUsu);
               $("#txbSobrenomeUsu").val(usuario.sobrenomeUsu);
               $("#txbDesEml").val(usuario.desEml);
-              $("#cbbPerfil:first-child").text(usuario.desPer);
-              $("#cbbPerfil:first-child").val(usuario.codPer);
+              $("#cbbPapel:first-child").text(usuario.desPap);
+              $("#cbbPapel:first-child").val(usuario.codPap);
               $("#cbbSituacao:first-child").text(usuario.desSit);
               $("#cbbSituacao:first-child").val(usuario.codSit);
               $("#txbPerCom").val(usuario.perCom);
@@ -214,7 +214,7 @@ function buscaUsuario(codigo){
 
 }
 
-function validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPerfil, cbbSituacao){
+function validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPapel, cbbSituacao){
     msgErro = "";
 
     if(txbNomUsu === ""){
@@ -229,8 +229,8 @@ function validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPerfi
     if(txbDesEml === ""){
         msgErro = msgErro + "<b>E-mail</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(cbbPerfil === ""){
-        msgErro = msgErro + "<b>Perfil</b> é um campo de preenchimento obrigatorio<br/>";
+    if(cbbPapel === ""){
+        msgErro = msgErro + "<b>Papel</b> é um campo de preenchimento obrigatorio<br/>";
     }
     if(cbbSituacao === ""){
         msgErro = msgErro + "<b>Situação</b> é um campo de preenchimento obrigatorio";

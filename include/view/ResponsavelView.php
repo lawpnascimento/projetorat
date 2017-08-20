@@ -15,7 +15,7 @@
         </div>
         <div class="panel-body" >
           <form id="formResponsavel" class="form-horizontal" role="form">
-            <input type="hidden" id="hidCodRes">
+            <input type="hidden" id="hidCodRes"></input>
             <div class="form-group">
               <div class="col-md-4">
                 <label for="nomRes">Nome do Responsavel*</label>

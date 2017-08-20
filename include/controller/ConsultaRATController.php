@@ -13,7 +13,9 @@ switch($_POST["action"]){
 			
 			$model->setUsuario($_POST["usuario"]);
 			$model->setCliente($_POST["cliente"]);
+			$model->setResponsavel($_POST["responsavel"]);
 			$model->setProjeto($_POST["projeto"]);
+			$model->setProduto($_POST["produto"]);
 			$model->setSituacao($_POST["situacao"]);
 			//$model->setDespesa($_POST["despesa"]);
 			//$model->setAtividade($_POST["atividade"]);

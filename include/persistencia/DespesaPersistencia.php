@@ -58,7 +58,7 @@ class DespesaPersistencia{
 			$sSql = "SELECT codDsp
 										 ,Tipodespesa_CodTipDsp
 										 ,desDsp
-										 ,vlrUni
+										 ,concat('R$ ', format(vlrUni, 2)) as vlrUni 
 							 	 FROM tbdespesa
 								WHERE 1 = 1";
 
@@ -105,6 +105,25 @@ class DespesaPersistencia{
 		return $retorno;
 
 	}
+
+  	public function atualizarDespesa(){
+	    $this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+		$tipoDespesa = $this->getModel()->getTipoDespesa();
+		$descricao = $this->getModel()->getDescricao();
+		$valorUnitario = $this->getModel()->getValorUnitario();
+
+	    $sSql = "UPDATE tbdespesa
+	                  SET  Tipodespesa_CodTipDsp = '" . $tipoDespesa . "'
+	                       ,desDsp = '" . $descricao . "'
+	                       ,vlrUni = '". $valorUnitario . "'
+	                  WHERE codDsp = " . $codigo;
+
+	    $this->getConexao()->query($sSql);
+
+	    $this->getConexao()->fechaConexao();
+  }
 
 }
 ?>

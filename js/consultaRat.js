@@ -1,6 +1,6 @@
   $("#formConsultaRAT #btnBuscar").click(function () {
     alert("Teste");
-    buscaUsuario();
+    consultaRAT();
 
   });
 
@@ -11,6 +11,7 @@ var txbNomUsu = $("#txbNomUsu").val();
 var txbNomCli = $("#txbNomCli").val();
 var txbNomRes = $("#txbNomRes").val();
 var txbNomPrj = $("#txbNomPrj").val();
+var txbNomPro = $("#txbNomPro").val();
 var txbSitRAT = $("#txbSitRAT").val();
 
   $.ajax({
@@ -18,10 +19,12 @@ var txbSitRAT = $("#txbSitRAT").val();
       type: "POST",
       dataType: "text",
       data: {
-          codigo: txbCodRat,
+          codigo: codigo,
           usuario: txbNomUsu,
           cliente: txbNomCli,
+          responsavel: txbNomRes,
           projeto: txbNomPrj,
+          produto: txbNomPro,
           situacao: txbSitRAT,
           action: "buscar"
       },
@@ -43,7 +46,9 @@ var txbSitRAT = $("#txbSitRAT").val();
             grid = grid + "<td>" + rat.codRAT + "</td>";
             grid = grid + "<td>" + rat.codUsu + "</td>";
             grid = grid + "<td>" + rat.codCli + "</td>";
+            grid = grid + "<td>" + rat.codRes + "</td>";
             grid = grid + "<td>" + rat.codPrj + "</td>";
+            grid = grid + "<td>" + rat.codPro + "</td>";  
             grid = grid + "<td>" + rat.codSit + "</td>";
             //grid = grid + "<td>" + des.codDes + "</td>";
             //grid = grid + "<td>" + ati.codAti + "</td>";

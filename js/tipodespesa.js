@@ -79,8 +79,8 @@ function buscaTipoDespesas(codigo){
           formularioModoAtualizar();
           for (var j = 0; j < json.length; j++) {
               tipodespesa = json[j];
-              $("#hidCodTipDsp").val(despesa.desDsp);
-              $("#txbDescricaoTipoDespesa").val(despesa.desDsp);
+              $("#hidCodTipDsp").val(tipodespesa.codTipDsp);
+              $("#txbDescricaoTipoDespesa").val(tipodespesa.desTipDsp);
           }
 
         }

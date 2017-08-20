@@ -1,7 +1,7 @@
 $("#document").ready(function(){
-	$("#txbValorUnitario").mask('#.##0,00', {reverse: true});
+	$("#txbValorUnitario").mask('###0,00', {reverse: true});
 
-    $("#formDespesa #btnCadastrar").click(function () {
+  $("#formDespesa #btnCadastrar").click(function () {
       
     var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
     var txbValorUnitario = $("#txbValorUnitario").val();
@@ -37,14 +37,51 @@ $("#document").ready(function(){
 
   });
 
-    $("#formDespesa #btnBuscar").click(function () {
+  $("#formDespesa #btnCancelar").click(function () {
     limpaCampos($(this).closest("form"));
     formularioModoInserir();
     buscaDespesas();
 
    });
 
+  $("#formDespesa #btnAtualizar").click(function () {
+
+    var codigo = $("#hidCodDsp").val();
+    var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
+    var txbValorUnitario = $("#txbValorUnitario").val();
+    var txbTipoDespesa = $("#txbTipoDespesa").val();
+
+    var msgErro = validaCampos(txbDescricaoDespesa, txbValorUnitario, txbTipoDespesa);
+
+    if(msgErro !== ""){
+        jbkrAlert.alerta('Alerta!',msgErro);
+    }
+    else{
+      $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            codigo: codigo,
+            tipoDespesa: txbTipoDespesa,
+            descricao: txbDescricaoDespesa,
+            valorUnitario: txbValorUnitario,
+            action: "atualizar"
+        },
+
+        url: "../controller/DespesaController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+          jbkrAlert.sucesso('Despesa', 'Despesa atualizada com sucesso!');
+          $("#formDespesa #btnCancelar").trigger("click");
+        }
+      });
+    }
+  });
+
 });
+
 
 function buscaDespesas(codigo){
     var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
@@ -82,7 +119,7 @@ function buscaDespesas(codigo){
             grid = grid + "<td>" + despesa.Tipodespesa_CodTipDsp + "</td>";
             grid = grid + "<td>" + despesa.desDsp + "</td>";
             grid = grid + "<td>" + despesa.vlrUni + "</td>";
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaDespesas(" + despesa.desDsp + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
+            grid = grid + "<td href='javascript:void(0);' onClick='buscaDespesas(" + despesa.codDsp + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
           }
@@ -91,9 +128,11 @@ function buscaDespesas(codigo){
         }else{
           formularioModoAtualizar();
           for (var j = 0; j < json.length; j++) {
-              produto = json[j];
-              $("#hidCodDsp").val(despesa.desDsp);
+              despesa = json[j];
+              $("#hidCodDsp").val(despesa.codDsp);
+              $("#txbTipoDespesa").val(despesa.Tipodespesa_CodTipDsp);
               $("#txbDescricaoDespesa").val(despesa.desDsp);
+              $("#txbValorUnitario").val(despesa.vlrUni);
           }
 
         }

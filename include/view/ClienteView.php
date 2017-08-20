@@ -13,7 +13,7 @@
         </div>
         <div class="panel-body" >
           <form id="formCliente" class="form-horizontal" role="form">
-            <input type="hidden" id="hidCodCli">
+            <input type="hidden" id="hidCodCli"></input>
             <fieldset>
               <legend class="scheduler-border">Empresa</legend>
               <div class="form-group">

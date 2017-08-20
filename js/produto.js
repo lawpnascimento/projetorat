@@ -1,4 +1,4 @@
-$("#document").ready(function() {
+$("#document").ready(function(){
   $("#formProduto #btnCadastrar").click(function () {
 
     var txbDescricaoProduto = $("#txbDescricaoProduto").val();
@@ -10,7 +10,7 @@ $("#document").ready(function() {
     }
     else {
       $.ajax({
-      	  //Tipo de envio POST ou GET
+          //Tipo de envio POST ou GET
           type: "POST",
           dataType: "text",
           data: {
@@ -27,19 +27,52 @@ $("#document").ready(function() {
           }
       });
     }
-
   });
 
-  $("#formProduto #btnCancelar").click(function(){
-    limpaCampos($(this).closest("form"));
-    buscaProdutos();
-});
+  $("#formProduto #btnAtualizar").click(function () {
+    var codigo = $("#hidCodPro").val();
+    var txbDescricaoProduto = $("#txbDescricaoProduto").val();
+
+    var msgErro = validaCampos(txbDescricaoProduto);
+
+    if(msgErro !== ""){
+        jbkrAlert.alerta('Alerta!',msgErro);
+    }
+    else{
+      $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+          codigo: codigo,
+          descricao: txbDescricaoProduto,
+          action: "atualizar"
+        },
+
+        url: "../controller/ProdutoController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+          jbkrAlert.sucesso('Produto', 'Produto atualizado com sucesso!');
+          $("#formProduto #btnCancelar").trigger("click");
+        }
+      });
+    }
+  });
+
 
   $("#formProduto #btnBuscar").click(function () {
     buscaProdutos();
   });
 
+  $("#formProduto #btnCancelar").click(function(){
+    limpaCampos($(this).closest("form"));
+    formularioModoInserir();
+    buscaProdutos();
+  });
+  
 });
+
 
 function buscaProdutos(codigo){
   var txbDescricaoProduto = $("#txbDescricaoProduto").val();
@@ -80,7 +113,7 @@ function buscaProdutos(codigo){
           formularioModoAtualizar();
           for (var j = 0; j < json.length; j++) {
               produto = json[j];
-              $("#hidCodPro").val(produto.codCli);
+              $("#hidCodPro").val(produto.codPro);
               $("#txbDescricaoProduto").val(produto.desPro);
           }
 

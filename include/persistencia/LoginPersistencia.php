@@ -27,7 +27,7 @@ class LoginPersistencia {
     $senha = $this->getModel()->getSenha();
 
 		$sSql = "SELECT usu.codUsu codUsu
-								 	 ,usu.Perfil_codPer codPer
+								 	 ,usu.Papel_codPap codPap
 								 	 ,usu.nomUsu nomUsu
 								 	 ,usu.senUsu senUsu
 									 ,usu.codSit codSit
@@ -42,7 +42,7 @@ class LoginPersistencia {
      			$_SESSION["codUsu"] = $oDados->codUsu;
 		   		$_SESSION["codSit"] = $oDados->codSit;
    		  		$_SESSION["nomUsu"] = $oDados->nomUsu;
-				$_SESSION["codPer"] = $oDados->codPer;
+				$_SESSION["codPap"] = $oDados->codPap;
 				$_SESSION["desEml"] = $oDados->desEml;
 				$logado = true;
 		} else {

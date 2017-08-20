@@ -89,7 +89,7 @@ $(document).ready(function(){
       url: "UsuarioView.php",
       success: function(callback){
         $("#divPrincipal").html(callback);
-        buscaPerfilDropdown();
+        buscaPapelDropdown();
         buscaUsuario();
 
         $("#ulSituacao li a").click(function(){
@@ -130,7 +130,7 @@ $(document).ready(function(){
     });
   });
 
-  $("#btnPerfil").click(function(){
+  $("#perfil").click(function(){
       $.ajax({
         type: "POST",
         dataType: "text",

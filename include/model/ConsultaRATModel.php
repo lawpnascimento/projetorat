@@ -9,6 +9,7 @@ class ConsultaRATModel {
 	private $atividade;
 	private $despesa;
 	private $projeto;
+	private $produto;
 	private $situacao;
 	private $termo;
 
@@ -65,6 +66,14 @@ class ConsultaRATModel {
 
 	public function setProjeto($projeto){
 		$this->projeto = $projeto;
+	}
+
+	public function getProduto(){
+		return $this->produto;
+	}
+
+	public function setProduto($produto){
+		$this->produto = $produto;
 	}
 
 	public function getSituacao(){

@@ -11,6 +11,8 @@ switch($_POST["action"]){
 		$model->setProduto($_POST["produto"]);
 		$model->setDataInicio($_POST["dataInicio"]);
 		$model->setCliente($_POST["cliente"]);
+		$model->setValorHora($_POST["valorHora"]);
+		$model->setObsProjeto($_POST["obsProjeto"]);
 
 		$persistencia = new ProjetoPersistencia();
 		$persistencia->setModel($model);
@@ -29,6 +31,8 @@ switch($_POST["action"]){
 		$model->setProduto($_POST["produto"]);
 		$model->setDataInicio($_POST["dataInicio"]);
 		$model->setCliente($_POST["cliente"]);
+		$model->setValorHora($_POST["valorHora"]);
+		$model->setObsProjeto($_POST["obsProjeto"]);
 
 	$persistencia = new ProjetoPersistencia();
 
@@ -37,6 +41,28 @@ switch($_POST["action"]){
 	$retorno = $persistencia->buscarProjetos();
 
    	break;
+
+	case 'atualizar':
+   	$model = new ProjetoModel();
+
+   		if(isset($_POST["codigo"])){
+				$model->setCodigo($_POST["codigo"]);
+		}
+
+		$model->setProjeto($_POST["projeto"]);
+		$model->setProduto($_POST["produto"]);
+		$model->setDataInicio($_POST["dataInicio"]);
+		$model->setCliente($_POST["cliente"]);
+		$model->setValorHora($_POST["valorHora"]);
+		$model->setObsProjeto($_POST["obsProjeto"]);
+
+	$persistencia = new ProjetoPersistencia();
+
+	$persistencia->setModel($model);
+
+	$retorno = $persistencia->atualizarProjeto();
+
+	break;
 
 	case 'clientedropdown':
         $persistencia = new ProjetoPersistencia();
