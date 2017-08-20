@@ -17,15 +17,22 @@ class RATModel {
 	private $hrFinal;
   private $dsAtividade;
   private $idFaturar;
+	private $dtDespesa;
+	private $idDespesa;
+	private $vlDespesa;
+	private $qtDespesa;
+	private $totDespesa;
+	private $cdFaturamento;
+	private $dsOberservacao;
+	private $cdDespesa;
 
+	public function setCodigo($codigo){
+	  $this->codigo = $codigo;
+	}
 
-	 public function setCodigo($codigo){
-		 $this->codigo = $codigo;
-	 }
-
-	 public function getCodigo(){
-		 return $this->codigo;
-	 }
+	public function getCodigo(){
+	  return $this->codigo;
+	}
 
 	public function setUsuario($usuario){
 		$this->usuario = $usuario;
@@ -136,6 +143,72 @@ class RATModel {
 	public function setIdFaturar($idFaturar){
 		$this->idFaturar = $idFaturar;
 	}
+
+	public function getDtDespesa() {
+      return $this->dtDespesa;
+  }
+
+  public function setDtDespesa($dtDespesa) {
+      $this->dtDespesa = $dtDespesa;
+  }
+
+  public function getIdDespesa() {
+      return $this->idDespesa;
+  }
+
+  public function setIdDespesa($idDespesa) {
+      $this->idDespesa = $idDespesa;
+  }
+
+  public function getVlDespesa() {
+      return $this->vlDespesa;
+  }
+
+  public function setVlDespesa($vlDespesa) {
+      $this->vlDespesa = $vlDespesa;
+  }
+
+  public function getQtDespesa() {
+      return $this->qtDespesa;
+  }
+
+  public function setQtDespesa($qtDespesa) {
+      $this->qtDespesa = $qtDespesa;
+  }
+
+  public function getTotDespesa() {
+      return $this->totDespesa;
+  }
+
+  public function setTotDespesa($totDespesa) {
+      $this->totDespesa = $totDespesa;
+  }
+
+  public function getCdFaturamento() {
+      return $this->cdFaturamento;
+  }
+
+  public function setCdFaturamento($cdFaturamento) {
+      $this->cdFaturamento = $cdFaturamento;
+  }
+
+  public function getDsOberservacao() {
+      return $this->dsOberservacao;
+  }
+
+  public function setDsOberservacao($dsOberservacao) {
+      $this->dsOberservacao = $dsOberservacao;
+  }
+
+	public function getCdDespesa() {
+      return $this->cdDespesa;
+  }
+
+  public function setCdDespesa($cdDespesa) {
+      $this->cdDespesa = $cdDespesa;
+  }
+
+
 
 }
 ?>

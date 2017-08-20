@@ -114,7 +114,6 @@ $btnExportarDespesa.click(function () {
 });
 
 $("#document").ready(function(){
-
   $("#tabLancar #btnLancarRAT").click(function () {
 
     var txbCliente = $("#txbCliente").val();
@@ -122,12 +121,12 @@ $("#document").ready(function(){
     var txbProjeto = $("#txbProjeto").val();
     var txbProduto = $("#txbProduto").val();
 
-  /*  msgErroGeral = validaCamposGeral(txbCliente, txbResponsavel, txbProjeto, txbProduto );
+    msgErroGeral = validaCamposGeral(txbCliente, txbResponsavel, txbProjeto, txbProduto );
 
     if(msgErroGeral !== ""){
       jbkrAlert.alerta('Alerta!',msgErroGeral);
       return;
-    }*/
+    }
 
     var $rowsAtividade = $tableAtividade.find('tr:not(.hide):not(.notselect)');
     var headersAtividade = [];
@@ -149,6 +148,7 @@ $("#document").ready(function(){
       // Use the headers from earlier to name our hash keys
       headersAtividade.forEach(function (header, i) {
         var $idFaturar = $td.eq(i).find('input:checkbox:first');
+
         if(typeof $idFaturar.val() !== "undefined") {
           if ($idFaturar.is(":checked"))
             h[header] = "1";
@@ -163,7 +163,7 @@ $("#document").ready(function(){
 
     });
 
-  /*  //Validando os campos para ver se está vazio
+    //Validando os campos para ver se está vazio
     for (var i = 0; i < dataAtividade.length; i++) {
       atividade = dataAtividade[i];
 
@@ -173,7 +173,7 @@ $("#document").ready(function(){
         jbkrAlert.alerta('Alerta!',msgErroAtividade);
         break;
       }
-    }*/
+    }
 
 
     var $rowsDespesa = $tabDespesas.find('tr:not(.hide):not(.notselect)');
@@ -181,10 +181,12 @@ $("#document").ready(function(){
     var dataDespesa = [];
 
     headersDespesa.push("dtDespesa");
+    headersDespesa.push("cdDespesa");
     headersDespesa.push("idDespesa");
     headersDespesa.push("vlDespesa");
     headersDespesa.push("qtDespesa");
     headersDespesa.push("totDespesa");
+    headersDespesa.push("cdFaturamento");
     headersDespesa.push("dsOberservacao");
 
     // Turn all existing rows into a loopable array
@@ -194,8 +196,27 @@ $("#document").ready(function(){
 
       // Use the headers from earlier to name our hash keys
       headersDespesa.forEach(function (header, i) {
+        var $cdFaturamento = $td.eq(i).find('select#cdFaturamento');
+        var $idDespesa = $td.eq(i).find("select[name='idDespesa']");
+        var $cdDespesa = $td.eq(i).find("select[name='dsDespesa']");
+
         if($td.eq(i).text() !== ""){
-          h[header] = $td.eq(i).text();
+
+          if(typeof $cdFaturamento.val() !== "undefined") {
+            h[header] = $cdFaturamento.val();
+          }
+          else if(typeof $idDespesa.val() !== "undefined"){
+            h[header] = $idDespesa.val();
+          }
+          else if(typeof $cdDespesa.val() !== "undefined"){
+              h[header] = $cdDespesa.val();
+            }
+          else {
+            if($td.eq(i).text() !== ""){
+              h[header] = $td.eq(i).text();
+            }
+          }
+
         }
       });
 
@@ -204,16 +225,16 @@ $("#document").ready(function(){
     });
 
     //Validando os campos para ver se está vazio
-    /*for (var t = 0; t < dataDespesa.length; t++) {
+    for (var t = 0; t < dataDespesa.length; t++) {
       despesa = dataDespesa[t];
 
-      var msgErroDespesa =  validaCamposDespesa(despesa.dtDespesa, despesa.idDespesa,despesa.vlDespesa,despesa.qtDespesa,despesa.totDespesa,despesa.dsOberservacao);
+      var msgErroDespesa =  validaCamposDespesa(despesa.dtDespesa, despesa.cdDespesa, despesa.idDespesa,despesa.vlDespesa,despesa.qtDespesa,despesa.totDespesa,despesa.cdFaturamento,despesa.dsOberservacao);
 
       if(msgErroDespesa !== ""){
         jbkrAlert.alerta('Alerta!',msgErroDespesa);
         break;
       }
-    }*/
+    }
 
     //Metodo para inserir no banco todas as informações coletadas
     lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto, dataAtividade, dataDespesa);
@@ -375,6 +396,37 @@ $("#document").ready(function(){
     }
   });
 
+  $('#tdFaturamento').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompleteproduto"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
 });
 
 function buscaRAT(codigo){
@@ -409,7 +461,7 @@ function buscaRAT(codigo){
 
 }
 
-function validaCamposDespesa(dtDespesa, idDespesa, vlDespesa, qtDespesa, totDespesa, dsOberservacao){
+function validaCamposDespesa(dtDespesa, dsDespesa, idDespesa, vlDespesa, qtDespesa, totDespesa, cdFaturamento, dsOberservacao){
 
     var msgErro = "";
     if(typeof dtDespesa === "undefined"){
@@ -434,6 +486,14 @@ function validaCamposDespesa(dtDespesa, idDespesa, vlDespesa, qtDespesa, totDesp
 
     if(typeof dsOberservacao === "undefined"){
       msgErro = msgErro + "<b>Observação</b> é um campo de preenchimento obrigatorio<br/>";
+    }
+
+    if(typeof cdFaturamento === "undefined"){
+      msgErro = msgErro + "<b>Faturamento</b> é um campo de preenchimento obrigatorio<br/>";
+    }
+
+    if(typeof dsDespesa === "undefined"){
+      msgErro = msgErro + "<b>Descrição da despesa</b> é um campo de preenchimento obrigatorio<br/>";
     }
 
     return msgErro;
@@ -531,4 +591,137 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
 
   }
 
+  for (var i = 0; i < dataDespesa.length; i++) {
+    despesa = dataDespesa[i];
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+                cdDespesa: despesa.cdDespesa,
+                dtDespesa: despesa.dtDespesa,
+                idDespesa: despesa.idDespesa,
+                vlDespesa: despesa.vlDespesa,
+                qtDespesa: despesa.qtDespesa,
+                totDespesa: despesa.totDespesa,
+                cdFaturamento: despesa.cdFaturamento,
+                dsOberservacao: despesa.dsOberservacao,
+                action: "inserirdespesa"
+        },
+
+        url: "../controller/RATController.php"
+
+    });
+
+  }
+
 }
+
+
+function buscaDescricaoDespesa(flgadd){
+  $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+              action: "buscadescricaodespesa"
+      },
+
+      url: "../controller/RATController.php",
+      success: function (dados) {
+        var json = $.parseJSON(dados);
+
+        var dropdown;
+        dropdown = '<option value="0"></option>';
+        for (var i = 0; i < json.length; i++) {
+
+            var descricaoDespesa = json[i];
+
+            dropdown = dropdown + '<option value="' + descricaoDespesa.codDsp  + '">'+ descricaoDespesa.desDsp +'</option>';
+
+        }
+        if(flgadd)
+          $("#tbDespesa tr:last select[name='dsDespesa']").html(dropdown);
+        else
+          $("select[name='dsDespesa']").html(dropdown);
+      }
+
+  });
+
+}
+
+function buscaTipoDespesa(codDsp, element) {
+
+  $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+              codDsp: codDsp,
+              action: "buscatipodespesadropdown"
+      },
+
+      url: "../controller/RATController.php",
+      success: function (dados) {
+        var json = $.parseJSON(dados);
+
+        var dropdown;
+        for (var i = 0; i < json.length; i++) {
+
+            var tipoDespesa = json[i];
+
+            dropdown = dropdown + '<option value="' + tipoDespesa.codTipDsp  + '">'+ tipoDespesa.desTipDsp +'</option>';
+
+        }
+        element.html(dropdown);
+
+      }
+
+  });
+
+
+}
+
+function buscaValorUnitarioDespesa(idDespesa, element){
+  $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+        idDespesa: idDespesa,
+        action: "buscavalorunitariodespesa"
+      },
+
+      url: "../controller/RATController.php",
+      success: function (dados) {
+        element.text(dados);
+      }
+
+  });
+
+
+}
+
+$("select[name='idDespesa']").bind("DOMSubtreeModified",function(){
+  buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
+});
+
+$("select[name='dsDespesa']").change(function() {
+    buscaTipoDespesa($(this).find(":selected").val(),$(this).parent().parent().find("select[name='idDespesa']"));
+
+});
+
+$("select[name='idDespesa']").change(function() {
+    buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
+
+});
+
+$("td[name='tdQtdDespesa']").blur(function() {
+  vlUni = $(this).parent().find("td[name='tdVlUni']").text();
+  qtdDespesa = $(this).text();
+  total = vlUni * qtdDespesa;
+
+  $(this).parent().find("td[name='totDespesa']").text(total);
+
+
+});

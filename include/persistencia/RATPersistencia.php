@@ -367,5 +367,132 @@ class RATPersistencia{
 
 	}
 
+	public function inserirDespesa(){
+
+		$this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+		$usuario = $this->getModel()->getUsuario();
+		$cdDespesa = $this->getModel()->getCdDespesa();
+		$dtDespesa = date("d/m/y",strtotime(str_replace('/','-',$this->getModel()->getDtDespesa())));
+		$idDespesa = $this->getModel()->getIdDespesa();
+    $vlDespesa = $this->getModel()->getVlDespesa();
+		$qtDespesa = $this->getModel()->getQtDespesa();
+		$totDespesa = $this->getModel()->getTotDespesa();
+		$cdFaturamento = $this->getModel()->getCdFaturamento();
+		$dsOberservacao = $this->getModel()->getDsOberservacao();
+
+
+		$sSql =  "INSERT INTO tbdespesarat (RAT_codRAT, Usuario_codUsu, Despesa_codDsp, datDsp, qtdDsp, totDsp, obsDsp, Fatdespesa_codTipFat)
+										VALUES (". $codigo ."
+													 ,". $usuario ."
+													 ,". $cdDespesa ."
+													 ,STR_TO_DATE('". $dtDespesa ."','%d/%m/%Y')
+													 ,". $qtDespesa ."
+													 ,". $totDespesa ."
+													 ,'". $dsOberservacao ."'
+													 ,". $cdFaturamento .")";
+
+		$this->getConexao()->query($sSql);
+
+    $this->getConexao()->fechaConexao();
+
+	}
+	public function buscaDescricaoDespesa(){
+		$this->getConexao()->conectaBanco();
+
+		$sSql = "SELECT codDsp, desDsp
+  						FROM tbdespesa";
+
+		$resultado = mysql_query($sSql);
+
+    $qtdLinhas = mysql_num_rows($resultado);
+
+    $contador = 0;
+
+    $retorno = '[';
+    while ($linha = mysql_fetch_assoc($resultado)) {
+
+        $contador = $contador + 1;
+
+        $retorno = $retorno . '{"codDsp": "'.$linha["codDsp"].'"
+                               , "desDsp" : "'.$linha["desDsp"].'"}';
+        //Para não concatenar a virgula no final do json
+        if($qtdLinhas != $contador)
+           $retorno = $retorno . ',';
+
+    }
+    $retorno = $retorno . "]";
+
+    $this->getConexao()->fechaConexao();
+
+    return $retorno;
+
+	}
+
+	public function buscaTipoDespesa(){
+		$this->getConexao()->conectaBanco();
+
+		$codDsp = $this->getModel()->getCodigo();
+
+		$sSql = "SELECT codTipDsp, desTipDsp
+						  FROM tbdespesa des
+						  JOIN tbtipodespesa tip
+						   ON des.Tipodespesa_CodTipDsp = tip.codTipDsp
+						 WHERE des.codDsp = " . $codDsp;
+
+		$resultado = mysql_query($sSql);
+
+    $qtdLinhas = mysql_num_rows($resultado);
+
+    $contador = 0;
+
+    $retorno = '[';
+    while ($linha = mysql_fetch_assoc($resultado)) {
+
+        $contador = $contador + 1;
+
+        $retorno = $retorno . '{"codTipDsp": "'.$linha["codTipDsp"].'"
+                               , "desTipDsp" : "'.$linha["desTipDsp"].'"}';
+        //Para não concatenar a virgula no final do json
+        if($qtdLinhas != $contador)
+           $retorno = $retorno . ',';
+
+    }
+    $retorno = $retorno . "]";
+
+    $this->getConexao()->fechaConexao();
+
+    return $retorno;
+
+	}
+
+	public function buscaValorUnitarioDespesa(){
+		$this->getConexao()->conectaBanco();
+
+		$idDespesa = $this->getModel()->getIdDespesa();
+
+		$sSql = "SELECT vlrUni
+							 FROM tbdespesa
+							WHERE tipodespesa_codtipdsp = " . $idDespesa;
+
+		$resultado = mysql_query($sSql);
+
+		$retorno = null;
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$retorno = $retorno . $linha["vlrUni"];
+
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+
+	}
+
+
+
 }
 ?>

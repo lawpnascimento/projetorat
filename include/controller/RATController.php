@@ -141,6 +141,66 @@ switch($_POST["action"]){
 		$retorno = $persistencia->inserirAtividade();
 
 		break;
+	case 'inserirdespesa':
+		$model = new RATModel();
+
+		$persistencia = new RATPersistencia();
+
+		$codRat = $persistencia->buscaCodigoRatInserido();
+
+		$model->setCodigo($codRat);
+		$model->setUsuario($_SESSION["codUsu"]);
+		$model->setCdDespesa($_POST["cdDespesa"]);
+		$model->setDtDespesa($_POST["dtDespesa"]);
+		$model->setIdDespesa($_POST["idDespesa"]);
+		$model->setVlDespesa($_POST["vlDespesa"]);
+		$model->setQtDespesa($_POST["qtDespesa"]);
+		$model->setTotDespesa($_POST["totDespesa"]);
+		$model->setCdFaturamento($_POST["cdFaturamento"]);
+		$model->setDsOberservacao($_POST["dsOberservacao"]);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->inserirDespesa();
+
+		break;
+  case 'buscatipodespesadropdown':
+		$model = new RATModel();
+
+		$persistencia = new RATPersistencia();
+
+		$model->setCodigo($_POST["codDsp"]);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->buscaTipoDespesa();
+
+		echo $retorno;
+
+		break;
+	case 'buscadescricaodespesa':
+		$persistencia = new RATPersistencia();
+
+		$retorno = $persistencia->buscaDescricaoDespesa();
+
+		echo $retorno;
+
+		break;
+
+	case 'buscavalorunitariodespesa':
+		$model = new RATModel();
+
+		$persistencia = new RATPersistencia();
+
+		$model->setIdDespesa($_POST["idDespesa"]);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->buscaValorUnitarioDespesa();
+
+		echo $retorno;
+
+		break;
 }
 
 
