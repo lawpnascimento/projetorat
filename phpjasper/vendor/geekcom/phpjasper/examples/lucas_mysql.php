@@ -3,8 +3,10 @@ require_once("../../../autoload.php");
 
  use JasperPHP\JasperPHP;
 
- $input = __DIR__ . '/hello_world.jrxml';
- $output = __DIR__ . '/hello_world_teste';
+ //$input = __DIR__ . '/hello_world.jrxml';
+ $input = __DIR__ . '/ExtratoComissao.jrxml';
+ //$output = __DIR__ . '/hello_world_teste';
+ $output = __DIR__ . '/ExtratoComissao';
 
  $conn = [
      'driver' => 'mysql',

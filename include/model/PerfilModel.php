@@ -12,12 +12,12 @@ class PerfilModel {
 	private $percentualComissao;
 
 	public function setCodigo($codigo){
- 		$this->codigo = $codigo;
-  }
+	 		$this->codigo = $codigo;
+	}
 
-  public function getCodigo(){
- 		return $this->codigo;
-  }
+	public function getCodigo(){
+	 		return $this->codigo;
+	}
 
 	public function setNome($nome){
 		$this->nome = $nome;

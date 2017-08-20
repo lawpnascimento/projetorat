@@ -39,13 +39,25 @@ class ConsultaRATPersistencia{
 		if($codigo == null){
 
 			$sSql = "SELECT rat.codRat
-										 ,rat.Usuario_codUsu
-										 ,rat.Cliente_codCli
-										 ,rat.Responsavel_codRes
-										 ,rat.Projeto_codPrj
-										 ,rat.Produto_codPro
-										 ,rat.Situacao_codSit
+										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
+										 ,CONCAT(rat.Cliente_codCli, ' - ',cli.nomCli) Cliente_codCli
+										 ,CONCAT(rat.Responsavel_codRes, ' - ',res.nomRes) Responsavel_codRes
+										 ,CONCAT(rat.Projeto_codPrj, ' - ',prj.nomPrj) Projeto_codPrj
+									     ,CONCAT(rat.Produto_codPro,' - ',pro.desPro) Produto_codPro
+										 ,CONCAT(rat.Situacao_codSit,' - ',sit.desSit) Situacao_codSit
 							 	 FROM tbrat rat
+							 	 JOIN tbusuario usu
+							       ON usu.codUsu = rat.Usuario_codUsu
+							     JOIN tbcliente cli
+								   ON cli.codCli = rat.Cliente_codCli
+								 JOIN tbresponsavel res 
+								   ON res.codRes = rat.Responsavel_codRes
+								 JOIN tbprojeto prj 
+								   ON prj.codPrj = rat.Projeto_codPrj
+								 JOIN tbproduto pro
+								   ON pro.codPro = rat.Produto_codPro
+								 JOIN tbsituacaorat = sit
+								   ON sit.codSit = rat.Situacao_codSit
 								WHERE 1 = 1";
 
 			if($usuario != null){
@@ -83,13 +95,25 @@ class ConsultaRATPersistencia{
 			$sSql = $sSql . " ORDER BY rat.codRat desc";
 		}else{
 			$sSql = "SELECT rat.codRat
-										 ,rat.Usuario_codUsu
-										 ,rat.Cliente_codCli
-										 ,rat.Responsavel_codRes
-										 ,rat.Projeto_codPrj
-										 ,rat.Produto_codPro
-										 ,rat.Situacao_codSit
+										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
+										 ,CONCAT(rat.Cliente_codCli,' - ',cli.nomCli) Cliente_codCli
+										 ,CONCAT(rat.Responsavel_codRes,' - ',res.nomRes) Responsavel_codRes
+										 ,CONCAT(rat.Projeto_codPrj,' - ',prj.nomPrj) Projeto_codPrj
+									     ,CONCAT(rat.Produto_codPro,' - ',pro.desPro) Produto_codPro
+										 ,CONCAT(rat.Situacao_codSit,' - ',sit.desSit) Situacao_codSit
 							 	 FROM tbrat rat
+							 	 JOIN tbusuario usu
+							       ON usu.codUsu = rat.Usuario_codUsu
+							     JOIN tbcliente cli
+								   ON cli.codCli = rat.Cliente_codCli
+								 JOIN tbresponsavel res 
+								   ON res.codRes = rat.Responsavel_codRes
+								 JOIN tbprojeto prj 
+								   ON prj.codPrj = rat.Projeto_codPrj
+								 JOIN tbproduto pro
+								   ON pro.codPro = rat.Produto_codPro
+								 JOIN tbsituacaorat = sit
+								   ON sit.codSit = rat.Situacao_codSit
 							   WHERE rat.codRat = " . $codigo . "
 								ORDER BY rat.codRat";
 		}

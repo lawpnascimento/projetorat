@@ -56,10 +56,12 @@ class DespesaPersistencia{
 		if($codigo == null){
 
 			$sSql = "SELECT codDsp
-										 ,Tipodespesa_CodTipDsp
+										 ,concat(Tipodespesa_CodTipDsp,' - ',tipdsp.desTipDsp) Tipodespesa_CodTipDsp
 										 ,desDsp
-										 ,concat('R$ ', format(vlrUni, 2)) as vlrUni 
-							 	 FROM tbdespesa
+										 ,concat('R$ ', format(vlrUni, 2)) vlrUni 
+							 	 FROM tbdespesa dsp
+							 	 JOIN tbtipodespesa tipdsp
+							 	   ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
 								WHERE 1 = 1";
 
 			if($descricao != null){
@@ -69,12 +71,14 @@ class DespesaPersistencia{
 			$sSql = $sSql . " ORDER BY desDsp";
 		}else{
 			$sSql = "SELECT codDsp
-										 ,Tipodespesa_CodTipDsp
+										 ,concat(Tipodespesa_CodTipDsp,' - ',tipdsp.desTipDsp) Tipodespesa_CodTipDsp
 										 ,desDsp
-										 ,vlrUni
-							 	 FROM tbdespesa
-							  WHERE codDsp = " . $codigo . "
-								ORDER BY desDsp";
+										 ,concat('R$ ', format(vlrUni, 2)) vlrUni 
+							 	 FROM tbdespesa dsp
+							 	 JOIN tbtipodespesa tipdsp
+							 	   ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
+							     WHERE codDsp = " . $codigo . "
+							   ORDER BY desDsp";
 		}
 
 		$resultado = mysql_query($sSql);

@@ -1,6 +1,45 @@
 $("#document").ready(function() {
     buscaPerfil();
-    function buscaPerfil(cdPerfil){
+
+$("#formPerfil #btnAtualizar").click(function () {
+    alert("teste");
+    var txbNome = $("#txbNome");
+    var txbSobrenome = $("#txbSobrenome");
+    var txbSenha = $("#txbSenha");
+    var txbEmail = $("#txbEmail");
+
+    var msgErro = validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail);
+
+    if(msgErro != ""){
+        jbkrAlert.alerta('Alerta!',msgErro);
+    }
+    else{
+        $.ajax({
+            //Tipo de envio POST ou GET
+            type: "POST",
+            dataType: "text",
+            data: {
+                email: txbEmail.val(),
+                nome: txbNome.val(),
+                sobrenome: txbSobrenome.val(),
+                cpf: txbCpf.val(),
+                telefone: txbTelefone.val(),
+                action: "atualizar"
+            },
+
+            url: "../controller/PerfilController.php",
+
+            //Se der tudo ok no envio...
+            success: function (callback) {
+                jbkrAlert.sucesso('Perfil', 'Perfil atualizado com sucesso!');
+            }
+        });
+    }
+});
+
+});
+
+function buscaPerfil(codigo){
         $.ajax({
             //Tipo de envio POST ou GET
             type: "POST",
@@ -31,69 +70,19 @@ $("#document").ready(function() {
 
     };
 
-$("#formPerfil #btnAtualizar").click(function () {
-    alert("teste");
-    var txbEmail = $("#txbEmail");
-    var txbNome = $("#txbNome");
-    var txbSobrenome = $("#txbSobrenome");
-    var txbCpf = $("#txbCpf");
-    var txbTelefone = $("#txbTelefone");
-
-
-    msgErro = validaCampos(txbEmail.val(), txbNome.val(),txbSobrenome.val(),txbCpf.val(),txbTelefone.val());
-    if(msgErro != ""){
-        jbkrAlert.alerta('Alerta!',msgErro);
+function validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail){
+    msgErro = "";
+    if(txbNome == ""){
+        msgErro = msgErro + "<b>Nome</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    else{
-        $.ajax({
-            //Tipo de envio POST ou GET
-            type: "POST",
-            dataType: "text",
-            data: {
-                email: txbEmail.val(),
-                nome: txbNome.val(),
-                sobrenome: txbSobrenome.val(),
-                cpf: txbCpf.val(),
-                telefone: txbTelefone.val(),
-                action: "atualizar"
-            },
-
-            url: "../controller/PerfilController.php",
-
-            //Se der tudo ok no envio...
-            success: function (callback) {
-                jbkrAlert.sucesso('Perfil', 'Perfil atualizado com sucesso!');
-            }
-        });
+    if(txbSobrenome == ""){
+        msgErro = msgErro + "<b>Sobrenome</b> é um campo de preenchimento obrigatorio<br/>";
     }
-});
-
-});
-
-
-function validaCampos(email, nome, sobrenome, cpf, telefone){
-
-    var mensagem = "";
-    if(nome == ""){
-        mensagem = mensagem.concat("<i><b>Nome</b> é um campo de preenchimento obrigatório</i>");
+    if(txbSenha == ""){
+        msgErro = msgErro + "<b>Senha</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(sobrenome == ""){
-        mensagem = mensagem.concat("<br/><i><b>Sobrenome</b> é um campo de preenchimento obrigatório</i>");
-    }
-    if(email == ""){
-        mensagem = mensagem.concat("<br/><i><b>E-mail</b> é um campo de preenchimento obrigatório</i>");
-    }
-    else if(!validaEmail(email)){
-        mensagem = mensagem.concat("<br/><i><b>E-mail</b> deve conter informações válidas</i>");
-    }
-    if(cpf == ""){
-        mensagem = mensagem.concat("<br/><i><b>CPF</b> é um campo de preenchimento obrigatório</i>");
-    }
-    if(telefone == ""){
-        mensagem = mensagem.concat("<br/><i><b>Telefone</b> é um campo de preenchimento obrigatório</i>");
-    }
-    else if (!validaCpf(cpf)){
-        mensagem = mensagem.concat("<br/><i><b>CPF</b> deve conter informações válidas</i>");
+    if(txbEmail == ""){
+        msgErro = msgErro + "<b>Email</b> é um campo de preenchimento obrigatorio<br/>";
     }
     return mensagem;
 

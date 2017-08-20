@@ -8,6 +8,7 @@
         </div>
         <div class="panel-body" >
             <form id="formPerfil" class="form-horizontal" role="form">
+            <input type="hidden" id="hidCodUsu"></input>
                 <div class="form-group">
                     <label for="txbNome" class="col-md-1 control-label">Nome</label>
                     <div class="col-md-4">

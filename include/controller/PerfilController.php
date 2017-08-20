@@ -1,45 +1,44 @@
 <?php
-header("Content-type: text/html; charset=UTF-8");
-header("Cache-Control: no-store, no-cache, must-revalidate");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-date_default_timezone_set('America/Sao_Paulo');
 require_once("../model/PerfilModel.php");
 require_once("../persistencia/PerfilPersistencia.php");
 
-switch($_POST["action"]) {
+switch($_POST["action"]){
 
     case 'buscar':
+        $model = new PerfilModel();
 
-        $oModel = new PerfilModel();
+        if(isset($_POST["codigo"])){
+                $model->setCodigo($_POST["codigo"]);
+        }
+        $model->setNome($_POST["email"]);
+        $model->setSobrenome($_POST["sobrenome"]);
+        $model->setSenha($_POST["cpf"]);
+        $model->setEmail($_POST["telefone"]);
 
-        $oPersistencia = new PerfilPersistencia();
+        $persistencia = new PerfilPersistencia();
 
-        $oModel->setUsuario($_SESSION["cdusuario"]);
+        $persistencia->setModel($model);
 
-        $oPersistencia->setModel($oModel);
-
-        $retorno = $oPersistencia->buscaUsuario();
+        $retorno = $persistencia->buscaPerfil();
 
         echo $retorno;
 
         break;
         
     case 'atualizar':
-        $oModel = new PerfilModel();
+        $model = new PerfilModel();
 
-        $oPersistencia = new PerfilPersistencia();
+        $model->setCodigo($_POST["codigo"]);
+        $model->setNome($_POST["email"]);
+        $model->setSobrenome($_POST["sobrenome"]);
+        $model->setSenha($_POST["cpf"]);
+        $model->setEmail($_POST["telefone"]);
 
-        $oModel->setUsuario($_SESSION["cdusuario"]);
-        $oModel->setEmail($_POST["email"]);
-        $oModel->setNome($_POST["nome"]);
-        $oModel->setSobrenome($_POST["sobrenome"]);
-        $oModel->setCpf($_POST["cpf"]);
-        $oModel->setTelefone($_POST["telefone"]);
+        $persistencia = new PerfilPersistencia();
+        
+        $persistencia->setModel($model);
 
-        $oPersistencia->setModel($oModel);
-
-        $oPersistencia->Atualizar();
+        $persistencia->atualizarPerfil();
 
         break;
 }

@@ -89,7 +89,7 @@ class ResponsavelPersistencia{
 			$sSql = "SELECT res.codRes codRes
 									 	 ,res.nomRes nomRes
 										 ,res.emlRes emlRes
-										,cli.nomCli nomCli
+										,CONCAT(res.cliente_codCli,' - ', cli.nomCli) nomCli
 										,cli.codCli codCli
 								 FROM tbresponsavel res
 								 JOIN tbcliente cli

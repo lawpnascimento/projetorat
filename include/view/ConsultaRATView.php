@@ -51,6 +51,7 @@
               <div id="actions" class="row">
                 <div class="col-md-12">
                   <button id="btnBuscar" type="button" class="btn btn-info">Buscar</button>
+                  <button id="btnCancelar" type="button" class="btn btn-warning">Cancelar</button>
                 </div>
               </div>
             </form>

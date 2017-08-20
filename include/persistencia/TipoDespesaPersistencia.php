@@ -92,5 +92,20 @@ class TipoDespesaPersistencia{
 
 	}
 
+  	public function atualizarTipoDespesa(){
+	    $this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+		$descricao = $this->getModel()->getDescricao();
+
+	    $sSql = "UPDATE tbtipodespesa
+	                  SET  desTipDsp = '" . $descricao . "'
+	                  WHERE codTipDsp = " . $codigo;
+
+	    $this->getConexao()->query($sSql);
+
+	    $this->getConexao()->fechaConexao();
+  }	
+
 }
 ?>

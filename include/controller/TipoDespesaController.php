@@ -31,6 +31,20 @@ switch($_POST["action"]){
 	  	echo $retorno;
 
 	   	break;
+
+	case 'atualizar':
+		$model = new TipoDespesaModel();
+
+		$model->setCodigo($_POST["codigo"]);
+		$model->setDescricao($_POST["descricao"]);
+
+		$persistencia = new TipoDespesaPersistencia();
+	  	$persistencia->setModel($model);
+	   	$retorno = $persistencia->atualizarTipoDespesa();
+
+	  	echo $retorno;
+
+	   	break;
 }
 
 

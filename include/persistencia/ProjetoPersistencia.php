@@ -64,12 +64,16 @@ class ProjetoPersistencia{
 
       $sSql = "SELECT codPrj
                      ,nomPrj
-                     ,Produto_codPro
-                     ,Cliente_codCli
+                     ,CONCAT(prj.Produto_codPro,' - ',pro.desPro) Produto_codPro
+                     ,CONCAT(prj.Cliente_codCli,' - ',cli.nomCli) Cliente_codCli
                      ,datIni
                      ,vlrHor
                      ,obsPrj
-                 FROM tbprojeto
+                 FROM tbprojeto prj
+                 JOIN tbcliente cli
+                   ON cli.codCli = prj.Cliente_codCli
+                 JOIN tbproduto pro
+                   ON pro.codPro = prj.Produto_codpro
                 WHERE 1 = 1";
 
       if($projeto != null){
@@ -100,12 +104,16 @@ class ProjetoPersistencia{
     }else{
       $sSql = "SELECT codPrj
                      ,nomPrj
-                     ,Produto_codPro
-                     ,Cliente_codCli
+                     ,CONCAT(prj.Produto_codPro,' - ',pro.desPro) Produto_codPro
+                     ,CONCAT(prj.Cliente_codCli,' - ',cli.nomCli) Cliente_codCli
                      ,datIni
                      ,vlrHor
                      ,obsPrj
-                 FROM tbprojeto
+                 FROM tbprojeto prj
+                 JOIN tbcliente cli
+                   ON cli.codCli = prj.Cliente_codCli
+                 JOIN tbproduto pro
+                   ON pro.codPro = prj.Produto_codpro
                 WHERE codPrj = " . $codigo . "
                 ORDER BY codPrj desc";
     }
