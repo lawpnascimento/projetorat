@@ -3,6 +3,7 @@ var $tableAtividade = $('#tableAtividade');
 var $tabDespesas = $('#tabDespesas');
 var $btnExportarAtividade = $('#btnExportarAtividade');
 var $msgExportarAtividade = $('#msgExportarAtividade');
+var descricaocarregada = false;
 
 //$("#tdDataDaAtividade").mask('99/99/9999', {reverse: false});
 
@@ -599,8 +600,8 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
 
   }
 
-  for (var i = 0; i < dataDespesa.length; i++) {
-    despesa = dataDespesa[i];
+  for (var j = 0; j < dataDespesa.length; j++) {
+    despesa = dataDespesa[j];
     $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
@@ -650,8 +651,14 @@ function buscaDescricaoDespesa(flgadd){
         }
         if(flgadd)
           $("#tbDespesa tr:last select[name='dsDespesa']").html(dropdown);
-        else
-          $("select[name='dsDespesa']").html(dropdown);
+
+        else {
+          if(descricaocarregada === false)  {
+            descricaocarregada = true;
+            $("select[name='dsDespesa']").html(dropdown);
+          }
+
+        }
       }
 
   });
