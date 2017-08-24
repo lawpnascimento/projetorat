@@ -121,7 +121,7 @@ class RATModel {
 	}
 
 	public function getHrFinal(){
-		return $this->hrInicial;
+		return $this->hrFinal;
 	}
 
 	public function setHrFinal($hrFinal){
