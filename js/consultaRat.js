@@ -1,9 +1,44 @@
-$("#document").ready(function(){
-  $("#formConsultaRAT #btnBuscar").click(function () {
+$("#document").ready(function(){ 
+var $msgTeste = $('#msgTeste');
+var $VgrdConsultaRAT = $('#grdConsultaRAT');
+
+$("#formConsultaRAT #btnBuscar").click(function () {
     alert("Teste");
     consultaRAT();
 
   });
+
+$("#grdConsultaRAT").on('click', 'tr', function (event) {
+    alert("oi");
+
+  });
+
+$("#formConsultaRAT #btnTeste").click(function () {
+  var $rows = $VgrdConsultaRAT.find('tr');
+  var headers = [];
+  var data = [];
+  
+  // Get the headers (add special header logic here)
+  $($rows.shift()).find('th:not(:empty)').each(function () {
+    headers.push($(this).text().toLowerCase());
+  });
+
+  // Turn all existing rows into a loopable array
+  $rows.each(function () {
+    var $td = $(this).find('td');
+    var h = {};
+
+    // Use the headers from earlier to name our hash keys
+    headers.forEach(function (header, i) {
+      h[header] = $td.eq(i).text();
+    });
+
+    data.push(h);
+  });
+
+  // Output the result
+  $msgTeste.text(JSON.stringify(data));
+});
 
 });
 

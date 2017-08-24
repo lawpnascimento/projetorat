@@ -15,11 +15,19 @@
         <div class="panel-body" >
           <form id="formDespesa" class="form-horizontal" role="form">
           <input type="hidden" id="hidCodDsp"></input>
-            <div class="form-group">
-              <div class="col-md-4">
-                <label for="tipoDespesa">Tipo da despesa*</label>
-                <input id="txbTipoDespesa" type="text" class="form-control" name="txbTipoDespesa" placeholder="Tipo da despesa" maxlength="40"></input>
-              </div>
+          <div class="form-group">  
+              <!--Combobox Tipo da Despesa-->
+                <div class="col-md-2">
+                    <label for="tipodespesa">Tipo da Despesa*</label>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbTipoDespesa" data-toggle="dropdown" aria-expanded="false" name="Tipo">
+                            Tipo
+                            <span class="caret"></span>
+                        </button>
+                        <ul id="ulTipoDespesa" class="dropdown-menu" role="menu" aria-labelledby="cbbTipoDespesa">
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
               <div class="col-md-4">
@@ -30,11 +38,10 @@
             <div class="form-group">
               <div class="col-md-4">
                 <label for="nomeDespesa">Valor unitário*</label>
-                <input id="txbValorUnitario" type="text" class="form-control" name="txbValorUnitario" placeholder="Valor unitário" maxlength="8"></input>
+                <input id="txbValorUnitario" type="text" class="form-control" name="txbValorUnitario" placeholder="Ex: 0.90" maxlength="8"></input>
               </div>
             </div>
-           
-
+            <br />
             <!-- BOTÕES -->
             <div id="actions" class="row">
               <div class="col-md-12">

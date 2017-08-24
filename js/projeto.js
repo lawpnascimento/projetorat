@@ -1,14 +1,16 @@
 $("#document").ready(function() {
+  $("#txbValorHora").mask('###0.00', {reverse: true});
+
   $("#formProjeto #btnCadastrar").click(function () {
 
     var txbProjeto = $("#txbProjeto").val();
-    var txbProduto = $("#txbProduto").val();
+    var cbbProduto = $("#cbbProduto").val();
     var txbDataInicio = $("#txbDataInicio").val();
-    var txbCliente = $("#txbCliente").val();
+    var cbbCliente = $("#cbbCliente").val();
     var txbValorHora = $("#txbValorHora").val();
     var txaObsProjeto = $("#txaObsProjeto").val();
 
-    var msgErro = validaCampos(txbProjeto, txbProduto, txbDataInicio, txbCliente, txbValorHora);
+    var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHora);
 
     if(msgErro !== ""){
       jbkrAlert.alerta('Alerta!',msgErro);
@@ -20,9 +22,9 @@ $("#document").ready(function() {
           dataType: "text",
           data: {
             projeto: txbProjeto,
-            produto: txbProduto,
+            produto: cbbProduto,
             dataInicio: txbDataInicio,
-            cliente: txbCliente,
+            cliente: cbbCliente,
             valorHora: txbValorHora,
             obsProjeto: txaObsProjeto,
             action: "cadastrar"
@@ -50,13 +52,13 @@ $("#document").ready(function() {
   $("#formProjeto #btnAtualizar").click(function () {
     var codigo = $("#hidCodPrj").val();
     var txbProjeto = $("#txbProjeto").val();
-    var txbProduto = $("#txbProduto").val();
+    var cbbProduto = $("#cbbProduto").val();
     var txbDataInicio = $("#txbDataInicio").val();
-    var txbCliente = $("#txbCliente").val();
+    var cbbCliente = $("#cbbCliente").val();
     var txbValorHora = $("#txbValorHora").val();
     var txaObsProjeto = $("#txaObsProjeto").val();
 
-    var msgErro = validaCampos(txbProjeto, txbProduto, txbDataInicio, txbCliente, txbValorHora);
+    var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHora);
 
     if(msgErro !== ""){
         jbkrAlert.alerta('Alerta!',msgErro);
@@ -69,9 +71,9 @@ $("#document").ready(function() {
         data: {
             codigo: codigo,
             projeto: txbProjeto,
-            produto: txbProduto,
+            produto: cbbProduto,
             dataInicio: txbDataInicio,
-            cliente: txbCliente,
+            cliente: cbbCliente,
             valorHora: txbValorHora,
             obsProjeto: txaObsProjeto,
             action: "atualizar"
@@ -97,86 +99,169 @@ $("#document").ready(function() {
 
 function buscaProjetos(codigo){
     var txbProjeto = $("#txbProjeto").val();
-    var txbProduto = $("#txbProduto").val();
+    var cbbProduto = $("#cbbProduto").val();
     var txbDataInicio = $("#txbDataInicio").val();
-    var txbCliente = $("#txbCliente").val();
+    var cbbCliente = $("#cbbCliente").val();
     var txbValorHora = $("#txbValorHora").val();
     var txaObsProjeto = $("#txaObsProjeto").val();
 
-  $.ajax({
-      //Tipo de envio POST ou GET
-      type: "POST",
-      dataType: "text",
-      data: {
-            codigo: codigo,
-            projeto: txbProjeto,
-            produto: txbProduto,
-            dataInicio: txbDataInicio,
-            cliente: txbCliente,
-            valorHora: txbValorHora,
-            obsProjeto: txaObsProjeto,
-            action: "buscar"
-      },
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+              codigo: codigo,
+              projeto: txbProjeto,
+              produto: cbbProduto,
+              dataInicio: txbDataInicio,
+              cliente: cbbCliente,
+              valorHora: txbValorHora,
+              obsProjeto: txaObsProjeto,
+              action: "buscar"
+        },
 
-      url: "../controller/ProjetoController.php",
+        url: "../controller/ProjetoController.php",
 
-      //Se der tudo ok no envio...
-      success: function (dados) {
-        var json = $.parseJSON(dados);
-        var projeto = null;
+        //Se der tudo ok no envio...
+        success: function (dados) {
+          var json = $.parseJSON(dados);
+          var projeto = null;
 
-        //Carregando a grid
-        if(codigo == null){
-          var grid = "";
-          for (var i = 0; i < json.length; i++) {
-            projeto = json[i];
+          //Carregando a grid
+          if(codigo == null){
+            var grid = "";
+            for (var i = 0; i < json.length; i++) {
+              projeto = json[i];
 
-            grid = grid + "<tr>";
-            grid = grid + "<td>" + projeto.codPrj + "</td>";
-            grid = grid + "<td>" + projeto.nomPrj + "</td>";
-            grid = grid + "<td>" + projeto.Produto_codPro + "</td>";
-            grid = grid + "<td>" + projeto.Cliente_codCli + "</td>";
-            grid = grid + "<td>" + projeto.datIni + "</td>";
-            grid = grid + "<td>" + projeto.vlrHor + "</td>";
+              grid = grid + "<tr>";
+              grid = grid + "<td>" + projeto.codPrj + "</td>";
+              grid = grid + "<td>" + projeto.nomPrj + "</td>";
+              grid = grid + "<td>" + projeto.codPro + "</td>";
+              grid = grid + "<td>" + projeto.codCli + "</td>";
+              grid = grid + "<td>" + projeto.datIni + "</td>";
+              grid = grid + "<td>" + projeto.vlrHor + "</td>";
 
-            grid = grid + "<td href='javascript:void(0);' onClick='buscaProjetos(" + projeto.codPrj + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
-            grid = grid + "</tr>";
+              grid = grid + "<td href='javascript:void(0);' onClick='buscaProjetos(" + projeto.codPrj + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
+              grid = grid + "</tr>";
 
-          }
+            }
 
-          $("#grdProjeto").html(grid);
-        }else{
-          formularioModoAtualizar();
-          for (var j = 0; j < json.length; j++) {
-              projeto = json[j];
-              $("#hidCodPrj").val(projeto.codPrj);
-              $("#txbProjeto").val(projeto.nomPrj);
-              $("#txbProduto").val(projeto.Produto_codPro);
-              $("#txbCliente").val(projeto.Cliente_codCli);
-              $("#txbDataInicio").val(projeto.datIni);
-              $("#txbValorHora").val(projeto.vlrHor);
-              $("#txaObsProjeto").val(projeto.obsPrj);
+            $("#grdProjeto").html(grid);
+          }else{
+            formularioModoAtualizar();
+            for (var j = 0; j < json.length; j++) {
+                projeto = json[j];
+                $("#hidCodPrj").val(projeto.codPrj);
+                $("#txbProjeto").val(projeto.nomPrj);
+                $("#cbbCliente:first-child").text(projeto.nomCli);
+                $("#cbbProduto:first-child").text(projeto.desPro);
+                $("#txbDataInicio").val(projeto.datIni);
+                $("#txbValorHora").val(projeto.vlrHor);
+                $("#txaObsProjeto").val(projeto.obsPrj);
+            }
+
           }
 
         }
-
-      }
-  });
+    });
 
 }
 
-function validaCampos(txbProjeto, txbProduto, txbDataInicio, txbCliente, txbValorHora){
+function buscaClienteDropdown(){
+  $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            action: "clientedropdown"
+        },
+
+        url: "../controller/ProjetoController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+            var json = $.parseJSON(dados);
+
+            var dropdown = "";
+            for (var i = 0; i < json.length; i++) {
+
+                var cliente = json[i];
+
+                dropdown = dropdown + '<li role="presentation" value="' + cliente.codCli  + '"><a role="menuitem" tabindex="-1" href="#">' + cliente.nomCli + '</a></li>';
+
+            }
+            $("#ulCliente").html(dropdown);
+
+            $("#ulCliente li a").click(function(){
+                $("#cbbCliente:first-child").text($(this).text());
+
+                $("#ulCliente li").each(function(){
+
+                    if ($(this).text() == $("#cbbCliente").text().trim()){
+                        $("#cbbCliente").val($(this).val());
+                    }
+                });
+
+            });
+        }
+
+    });
+}
+
+function buscaProdutoDropdown(){
+  $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            action: "produtodropdown"
+        },
+
+        url: "../controller/ProjetoController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+            var json = $.parseJSON(dados);
+
+            var dropdown = "";
+            for (var i = 0; i < json.length; i++) {
+
+                var produto = json[i];
+
+                dropdown = dropdown + '<li role="presentation" value="' + produto.codPro  + '"><a role="menuitem" tabindex="-1" href="#">' + produto.desPro + '</a></li>';
+
+            }
+            $("#ulProduto").html(dropdown);
+
+            $("#ulProduto li a").click(function(){
+
+                $("#cbbProduto:first-child").text($(this).text());
+
+                $("#ulProduto li").each(function(){
+
+                    if ($(this).text() == $("#cbbProduto").text().trim()){
+                        $("#cbbProduto").val($(this).val());
+                    }
+                });
+
+            });
+        }
+
+    });
+}
+
+function validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHora){
     msgErro = "";
     if(txbProjeto === ""){
         msgErro = msgErro + "<b>Projeto</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(txbProduto === ""){
+    if(cbbProduto === ""){
         msgErro = msgErro + "<b>Produto</b> é um campo de preenchimento obrigatorio<br/>";
     }
     if(txbDataInicio === ""){
         msgErro = msgErro + "<b>Data Inicial</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(txbCliente === ""){
+    if(cbbCliente === ""){
         msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio<br/>";
     }
     if(txbValorHora === ""){

@@ -20,27 +20,42 @@
               <div class="form-group">
                 <div class="col-md-4">
                   <label for="projeto">Projeto*</label>
-                  <input id="txbProjeto" type="text" class="form-control" name="txbProjeto" placeholder="Nome do Projeto"></input>
-                </div>
-                <div class="col-md-4">
-                  <label for="produto">Produto*</label>
-                  <input id="txbProduto" type="text" class="form-control" name="txbProduto" placeholder="Nome do Produto"></input>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-4">
-                  <label for="cliente">Cliente*</label>
-                  <input id="txbCliente" type="text" class="form-control" name="txbCliente" placeholder="Nome do Cliente"></input>
+                  <input id="txbProjeto" type="text" class="form-control" name="txbProjeto" placeholder="Nome do Projeto" maxlength="40"></input>
                 </div>
                 <div class="col-md-2">
                   <label for="DataInicio">Data de Início*</label>
                   <input id="txbDataInicio" type="date" class="form-control" name="txbDataInicio"></input>
                 </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <label for="ValorHora">Valor Hora*</label>
-                  <input id="txbValorHora" type="text" class="form-control" name="txbValorHora"></input>
+                  <input id="txbValorHora" type="text" class="form-control" name="txbValorHora" placeholder="Ex: 100.00" maxlength="8"></input>
+                </div>
+              </div>
+              <!--Combobox -->
+              <div class="form-group">  
+              <!--Combobox Cliente-->
+                <div class="col-md-2">
+                    <label for="nomecliente">Nome do Cliente*</label>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbCliente" data-toggle="dropdown" aria-expanded="false" name="Cliente">
+                            Cliente
+                            <span class="caret"></span>
+                        </button>
+                        <ul id="ulCliente" class="dropdown-menu" role="menu" aria-labelledby="cbbCliente">
+                        </ul>
+                    </div>
+                </div>
+                <!--Combobox Produto-->
+                <div class="col-md-2">
+                    <label for="nomeproduto">Nome do Produto*</label>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle form-control" type="button" id="cbbProduto" data-toggle="dropdown" aria-expanded="false" name="Produto">
+                            Produto
+                            <span class="caret"></span>
+                        </button>
+                        <ul id="ulProduto" class="dropdown-menu" role="menu" aria-labelledby="cbbProduto">
+                        </ul>
+                    </div>
                 </div>
               </div>
               <div class="form-group">

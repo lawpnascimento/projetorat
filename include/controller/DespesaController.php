@@ -7,9 +7,9 @@ switch($_POST["action"]){
 	case 'cadastrar':
 		$model = new DespesaModel();
 
+		$model->setTipoDespesa($_POST["tipoDespesa"]);
 		$model->setDescricao($_POST["descricao"]);
 		$model->setValorUnitario($_POST["valorUnitario"]);
-		$model->setTipoDespesa($_POST["tipoDespesa"]);
 
 		$persistencia = new DespesaPersistencia();
 		$persistencia->setModel($model);
@@ -24,9 +24,9 @@ switch($_POST["action"]){
 				$model->setCodigo($_POST["codigo"]);
 		}
 
+		$model->setTipoDespesa($_POST["tipoDespesa"]);
 		$model->setDescricao($_POST["descricao"]);
 		$model->setValorUnitario($_POST["valorUnitario"]);
-		$model->setTipoDespesa($_POST["tipoDespesa"]);
 
 		$persistencia = new DespesaPersistencia();
 	  	$persistencia->setModel($model);
@@ -40,9 +40,9 @@ switch($_POST["action"]){
 		$model = new DespesaModel();
 
 		$model->setCodigo($_POST["codigo"]);
+		$model->setTipoDespesa($_POST["tipoDespesa"]);
 		$model->setDescricao($_POST["descricao"]);
 		$model->setValorUnitario($_POST["valorUnitario"]);
-		$model->setTipoDespesa($_POST["tipoDespesa"]);
 
 		$persistencia = new DespesaPersistencia();
 	  	$persistencia->setModel($model);
@@ -51,6 +51,14 @@ switch($_POST["action"]){
 	  	echo $retorno;
 
 	   	break;
+
+	case 'tipodespesadropdown':
+    	$persistencia = new DespesaPersistencia();
+    	$retorno = $persistencia->buscaTipoDespesaDropDown();
+
+        echo $retorno;
+
+        break;
 }
 
 

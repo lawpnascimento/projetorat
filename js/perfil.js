@@ -1,45 +1,47 @@
 $("#document").ready(function() {
-    buscaPerfil();
+    $("#formPerfil #btnAtualizar").click(function () {
+        alert("teste");
+        var txbNome = $("#txbNome").val();
+        var txbSobrenome = $("#txbSobrenome").val();
+        var txbSenha = $("#txbSenha").val();
+        var txbEmail = $("#txbEmail").val();
 
-$("#formPerfil #btnAtualizar").click(function () {
-    alert("teste");
-    var txbNome = $("#txbNome");
-    var txbSobrenome = $("#txbSobrenome");
-    var txbSenha = $("#txbSenha");
-    var txbEmail = $("#txbEmail");
+        var msgErro = validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail);
 
-    var msgErro = validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail);
+        if(msgErro != ""){
+            jbkrAlert.alerta('Alerta!',msgErro);
+        }
+        else{
+            $.ajax({
+                //Tipo de envio POST ou GET
+                type: "POST",
+                dataType: "text",
+                data: {
+                    nome: txbNome,
+                    sobrenome: txbSobrenome,
+                    senha: txbSenha,
+                    email: txbEmail,
+                    action: "atualizar"
+                },
 
-    if(msgErro != ""){
-        jbkrAlert.alerta('Alerta!',msgErro);
-    }
-    else{
-        $.ajax({
-            //Tipo de envio POST ou GET
-            type: "POST",
-            dataType: "text",
-            data: {
-                email: txbEmail.val(),
-                nome: txbNome.val(),
-                sobrenome: txbSobrenome.val(),
-                cpf: txbCpf.val(),
-                telefone: txbTelefone.val(),
-                action: "atualizar"
-            },
+                url: "../controller/PerfilController.php",
 
-            url: "../controller/PerfilController.php",
-
-            //Se der tudo ok no envio...
-            success: function (callback) {
-                jbkrAlert.sucesso('Perfil', 'Perfil atualizado com sucesso!');
-            }
-        });
-    }
-});
+                //Se der tudo ok no envio...
+                success: function (callback) {
+                    jbkrAlert.sucesso('Perfil', 'Perfil atualizado com sucesso!');
+                }
+            });
+        }
+    });
 
 });
 
 function buscaPerfil(codigo){
+  var txbNome = $("#txbNome").val();
+  var txbSobrenome = $("#txbSobrenome").val();
+  var txbSenha = $("#txbSenha").val();
+  var txbEmail = $("#txbEmail").val();
+
         $.ajax({
             //Tipo de envio POST ou GET
             type: "POST",
@@ -58,12 +60,10 @@ function buscaPerfil(codigo){
 
                     var perfil = json[i];
 
-                    $("#txbNome").val(perfil.dsNome);
-                    $("#txbSobrenome").val(perfil.dsSobrenome);
-                    $("#txbEmail").val(perfil.dsEmail);
-                    $("#txbCpf").val(perfil.nrCpf);
-                    $("#txbTelefone").val(perfil.nrTelefone);
-
+                    $("#txbNome").val(perfil.nomUsu);
+                    $("#txbSobrenome").val(perfil.sobrenomeUsu);
+                    $("#txbSenha").val(perfil.senUsu);
+                    $("#txbEmail").val(perfil.desEml);
                 }
             }
         });

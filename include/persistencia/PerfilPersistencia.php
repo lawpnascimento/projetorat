@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once("../../estrutura/conexao.php");
 
 class PerfilPersistencia {
@@ -23,19 +23,22 @@ class PerfilPersistencia {
         return $this->conexao;
     }
 
-    public function buscaUsuario(){
-        $usuario = $this->getModel()->getUsuario();
-
-        $sSql = "SELECT usu.dsEmail
-                       ,usu.nrCpf
-                       ,usu.dsNome
-                       ,usu.dsSobrenome
-                       ,usu.nrTelefone
-                   FROM tbusuario usu
-                  WHERE usu.cdUsuario =" . $usuario;
-
-
+    public function buscaPerfil(){
         $this->getConexao()->conectaBanco();
+
+        $codigo = $this->getModel()->getCodigo();
+        $nome = $this->getModel()->getNome();
+        $sobrenome = $this->getModel()->getSobrenome();
+        $senha = $this->getModel()->getSenha();
+        $email = $this->getModel()->getEmail();
+
+              $sSql = "SELECT usu.codUsu
+                             ,usu.nomUsu
+                             ,usu.sobrenomeUsu
+                             ,usu.senUsu
+                             ,usu.desEml
+                         FROM tbusuario usu
+                        WHERE usu.codUsu = " . $codigo;
 
         $resultado = mysql_query($sSql);
 
@@ -49,11 +52,10 @@ class PerfilPersistencia {
 
             $contador = $contador + 1;
 
-            $retorno = $retorno . '{"dsEmail": "'.$linha["dsEmail"].'"
-                                   , "nrCpf" : "'.$linha["nrCpf"].'"
-                                   , "dsNome" : "'.$linha["dsNome"].'"
-                                   , "nrTelefone" : "'.$linha["nrTelefone"].'"
-                                   , "dsSobrenome" : "'.$linha["dsSobrenome"].'"}';
+            $retorno = $retorno . '{"nomUsu": "'.$linha["nomUsu"].'"
+                                   , "sobrenomeUsu" : "'.$linha["sobrenomeUsu"].'"
+                                   , "senUsu" : "'.$linha["senUsu"].'"
+                                   , "desEml" : "'.$linha["desEml"].'"}';
 
             //Para não concatenar a virgula no final do json
             if($qtdLinhas != $contador)
@@ -67,23 +69,21 @@ class PerfilPersistencia {
         $this->getConexao()->fechaConexao();
     }
 
-    public function Atualizar(){
+    public function AtualizarPerfil(){
         $this->getConexao()->conectaBanco();
 
-        $usuario = intval($this->getModel()->getUsuario());
+        $codigo = $this->getModel()->getCodigo();
         $nome = $this->getModel()->getNome();
         $sobrenome = $this->getModel()->getSobrenome();
+        $senha = $this->getModel()->getSenha();
         $email = $this->getModel()->getEmail();
-        $cpf = $this->getModel()->getCpf();
-        $telefone = $this->getModel()->getTelefone();
 
         $sSql = "UPDATE tbusuario usu
-                    SET usu.dsEmail = '" . $email ."'
-                       ,usu.nrCpf = '" . $cpf ."'
-                       ,usu.dsNome = '" . $nome ."'
-                       ,usu.dsSobrenome = '". $sobrenome ."'
-                       ,usu.nrTelefone = '". $telefone ."'
-                  WHERE usu.cdUsuario = " . $usuario;
+                    SET usu.nomUsu = '" . $nome ."'
+                       ,usu.sobrenomeUsu = '" . $sobrenome ."'
+                       ,usu.senUsu = '" . $senha ."'
+                       ,usu.desEml = '". $email ."'
+                  WHERE usu.codUsu = " . $codigo;
 
         $this->getConexao()->query($sSql);
 

@@ -4,6 +4,14 @@ var $tabDespesas = $('#tabDespesas');
 var $btnExportarAtividade = $('#btnExportarAtividade');
 var $msgExportarAtividade = $('#msgExportarAtividade');
 
+//$("#tdDataDaAtividade").mask('99/99/9999', {reverse: false});
+
+//$("#tdDataDaAtividade").inputmask("date");
+//$("#tdHoraInicial").inputmask("99:99");
+/*$("document").on("focus", "col-sm-1", function() { 
+    $(this).mask("99:99");
+  });*/
+
 //$('.table-add').click(function () {
 $('#addAtividade').click(function () {
   var $clone = $tableAtividade.find('tr.hide').clone(true).removeClass('hide table-line');

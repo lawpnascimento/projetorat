@@ -56,9 +56,10 @@ class DespesaPersistencia{
 		if($codigo == null){
 
 			$sSql = "SELECT codDsp
-										 ,concat(Tipodespesa_CodTipDsp,' - ',tipdsp.desTipDsp) Tipodespesa_CodTipDsp
-										 ,desDsp
-										 ,concat('R$ ', format(vlrUni, 2)) vlrUni 
+										 ,concat(Tipodespesa_CodTipDsp,' - ',tipdsp.desTipDsp) codTipDsp
+										 ,tipdsp.desTipDsp desTipDsp
+										 ,desDsp desDsp
+										 ,vlrUni vlrUni
 							 	 FROM tbdespesa dsp
 							 	 JOIN tbtipodespesa tipdsp
 							 	   ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
@@ -71,9 +72,10 @@ class DespesaPersistencia{
 			$sSql = $sSql . " ORDER BY desDsp";
 		}else{
 			$sSql = "SELECT codDsp
-										 ,concat(Tipodespesa_CodTipDsp,' - ',tipdsp.desTipDsp) Tipodespesa_CodTipDsp
-										 ,desDsp
-										 ,concat('R$ ', format(vlrUni, 2)) vlrUni 
+										 ,concat(Tipodespesa_CodTipDsp,' - ',tipdsp.desTipDsp) codTipDsp
+										 ,tipdsp.desTipDsp desTipDsp
+										 ,desDsp desDsp
+										 ,vlrUni vlrUni
 							 	 FROM tbdespesa dsp
 							 	 JOIN tbtipodespesa tipdsp
 							 	   ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
@@ -93,7 +95,8 @@ class DespesaPersistencia{
 			$contador = $contador + 1;
 
 			$retorno = $retorno . '{"codDsp": "'.$linha["codDsp"].'"
-														, "Tipodespesa_CodTipDsp" : "'.$linha["Tipodespesa_CodTipDsp"].'"
+														, "codTipDsp" : "'.$linha["codTipDsp"].'"
+														, "desTipDsp" : "'.$linha["desTipDsp"].'"
 														, "desDsp" : "'.$linha["desDsp"].'"
 														, "vlrUni" : "'.$linha["vlrUni"].'"}';
 
@@ -127,6 +130,39 @@ class DespesaPersistencia{
 	    $this->getConexao()->query($sSql);
 
 	    $this->getConexao()->fechaConexao();
+  }
+
+    public function buscaTipoDespesaDropDown(){
+    $this->getConexao()->conectaBanco();
+
+    $sSql = "SELECT tipdsp.codTipDsp codTipDsp
+                   ,tipdsp.desTipDsp desTipDsp
+               FROM tbtipodespesa tipdsp
+               ORDER BY tipdsp.codTipDsp";
+
+    $resultado = mysql_query($sSql);
+
+    $qtdLinhas = mysql_num_rows($resultado);
+
+    $contador = 0;
+
+    $retorno = '[';
+    while ($linha = mysql_fetch_assoc($resultado)) {
+
+        $contador = $contador + 1;
+
+        $retorno = $retorno . '{"codTipDsp": "'.$linha["codTipDsp"].'"
+                               , "desTipDsp" : "'.$linha["desTipDsp"].'"}';
+        //Para não concatenar a virgula no final do json
+        if($qtdLinhas != $contador)
+           $retorno = $retorno . ',';
+
+    }
+    $retorno = $retorno . "]";
+
+    $this->getConexao()->fechaConexao();
+
+    return $retorno;
   }
 
 }

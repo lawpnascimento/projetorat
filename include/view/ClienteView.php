@@ -81,6 +81,7 @@
                 </div>
               </div>
             </fieldset>
+            <br />
             <div id="actions" class="row">
               <div class="col-md-12">
                 <button id="btnCadastrar" type="button" class="btn btn-success"> Cadastrar</button>

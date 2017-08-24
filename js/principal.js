@@ -27,6 +27,7 @@ $(document).ready(function(){
         success: function(callback){
             $("#divPrincipal").html(callback);
             buscaClienteDropdown();
+            buscaProdutoDropdown();
             buscaProjetos();
 
         }
@@ -77,6 +78,7 @@ $(document).ready(function(){
         success: function(callback){
             $("#divPrincipal").html(callback);
             buscaDespesas();
+            buscaDespesaDropdown();
         }
     });
 
@@ -137,6 +139,7 @@ $(document).ready(function(){
         url: "PerfilView.php",
         success: function(callback){
             $("#divPrincipal").html(callback);
+            buscaPerfil();
         }
       });
   });

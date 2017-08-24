@@ -12,6 +12,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
   <script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="../../lib/jquery/jquery-ui.min.js"></script>
   <script type="text/javascript" src="../../lib/jquery/jquery.mask.js"></script>
+  <script type="text/javascript" src="../../lib/inputmask/jquery.inputmask.bundle.min.js"></script>
   <script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../../js/geral.js"></script>
   <script type="text/javascript" src="../../js/principal.js"></script>

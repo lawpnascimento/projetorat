@@ -21,17 +21,14 @@ require_once("../../estrutura/iniciar_sessao.php");
           <div class="panel-heading">
             <div class="panel-title">Lançar RAT</div>
           </div>
-
           <div id="content" align="left">
           <ul id="tabs" class="nav nav-pills nav-justified" data-tabs="tabs">
             <li class="active"><a href="#tabGeral" data-toggle="tab">Geral</a></li>
             <li><a href="#tabAtividades" data-toggle="tab">Atividades</a></li>
             <li><a href="#tabDespesas" data-toggle="tab" onclick="buscaDescricaoDespesa(false);">Despesas</a></li>
             <li><a href="#tabLancar" data-toggle="tab">Lançar</a></li>
-            <li><a href="#blue" data-toggle="tab">Blue</a></li>
           </ul>
           </div>
-
           <!-- TELA GERAL -->
           <div class="tab-content">
             <div class="tab-pane active" id="tabGeral">
@@ -64,15 +61,15 @@ require_once("../../estrutura/iniciar_sessao.php");
             <span id="addAtividade" class="table-add glyphicon glyphicon-plus"></span>
             <table id="tbAtividades" class="table table-condensed table-hover table-bordered">
               <tr class="notselect">
-                <th class="col-sm-1">Data da Atividade</th>
+                <th class="col-sm-1">Data Ati.</th>
                 <th class="col-sm-1">Hora Inicial</th>
                 <th class="col-sm-1">Hora Final</th>
-                <th class="col-sm-1">Descrição das Atividades</th>
-                <th class="col-sm-1">Faturar Atividade</th>
+                <th>Descrição das Atividades</th>
+                <th class="col-sm-1">Faturar Ati.</th>
                 <th class="col-sm-1"></th>
               </tr>
               <tr>
-                <td id="tdDataDaAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 9)" class="col-sm-1"></td>
+                <td id="tdDataDaAtividade" contenteditable="true" class="col-sm-1"></td>
                 <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
                 <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
                 <td id="tdDescricaoAtividades" contenteditable="true" onkeypress="return (this.innerText.length <= 1000)"></td>
@@ -85,9 +82,9 @@ require_once("../../estrutura/iniciar_sessao.php");
               </tr>
               <!-- Linha que será adicionada -->
               <tr class="hide">
-                <td contenteditable="true" onkeypress="return (this.innerText.length <= 9)"></td>
-                <td contenteditable="true"></td>
-                <td contenteditable="true"></td>
+                <td class="col-sm-1" contenteditable="true"></td>
+                <td class="col-sm-1" contenteditable="true"></td>
+                <td class="col-sm-1" contenteditable="true"></td>
                 <td contenteditable="true"></td>
                 <td class="checkbox col-sm-1"><label><input type="checkbox" value="1">Faturar</label></td>
                 <td class="col-sm-1">
@@ -99,7 +96,7 @@ require_once("../../estrutura/iniciar_sessao.php");
             </table>
                 <button id="btnExportarAtividade" class="btn btn-primary">Export Data</button>
                 <p id="msgExportarAtividade"></p>
-          </div>
+            </div>
           </div>
           <!-- TELA DESPESA -->
           <div class="tab-pane" id="tabDespesas">
@@ -107,9 +104,9 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <span id="addDespesa" class="table-add glyphicon glyphicon-plus" onclick="buscaDescricaoDespesa(true);"></span>
                 <table class="table table-condensed table-hover table-bordered" id="tbDespesa">
                   <tr class="notselect">
-                    <th class="col-sm-1">Data despesa</th>
-                    <th class="col-sm-1">Descrição despesa</th>
-                    <th class="col-sm-2">Tipo da despesa</th>
+                    <th class="col-sm-1">Data Desp.</th>
+                    <th class="col-sm-2">Descrição Desp.</th>
+                    <th class="col-sm-2">Tipo Desp.</th>
                     <th class="col-sm-1">Valor Unitário</th>
                     <th class="col-sm-1">Quantidade</th>
                     <th class="col-sm-1">Total</th>
@@ -119,16 +116,16 @@ require_once("../../estrutura/iniciar_sessao.php");
                   </tr>
                   <tr>
                     <td contenteditable="true" class="col-sm-1" onkeypress="return (this.innerText.length <= 9)"></td>
-                    <td contenteditable="true" class="col-sm-1">
+                    <td contenteditable="false" class="col-sm-1">
                         <select style="width:100%;" name="dsDespesa"></select>
                     </td>
-                    <td contenteditable="true" class="col-sm-1" readonly>
+                    <td contenteditable="false" class="col-sm-1" readonly>
                       <select style="width:100%;" name="idDespesa"></select>
                     </td>
-                    <td contenteditable="true" class="col-sm-1" readonly name="tdVlUni"></td>
+                    <td contenteditable="false" class="col-sm-1" readonly name="tdVlUni"></td>
                     <td contenteditable="true" class="col-sm-1" name="tdQtdDespesa"></td>
-                    <td contenteditable="true" class="col-sm-1" name="totDespesa"></td>
-                    <td contenteditable="true" class="col-sm-1">
+                    <td contenteditable="false" class="col-sm-1" name="totDespesa"></td>
+                    <td contenteditable="false" class="col-sm-1">
                       <select style="width:100%;" id="cdFaturamento">
                         <option value="1"> FR </option>
                         <option value="2"> FN </option>
@@ -174,21 +171,15 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <button id="btnExportarDespesa" class="btn btn-primary">Export Data</button>
                 <p id="msgExportarDespesa"></p>
               </div>
-              <input type="hidden" id="hidVlUni" >
+              <input type="hidden" id="hidVlUni"></input>
           </div>
 
             <!-- TELA LANCAR -->
             <div class="tab-pane" id="tabLancar">
               <button id="btnLancarRAT" type="button" class="btn btn-success">Lançar RAT</button>
             </div>
-            <!-- TELA -->
-            <div class="tab-pane" id="blue">
-              <h1>Blue</h1>
-              <p>blue blue blue blue blue</p>
-            </div>
           </div>
         </div>
-    </div>
-
+    
 </body>
 </html>

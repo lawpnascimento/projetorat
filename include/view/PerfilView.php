@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="txbSenha" class="col-md-1 control-label">Senha</label>
                     <div class="col-md-4">
-                        <input id="txbSenha" type="text" class="form-control" name="txbSenha" placeholder="Senha" maxlength="50">
+                        <input id="txbSenha" type="password" class="form-control" name="txbSenha" placeholder="Senha" maxlength="50">
                     </div>
                 </div>
                 <div class="form-group">

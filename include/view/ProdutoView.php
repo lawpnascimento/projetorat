@@ -24,7 +24,7 @@
                 </div>
               </div>
           </fieldset>
-
+          <br />
             <!-- BOTÕES -->
             <div id="actions" class="row">
               <div class="col-md-12">

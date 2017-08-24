@@ -1,4 +1,6 @@
 $("#document").ready(function() {
+  $("#txbPerCom").mask('99%', {reverse: false});
+
   $("#formUsuario #btnCadastrar").click(function () {
     var txbNomUsu = $("#txbNomUsu").val();
     var txbSobrenomeUsu = $("#txbSobrenomeUsu").val();
@@ -197,6 +199,7 @@ function buscaUsuario(codigo){
 
               $("#hidCodUsu").val(usuario.codUsu);
               $("#txbNomUsu").val(usuario.nomUsu);
+              $("#txbSenUsu").val(usuario.senUsu);
               $("#txbSobrenomeUsu").val(usuario.sobrenomeUsu);
               $("#txbDesEml").val(usuario.desEml);
               $("#cbbPapel:first-child").text(usuario.desPap);

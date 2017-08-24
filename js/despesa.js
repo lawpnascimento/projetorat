@@ -1,13 +1,13 @@
 $("#document").ready(function(){
-	$("#txbValorUnitario").mask('###0,00', {reverse: true});
+	$("#txbValorUnitario").mask('###0.00', {reverse: true});
 
   $("#formDespesa #btnCadastrar").click(function () {
       
+    var cbbTipoDespesa = $("#cbbTipoDespesa").val();  
     var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
     var txbValorUnitario = $("#txbValorUnitario").val();
-    var txbTipoDespesa = $("#txbTipoDespesa").val();
 
-    var msgErro = validaCampos(txbDescricaoDespesa, txbValorUnitario, txbTipoDespesa);
+    var msgErro = validaCampos(cbbTipoDespesa, txbDescricaoDespesa, txbValorUnitario);
 
     if(msgErro !== ""){
       jbkrAlert.alerta('Alerta!',msgErro);
@@ -18,7 +18,7 @@ $("#document").ready(function(){
           type: "POST",
           dataType: "text",
           data: {
-            tipoDespesa: txbTipoDespesa,
+            tipoDespesa: cbbTipoDespesa,
             descricao: txbDescricaoDespesa,
             valorUnitario: txbValorUnitario,
 
@@ -47,11 +47,11 @@ $("#document").ready(function(){
   $("#formDespesa #btnAtualizar").click(function () {
 
     var codigo = $("#hidCodDsp").val();
+    var cbbTipoDespesa = $("#cbbTipoDespesa").val();
     var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
     var txbValorUnitario = $("#txbValorUnitario").val();
-    var txbTipoDespesa = $("#txbTipoDespesa").val();
 
-    var msgErro = validaCampos(txbDescricaoDespesa, txbValorUnitario, txbTipoDespesa);
+    var msgErro = validaCampos(cbbTipoDespesa, txbDescricaoDespesa, txbValorUnitario);
 
     if(msgErro !== ""){
         jbkrAlert.alerta('Alerta!',msgErro);
@@ -63,7 +63,7 @@ $("#document").ready(function(){
         dataType: "text",
         data: {
             codigo: codigo,
-            tipoDespesa: txbTipoDespesa,
+            tipoDespesa: cbbTipoDespesa,
             descricao: txbDescricaoDespesa,
             valorUnitario: txbValorUnitario,
             action: "atualizar"
@@ -86,7 +86,7 @@ $("#document").ready(function(){
 function buscaDespesas(codigo){
     var txbDescricaoDespesa = $("#txbDescricaoDespesa").val();
     var txbValorUnitario = $("#txbValorUnitario").val();
-    var txbTipoDespesa = $("#txbTipoDespesa").val();
+    var cbbTipoDespesa = $("#cbbTipoDespesa").val();
 
   $.ajax({
       //Tipo de envio POST ou GET
@@ -94,7 +94,7 @@ function buscaDespesas(codigo){
       dataType: "text",
       data: {
           codigo: codigo,
-          tipoDespesa: txbTipoDespesa,
+          tipoDespesa: cbbTipoDespesa,
           descricao: txbDescricaoDespesa,
           valorUnitario: txbValorUnitario,
 
@@ -116,7 +116,7 @@ function buscaDespesas(codigo){
 
             grid = grid + "<tr>";
             grid = grid + "<td>" + despesa.codDsp + "</td>";      
-            grid = grid + "<td>" + despesa.Tipodespesa_CodTipDsp + "</td>";
+            grid = grid + "<td>" + despesa.codTipDsp + "</td>";
             grid = grid + "<td>" + despesa.desDsp + "</td>";
             grid = grid + "<td>" + despesa.vlrUni + "</td>";
             grid = grid + "<td href='javascript:void(0);' onClick='buscaDespesas(" + despesa.codDsp + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
@@ -130,7 +130,7 @@ function buscaDespesas(codigo){
           for (var j = 0; j < json.length; j++) {
               despesa = json[j];
               $("#hidCodDsp").val(despesa.codDsp);
-              $("#txbTipoDespesa").val(despesa.Tipodespesa_CodTipDsp);
+              $("#cbbTipoDespesa:first-child").text(despesa.desTipDsp);
               $("#txbDescricaoDespesa").val(despesa.desDsp);
               $("#txbValorUnitario").val(despesa.vlrUni);
           }
@@ -142,9 +142,50 @@ function buscaDespesas(codigo){
 
 }
 
-function validaCampos(txbTipoDespesa, txbDescricaoDespesa, txbValorUnitario){
+function buscaDespesaDropdown(){
+  $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            action: "tipodespesadropdown"
+        },
+
+        url: "../controller/DespesaController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+            var json = $.parseJSON(dados);
+
+            var dropdown = "";
+            for (var i = 0; i < json.length; i++) {
+
+                var tipodespesa = json[i];
+
+                dropdown = dropdown + '<li role="presentation" value="' + tipodespesa.codTipDsp  + '"><a role="menuitem" tabindex="-1" href="#">' + tipodespesa.desTipDsp + '</a></li>';
+
+            }
+            $("#ulTipoDespesa").html(dropdown);
+
+            $("#ulTipoDespesa li a").click(function(){
+                $("#cbbTipoDespesa:first-child").text($(this).text());
+
+                $("#ulTipoDespesa li").each(function(){
+
+                    if ($(this).text() == $("#cbbTipoDespesa").text().trim()){
+                        $("#cbbTipoDespesa").val($(this).val());
+                    }
+                });
+
+            });
+        }
+
+    });
+}
+
+function validaCampos(cbbTipoDespesa, txbDescricaoDespesa, txbValorUnitario){
     msgErro = "";
-    if(txbTipoDespesa === ""){
+    if(cbbTipoDespesa === ""){
         msgErro = msgErro + "<b>Tipo da despesa</b> é um campo de preenchimento obrigatorio<br/>";
     }
     if(txbDescricaoDespesa === ""){

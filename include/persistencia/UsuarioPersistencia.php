@@ -106,7 +106,7 @@ class UsuarioPersistencia{
                      ,usu.desEml desEml
                      ,pap.codPap codPap
                      ,pap.desPap desPap
-                     ,usu.perCom perCom
+                     ,concat(usu.perCom, '%') perCom
                      , if(usu.codsit = 1 ,'Ativo','Inativo') desSit
                  FROM tbusuario usu
                  JOIN tbpapel pap
@@ -144,7 +144,7 @@ class UsuarioPersistencia{
                      ,usu.desEml desEml
                      ,pap.codPap codPap
                      ,pap.desPap desPap
-                     ,usu.perCom perCom
+                     ,concat(usu.perCom, '%') perCom
                      , if(usu.codsit = 1 ,'Ativo','Inativo') desSit
                  FROM tbusuario usu
                  JOIN tbpapel pap

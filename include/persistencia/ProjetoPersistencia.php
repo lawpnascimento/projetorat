@@ -64,8 +64,10 @@ class ProjetoPersistencia{
 
       $sSql = "SELECT codPrj
                      ,nomPrj
-                     ,CONCAT(prj.Produto_codPro,' - ',pro.desPro) Produto_codPro
-                     ,CONCAT(prj.Cliente_codCli,' - ',cli.nomCli) Cliente_codCli
+                     ,CONCAT(prj.Produto_codPro,' - ',pro.desPro) codPro
+                     ,pro.desPro desPro
+                     ,CONCAT(prj.Cliente_codCli,' - ',cli.nomCli) codCli
+                     ,cli.nomCli nomCli
                      ,datIni
                      ,vlrHor
                      ,obsPrj
@@ -104,8 +106,10 @@ class ProjetoPersistencia{
     }else{
       $sSql = "SELECT codPrj
                      ,nomPrj
-                     ,CONCAT(prj.Produto_codPro,' - ',pro.desPro) Produto_codPro
-                     ,CONCAT(prj.Cliente_codCli,' - ',cli.nomCli) Cliente_codCli
+                     ,CONCAT(prj.Produto_codPro,' - ',pro.desPro) codPro
+                     ,pro.desPro desPro
+                     ,CONCAT(prj.Cliente_codCli,' - ',cli.nomCli) codCli
+                     ,cli.nomCli nomCli
                      ,datIni
                      ,vlrHor
                      ,obsPrj
@@ -131,10 +135,13 @@ class ProjetoPersistencia{
 
       $retorno = $retorno . '{"codPrj": "'.$linha["codPrj"].'"
                                                   , "nomPrj" : "'.$linha["nomPrj"].'"
-                                                  , "Produto_codPro" : "'.$linha["Produto_codPro"].'"
-                                                  , "Cliente_codCli" : "'.$linha["Cliente_codCli"].'"
+                                                  , "codCli" : "'.$linha["codCli"].'"
+                                                  , "nomCli" : "'.$linha["nomCli"].'"
+                                                  , "codPro" : "'.$linha["codPro"].'"
+                                                  , "desPro" : "'.$linha["desPro"].'"
                                                   , "datIni" : "'.$linha["datIni"].'"
                                                   , "vlrHor" : "'.$linha["vlrHor"].'"
+                                                  , "obsPrj" : "'.$linha["obsPrj"].'"
                                                 }';
 
       //Para não concatenar a virgula no final do json

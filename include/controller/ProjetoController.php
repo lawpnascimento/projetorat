@@ -65,17 +65,15 @@ switch($_POST["action"]){
 	break;
 
 	case 'clientedropdown':
-        $persistencia = new ProjetoPersistencia();
-        $retorno = $persistencia->buscaClienteDropDown();
+    	$persistencia = new ProjetoPersistencia();
+    	$retorno = $persistencia->buscaClienteDropDown();
 
         echo $retorno;
 
         break;
 
 	case 'produtodropdown':
-	
         $persistencia = new ProjetoPersistencia();
-
         $retorno = $persistencia->buscaProdutoDropDown();
 
         echo $retorno;

@@ -46,12 +46,13 @@
                     <input id="txbSitRAT" type="text" class="form-control" name="txbSitRAT"></input>
                 </div>
               </div>
-
+                <p id="msgTeste"></p>
               <!-- BOTÕES -->
               <div id="actions" class="row">
                 <div class="col-md-12">
                   <button id="btnBuscar" type="button" class="btn btn-info">Buscar</button>
                   <button id="btnCancelar" type="button" class="btn btn-warning">Cancelar</button>
+                  <button id="btnTeste" type="button" class="btn btn-info">Teste</button>
                 </div>
               </div>
             </form>
@@ -60,7 +61,7 @@
 
     <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
           <!-- Tabela da consulta -->
-          <table class="table table-hover table-condensed table-striped table-bordered">
+          <table id="tableConsultaRAT" class="table table-hover table-condensed table-striped table-bordered">
             <thead>
               <tr>
                 <th>

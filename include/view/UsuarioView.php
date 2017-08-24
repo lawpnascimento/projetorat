@@ -69,11 +69,9 @@
             <div class="form-group">
               <div class="col-md-2">
                 <label for="txbPerCom">Percentual de comissão</label>
-                <input id="txbPerCom" class="form-control" name="txbPerCom"></input>
+                <input id="txbPerCom" class="form-control" name="txbPerCom" maxlength="3" placeholder="Ex: 10%"></input>
             </div>
               </div>
-
-            <br />
             <br />
             <!-- BOTÕES -->
             <div id="actions" class="row">

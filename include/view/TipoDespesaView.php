@@ -20,7 +20,8 @@
                 <label for="nomeTipoDespesa">Descrição do Tipo da Despesa*</label>
                 <input id="txbDescricaoTipoDespesa" type="text" class="form-control" name="txbDescricaoTipoDespesa" maxlength="100"></input>
               </div>
-            </div>           
+            </div>
+            <br />         
             <!-- BOTÕES -->
             <div id="actions" class="row">
               <div class="col-md-12">
