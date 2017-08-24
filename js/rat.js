@@ -9,7 +9,7 @@ var descricaocarregada = false;
 
 //$("#tdDataDaAtividade").inputmask("date");
 //$("#tdHoraInicial").inputmask("99:99");
-/*$("document").on("focus", "col-sm-1", function() { 
+/*$("document").on("focus", "col-sm-1", function() {
     $(this).mask("99:99");
   });*/
 
@@ -180,7 +180,7 @@ $("#document").ready(function(){
 
       if(msgErroAtividade !== ""){
         jbkrAlert.alerta('Alerta!',msgErroAtividade);
-        break;
+        return;
       }
     }
 
@@ -241,7 +241,7 @@ $("#document").ready(function(){
 
       if(msgErroDespesa !== ""){
         jbkrAlert.alerta('Alerta!',msgErroDespesa);
-        break;
+        return;
       }
     }
 
