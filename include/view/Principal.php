@@ -36,7 +36,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
           <div class="navbar-header">
             <a class="navbar-brand" href="Principal.php"><i class="glyphicon glyphicon-home"></i> Projeto RAT</a>
           </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastros<span class="caret"></span></a>
@@ -134,7 +134,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo ucfirst($_SESSION["nomUsu"]) ?><span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <?php echo ucfirst($_SESSION["nomUsu"]) ?><span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                       <li>
                           <a id="perfil" href="#">Perfil</a>
@@ -143,14 +143,20 @@ $_SESSION['userid'] = "1" // You may want to set it on login
                       <li>
                           <a id="btnAjuda" href="#">Ajuda</a>
                       </li>
-                      <li class="divider"/>
+                     </ul>
+                </li>
+                <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-off"></i></a>
+                  <ul class="dropdown-menu" role="menu">
                       <li>
                           <a href="Sair.php">Sair</a>
                       </li>
                      </ul>
                 </li>
-              </ul>
-
+            </ul>
+            </ul>
+            
           </div>
         </div>
       </nav>

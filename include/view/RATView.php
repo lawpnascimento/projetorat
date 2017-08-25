@@ -53,6 +53,10 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <label for="produto">Produto*</label>
                   <input id="txbProduto" type="text" class="form-control" name="txbProduto" placeholder="Nome do Produto"></input>
                 </div>
+                <div class="col-md-2">
+                  <label for="datarat">Data RAT*</label>
+                  <input id="txbDataRAT" type="date" class="form-control" name="txbDataRAT"></input>
+                </div>
               </div>
             </div>
           <!-- TELA ATIVIDADES -->
@@ -68,7 +72,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <th class="col-sm-1">Faturar Ati.</th>
                 <th class="col-sm-1"></th>
               </tr>
-              <tr>
+              <tr class="fix">
                 <td id="tdDataDaAtividade" contenteditable="true" class="col-sm-1"></td>
                 <td id="tdHoraInicial" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
                 <td id="tdHoraFinal" contenteditable="true" onkeypress="return (this.innerText.length <= 4)" class="col-sm-1"></td>
@@ -77,7 +81,6 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <td class="col-sm-1">
                   <span class="table-up glyphicon glyphicon-arrow-up"></span>
                   <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                  <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
               </tr>
               <!-- Linha que será adicionada -->
@@ -114,7 +117,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                     <th class="col-sm-1">Observações</th>
                     <th class="col-sm-1"></th>
                   </tr>
-                  <tr>
+                  <tr class="fix">
                     <td contenteditable="true" class="col-sm-1" onkeypress="return (this.innerText.length <= 9)"></td>
                     <td contenteditable="false" class="col-sm-1">
                         <select style="width:100%;" name="dsDespesa"></select>
@@ -137,7 +140,6 @@ require_once("../../estrutura/iniciar_sessao.php");
                     <td class="col-sm-1">
                       <span class="table-up glyphicon glyphicon-arrow-up"></span>
                       <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                      <span class="table-remove glyphicon glyphicon-remove"></span>
                     </td>
                   </tr>
                   <!-- Linha que será adicionada -->

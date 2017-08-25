@@ -37,7 +37,11 @@ class PerfilPersistencia {
                              ,usu.sobrenomeUsu
                              ,usu.senUsu
                              ,usu.desEml
+                             ,pap.codPap
+                             ,pap.desPap
                          FROM tbusuario usu
+                          JOIN tbpapel pap
+                          ON usu.Papel_codpap = pap.codPap
                         WHERE usu.codUsu = " . $codigo;
 
         $resultado = mysql_query($sSql);
@@ -55,7 +59,8 @@ class PerfilPersistencia {
             $retorno = $retorno . '{"nomUsu": "'.$linha["nomUsu"].'"
                                    , "sobrenomeUsu" : "'.$linha["sobrenomeUsu"].'"
                                    , "senUsu" : "'.$linha["senUsu"].'"
-                                   , "desEml" : "'.$linha["desEml"].'"}';
+                                   , "desEml" : "'.$linha["desEml"].'"
+                                   , "desPap" : "'.$linha["desPap"].'"}';
 
             //Para não concatenar a virgula no final do json
             if($qtdLinhas != $contador)

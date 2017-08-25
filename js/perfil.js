@@ -1,6 +1,5 @@
 $("#document").ready(function() {
     $("#formPerfil #btnAtualizar").click(function () {
-        alert("teste");
         var txbNome = $("#txbNome").val();
         var txbSobrenome = $("#txbSobrenome").val();
         var txbSenha = $("#txbSenha").val();
@@ -34,6 +33,11 @@ $("#document").ready(function() {
         }
     });
 
+   $("#formPerfil #btnCancelar").click(function(){
+     limpaCampos($(this).closest("form"));
+     buscaPerfil();
+   });
+
 });
 
 function buscaPerfil(codigo){
@@ -41,6 +45,7 @@ function buscaPerfil(codigo){
   var txbSobrenome = $("#txbSobrenome").val();
   var txbSenha = $("#txbSenha").val();
   var txbEmail = $("#txbEmail").val();
+  var txbPapel = $("#txbPapel").val();
 
         $.ajax({
             //Tipo de envio POST ou GET
@@ -64,6 +69,7 @@ function buscaPerfil(codigo){
                     $("#txbSobrenome").val(perfil.sobrenomeUsu);
                     $("#txbSenha").val(perfil.senUsu);
                     $("#txbEmail").val(perfil.desEml);
+                    $("#txbPapel").val(perfil.desPap);
                 }
             }
         });
@@ -84,6 +90,6 @@ function validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail){
     if(txbEmail == ""){
         msgErro = msgErro + "<b>Email</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    return mensagem;
+    return msgErro;
 
 };

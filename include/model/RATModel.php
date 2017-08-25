@@ -12,11 +12,12 @@ class RATModel {
 	private $situacao;
 	private $termo;
 	private $produto;
+	private $dtRAT;
 	private $dtAtividade;
 	private $hrInicial;
 	private $hrFinal;
-  private $dsAtividade;
-  private $idFaturar;
+    private $dsAtividade;
+    private $idFaturar;
 	private $dtDespesa;
 	private $idDespesa;
 	private $vlDespesa;
@@ -86,6 +87,14 @@ class RATModel {
 
 	public function setProduto($produto){
 		$this->produto = $produto;
+	}
+
+	public function getDtRAT(){
+		return $this->dtRAT;
+	}
+
+	public function setDtRAT($dtRAT){
+		$this->dtRAT = $dtRAT;
 	}
 
 	public function getSituacao(){

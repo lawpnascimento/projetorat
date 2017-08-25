@@ -88,6 +88,7 @@ switch($_POST["action"]){
 		echo $retorno;
 
 		break;
+
 	case 'autocompleteproduto':
 
 		$model = new RATModel();
@@ -103,6 +104,7 @@ switch($_POST["action"]){
 		echo $retorno;
 
 		break;
+
 	case 'inserirrat':
 
 		$model = new RATModel();
@@ -111,6 +113,7 @@ switch($_POST["action"]){
 		$model->setResponsavel($_POST["responsavel"]);
 		$model->setProjeto($_POST["projeto"]);
 		$model->setProduto($_POST["produto"]);
+		$model->setDtRAT($_POST["datarat"]);
 
 		$persistencia = new RATPersistencia();
 
@@ -121,6 +124,7 @@ switch($_POST["action"]){
 		echo $retorno;
 
 		break;
+
 	case 'inseriratividade':
 		$model = new RATModel();
 
@@ -141,6 +145,7 @@ switch($_POST["action"]){
 		$retorno = $persistencia->inserirAtividade();
 
 		break;
+
 	case 'inserirdespesa':
 		$model = new RATModel();
 
@@ -164,6 +169,7 @@ switch($_POST["action"]){
 		$retorno = $persistencia->inserirDespesa();
 
 		break;
+
   case 'buscatipodespesadropdown':
 		$model = new RATModel();
 
@@ -178,6 +184,7 @@ switch($_POST["action"]){
 		echo $retorno;
 
 		break;
+		
 	case 'buscadescricaodespesa':
 		$persistencia = new RATPersistencia();
 

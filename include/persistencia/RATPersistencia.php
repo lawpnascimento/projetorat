@@ -2,6 +2,7 @@
 
 session_start();
 require_once("../../estrutura/conexao.php");
+require_once("../../estrutura/email.php");
 
 class RATPersistencia{
 	protected $model;
@@ -208,6 +209,7 @@ class RATPersistencia{
 		$despesa = $this->getModel()->getDespesa();
 		$projeto = $this->getModel()->getProjeto();
 		$situacao = $this->getModel()->getSituacao();
+		$dataRAT = $this->getModel()->getDtRAT();
 
 		if($codigo == null){
 
@@ -218,6 +220,7 @@ class RATPersistencia{
 										 ,atividade_codAti
 										 ,despesa_codDsp
 										 ,projeto_codPrj
+										 ,datRat
 										 ,situacao_codSit
 							 	 FROM tbrat
 								WHERE 1 = 1";
@@ -246,6 +249,10 @@ class RATPersistencia{
 					$sSql = $sSql . " AND projeto_codPrj = '" . $projeto ."'";
 			}
 
+			if($dataRAT != null){
+					$sSql = $sSql . " AND datRat = '" . $dataRAT ."')";
+			}
+
 			if($situacao != null){
 					$sSql = $sSql . " AND situacao_codSit = '" . $situacao ."')";
 			}
@@ -259,6 +266,7 @@ class RATPersistencia{
 										 ,atividade_codAti
 										 ,despesa_codDsp
 										 ,projeto_codPrj
+										 ,datRat
 										 ,situacao_codSit
 							 	 FROM tbrat
 							  WHERE codRat = " . $codigo . "
@@ -283,8 +291,8 @@ class RATPersistencia{
 														, "atividade_codAti" : "'.$linha["atividade_codAti"].'"
 														, "despesa_codDsp" : "'.$linha["despesa_codDsp"].'"
 														, "projeto_codPrj" : "'.$linha["projeto_codPrj"].'"
-														, "situacao_codSit" : "'.$linha["situacao_codSit"].'"
-														, "desBai" : "'.$linha["desBai"].'"}';
+														, "datRat" : "'.$linha["datRat"].'"
+													    , "situacao_codSit" : "'.$linha["situacao_codSit"].'"}';
 
 			//Para não concatenar a virgula no final do json
 			if($qtdLinhas != $contador)
@@ -308,13 +316,15 @@ class RATPersistencia{
 		$responsavel = $this->getModel()->getResponsavel();
 		$projeto = $this->getModel()->getProjeto();
 		$produto = $this->getModel()->getProduto();
-
-		$sSql =  "INSERT INTO tbrat (Usuario_codUsu, Cliente_codCli, Responsavel_codRes, Projeto_codPrj, Produto_codPro, Situacao_codSit)
+		$dataRAT = $this->getModel()->getDtRAT();
+		echo $dataRAT;
+		$sSql =  "INSERT INTO tbrat (Usuario_codUsu, Cliente_codCli, Responsavel_codRes, Projeto_codPrj, Produto_codPro, datRat, Situacao_codSit)
 										VALUES (". $usuario ."
 													 ,". $cliente ."
 													 ,". $responsavel ."
 													 ,". $projeto ."
 													 ,". $produto ."
+													 ,'". $dataRAT ."'
 													 ,". 1 .")";
 
 		$this->getConexao()->query($sSql);
@@ -492,6 +502,35 @@ class RATPersistencia{
 
 	}
 
+	public function enviaEmailRAT($codUsu, $codRAT, $cliente){
+
+      $sSql = "SELECT desEml
+                 FROM tbusuario usu
+               WHERE usu.codUsu = " . $codUsu;
+
+      $resultado = mysql_query($sSql);
+
+      $assunto = "RAT" . $codRAT . "ref." . $cliente . " .";
+
+      $mensagem	= "Segue RAT para avaliação.
+                   Este e-mail é automatico, favor não responder.";
+
+      $emailUsuario = "";
+      $contador = 0;
+      while ($linha = mysql_fetch_assoc($resultado)) {
+
+        $contador = $contador + 1;
+
+        //Se for a primeira vez
+        if ($contador = 1)
+          $emailUsuario = $linha["desEml"];
+        else
+          $emailUsuario = $emailUsuario . ";" . $linha["desEml"];
+      }
+      $email = new Email();
+      $email->enviaEmail($emailUsuario,$mensagem,$assunto,"Sistema");
+
+  	}
 
 
 }

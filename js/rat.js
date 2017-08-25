@@ -14,14 +14,9 @@ var descricaocarregada = false;
   });*/
 
 //$('.table-add').click(function () {
-$('#addAtividade').click(function () {
-  var $clone = $tableAtividade.find('tr.hide').clone(true).removeClass('hide table-line');
-
-  $tableAtividade.find('table').append($clone);
-});
 
 $('.table-remove').click(function () {
-  $(this).parents('tr').detach();
+  $(this).parents('tr').not('.fix').detach();
 });
 
 $('.table-up').click(function () {
@@ -33,6 +28,12 @@ $('.table-up').click(function () {
 $('.table-down').click(function () {
   var $row = $(this).parents('tr');
   $row.next().after($row.get(0));
+});
+
+$('#addAtividade').click(function () {
+  var $clone = $tableAtividade.find('tr.hide').clone(true).removeClass('hide table-line');
+
+  $tableAtividade.find('table').append($clone);
 });
 
 // A few jQuery helpers for exporting only
@@ -76,21 +77,6 @@ $('#addDespesa').click(function () {
   $tableDespesa.find('table').append($clone);
 });
 
-$('.table-remove').click(function () {
-  $(this).parents('tr').detach();
-});
-
-$('.table-up').click(function () {
-  var $row = $(this).parents('tr');
-  if ($row.index() === 1) return; // Don't go above the header
-  $row.prev().before($row.get(0));
-});
-
-$('.table-down').click(function () {
-  var $row = $(this).parents('tr');
-  $row.next().after($row.get(0));
-});
-
 // A few jQuery helpers for exporting only
 jQuery.fn.pop = [].pop;
 jQuery.fn.shift = [].shift;
@@ -129,8 +115,9 @@ $("#document").ready(function(){
     var txbResponsavel = $("#txbResponsavel").val();
     var txbProjeto = $("#txbProjeto").val();
     var txbProduto = $("#txbProduto").val();
+    var txbDataRAT = $("#txbDataRAT").val();
 
-    msgErroGeral = validaCamposGeral(txbCliente, txbResponsavel, txbProjeto, txbProduto );
+    msgErroGeral = validaCamposGeral(txbCliente, txbResponsavel, txbProjeto, txbProduto, txbDataRAT);
 
     if(msgErroGeral !== ""){
       jbkrAlert.alerta('Alerta!',msgErroGeral);
@@ -246,7 +233,7 @@ $("#document").ready(function(){
     }
 
     //Metodo para inserir no banco todas as informações coletadas
-    lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto, dataAtividade, dataDespesa);
+    lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto, dataAtividade, dataDespesa, txbDataRAT);
 
   });
 
@@ -533,7 +520,7 @@ function validaCamposAtividade(dtAtividade, hrInicial, hrFinal, dsAtividade){
 
 }
 
-function validaCamposGeral(txbCliente, txbResponsavel, txbProjeto, txbProduto){
+function validaCamposGeral(txbCliente, txbResponsavel, txbProjeto, txbProduto, txbDataRAT){
   var msgErro = "";
   if(txbCliente === ""){
     msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio<br/>";
@@ -550,11 +537,15 @@ function validaCamposGeral(txbCliente, txbResponsavel, txbProjeto, txbProduto){
   if(txbProduto === ""){
     msgErro = msgErro + "<b>Produto</b> é um campo de preenchimento obrigatorio<br/>";
   }
+
+  if(txbDataRAT === ""){
+    msgErro = msgErro + "<b>Data do Lançamento</b> é um campo de preenchimento obrigatorio<br/>";
+  }
   return msgErro;
 
 }
 
-function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtividade, dataDespesa) {
+function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtividade, dataDespesa, txbDataRAT) {
   var cliente, responsavel, projeto, atividade;
 
   cliente = txbCliente.split("-");
@@ -571,6 +562,7 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
               responsavel: responsavel[0],
               projeto: projeto[0],
               produto: produto[0],
+              datarat: txbDataRAT,
               action: "inserirrat"
       },
 
