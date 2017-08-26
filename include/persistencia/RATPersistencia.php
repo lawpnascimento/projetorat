@@ -2,7 +2,7 @@
 
 session_start();
 require_once("../../estrutura/conexao.php");
-require_once("../../estrutura/email.php");
+require_once("../../estrutura/conf_email.php");
 
 class RATPersistencia{
 	protected $model;

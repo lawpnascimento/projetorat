@@ -24,7 +24,7 @@ switch($_POST["action"]){
         $model = new PerfilModel();
 
         $model->setCodigo($_SESSION["codUsu"]);
-        $model->setNome($_POST["email"]);
+        $model->setNome($_POST["nome"]);
         $model->setSobrenome($_POST["sobrenome"]);
         $model->setSenha($_POST["senha"]);
         $model->setEmail($_POST["email"]);

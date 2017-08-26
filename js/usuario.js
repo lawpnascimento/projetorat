@@ -232,6 +232,9 @@ function validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPapel
     if(txbDesEml === ""){
         msgErro = msgErro + "<b>E-mail</b> é um campo de preenchimento obrigatorio<br/>";
     }
+    else if(!validaEmail(txbDesEml)){
+        msgErro = msgErro + "<b>E-mail</b> deve ser válido<br/>";
+    }
     if(cbbPapel === ""){
         msgErro = msgErro + "<b>Papel</b> é um campo de preenchimento obrigatorio<br/>";
     }

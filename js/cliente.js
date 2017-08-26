@@ -1,6 +1,9 @@
 $("#document").ready(function() {
-  $("#formCliente #btnCadastrar").click(function () {
+  $('#txbCnpj').mask('00.000.000/0000-00', {reverse: true});
+  $('#txbCep').mask('00000-000');
+  $('#txbTelefone').mask('(00) 0000-0000');
 
+  $("#formCliente #btnCadastrar").click(function () {
     var txbRazaoSocial = $("#txbRazaoSocial").val();
     var txbNomeFantasia = $("#txbNomeFantasia").val();
     var txbCnpj = $("#txbCnpj").val();
@@ -11,7 +14,7 @@ $("#document").ready(function() {
     var txbBairro = $("#txbBairro").val();
     var txbRua = $("#txbRua").val();
     var txbNumero = $("#txbNumero").val();
-    var txbTelefone = $("#txbTelefone").val();
+    var txbTelefone = $("#txbTelefone").val(); 
 
     var msgErro = validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbUf, txbCidade, txbBairro, txbRua, txbNumero, txbTelefone);
 
@@ -58,6 +61,7 @@ $("#document").ready(function() {
   });
 
   $("#formCliente #btnAtualizar").click(function () {
+
     var codigo = $("#hidCodCli").val();
     var txbRazaoSocial = $("#txbRazaoSocial").val();
     var txbNomeFantasia = $("#txbNomeFantasia").val();
@@ -116,6 +120,7 @@ $("#document").ready(function() {
 });
 
 function buscaClientes(codigo){
+
   var txbRazaoSocial = $("#txbRazaoSocial").val();
   var txbNomeFantasia = $("#txbNomeFantasia").val();
   var txbCnpj = $("#txbCnpj").val();
@@ -176,6 +181,7 @@ function buscaClientes(codigo){
           formularioModoAtualizar();
           for (var j = 0; j < json.length; j++) {
               cliente = json[j];
+
               $("#hidCodCli").val(cliente.codCli);
               $("#txbRazaoSocial").val(cliente.desRazaoSocial);
               $("#txbNomeFantasia").val(cliente.nomCli);
@@ -188,6 +194,10 @@ function buscaClientes(codigo){
               $("#txbRua").val(cliente.desEnd);
               $("#txbNumero").val(cliente.numEnd);
               $("#txbTelefone").val(cliente.telCli);
+              // Para aplicar a máscara nos campos recebidos por ajax
+              $('#txbCnpj').unmask().mask('00.000.000/0000-00', {reverse: true});
+              $('#txbCep').unmask().mask('00000-000');
+              $('#txbTelefone').unmask.mask('(00) 0000-0000');
           }
 
         }

@@ -514,6 +514,9 @@ function validaCamposAtividade(dtAtividade, hrInicial, hrFinal, dsAtividade){
   if(dsAtividade === ""){
     msgErro = msgErro + "<b>Descrição da atividade</b> é um campo de preenchimento obrigatorio<br/>";
   }
+  else if(hrInicial >= hrFinal){
+    msgErro = msgErro + "<b>Hora Inicial</b> deve ser menor que a hora final<br/>";
+  }
 
   return msgErro;
 

@@ -90,6 +90,9 @@ function validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail){
     if(txbEmail == ""){
         msgErro = msgErro + "<b>Email</b> é um campo de preenchimento obrigatorio<br/>";
     }
+    else if(!validaEmail(txbEmail)){
+        msgErro = msgErro + "<b>E-mail</b> deve ser válido<br/>";
+    }
     return msgErro;
 
 };
