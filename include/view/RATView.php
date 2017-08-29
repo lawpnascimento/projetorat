@@ -137,7 +137,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                       <select class="selectTipoDespesa" style="width:100%;" name="idDespesa"></select>
                     </td>
                     <td id="tdVlUni" bgcolor="#EBEBE4" contenteditable="false" readonly name="tdVlUni"></td>
-                    <td id="tdQtdDespesa" contenteditable="true" name="tdQtdDespesa"></td>
+                    <td id="tdQtdDespesa" contenteditable="true" name="tdQtdDespesa" class="tdNumerico"></td>
                     <td id="tdTotDespesa" bgcolor="#EBEBE4" contenteditable="false" name="totDespesa"></td>
                     <td id="tdFatDespesa" contenteditable="false">
                       <select style="width:100%;" id="cdFaturamento">
@@ -163,7 +163,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                       <select class="selectTipoDespesa" style="width:100%;" name="idDespesa"></select>
                     </td>
                     <td id="tdVlUni" bgcolor="#EBEBE4" contenteditable="false" readonly name="tdVlUni"></td>
-                    <td id="tdQtdDespesa" contenteditable="true" name="tdQtdDespesa"></td>
+                    <td id="tdQtdDespesa" contenteditable="true" name="tdQtdDespesa" class="tdNumerico"></td>
                     <td id="tdTotDespesa" bgcolor="#EBEBE4" contenteditable="false" name="totDespesa"></td>
                     <td id="tdFatDespesa">
                       <select style="width:100%;" id="cdFaturamento">

@@ -8,6 +8,9 @@ var descricaocarregada = false;
 $(".tdData").inputmask("date");
 $(".tdHora").inputmask("99:99");
 
+//Campo somente numérico
+validaSomenteNumerico("#tbodyDespesas", ".tdNumerico");
+
 //Desabilita o select do tipo da despesa para cliques
 $('.selectTipoDespesa').attr("disabled", true); 
 
