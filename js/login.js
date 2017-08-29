@@ -1,6 +1,5 @@
 $(document).ready(function(){
   $("#txbLogin").focus();
-  $('#txbTelefone').mask('(00) 0000-0000');
 
 
   $("#loginform #txbSenha").on('keyup', function(event) {

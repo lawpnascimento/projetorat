@@ -23,7 +23,7 @@ $_SESSION['userid'] = "1" // You may want to set it on login
   <script type="text/javascript" src="../../js/alerta.js"></script>
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/alerta.css">
-    <!-- start orangechat code -->
+  <!-- start orangechat code -->
   <!--  <link type="text/css" rel="stylesheet" media="all" href="../../orangechat/orangechat/orangecss.php" />
     <script type="text/javascript" src="../../orangechat/orangechat/orangejs.php"></script> -->
   <!-- end orangechat code -->
@@ -162,7 +162,6 @@ $_SESSION['userid'] = "1" // You may want to set it on login
       </nav>
     </header>
 <!--Navegaçao-->
-
 <div class="row">
   <div id="divPrincipal" role="divPrincipal">
   </div>

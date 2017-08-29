@@ -4,7 +4,6 @@
 	  	<title>PROJETO RAT</title>
 	  <meta charset="utf-8">
       <script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
-      <script type="text/javascript" src="../../lib/jquery/jquery.mask.js"></script>
       <script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
       <script type="text/javascript" src="../../js/geral.js"></script>
       <script type="text/javascript" src="../../js/login.js"></script>

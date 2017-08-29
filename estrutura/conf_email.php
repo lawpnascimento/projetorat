@@ -16,7 +16,7 @@ class Email{
   public function enviaEmail($email, $mensagem, $assunto){
     global $error;
 
-    require_once("../../lib/PHPMailer/class.phpmailer.php");
+    require_once("../../lib/PHPMailer/PHPMailerAutoload.php");
 
     define('GUSER', $this->remetente);	// <-- Insira aqui o seu GMail
     define('GPWD', $this->senha);		// <-- Insira aqui a senha do seu GMail
@@ -30,7 +30,7 @@ class Email{
     $mail->Port = $this->porta;  		// A porta 587 deverá estar aberta em seu servidor
     $mail->Username = GUSER;
     $mail->Password = GPWD;
-    $mail->SetFrom($this->remetente, $empresa);
+    $mail->SetFrom($this->remetente);
     $mail->Subject = utf8_decode($assunto);
     $mail->Body = $mensagem;
     $mail->AddAddress($email);

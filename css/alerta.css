@@ -2,6 +2,7 @@ div.modal.modal-alerta.in button {
     position: absolute;
 
     right: 35px;
+    bottom: 10px;
 }
 .modal-alerta .modal-content {
     background: transparent;

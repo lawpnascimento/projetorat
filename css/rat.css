@@ -2,7 +2,13 @@
 	margin-top: 10px;
 }
 
-#tdDescricaoAtividades {
+#tdDescricaoAtividade {
+    max-width: 40px;
+    max-height: 15px;
+    overflow: hidden;
+}
+
+#tdObsDespesa {
     max-width: 40px;
     max-height: 15px;
     overflow: hidden;

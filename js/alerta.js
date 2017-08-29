@@ -34,9 +34,20 @@ var jbkrAlert = (function () {
         $('.modal-alerta .modal-body').html(conteudo);
     };
 
+    var exibirInfo = function (titulo, mensagem) {
+        criarModal();
+        var conteudo = $('<div class="alert alert-info"> <div style="background-color: #bce8f1">' +
+        '<b><i class="icon-info-sign"></i> ' + titulo + '</b></div></br>' +
+        '' + mensagem + '' +
+        '<button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button></div>');
+        $('.modal-alerta .modal-body').html(conteudo);
+
+    };
+
     return {
         alerta: exibirAlerta,
         erro: exibirErro,
-        sucesso: exibirSucesso
+        sucesso: exibirSucesso,
+        info: exibirInfo
     };
 })();

@@ -3,9 +3,13 @@ var $msgTeste = $('#msgTeste');
 var $VgrdConsultaRAT = $('#grdConsultaRAT');
 
 $("#formConsultaRAT #btnBuscar").click(function () {
-    alert("Teste");
     consultaRAT();
 
+  });
+
+$("#formConsultaRAT #btnCancelar").click(function(){
+    limpaCampos($(this).closest("form"));
+    consultaRAT();
   });
 
 $("#grdConsultaRAT").on('click', 'tr', function (event) {
@@ -42,7 +46,7 @@ $("#formConsultaRAT #btnTeste").click(function () {
 
 });
 
-function consultaRAT(codigo){
+function consultaRAT(){
 
   var txbCodRat = $("#txbCodRat").val();
   var txbNomUsu = $("#txbNomUsu").val();
@@ -57,7 +61,7 @@ function consultaRAT(codigo){
         type: "POST",
         dataType: "text",
         data: {
-            codigo: codigo,
+            codigo: txbCodRat,
             usuario: txbNomUsu,
             cliente: txbNomCli,
             responsavel: txbNomRes,
@@ -75,7 +79,6 @@ function consultaRAT(codigo){
           var rat = null;
 
           //Carregando a grid
-          if(codigo == null){
             var grid = "";
             for (var i = 0; i < json.length; i++) {
               rat = json[i];
@@ -95,7 +98,7 @@ function consultaRAT(codigo){
             }
 
             $("#grdConsultaRAT").html(grid);
-          }
+          
         }
     });
 }

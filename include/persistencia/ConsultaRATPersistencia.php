@@ -60,6 +60,10 @@ class ConsultaRATPersistencia{
 								   ON sit.codSit = rat.Situacao_codSit
 								WHERE 1 = 1";
 
+			if($codigo != null){
+					$sSql = $sSql . " AND rat.codRat = '" . $codigo ."'";
+			}
+
 			if($usuario != null){
 					$sSql = $sSql . " AND rat.Usuario_codUsu = '" . $usuario ."'";
 			}

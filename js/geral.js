@@ -1,11 +1,19 @@
 function limpaCampos($form){
-    $form.trigger('reset')
+    $form.trigger('reset');
     $form.find('input:text, input:password, input:file, select, textarea').val('');
     $form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
     $form.find('.dropdown-toggle').each(function(){
         $(this).html($(this).attr('name') + "&nbsp<span class='caret'></span>");
         $(this).val('');
     });
+};
+
+function limpaCamposRAT($form){
+    $form.trigger('reset');
+    $("#tbodyAtividades tr td").not("#tdFatAtividade, #tdButtonsAtividade").empty();
+    $("#tbodyDespesas tr td").not("#tdDsDespesa, #tdTipoDespesa, #tdFatDespesa, #tdButtonsDespesa").empty();
+    $(".selectDsDespesa").val($(".selectDsDespesa option:first").val());
+    $(".selectTipoDespesa").val($(".selectTipoDespesa option:first").val());
 };
 
 function validaEmail(email) {

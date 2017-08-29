@@ -317,7 +317,7 @@ class RATPersistencia{
 		$projeto = $this->getModel()->getProjeto();
 		$produto = $this->getModel()->getProduto();
 		$dataRAT = $this->getModel()->getDtRAT();
-		echo $dataRAT;
+		
 		$sSql =  "INSERT INTO tbrat (Usuario_codUsu, Cliente_codCli, Responsavel_codRes, Projeto_codPrj, Produto_codPro, datRat, Situacao_codSit)
 										VALUES (". $usuario ."
 													 ,". $cliente ."
@@ -327,7 +327,9 @@ class RATPersistencia{
 													 ,'". $dataRAT ."'
 													 ,". 1 .")";
 
-		$this->getConexao()->query($sSql);
+	$this->getConexao()->query($sSql);
+
+	$this->enviaEmailRAT($_SESSION["codUsu"],$_SESSION["nomUsu"],$_SESSION["sobrenomeUsu"], 1, $cliente, $responsavel);
 
     $this->getConexao()->fechaConexao();
 
@@ -357,7 +359,7 @@ class RATPersistencia{
 		$codigo = $this->getModel()->getCodigo();
 		$usuario = $this->getModel()->getUsuario();
 		$hrInicial = date("H:i", strtotime($this->getModel()->gethrInicial()));
-    $hrFinal = date("H:i", strtotime($this->getModel()->gethrFinal()));
+    	$hrFinal = date("H:i", strtotime($this->getModel()->gethrFinal()));
 		$dtAtividade = date("d/m/y",strtotime(str_replace('/','-',$this->getModel()->getdtAtividade())));
 		$dsAtividade = $this->getModel()->getdsAtividade();
 		$idFaturar = $this->getModel()->getIdFaturar();
@@ -386,7 +388,7 @@ class RATPersistencia{
 		$cdDespesa = $this->getModel()->getCdDespesa();
 		$dtDespesa = date("d/m/y",strtotime(str_replace('/','-',$this->getModel()->getDtDespesa())));
 		$idDespesa = $this->getModel()->getIdDespesa();
-    $vlDespesa = $this->getModel()->getVlDespesa();
+    	$vlDespesa = $this->getModel()->getVlDespesa();
 		$qtDespesa = $this->getModel()->getQtDespesa();
 		$totDespesa = $this->getModel()->getTotDespesa();
 		$cdFaturamento = $this->getModel()->getCdFaturamento();
@@ -502,7 +504,7 @@ class RATPersistencia{
 
 	}
 
-	public function enviaEmailRAT($codUsu, $codRAT, $cliente){
+	public function enviaEmailRAT($codUsu, $nomUsu, $sobrenomeUsu, $codRAT, $cliente, $responsavel){
 
       $sSql = "SELECT desEml
                  FROM tbusuario usu
@@ -510,10 +512,9 @@ class RATPersistencia{
 
       $resultado = mysql_query($sSql);
 
-      $assunto = "RAT" . $codRAT . "ref." . $cliente . " .";
+      $assunto = "Gestão - RAT " . $codRAT . "ref. " . $cliente . " .";
 
-      $mensagem	= "Segue RAT para avaliação.
-                   Este e-mail é automatico, favor não responder.";
+      $mensagem	= "Olá " . $responsavel . ", Segue RAT lançado por " . $nomUsu . $sobrenomeUsu . " para avaliação. Este e-mail é automatico, favor não responder.";
 
       $emailUsuario = "";
       $contador = 0;
@@ -528,7 +529,7 @@ class RATPersistencia{
           $emailUsuario = $emailUsuario . ";" . $linha["desEml"];
       }
       $email = new Email();
-      $email->enviaEmail($emailUsuario,$mensagem,$assunto,"Sistema");
+      $email->enviaEmail($emailUsuario,$mensagem,$assunto);
 
   	}
 

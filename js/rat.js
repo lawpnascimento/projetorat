@@ -5,15 +5,15 @@ var $btnExportarAtividade = $('#btnExportarAtividade');
 var $msgExportarAtividade = $('#msgExportarAtividade');
 var descricaocarregada = false;
 
-//$("#tdDataDaAtividade").mask('99/99/9999', {reverse: false});
+$(".tdData").inputmask("date");
+$(".tdHora").inputmask("99:99");
 
-//$("#tdDataDaAtividade").inputmask("date");
-//$("#tdHoraInicial").inputmask("99:99");
-/*$("document").on("focus", "col-sm-1", function() {
-    $(this).mask("99:99");
-  });*/
+//Desabilita o select do tipo da despesa para cliques
+$('.selectTipoDespesa').attr("disabled", true); 
 
-//$('.table-add').click(function () {
+$("#formGeral #btnCancelar").click(function(){
+    limpaCamposRAT($(this).closest("form"));
+  });
 
 $('.table-remove').click(function () {
   $(this).parents('tr').not('.fix').detach();
@@ -31,9 +31,13 @@ $('.table-down').click(function () {
 });
 
 $('#addAtividade').click(function () {
-  var $clone = $tableAtividade.find('tr.hide').clone(true).removeClass('hide table-line');
+  $(".tdData").inputmask("remove");
+  $(".tdHora").inputmask("remove");
+    var $clone = $tableAtividade.find('tr.hide').clone(true).removeClass('hide table-line');
 
   $tableAtividade.find('table').append($clone);
+  $(".tdData").inputmask("date");
+  $(".tdHora").inputmask("99:99");
 });
 
 // A few jQuery helpers for exporting only
@@ -73,8 +77,12 @@ var $btnExportarDespesa = $('#btnExportarDespesa');
 var $msgExportarDespesa = $('#msgExportarDespesa');
 
 $('#addDespesa').click(function () {
-  var $clone = $tableDespesa.find('tr.hide').clone(true).removeClass('hide table-line');
-  $tableDespesa.find('table').append($clone);
+  $(".tdData").inputmask("remove");
+
+    var $clone = $tableDespesa.find('tr.hide').clone(true).removeClass('hide table-line');
+    $tableDespesa.find('table').append($clone);
+
+  $(".tdData").inputmask("date");
 });
 
 // A few jQuery helpers for exporting only
@@ -127,7 +135,6 @@ $("#document").ready(function(){
     var $rowsAtividade = $tableAtividade.find('tr:not(.hide):not(.notselect)');
     var headersAtividade = [];
     var dataAtividade = [];
-
 
     headersAtividade.push("dtAtividade");
     headersAtividade.push("hrInicial");
@@ -570,6 +577,12 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
       },
 
       url: "../controller/RATController.php",
+
+      //Se der tudo ok no envio...
+      success: function (dados) {
+              jbkrAlert.sucesso('RAT', 'RAT cadastrado com sucesso!');
+              $("#formGeral #btnCancelar").trigger("click");
+          }
 
   });
 
