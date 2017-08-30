@@ -317,7 +317,7 @@ class RATPersistencia{
 		$projeto = $this->getModel()->getProjeto();
 		$produto = $this->getModel()->getProduto();
 		$dataRAT = $this->getModel()->getDtRAT();
-		
+
 		$sSql =  "INSERT INTO tbrat (Usuario_codUsu, Cliente_codCli, Responsavel_codRes, Projeto_codPrj, Produto_codPro, datRat, Situacao_codSit)
 										VALUES (". $usuario ."
 													 ,". $cliente ."
@@ -327,9 +327,9 @@ class RATPersistencia{
 													 ,'". $dataRAT ."'
 													 ,". 1 .")";
 
-	$this->getConexao()->query($sSql);
+	  $this->getConexao()->query($sSql);
 
-	$this->enviaEmailRAT($_SESSION["codUsu"],$_SESSION["nomUsu"],$_SESSION["sobrenomeUsu"], 1, $cliente, $responsavel);
+	 
 
     $this->getConexao()->fechaConexao();
 

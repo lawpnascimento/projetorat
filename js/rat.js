@@ -12,7 +12,7 @@ $(".tdHora").inputmask("99:99");
 validaSomenteNumerico("#tbodyDespesas", ".tdNumerico");
 
 //Desabilita o select do tipo da despesa para cliques
-$('.selectTipoDespesa').attr("disabled", true); 
+$('.selectTipoDespesa').attr("disabled", true);
 
 $("#formGeral #btnCancelar").click(function(){
     limpaCamposRAT($(this).closest("form"));
@@ -121,7 +121,6 @@ $btnExportarDespesa.click(function () {
 
 $("#document").ready(function(){
   $("#tabLancar #btnLancarRAT").click(function () {
-
     var txbCliente = $("#txbCliente").val();
     var txbResponsavel = $("#txbResponsavel").val();
     var txbProjeto = $("#txbProjeto").val();
@@ -633,6 +632,31 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
 
     });
 
+  }
+
+  var enviar = confirm('Deseja receber e-mail do RAT cadastrado por e-mail?');
+  if (enviar){
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+                cliente: cliente[0],
+                responsavel: responsavel[0],
+                action: "enviaemailrat"
+        },
+
+        url: "../controller/RATController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+
+        }
+
+    });
+  }
+  else{
+    alert("não apagou");
   }
 
 }

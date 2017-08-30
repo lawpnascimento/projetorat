@@ -184,7 +184,7 @@ switch($_POST["action"]){
 		echo $retorno;
 
 		break;
-		
+
 	case 'buscadescricaodespesa':
 		$persistencia = new RATPersistencia();
 
@@ -208,6 +208,14 @@ switch($_POST["action"]){
 		echo $retorno;
 
 		break;
+	case 'enviaemailrat':
+
+		$persistencia = new RATPersistencia();
+
+		$persistencia->enviaEmailRAT($_SESSION["codUsu"],$_SESSION["nomUsu"],'teste', 1, $_POST["cliente"], $_POST["responsavel"]);
+
+		break;
+
 }
 
 
