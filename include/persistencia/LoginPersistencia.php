@@ -27,11 +27,12 @@ class LoginPersistencia {
     $senha = $this->getModel()->getSenha();
 
 		$sSql = "SELECT usu.codUsu codUsu
-								 	 ,usu.Papel_codPap codPap
 								 	 ,usu.nomUsu nomUsu
+								 	 ,usu.sobrenomeUsu sobrenomeUsu
 								 	 ,usu.senUsu senUsu
+								 	 ,usu.desEml desEml
 									 ,usu.codSit codSit
-									 ,usu.desEml desEml
+									 ,usu.Papel_codPap codPap
 							 FROM tbusuario usu
 					    WHERE usu.desEml = '" . $login . "'" .
 							" AND usu.senUsu = '" . $senha . "'";
@@ -40,10 +41,11 @@ class LoginPersistencia {
 
 		if( $oDados = $this->getConexao()->fetch_query($sSql) ) {
      			$_SESSION["codUsu"] = $oDados->codUsu;
+     			$_SESSION["nomUsu"] = $oDados->nomUsu;
+     			$_SESSION["sobrenomeUsu"] = $oDados->sobrenomeUsu;
 		   		$_SESSION["codSit"] = $oDados->codSit;
-   		  		$_SESSION["nomUsu"] = $oDados->nomUsu;
-				$_SESSION["codPap"] = $oDados->codPap;
 				$_SESSION["desEml"] = $oDados->desEml;
+				$_SESSION["codPap"] = $oDados->codPap;
 				$logado = true;
 		} else {
       Session_destroy();

@@ -64,7 +64,7 @@ $("#document").ready(function() {
     var cbbSituacao = $("#cbbSituacao").val();
     var txbPerCom = $("#txbPerCom").val();
 
-    var msgErro = validaCampos(txbNomUsu, "senha", txbDesEml, cbbPapel, cbbSituacao);
+    var msgErro = validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPapel, cbbSituacao);
 
     if(msgErro !== ""){
         jbkrAlert.alerta('Alerta!',msgErro);

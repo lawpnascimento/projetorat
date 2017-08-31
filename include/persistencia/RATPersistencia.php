@@ -505,29 +505,28 @@ class RATPersistencia{
 	}
 
 	public function enviaEmailRAT($codUsu, $nomUsu, $sobrenomeUsu, $codRAT, $cliente, $responsavel){
-
+	  $this->getConexao()->conectaBanco();
+	  
       $sSql = "SELECT desEml
                  FROM tbusuario usu
                WHERE usu.codUsu = " . $codUsu;
 
       $resultado = mysql_query($sSql);
 
-      $assunto = "Gestão - RAT " . $codRAT . "ref. " . $cliente . " .";
+      $assunto = "Gestão - RAT " . $codRAT . " ref. " . $cliente . "";
 
-      $mensagem	= "Olá " . $responsavel . ", Segue RAT lançado por " . $nomUsu . $sobrenomeUsu . " para avaliação. Este e-mail é automatico, favor não responder.";
+      $mensagem	= "Olá " . $responsavel . ", Segue RAT lançado por " . $nomUsu . " " . $sobrenomeUsu . ".";
 
-      $emailUsuario = "";
-      $contador = 0;
+      $emailUsuario = null;
+
       while ($linha = mysql_fetch_assoc($resultado)) {
 
-        $contador = $contador + 1;
-
-        //Se for a primeira vez
-        if ($contador = 1)
           $emailUsuario = $linha["desEml"];
-        else
-          $emailUsuario = $emailUsuario . ";" . $linha["desEml"];
+
       }
+
+	  $this->getConexao()->fechaConexao();
+
       $email = new Email();
       $email->enviaEmail($emailUsuario,$mensagem,$assunto);
 

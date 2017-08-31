@@ -208,11 +208,18 @@ switch($_POST["action"]){
 		echo $retorno;
 
 		break;
-	case 'enviaemailrat':
 
+	case 'enviaemailrat':
 		$persistencia = new RATPersistencia();
 
-		$persistencia->enviaEmailRAT($_SESSION["codUsu"],$_SESSION["nomUsu"],'teste', 1, $_POST["cliente"], $_POST["responsavel"]);
+		$codRat = $persistencia->buscaCodigoRatInserido();
+		echo $codRat;
+		$persistencia->enviaEmailRAT($_SESSION["codUsu"]
+									,$_SESSION["nomUsu"]
+									,$_SESSION["sobrenomeUsu"]
+									,$codRat
+									,$_POST["cliente"]
+									,$_POST["responsavel"]);
 
 		break;
 
