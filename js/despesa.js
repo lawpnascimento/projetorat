@@ -130,6 +130,7 @@ function buscaDespesas(codigo){
           for (var j = 0; j < json.length; j++) {
               despesa = json[j];
               $("#hidCodDsp").val(despesa.codDsp);
+              $("#cbbTipoDespesa:first-child").val(despesa.codTipDsp);
               $("#cbbTipoDespesa:first-child").text(despesa.desTipDsp);
               $("#txbDescricaoDespesa").val(despesa.desDsp);
               $("#txbValorUnitario").val(despesa.vlrUni);

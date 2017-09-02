@@ -6,7 +6,7 @@
     <script type="text/javascript" src="../../js/geral.js"></script>
     <script type="text/javascript" src="../../js/alerta.js"></script>
     <script type="text/javascript" src="../../js/ConsultaRAT.js"></script>
-    <link rel="stylesheet" href="../../css/alerta.css">
+    <link rel="stylesheet" href="../../css/consultaRAT.css">
   </head>
   <body>
     <div class="container-fluid">
@@ -61,7 +61,7 @@
 
     <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
           <!-- Tabela da consulta -->
-          <table id="tableConsultaRAT" class="table table-hover table-condensed table-striped table-bordered">
+          <table id="tableConsultaRAT" class="table table-condensed table-bordered">
             <thead>
               <tr>
                 <th>
@@ -91,21 +91,71 @@
           </table>
     </div>
 
-    <!-- PANEL ATIVIDADES -->
-    <div class="panel panel-default">
-        <div class="panel-body">
-        <legend class="scheduler-border">Atividades</legend>
-          teste
-        </div>
+    <legend class="scheduler-border">Atividades</legend>
+        <div class="panel panel-default" style="overflow-y: scroll; height:100px !important;">
+          <table id="tableConsultaAtividade" class="table table-condensed table-bordered">
+            <thead>
+              <tr>
+                <th class="col-sm-1">
+                  Código
+                </th>
+                <th class="col-sm-1">
+                  Data
+                </th>
+                <th class="col-sm-1">
+                  Hora Inicial
+                </th>
+                <th class="col-sm-1">
+                  Hora Final
+                </th>
+                <th>
+                  Descrição
+                </th>
+                <th class="col-sm-1">
+                  Tip. Fat.
+                </th>
+              </tr>
+            </thead>
+            <tbody id="grdConsultaAtividade"></tbody>
+          </table>
     </div>
 
-
-    <!-- PANEL DESPESAS -->
-    <div class="panel panel-default">
-        <div class="panel-body">
-        <legend class="scheduler-border">Despesas</legend>
-          teste
-        </div>
+    <legend class="scheduler-border">Despesas</legend>
+        <div class="panel panel-default" style="overflow-y: scroll; height:100px !important;">
+          <table id="tableConsultaDespesa" class="table table-condensed table-bordered">
+            <thead>
+              <tr>
+                <th class="col-sm-1">
+                  Código
+                </th>
+                <th class="col-sm-1">
+                  Data
+                </th>
+                <th class="col-sm-2">
+                  Descrição
+                </th>
+                <th class="col-sm-2">
+                  Tip. Desp.
+                </th>
+                <th class="col-sm-1">
+                  Valor Unitário
+                </th>
+                <th class="col-sm-1">
+                  Quantidade
+                </th>
+                <th class="col-sm-1">
+                  Total
+                </th>
+               <th>
+                  Observações
+                </th>
+               <th class="col-sm-1">
+                  Tip. Fat.
+                </th>
+              </tr>
+            </thead>
+            <tbody id="grdConsultaDespesa"></tbody>
+          </table>
     </div>
       
   </body>

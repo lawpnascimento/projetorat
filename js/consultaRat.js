@@ -12,8 +12,91 @@ $("#formConsultaRAT #btnCancelar").click(function(){
     consultaRAT();
   });
 
-$("#grdConsultaRAT").on('click', 'tr', function (event) {
-    alert("oi");
+$("#grdConsultaRAT").on('click', 'tr', function () {
+    var selected = $(this).hasClass("highlight");
+    $("#grdConsultaRAT tr").removeClass("highlight");
+    if(!selected)
+            $(this).addClass("highlight");
+
+  var tdCodRAT = $(this).closest('tr').find('td:first').text();
+  //alert(tdCodRAT);
+
+    //atividade
+    $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+              codigo: tdCodRAT,
+              action: "buscaatividade"
+      },
+
+      url: "../controller/ConsultaRATController.php",
+
+      //Se der tudo ok no envio...
+        success: function (dados) {
+          var json = $.parseJSON(dados);
+          var atividade = null;
+
+            //Carregando a grid
+            var grid = "";
+            for (var i = 0; i < json.length; i++) {
+              atividade = json[i];
+
+              grid = grid + "<tr>";
+              grid = grid + "<td>" + atividade.codAti + "</td>";
+              grid = grid + "<td>" + atividade.datAti + "</td>";
+              grid = grid + "<td>" + atividade.horIni + "</td>";
+              grid = grid + "<td>" + atividade.horFin + "</td>";
+              grid = grid + "<td>" + atividade.desAti + "</td>";
+              grid = grid + "<td>" + atividade.tipFat + "</td>";  
+              grid = grid + "</tr>";
+
+            }
+
+            $("#grdConsultaAtividade").html(grid);
+        }
+      });
+
+    //despesa
+    $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+              codigo: tdCodRAT,
+              action: "buscadespesa"
+      },
+
+      url: "../controller/ConsultaRATController.php",
+
+      //Se der tudo ok no envio...
+        success: function (dados) {
+          var json = $.parseJSON(dados);
+          var despesa = null;
+
+            //Carregando a grid
+            var grid = "";
+            for (var i = 0; i < json.length; i++) {
+              despesa = json[i];
+
+              grid = grid + "<tr>";
+              grid = grid + "<td>" + despesa.seqDsp + "</td>";
+              grid = grid + "<td>" + despesa.datDsp + "</td>";
+              grid = grid + "<td>" + despesa.desDsp + "</td>";
+              grid = grid + "<td>" + despesa.desTipDsp + "</td>";
+              grid = grid + "<td>" + despesa.vlrUni + "</td>";
+              grid = grid + "<td>" + despesa.qtdDsp + "</td>";
+              grid = grid + "<td>" + despesa.totDsp + "</td>";
+              grid = grid + "<td>" + despesa.obsDsp + "</td>";
+              grid = grid + "<td>" + despesa.desFatDsp + "</td>";
+              grid = grid + "</tr>";
+
+            }
+
+            $("#grdConsultaDespesa").html(grid);
+        }
+      });
 
   });
 

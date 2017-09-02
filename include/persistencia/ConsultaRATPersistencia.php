@@ -154,5 +154,108 @@ class ConsultaRATPersistencia{
 
 	}
 
+	public function buscaAtividade(){
+		$this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+
+		$sSql = "SELECT codAti,
+						DATE_FORMAT(datAti, '%d-%m-%Y') datAti,
+						horIni,
+						horFin,
+						desAti,
+						tipFat
+				 		from tbatividade 
+				 		where RAT_codRAT = " . $codigo . "
+				 		order by codAti";
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = '[';
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . '{"codAti": "'.$linha["codAti"].'"
+														, "datAti" : "'.$linha["datAti"].'"
+														, "horIni" : "'.$linha["horIni"].'"
+														, "horFin" : "'.$linha["horFin"].'"
+														, "desAti" : "'.$linha["desAti"].'"
+														, "tipFat" : "'.$linha["tipFat"].'"}';
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+		$retorno = $retorno . "]";
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+	}
+
+	public function buscaDespesa(){
+		$this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+
+		$sSql = "SELECT dsprat.seqDsp seqDsp
+							    ,DATE_FORMAT(datDsp, '%d-%m-%Y') datDsp
+							    ,dsp.desDsp desDsp
+								,tipdsp.desTipDsp desTipDsp
+								,dsp.vlrUni vlrUni
+								,dsprat.qtdDsp qtdDsp
+								,CONCAT('R$ ', dsprat.totDsp) totDsp
+								,dsprat.obsDsp obsDsp
+								,fatdsp.desFatDsp desFatDsp
+					 		from tbdespesarat dsprat
+				 		    JOIN tbdespesa dsp
+							ON dsp.codDsp = dsprat.Despesa_codDsp
+							JOIN tbtipodespesa tipdsp
+							ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
+							JOIN tbfatdespesa fatdsp
+							ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
+				 		where RAT_codRAT = " . $codigo . "
+				 		order by seqDsp";
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = '[';
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . '{"seqDsp": "'.$linha["seqDsp"].'"
+														, "datDsp" : "'.$linha["datDsp"].'"
+													    , "desDsp" : "'.$linha["desDsp"].'"
+													    , "desTipDsp" : "'.$linha["desTipDsp"].'"
+													    , "vlrUni" : "'.$linha["vlrUni"].'"
+													    , "qtdDsp" : "'.$linha["qtdDsp"].'"
+													    , "totDsp" : "'.$linha["totDsp"].'"
+													    , "obsDsp" : "'.$linha["obsDsp"].'"
+													    , "desFatDsp" : "'.$linha["desFatDsp"].'"
+												}';
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+		$retorno = $retorno . "]";
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+	}
+
 }
 ?>

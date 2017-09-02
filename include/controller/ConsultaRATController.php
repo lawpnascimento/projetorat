@@ -29,6 +29,37 @@ switch($_POST["action"]){
 	  	echo $retorno;
 
 	   	break;
+
+	case 'buscaatividade':
+		$model = new ConsultaRATModel();
+
+			$model->setCodigo($_POST["codigo"]);
+
+		$persistencia = new ConsultaRATPersistencia();
+
+	  	$persistencia->setModel($model);
+
+	   	$retorno = $persistencia->buscaAtividade();
+
+	  	echo $retorno;
+
+	   	break;
+
+	case 'buscadespesa':
+		$model = new ConsultaRATModel();
+
+			$model->setCodigo($_POST["codigo"]);
+
+		$persistencia = new ConsultaRATPersistencia();
+
+	  	$persistencia->setModel($model);
+
+	   	$retorno = $persistencia->buscaDespesa();
+
+	  	echo $retorno;
+
+	   	break;
+
 }
 
 

@@ -1,4 +1,19 @@
 $("#document").ready(function() {
+
+  var date = new Date();
+
+  var day = date.getDate();
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
+
+  if (month < 10) month = "0" + month;
+  if (day < 10) day = "0" + day;
+
+  var inputToday = year + "-" + month + "-" + day;
+  var tdToday = day + "/" + month + "/" + year;
+
+  $("#txbDataInicio").val(inputToday);
+
   $("#txbValorHora").mask('###0.00', {reverse: true});
 
   $("#formProjeto #btnCadastrar").click(function () {
@@ -154,7 +169,9 @@ function buscaProjetos(codigo){
                 $("#hidCodPrj").val(projeto.codPrj);
                 $("#txbProjeto").val(projeto.nomPrj);
                 $("#cbbCliente:first-child").text(projeto.nomCli);
+                $("#cbbCliente:first-child").val(projeto.codCli);
                 $("#cbbProduto:first-child").text(projeto.desPro);
+                $("#cbbProduto:first-child").val(projeto.codPro);
                 $("#txbDataInicio").val(projeto.datIni);
                 $("#txbValorHora").val(projeto.vlrHor);
                 $("#txaObsProjeto").val(projeto.obsPrj);

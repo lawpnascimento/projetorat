@@ -44,7 +44,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                   </div>
                   <div class="col-md-2">
                     <label for="responsavel">Responsavel*</label>
-                    <input id="txbResponsavel" type="text" class="form-control" name="txbResponsavel" placeholder="Nome do Reponsável"></input>
+                    <input id="txbResponsavel" type="text" class="form-control" name="txbResponsavel" placeholder="Nome do Responsável"></input>
                   </div>
                   <div class="col-md-2">
                     <label for="projeto">Projeto*</label>
