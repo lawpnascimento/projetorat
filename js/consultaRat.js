@@ -1,131 +1,65 @@
 $("#document").ready(function(){ 
-var $msgTeste = $('#msgTeste');
-var $VgrdConsultaRAT = $('#grdConsultaRAT');
+  var $msgTeste = $('#msgTeste');
+  var $VgrdConsultaRAT = $('#grdConsultaRAT');
 
-$("#formConsultaRAT #btnBuscar").click(function () {
-    consultaRAT();
+  $("#formConsultaRAT #btnBuscar").click(function () {
+      consultaRAT();
 
-  });
-
-$("#formConsultaRAT #btnCancelar").click(function(){
-    limpaCampos($(this).closest("form"));
-    consultaRAT();
-  });
-
-$("#grdConsultaRAT").on('click', 'tr', function () {
-    var selected = $(this).hasClass("highlight");
-    $("#grdConsultaRAT tr").removeClass("highlight");
-    if(!selected)
-            $(this).addClass("highlight");
-
-  var tdCodRAT = $(this).closest('tr').find('td:first').text();
-  //alert(tdCodRAT);
-
-    //atividade
-    $.ajax({
-      //Tipo de envio POST ou GET
-      type: "POST",
-      dataType: "text",
-      data: {
-              codigo: tdCodRAT,
-              action: "buscaatividade"
-      },
-
-      url: "../controller/ConsultaRATController.php",
-
-      //Se der tudo ok no envio...
-        success: function (dados) {
-          var json = $.parseJSON(dados);
-          var atividade = null;
-
-            //Carregando a grid
-            var grid = "";
-            for (var i = 0; i < json.length; i++) {
-              atividade = json[i];
-
-              grid = grid + "<tr>";
-              grid = grid + "<td>" + atividade.codAti + "</td>";
-              grid = grid + "<td>" + atividade.datAti + "</td>";
-              grid = grid + "<td>" + atividade.horIni + "</td>";
-              grid = grid + "<td>" + atividade.horFin + "</td>";
-              grid = grid + "<td>" + atividade.desAti + "</td>";
-              grid = grid + "<td>" + atividade.tipFat + "</td>";  
-              grid = grid + "</tr>";
-
-            }
-
-            $("#grdConsultaAtividade").html(grid);
-        }
-      });
-
-    //despesa
-    $.ajax({
-      //Tipo de envio POST ou GET
-      type: "POST",
-      dataType: "text",
-      data: {
-              codigo: tdCodRAT,
-              action: "buscadespesa"
-      },
-
-      url: "../controller/ConsultaRATController.php",
-
-      //Se der tudo ok no envio...
-        success: function (dados) {
-          var json = $.parseJSON(dados);
-          var despesa = null;
-
-            //Carregando a grid
-            var grid = "";
-            for (var i = 0; i < json.length; i++) {
-              despesa = json[i];
-
-              grid = grid + "<tr>";
-              grid = grid + "<td>" + despesa.seqDsp + "</td>";
-              grid = grid + "<td>" + despesa.datDsp + "</td>";
-              grid = grid + "<td>" + despesa.desDsp + "</td>";
-              grid = grid + "<td>" + despesa.desTipDsp + "</td>";
-              grid = grid + "<td>" + despesa.vlrUni + "</td>";
-              grid = grid + "<td>" + despesa.qtdDsp + "</td>";
-              grid = grid + "<td>" + despesa.totDsp + "</td>";
-              grid = grid + "<td>" + despesa.obsDsp + "</td>";
-              grid = grid + "<td>" + despesa.desFatDsp + "</td>";
-              grid = grid + "</tr>";
-
-            }
-
-            $("#grdConsultaDespesa").html(grid);
-        }
-      });
-
-  });
-
-$("#formConsultaRAT #btnTeste").click(function () {
-  var $rows = $VgrdConsultaRAT.find('tr');
-  var headers = [];
-  var data = [];
-  
-  // Get the headers (add special header logic here)
-  $($rows.shift()).find('th:not(:empty)').each(function () {
-    headers.push($(this).text().toLowerCase());
-  });
-
-  // Turn all existing rows into a loopable array
-  $rows.each(function () {
-    var $td = $(this).find('td');
-    var h = {};
-
-    // Use the headers from earlier to name our hash keys
-    headers.forEach(function (header, i) {
-      h[header] = $td.eq(i).text();
     });
 
-    data.push(h);
-  });
+  $("#formConsultaRAT #btnCancelar").click(function(){
+      limpaCampos($(this).closest("form"));
+      consultaRAT();
+    });
 
-  // Output the result
-  $msgTeste.text(JSON.stringify(data));
-});
+  $("#grdConsultaRAT").on('click', 'tr', function () {
+      var selected = $(this).hasClass("highlight");
+      $("#grdConsultaRAT tr").removeClass("highlight");
+      if(!selected){
+              $(this).addClass("highlight")
+      };
+
+      var tdCodRAT = $(this).closest('tr').find('td:first').text();
+      var tdSitRAT = $(this).closest('tr').find('td:last').text().slice(0,1);
+      //alert(tdSitRAT);
+
+      consultaAtividade(tdCodRAT);
+      consultaDespesa(tdCodRAT);
+      //aprovaRAT(tdCodRAT, tdSitRAT);
+
+    });
+
+  $("#formConsultaRAT #btnAprovar").click(function(){
+      var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
+      if (trSelecionado == true){
+        var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
+        var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
+
+          if (tdSitRAT != 2){
+                              alert("O RAT precisa estar com a situação '2 - Enviado' para ser aprovado.");
+          } else {
+                   aprovaRAT(tdCodRAT, tdSitRAT);
+                   }     
+      } else {
+              alert("Favor selecionar o RAT para ser aprovado.");
+             }
+    });
+
+  $("#formConsultaRAT #btnReprovar").click(function(){
+      var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
+      if (trSelecionado == true){
+        var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
+        var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
+
+          if (tdSitRAT != 2){
+                              alert("O RAT precisa estar com a situação '2 - Enviado' para ser reprovado.");
+          } else {
+                   reprovaRAT(tdCodRAT, tdSitRAT);
+                   }     
+      } else {
+              alert("Favor selecionar o RAT para ser reprovado.");
+             }
+    });
 
 });
 
@@ -184,4 +118,126 @@ function consultaRAT(){
           
         }
     });
+}
+
+function aprovaRAT(tdCodRAT, tdSitRAT){
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            codigo: tdCodRAT,
+            situacao: tdSitRAT,
+            action: "aprovar"
+        },
+
+        url: "../controller/ConsultaRATController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+            jbkrAlert.sucesso('RAT', 'RAT autorizado com sucesso!');
+            $("#formConsultaRAT #btnCancelar").trigger("click");
+        }
+    });
+}
+
+function reprovaRAT(tdCodRAT, tdSitRAT){
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            codigo: tdCodRAT,
+            situacao: tdSitRAT,
+            action: "reprovar"
+        },
+
+        url: "../controller/ConsultaRATController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+            jbkrAlert.sucesso('RAT', 'RAT reprovado com sucesso!');
+            $("#formConsultaRAT #btnCancelar").trigger("click");
+        }
+    });
+}
+
+function consultaAtividade(tdCodRAT){
+        $.ajax({
+          //Tipo de envio POST ou GET
+          type: "POST",
+          dataType: "text",
+          data: {
+                  codigo: tdCodRAT,
+                  action: "buscaatividade"
+          },
+
+          url: "../controller/ConsultaRATController.php",
+
+          //Se der tudo ok no envio...
+            success: function (dados) {
+              var json = $.parseJSON(dados);
+              var atividade = null;
+
+                //Carregando a grid
+                var grid = "";
+                for (var i = 0; i < json.length; i++) {
+                  atividade = json[i];
+
+                  grid = grid + "<tr>";
+                  grid = grid + "<td>" + atividade.codAti + "</td>";
+                  grid = grid + "<td>" + atividade.datAti + "</td>";
+                  grid = grid + "<td>" + atividade.horIni + "</td>";
+                  grid = grid + "<td>" + atividade.horFin + "</td>";
+                  grid = grid + "<td>" + atividade.desAti + "</td>";
+                  grid = grid + "<td>" + atividade.tipFat + "</td>";  
+                  grid = grid + "</tr>";
+
+                }
+
+                $("#grdConsultaAtividade").html(grid);
+            }
+          });
+}
+
+function consultaDespesa(tdCodRAT){
+        $.ajax({
+          //Tipo de envio POST ou GET
+          type: "POST",
+          dataType: "text",
+          data: {
+                  codigo: tdCodRAT,
+                  action: "buscadespesa"
+          },
+
+          url: "../controller/ConsultaRATController.php",
+
+          //Se der tudo ok no envio...
+            success: function (dados) {
+              var json = $.parseJSON(dados);
+              var despesa = null;
+
+                //Carregando a grid
+                var grid = "";
+                for (var i = 0; i < json.length; i++) {
+                  despesa = json[i];
+
+                  grid = grid + "<tr>";
+                  grid = grid + "<td>" + despesa.seqDsp + "</td>";
+                  grid = grid + "<td>" + despesa.datDsp + "</td>";
+                  grid = grid + "<td>" + despesa.desDsp + "</td>";
+                  grid = grid + "<td>" + despesa.desTipDsp + "</td>";
+                  grid = grid + "<td>" + despesa.vlrUni + "</td>";
+                  grid = grid + "<td>" + despesa.qtdDsp + "</td>";
+                  grid = grid + "<td>" + despesa.totDsp + "</td>";
+                  grid = grid + "<td>" + despesa.obsDsp + "</td>";
+                  grid = grid + "<td>" + despesa.desFatDsp + "</td>";
+                  grid = grid + "</tr>";
+
+                }
+
+                $("#grdConsultaDespesa").html(grid);
+            }
+          });
+
 }

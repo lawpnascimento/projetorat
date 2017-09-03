@@ -151,7 +151,6 @@ class ConsultaRATPersistencia{
 		$this->getConexao()->fechaConexao();
 
 		return $retorno;
-
 	}
 
 	public function buscaAtividade(){
@@ -256,6 +255,39 @@ class ConsultaRATPersistencia{
 
 		return $retorno;
 	}
+
+	public function aprovaRAT(){
+		$this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+		$situacao = $this->getModel()->getSituacao();
+
+		$sSql = "UPDATE tbRAT rat
+				 		SET Situacao_codSit = 3
+				 		where codRAT = '" . $codigo . "'
+				 		and Situacao_codSit = 2";
+
+		$this->getConexao()->query($sSql);
+
+		$this->getConexao()->fechaConexao();
+	}
+
+	public function reprovaRAT(){
+		$this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+		$situacao = $this->getModel()->getSituacao();
+
+		$sSql = "UPDATE tbRAT rat
+				 		SET Situacao_codSit = 6
+				 		where codRAT = '" . $codigo . "'
+				 		and Situacao_codSit = 2";
+
+		$this->getConexao()->query($sSql);
+
+		$this->getConexao()->fechaConexao();
+	}
+
 
 }
 ?>

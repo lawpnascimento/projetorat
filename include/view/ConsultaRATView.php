@@ -19,7 +19,7 @@
               <div class="form-group">
                 <div class="col-md-1">
                   <label for="codRat">Código</label>
-                    <input id="txbCodRat" type="text" class="form-control" name="txbCodRat"></input>
+                    <input id="txbCodRat" type="text" class="form-control" name="txbCodRat" placeholder="Cod RAT"></input>
                 </div>
                 <div class="col-md-2">
                   <label for="nomUsu">Usuário</label>
@@ -46,13 +46,13 @@
                     <input id="txbSitRAT" type="text" class="form-control" name="txbSitRAT"></input>
                 </div>
               </div>
-                <p id="msgTeste"></p>
               <!-- BOTÕES -->
               <div id="actions" class="row">
                 <div class="col-md-12">
                   <button id="btnBuscar" type="button" class="btn btn-info">Buscar</button>
                   <button id="btnCancelar" type="button" class="btn btn-warning">Cancelar</button>
-                  <button id="btnTeste" type="button" class="btn btn-info">Teste</button>
+                  <button id="btnAprovar" type="button" class="btn btn-success">Aprovar</button>
+                  <button id="btnReprovar" type="button" class="btn btn-danger">Reprovar</button>
                 </div>
               </div>
             </form>

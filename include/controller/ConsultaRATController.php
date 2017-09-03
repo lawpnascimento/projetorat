@@ -48,7 +48,7 @@ switch($_POST["action"]){
 	case 'buscadespesa':
 		$model = new ConsultaRATModel();
 
-			$model->setCodigo($_POST["codigo"]);
+		$model->setCodigo($_POST["codigo"]);
 
 		$persistencia = new ConsultaRATPersistencia();
 
@@ -59,6 +59,40 @@ switch($_POST["action"]){
 	  	echo $retorno;
 
 	   	break;
+
+	case 'aprovar':
+
+		$model = new ConsultaRATModel();
+
+		$model->setCodigo($_POST["codigo"]);
+		$model->setSituacao($_POST["situacao"]);
+
+		$persistencia = new ConsultaRATPersistencia();
+
+	  	$persistencia->setModel($model);
+
+	   	$retorno = $persistencia->aprovaRAT();
+
+	  	echo $retorno;
+
+	break;
+
+	case 'reprovar':
+
+		$model = new ConsultaRATModel();
+
+		$model->setCodigo($_POST["codigo"]);
+		$model->setSituacao($_POST["situacao"]);
+
+		$persistencia = new ConsultaRATPersistencia();
+
+	  	$persistencia->setModel($model);
+
+	   	$retorno = $persistencia->reprovaRAT();
+
+	  	echo $retorno;
+
+	break;
 
 }
 
