@@ -1,4 +1,6 @@
 $("#document").ready(function(){ 
+  verificaPapelUsuario();
+  
   var $msgTeste = $('#msgTeste');
   var $VgrdConsultaRAT = $('#grdConsultaRAT');
 
@@ -21,11 +23,9 @@ $("#document").ready(function(){
 
       var tdCodRAT = $(this).closest('tr').find('td:first').text();
       var tdSitRAT = $(this).closest('tr').find('td:last').text().slice(0,1);
-      //alert(tdSitRAT);
 
       consultaAtividade(tdCodRAT);
       consultaDespesa(tdCodRAT);
-      //aprovaRAT(tdCodRAT, tdSitRAT);
 
     });
 
@@ -36,12 +36,12 @@ $("#document").ready(function(){
         var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
           if (tdSitRAT != 2){
-                              alert("O RAT precisa estar com a situação '2 - Enviado' para ser aprovado.");
+                              jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '2 - Enviado' para ser aprovado.");
           } else {
                    aprovaRAT(tdCodRAT, tdSitRAT);
                    }     
       } else {
-              alert("Favor selecionar o RAT para ser aprovado.");
+              jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser aprovado.");
              }
     });
 
@@ -52,12 +52,12 @@ $("#document").ready(function(){
         var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
           if (tdSitRAT != 2){
-                              alert("O RAT precisa estar com a situação '2 - Enviado' para ser reprovado.");
+                              jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '2 - Enviado' para ser reprovado.");
           } else {
                    reprovaRAT(tdCodRAT, tdSitRAT);
                    }     
       } else {
-              alert("Favor selecionar o RAT para ser reprovado.");
+              jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser reprovado.");
              }
     });
 
@@ -240,4 +240,31 @@ function consultaDespesa(tdCodRAT){
             }
           });
 
+}
+
+function telaModoConsultor(){
+  $("#formConsultaRAT #btnAprovar").css("display","none");
+  $("#formConsultaRAT #btnReprovar").css("display","none");
+}
+
+function verificaPapelUsuario(){
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            action: "verificapapelusuario"
+        },
+
+        url: "../controller/ConsultaRATController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+        var json = $.parseJSON(dados);
+
+        if (json.status == 2) {
+          telaModoConsultor();
+                  }
+        }
+    });
 }

@@ -1,6 +1,7 @@
 <?php
 require_once("../model/ConsultaRATModel.php");
 require_once("../persistencia/ConsultaRATPersistencia.php");
+session_start();
 
 switch($_POST["action"]){
 
@@ -94,7 +95,18 @@ switch($_POST["action"]){
 
 	break;
 
-}
+	case 'verificapapelusuario':
+		//administrador
+		if ($_SESSION["codPap"] == "1"){
+			   echo '{"status" : "1" }';
+	  }
+	  	//consultor
+		if ($_SESSION["codPap"] == "2"){
+			   echo '{"status" : "2" }';
+	  }
 
+    break;
+
+}
 
 ?>
