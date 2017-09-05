@@ -7,12 +7,9 @@ class ClienteModel {
 	private $cnpj;
 	private $inscricao;
 	private $cep;
-	private $uf;
 	private $cidade;
-	private $bairro;
-	private $rua;
-	private $numero;
 	private $telefone;
+	private $termo;
 
 	 public function setCodigo($codigo){
 		 $this->codigo = $codigo;
@@ -62,14 +59,6 @@ class ClienteModel {
 		return $this->cep;
 	}
 
-	public function setUf($uf){
-		$this->uf = $uf;
-	}
-
-	public function getUf(){
-		return $this->uf;
-	}
-
 	public function setCidade($cidade){
 		$this->cidade = $cidade;
 	}
@@ -78,36 +67,20 @@ class ClienteModel {
 		return $this->cidade;
 	}
 
-	public function setBairro($bairro){
-		$this->bairro = $bairro;
-	}
-
-	public function getBairro(){
-		return $this->bairro;
-	}
-
-	public function setRua($rua){
-		$this->rua = $rua;
-	}
-
-	public function getRua(){
-		return $this->rua;
-	}
-
-	public function setNumero($numero){
-		$this->numero = $numero;
-	}
-
-	public function getNumero(){
-		return $this->numero;
-	}
-
 	public function setTelefone($telefone){
 		$this->telefone = $telefone;
 	}
 
 	public function getTelefone(){
 		return $this->telefone;
+	}
+
+	public function getTermo(){
+		return $this->termo;
+	}
+
+	public function setTermo($termo){
+		$this->termo = $termo;
 	}
 
 }

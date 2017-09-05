@@ -1,25 +1,22 @@
 $("#document").ready(function() {
-  $('#txbCnpj').mask('00.000.000/0000-00', {reverse: true});
-  $('#txbCep').mask('00000-000');
-  $('#txbTelefone').mask('(00) 0000-0000');
+  aplicaMascara();
 
   $("#formCliente #btnCadastrar").click(function () {
+    removeMascara();
     var txbRazaoSocial = $("#txbRazaoSocial").val();
     var txbNomeFantasia = $("#txbNomeFantasia").val();
     var txbCnpj = $("#txbCnpj").val();
     var txbInscricao = $("#txbInscricao").val();
     var txbCep = $("#txbCep").val();
-    var txbUf = $("#txbUf").val();
     var txbCidade = $("#txbCidade").val();
-    var txbBairro = $("#txbBairro").val();
-    var txbRua = $("#txbRua").val();
-    var txbNumero = $("#txbNumero").val();
+    var seqCidade = txbCidade.split("-");
     var txbTelefone = $("#txbTelefone").val(); 
 
-    var msgErro = validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbUf, txbCidade, txbBairro, txbRua, txbNumero, txbTelefone);
+    var msgErro = validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbCidade, txbTelefone);
 
     if(msgErro !== ""){
       jbkrAlert.alerta('Alerta!',msgErro);
+      aplicaMascara();
     }
     else {
       $.ajax({
@@ -32,11 +29,7 @@ $("#document").ready(function() {
             cnpj: txbCnpj,
             inscricao: txbInscricao,
             cep: txbCep,
-            uf: txbUf,
-            cidade: txbCidade,
-            bairro: txbBairro,
-            rua: txbRua,
-            numero: txbNumero,
+            cidade: seqCidade[0],
             telefone: txbTelefone,
             action: "cadastrar"
           },
@@ -58,9 +51,11 @@ $("#document").ready(function() {
     limpaCampos($(this).closest("form"));
     formularioModoInserir();
     buscaClientes();
+    aplicaMascara();
   });
 
   $("#formCliente #btnAtualizar").click(function () {
+    removeMascara();
 
     var codigo = $("#hidCodCli").val();
     var txbRazaoSocial = $("#txbRazaoSocial").val();
@@ -68,14 +63,11 @@ $("#document").ready(function() {
     var txbCnpj = $("#txbCnpj").val();
     var txbInscricao = $("#txbInscricao").val();
     var txbCep = $("#txbCep").val();
-    var txbUf = $("#txbUf").val();
     var txbCidade = $("#txbCidade").val();
-    var txbBairro = $("#txbBairro").val();
-    var txbRua = $("#txbRua").val();
-    var txbNumero = $("#txbNumero").val();
+    var seqCidade = txbCidade.split("-");
     var txbTelefone = $("#txbTelefone").val();
 
-    var msgErro = validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbUf, txbCidade, txbBairro, txbRua, txbNumero, txbTelefone);
+    var msgErro = validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, seqCidade, txbTelefone);
 
     if(msgErro !== ""){
         jbkrAlert.alerta('Alerta!',msgErro);
@@ -92,11 +84,7 @@ $("#document").ready(function() {
           cnpj: txbCnpj,
           inscricao: txbInscricao,
           cep: txbCep,
-          uf: txbUf,
-          cidade: txbCidade,
-          bairro: txbBairro,
-          rua: txbRua,
-          numero: txbNumero,
+          cidade: seqCidade[0],
           telefone: txbTelefone,
           action: "atualizar"
         },
@@ -114,9 +102,39 @@ $("#document").ready(function() {
 
   $("#formCliente #btnBuscar").click(function () {
     buscaClientes();
-
   });
-  
+
+  $('#txbCidade').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/ClienteController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompletecidade"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
 });
 
 function buscaClientes(codigo){
@@ -126,11 +144,7 @@ function buscaClientes(codigo){
   var txbCnpj = $("#txbCnpj").val();
   var txbInscricao = $("#txbInscricao").val();
   var txbCep = $("#txbCep").val();
-  var txbUf = $("#txbUf").val();
   var txbCidade = $("#txbCidade").val();
-  var txbBairro = $("#txbBairro").val();
-  var txbRua = $("#txbRua").val();
-  var txbNumero = $("#txbNumero").val();
   var txbTelefone = $("#txbTelefone").val();
 
   $.ajax({
@@ -144,11 +158,7 @@ function buscaClientes(codigo){
           cnpj: txbCnpj,
           inscricao: txbInscricao,
           cep: txbCep,
-          uf: txbUf,
           cidade: txbCidade,
-          bairro: txbBairro,
-          rua: txbRua,
-          numero: txbNumero,
           telefone: txbTelefone,
           action: "buscar"
       },
@@ -170,7 +180,10 @@ function buscaClientes(codigo){
             grid = grid + "<td>" + cliente.codCli  + "</td>";
             grid = grid + "<td>" + cliente.desRazaoSocial  + "</td>";
             grid = grid + "<td>" + cliente.nomCli + "</td>";
-            grid = grid + "<td>" + cliente.numCNPJ         + "</td>";
+            grid = grid + "<td>" + cliente.numCNPJ + "</td>";
+            grid = grid + "<td>" + cliente.Cidade_seqCid + "</td>";
+            grid = grid + "<td>" + "SC (fixo)" + "</td>";
+            grid = grid + "<td>" + cliente.telCli + "</td>";
             grid = grid + "<td href='javascript:void(0);' onClick='buscaClientes(" + cliente.codCli + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
 
@@ -188,16 +201,11 @@ function buscaClientes(codigo){
               $("#txbCnpj").val(cliente.numCNPJ);
               $("#txbInscricao").val(cliente.iesCli);
               $("#txbCep").val(cliente.numCEP);
-              $("#txbUf").val(cliente.desUF);
-              $("#txbCidade").val(cliente.desCid);
-              $("#txbBairro").val(cliente.desBai);
-              $("#txbRua").val(cliente.desEnd);
-              $("#txbNumero").val(cliente.numEnd);
+              $("#txbCidade").val(cliente.Cidade_seqCid);
               $("#txbTelefone").val(cliente.telCli);
               // Para aplicar a máscara nos campos recebidos por ajax
-              $('#txbCnpj').unmask().mask('00.000.000/0000-00', {reverse: true});
-              $('#txbCep').unmask().mask('00000-000');
-              $('#txbTelefone').unmask.mask('(00) 0000-0000');
+              removeMascara();
+              aplicaMascara();
           }
 
         }
@@ -207,7 +215,7 @@ function buscaClientes(codigo){
 
 }
 
-function validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbUf, txbCidade, txbBairro, txbRua, txbNumero, txbTelefone){
+function validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbCidade, txbTelefone){
     msgErro = "";
     if(txbRazaoSocial === ""){
         msgErro = msgErro + "<b>Razão Social</b> é um campo de preenchimento obrigatorio<br/>";
@@ -221,4 +229,16 @@ function validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, tx
 
     return msgErro;
 
+}
+
+function aplicaMascara(){
+  $('#txbCnpj').mask('00.000.000/0000-00', {reverse: true});
+  $('#txbCep').mask('00000-000');
+  $('#txbTelefone').mask('(00) 0000-0000');
+}
+
+function removeMascara(){
+  $('#txbCnpj').unmask();
+  $('#txbCep').unmask();
+  $('#txbTelefone').unmask();
 }

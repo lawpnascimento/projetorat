@@ -3,7 +3,9 @@
   <head>
     <title>PROJETO RAT</title>
     <meta charset="utf-8">
+    <script type="text/javascript" src="../../lib/jquery/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../../js/cliente.js"></script>
+    <link rel="stylesheet" href="../../lib/jquery/jquery-ui.css">
   </head>
   <body>
     <div class="container-fluid">
@@ -46,30 +48,14 @@
                   <input id="txbCidade" type="text" class="form-control" name="txbCidade" placeholder="Nome da Cidade" maxlength="50"></input>
                 </div>
                 <div class="col-md-4">
-                  <label for="UF">UF</label>
-                  <input id="txbUf" type="text" class="form-control" name="txbUf" placeholder="Unidade da Federação" maxlength="2"></input>
+                  <label for="estado">Estado*</label>
+                  <input readonly id="txbEstado" type="text" class="form-control" name="txbEstado" placeholder="Nome do Estado"></input>
                 </div>
-              </div>
-              <div class="form-group">
                 <div class="col-md-4">
                   <label for="cep">CEP</label>
-                  <input id="txbCep" type="text" class="form-control" name="txbCep" placeholder="CEP" maxlength="8"></input>
+                  <input id="txbCep" type="text" class="form-control" name="txbCep" placeholder="CEP" maxlength="9"></input>
                 </div>
-                <div class="col-md-4">
-                  <label for="bairro">Bairro</label>
-                  <input id="txbBairro" type="text" class="form-control" name="txbBairro" placeholder="Nome do Bairro" maxlength="50"></input>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-4">
-                  <label for="rua">Rua</label>
-                  <input id="txbRua" type="text" class="form-control" name="txbRua" placeholder="Nome da Rua" maxlength="100"></input>
-                </div>
-                <div class="col-md-4">
-                  <label for="numero">Número</label>
-                  <input id="txbNumero" type="text" class="form-control" name="txbNumero" placeholder="Número" maxlength="10"></input>
-                </div>
-              </div>
+               </div>
             </fieldset>
             <br />
             <fieldset>
@@ -110,6 +96,15 @@
               </th>
               <th>
                 CNPJ
+              </th>
+              <th>
+                Cidade
+              </th>
+              <th>
+                Estado
+              </th>
+              <th>
+                Telefone
               </th>
             </tr>
           </thead>

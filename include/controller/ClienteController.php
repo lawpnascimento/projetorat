@@ -12,11 +12,7 @@ switch($_POST["action"]){
 		$model->setCnpj($_POST["cnpj"]);
 		$model->setInscricao($_POST["inscricao"]);
 		$model->setCep($_POST["cep"]);
-		$model->setUf($_POST["uf"]);
 		$model->setCidade($_POST["cidade"]);
-		$model->setBairro($_POST["bairro"]);
-		$model->setRua($_POST["rua"]);
-		$model->setNumero($_POST["numero"]);
 		$model->setTelefone($_POST["telefone"]);
 
 		$persistencia = new ClientePersistencia();
@@ -33,11 +29,7 @@ switch($_POST["action"]){
 		$model->setCnpj($_POST["cnpj"]);
 		$model->setInscricao($_POST["inscricao"]);
 		$model->setCep($_POST["cep"]);
-		$model->setUf($_POST["uf"]);
 		$model->setCidade($_POST["cidade"]);
-		$model->setBairro($_POST["bairro"]);
-		$model->setRua($_POST["rua"]);
-		$model->setNumero($_POST["numero"]);
 		$model->setTelefone($_POST["telefone"]);
 
 		$persistencia = new ClientePersistencia();
@@ -61,11 +53,7 @@ switch($_POST["action"]){
 		$model->setCnpj($_POST["cnpj"]);
 		$model->setInscricao($_POST["inscricao"]);
 		$model->setCep($_POST["cep"]);
-		$model->setUf($_POST["uf"]);
 		$model->setCidade($_POST["cidade"]);
-		$model->setBairro($_POST["bairro"]);
-		$model->setRua($_POST["rua"]);
-		$model->setNumero($_POST["numero"]);
 		$model->setTelefone($_POST["telefone"]);
 
    	$persistencia = new ClientePersistencia();
@@ -76,6 +64,38 @@ switch($_POST["action"]){
 
   	echo $retorno;
    	break;
+
+   	case 'autocompletecidade':
+
+	   	$model = new ClienteModel();
+
+		$model->setTermo($_POST["termo"]);
+
+	$persistencia = new ClientePersistencia();
+
+	$persistencia->setModel($model);
+
+	$retorno = $persistencia->buscaCidadeAutoComplete();
+
+	echo $retorno;
+
+   	break;
+
+ 	case 'buscaestado':
+		$model = new ClienteModel();
+
+		$persistencia = new RATPersistencia();
+
+		$model->setCodigo($_POST["codDsp"]);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->buscaTipoDespesa();
+
+		echo $retorno;
+
+		break;
+
 }
 
 

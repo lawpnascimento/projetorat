@@ -28,8 +28,6 @@ $(document).ready(function(){
             $("#divPrincipal").html(callback);
             buscaClienteDropdown();
             buscaProdutoDropdown();
-            buscaProjetos();
-
         }
     });
 

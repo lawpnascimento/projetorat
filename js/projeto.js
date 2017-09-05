@@ -1,18 +1,12 @@
 $("#document").ready(function() {
 
-  var date = new Date();
-
-  var day = date.getDate();
-  var month = date.getMonth() + 1;
-  var year = date.getFullYear();
-
-  if (month < 10) month = "0" + month;
-  if (day < 10) day = "0" + day;
-
-  var inputToday = year + "-" + month + "-" + day;
-  var tdToday = day + "/" + month + "/" + year;
-
-  $("#txbDataInicio").val(inputToday);
+//para chamar a data atual depois de buscar todos os projetos para a grid
+$.ajax({
+   url:buscaProjetos(),
+   success:function(){
+   setaDataAtual("#txbDataInicio");
+}
+})
 
   $("#txbValorHora").mask('###0.00', {reverse: true});
 
@@ -286,4 +280,19 @@ function validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValo
     }
     return msgErro;
 
+}
+
+function setaDataAtual(input){
+  var date = new Date();
+
+  var day = date.getDate();
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
+
+  if (month < 10) month = "0" + month;
+  if (day < 10) day = "0" + day;
+
+  inputToday = year + "-" + month + "-" + day;
+
+  $(input).val(inputToday);
 }

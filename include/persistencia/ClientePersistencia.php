@@ -33,34 +33,22 @@ class ClientePersistencia{
 		$cnpj = $this->getModel()->getCnpj();
 		$inscricao = $this->getModel()->getInscricao();
 		$cep = $this->getModel()->getCep();
-		$uf = $this->getModel()->getUf();
 		$cidade = $this->getModel()->getCidade();
-		$bairro = $this->getModel()->getBairro();
-		$rua = $this->getModel()->getRua();
-		$numero = $this->getModel()->getNumero();
 		$telefone = $this->getModel()->getTelefone();
 
-		$sSql =  "INSERT INTO tbcliente (desRazaoSocial
+		$sSql =  "INSERT INTO tbcliente (Cidade_seqCid
+																		,desRazaoSocial
 																		,nomCli
 																		,numCNPJ
 																		,iesCli
 																		,numCEP
-																		,desUF
-																		,desCid
-																 	  ,desBai
-																	  ,desEnd
-																	  ,numEnd
-																	  ,telCli)
-														VALUES ('". $razaoSocial ."'
+																	    ,telCli)
+														VALUES ('". $cidade ."'
+																	 ,'". $razaoSocial ."'
 															 		 ,'". $nomeFantasia ."'
 																	 ,'". $cnpj ."'
 																	 ,'". $inscricao ."'
 																	 ,'". $cep ."'
-																	 ,'". $uf ."'
-																	 ,'". $cidade ."'
-																	 ,'". $bairro ."'
-																	 ,'". $rua ."'
-																	 ,'". $numero ."'
 																	 ,'". $telefone ."')";
 
 		$this->getConexao()->query($sSql);
@@ -77,28 +65,22 @@ class ClientePersistencia{
 		$cnpj = $this->getModel()->getCnpj();
 		$inscricao = $this->getModel()->getInscricao();
 		$cep = $this->getModel()->getCep();
-		$uf = $this->getModel()->getUf();
 		$cidade = $this->getModel()->getCidade();
-		$bairro = $this->getModel()->getBairro();
-		$rua = $this->getModel()->getRua();
-		$numero = $this->getModel()->getNumero();
 		$telefone = $this->getModel()->getTelefone();
 
 		if($codigo == null){
 
 			$sSql = "SELECT codCli
+										 ,CONCAT(cli.Cidade_seqCid,'-',cid.desCid) Cidade_seqCid
 										 ,desRazaoSocial
 										 ,nomCli
-										 ,numCNPJ
+										 ,CONCAT(SUBSTRING(numCNPJ, 1,2), '.', SUBSTRING(numCNPJ,3,3), '.', SUBSTRING(numCNPJ,6,3), '/', SUBSTRING(numCNPJ,9,4), '-', SUBSTRING(numCNPJ,13, 2)) numCNPJ
 										 ,iesCli
 										 ,numCEP
-										 ,desUF
-										 ,desCid
-									   ,desBai
-									   ,desEnd
-									   ,numEnd
-									   ,telCli
-							 	 FROM tbcliente
+									     ,CONCAT(SUBSTRING(telCli, 1,0), '(', SUBSTRING(telCli,1,2), ')', ' ', SUBSTRING(telCli,3,4), '-', SUBSTRING(telCli,7,4)) telCli
+							 	 FROM tbcliente cli
+							 	 JOIN tbcidade cid
+							 	 ON cid.seqCid = cli.Cidade_seqCid
 								WHERE 1 = 1";
 
 			if($razaoSocial != null){
@@ -121,24 +103,8 @@ class ClientePersistencia{
 					$sSql = $sSql . " AND numCEP = '" . $cep ."'";
 			}
 
-			if($uf != null){
-					$sSql = $sSql . " AND UPPER(desUF) LIKE UPPER('%" . $uf ."%')";
-			}
-
 			if($cidade != null){
-					$sSql = $sSql . " AND UPPER(desCid) LIKE UPPER('%" . $cidade ."%')";
-			}
-
-			if($bairro != null){
-					$sSql = $sSql . " AND UPPER(desBai) LIKE UPPER('%" . $bairro ."%')";
-			}
-
-			if($rua != null){
-					$sSql = $sSql . " AND UPPER(desEnd) LIKE UPPER('%" . $rua ."%')";
-			}
-
-			if($numero != null){
-					$sSql = $sSql . " AND numEnd = ". intval($numero);
+					$sSql = $sSql . " AND Cidade_seqCid = '" . $cnpj ."'";
 			}
 
 			if($telefone != null){
@@ -148,18 +114,16 @@ class ClientePersistencia{
 			$sSql = $sSql . " ORDER BY nomCli";
 		}else{
 			$sSql = "SELECT codCli
+										 ,CONCAT(cli.Cidade_seqCid,'-',cid.desCid) Cidade_seqCid
 										 ,desRazaoSocial
 										 ,nomCli
-										 ,numCNPJ
+										 ,CONCAT(SUBSTRING(numCNPJ, 1,2), '.', SUBSTRING(numCNPJ,3,3), '.', SUBSTRING(numCNPJ,6,3), '/', SUBSTRING(numCNPJ,9,4), '-', SUBSTRING(numCNPJ,13, 2)) numCNPJ
 										 ,iesCli
 										 ,numCEP
-										 ,desUF
-										 ,desCid
-									   ,desBai
-									   ,desEnd
-									   ,numEnd
-									   ,telCli
-							 	 FROM tbcliente
+									     ,CONCAT(SUBSTRING(telCli, 1,0), '(', SUBSTRING(telCli,1,2), ')', ' ', SUBSTRING(telCli,3,4), '-', SUBSTRING(telCli,7,4)) telCli
+							 	 FROM tbcliente cli
+							 	 JOIN tbcidade cid
+							 	 ON cid.seqCid = cli.Cidade_seqCid
 							  WHERE codCli = " . $codigo . "
 								ORDER BY nomCli";
 		}
@@ -176,16 +140,12 @@ class ClientePersistencia{
 			$contador = $contador + 1;
 
 			$retorno = $retorno . '{"codCli": "'.$linha["codCli"].'"
+														, "Cidade_seqCid" : "'.$linha["Cidade_seqCid"].'"
 														, "desRazaoSocial" : "'.$linha["desRazaoSocial"].'"
 														, "nomCli" : "'.$linha["nomCli"].'"
 														, "numCNPJ" : "'.$linha["numCNPJ"].'"
 														, "iesCli" : "'.$linha["iesCli"].'"
 														, "numCEP" : "'.$linha["numCEP"].'"
-														, "desUF" : "'.$linha["desUF"].'"
-														, "desCid" : "'.$linha["desCid"].'"
-														, "desBai" : "'.$linha["desBai"].'"
-														, "desEnd" : "'.$linha["desEnd"].'"
-														, "numEnd" : "'.$linha["numEnd"].'"
 														, "telCli" : "'.$linha["telCli"].'"}';
 
 			//Para não concatenar a virgula no final do json
@@ -210,30 +170,92 @@ class ClientePersistencia{
 			$cnpj = $this->getModel()->getCnpj();
 			$inscricao = $this->getModel()->getInscricao();
 			$cep = $this->getModel()->getCep();
-			$uf = $this->getModel()->getUf();
 			$cidade = $this->getModel()->getCidade();
-			$bairro = $this->getModel()->getBairro();
-			$rua = $this->getModel()->getRua();
-			$numero = $this->getModel()->getNumero();
 			$telefone = $this->getModel()->getTelefone();
 
 			$sSql = "UPDATE tbcliente
 									SET desRazaoSocial = '" . $razaoSocial ."'
+										 ,Cidade_seqCid = '" . $cidade ."'
 										 ,nomCli = '" . $nomeFantasia ."'
 										 ,numCNPJ = '" . $cnpj ."'
 										 ,iesCli = '" . $inscricao ."'
 										 ,numCEP = '" . $cep ."'
-										 ,desUF = '" . $uf ."'
-										 ,desCid = '" . $cidade ."'
-										 ,desBai = '" . $bairro ."'
-										 ,desEnd = '" . $rua ."'
-										 ,numEnd = '" . $numero ."'
 										 ,telCli = '" . $telefone ."'
 								WHERE codcli = " . $codigo;
 
 			$this->getConexao()->query($sSql);
 
 			$this->getConexao()->fechaConexao();
+	}
+
+	public function buscaCidadeAutoComplete(){
+		$this->getConexao()->conectaBanco();
+		$termo = $this->getModel()->getTermo();
+
+		$sSql = "SELECT CONCAT(seqCid,'-',desCid) desCid
+						   FROM tbcidade
+						  WHERE desCid LIKE '%". $termo ."%'";
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = null;
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . $linha["desCid"];
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+	}
+
+	public function buscaEstado(){
+		$this->getConexao()->conectaBanco();
+
+		$seqCid = $this->getModel()->getCodigo();
+
+		$sSql = "SELECT seqEst, desEst, ufEst
+						  FROM tbestado est
+						  JOIN tbcidade cid
+						   ON cid.Estado_seqEst = est.seqEst
+						 WHERE cid.seqCid = " . $seqCid;
+
+		$resultado = mysql_query($sSql);
+
+	    $qtdLinhas = mysql_num_rows($resultado);
+
+	    $contador = 0;
+
+	    $retorno = '[';
+	    while ($linha = mysql_fetch_assoc($resultado)) {
+
+	        $contador = $contador + 1;
+
+	        $retorno = $retorno . '{"seqEst": "'.$linha["seqEst"].'"
+	                               , "desEst" : "'.$linha["desEst"].'"}';
+	        //Para não concatenar a virgula no final do json
+	        if($qtdLinhas != $contador)
+	           $retorno = $retorno . ',';
+
+	    }
+	    $retorno = $retorno . "]";
+
+	    $this->getConexao()->fechaConexao();
+
+	    return $retorno;
+
 	}
 
 }
