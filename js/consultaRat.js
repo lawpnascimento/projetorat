@@ -6,6 +6,10 @@ $("#document").ready(function(){
 
   $("#formConsultaRAT #btnBuscar").click(function () {
       consultaRAT();
+    });
+
+  $("#formConsultaRAT #btnEmail").click(function(){
+    alert("teste");
 
     });
 
@@ -103,6 +107,7 @@ function consultaRAT(){
               grid = grid + "<tr>";
               grid = grid + "<td>" + rat.codRat + "</td>";
               grid = grid + "<td>" + rat.codUsu + "</td>";
+              grid = grid + "<td>" + rat.perCom + "</td>";
               grid = grid + "<td>" + rat.codCli + "</td>";
               grid = grid + "<td>" + rat.codRes + "</td>";
               grid = grid + "<td>" + rat.codPrj + "</td>";

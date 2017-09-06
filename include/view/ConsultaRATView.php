@@ -51,6 +51,7 @@
               <div id="actions" class="row">
                 <div class="col-md-12">
                   <button id="btnBuscar" type="button" class="btn btn-info">Buscar</button>
+                  <button id="btnEmail" type="button" class="btn btn-info">Enviar e-mail</button>
                   <button id="btnCancelar" type="button" class="btn btn-warning">Cancelar</button>
                   <button id="btnAprovar" type="button" class="btn btn-success">Aprovar</button>
                   <button id="btnReprovar" type="button" class="btn btn-danger">Reprovar</button>
@@ -70,6 +71,9 @@
                 </th>
                 <th>
                   Usuário
+                </th>
+                <th>
+                  % Comissão
                 </th>
                 <th>
                   Cliente

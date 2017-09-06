@@ -32,15 +32,17 @@ class ProjetoPersistencia{
         $produto = $this->getModel()->getProduto();
         $dataInicio = $this->getModel()->getDataInicio();
         $cliente = $this->getModel()->getCliente();
-        $valorHora = $this->getModel()->getValorHora();
+        $valorHoraCom = $this->getModel()->getValorHoraCom();
+        $valorHoraFat = $this->getModel()->getValorHoraFat();
         $obsProjeto = $this->getModel()->getObsProjeto();
 		
-		$sSql = "INSERT INTO tbprojeto (nomPrj, Produto_codPro, Cliente_codCli, datIni, vlrHor, obsPrj)
+		$sSql = "INSERT INTO tbprojeto (nomPrj, Produto_codPro, Cliente_codCli, datIni, vlrHorCom,vlrComFat, obsPrj)
                           VALUES ('". $projeto ."'
                                  ,'". $produto ."'
                                  ,'". $cliente ."'
                                  ,'". $dataInicio ."'
-                                 ,'". $valorHora ."'
+                                 ,'". $valorHoraCom ."'
+                                 ,'". $valorHoraFat ."'
                                  ,'". $obsProjeto ."')"; 
 
         $this->getConexao()->query($sSql);
@@ -57,7 +59,8 @@ class ProjetoPersistencia{
     $produto = $this->getModel()->getProduto();
     $dataInicio = $this->getModel()->getDataInicio();
     $cliente = $this->getModel()->getCliente();
-    $valorHora = $this->getModel()->getValorHora();
+    $valorHoraCom = $this->getModel()->getValorHoraCom();
+    $valorHoraFat = $this->getModel()->getValorHoraFat();
     $obsProjeto = $this->getModel()->getObsProjeto();
 
     if($codigo == null){
@@ -69,7 +72,8 @@ class ProjetoPersistencia{
                      ,CONCAT(prj.Cliente_codCli,' - ',cli.nomCli) codCli
                      ,cli.nomCli nomCli
                      ,datIni
-                     ,vlrHor
+                     ,vlrHorCom
+                     ,vlrHorFat
                      ,obsPrj
                  FROM tbprojeto prj
                  JOIN tbcliente cli
@@ -94,8 +98,12 @@ class ProjetoPersistencia{
           $sSql = $sSql . " AND UPPER(Cliente_codCli) LIKE UPPER('%" . $cliente ."%')";
       }
 
-      if($valorHora != null){
-          $sSql = $sSql . " AND UPPER(vlrHor) LIKE UPPER('%" . $valorHora ."%')";
+      if($valorHoraCom != null){
+          $sSql = $sSql . " AND UPPER(vlrHorCom) LIKE UPPER('%" . $valorHoraCom ."%')";
+      }
+
+      if($valorHoraFat != null){
+          $sSql = $sSql . " AND UPPER(vlrHorFat) LIKE UPPER('%" . $valorHoraFat ."%')";
       }
 
       if($obsProjeto != null){
@@ -111,7 +119,8 @@ class ProjetoPersistencia{
                      ,CONCAT(prj.Cliente_codCli,' - ',cli.nomCli) codCli
                      ,cli.nomCli nomCli
                      ,datIni
-                     ,vlrHor
+                     ,vlrHorCom
+                     ,vlrHorFat
                      ,obsPrj
                  FROM tbprojeto prj
                  JOIN tbcliente cli
@@ -140,7 +149,8 @@ class ProjetoPersistencia{
                                                   , "codPro" : "'.$linha["codPro"].'"
                                                   , "desPro" : "'.$linha["desPro"].'"
                                                   , "datIni" : "'.$linha["datIni"].'"
-                                                  , "vlrHor" : "'.$linha["vlrHor"].'"
+                                                  , "vlrHorCom" : "'.$linha["vlrHorCom"].'"
+                                                  , "vlrHorFat" : "'.$linha["vlrHorFat"].'"
                                                   , "obsPrj" : "'.$linha["obsPrj"].'"
                                                 }';
 
@@ -164,7 +174,8 @@ class ProjetoPersistencia{
     $produto = $this->getModel()->getProduto();
     $dataInicio = $this->getModel()->getDataInicio();
     $cliente = $this->getModel()->getCliente();
-    $valorHora = $this->getModel()->getValorHora();
+    $valorHoraCom = $this->getModel()->getValorHoraCom();
+    $valorHoraFat = $this->getModel()->getValorHoraFat();
     $obsProjeto = $this->getModel()->getObsProjeto();
 
     $sSql = "UPDATE tbprojeto
@@ -172,7 +183,8 @@ class ProjetoPersistencia{
                        ,Produto_codPro = '" . $produto . "'
                        ,datIni = '" . $dataInicio . "'
                        ,Cliente_codCli = '". $cliente . "'
-                       ,vlrHor = '" . $valorHora . "'
+                       ,vlrHorCom = '" . $valorHoraCom . "'
+                       ,vlrHorFat = '" . $valorHoraFat . "'
                        ,obsPrj = '" . $obsProjeto . "'
                   WHERE codPrj = " . $codigo;
 

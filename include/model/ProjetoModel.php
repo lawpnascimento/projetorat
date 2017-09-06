@@ -7,7 +7,8 @@ class ProjetoModel {
 	private $produto;
 	private $dataInicio;
 	private $cliente;
-	private $valorHora;
+	private $valorHoraCom;
+	private $valorHoraFat;
 	private $obsProjeto;
 
 	public function setCodigo($codigo){
@@ -50,12 +51,20 @@ class ProjetoModel {
         return $this->cliente;
     }
 
-	public function setValorHora($valorHora){
-        $this->valorHora = $valorHora;
+	public function setValorHoraCom($valorHoraCom){
+        $this->valorHoraCom = $valorHoraCom;
     }
 
-    public function getValorHora(){
-        return $this->valorHora;
+    public function getValorHoraCom(){
+        return $this->valorHoraCom;
+    }
+
+    public function setValorHoraFat($valorHoraFat){
+        $this->valorHoraFat = $valorHoraFat;
+    }
+
+    public function getValorHoraFat(){
+        return $this->valorHoraFat;
     }
 
     public function setObsProjeto($obsProjeto){

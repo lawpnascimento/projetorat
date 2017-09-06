@@ -1,4 +1,5 @@
 $("#document").ready(function() {
+  aplicaMascaraProjeto();
 
 //para chamar a data atual depois de buscar todos os projetos para a grid
 $.ajax({
@@ -8,18 +9,17 @@ $.ajax({
 }
 })
 
-  $("#txbValorHora").mask('###0.00', {reverse: true});
-
   $("#formProjeto #btnCadastrar").click(function () {
 
     var txbProjeto = $("#txbProjeto").val();
     var cbbProduto = $("#cbbProduto").val();
     var txbDataInicio = $("#txbDataInicio").val();
     var cbbCliente = $("#cbbCliente").val();
-    var txbValorHora = $("#txbValorHora").val();
+    var txbValorHoraCom = $("#txbValorHoraCom").val();
+    var txbValorHoraFat = $("#txbValorHoraFat").val();
     var txaObsProjeto = $("#txaObsProjeto").val();
 
-    var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHora);
+    var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHoraCom);
 
     if(msgErro !== ""){
       jbkrAlert.alerta('Alerta!',msgErro);
@@ -34,7 +34,8 @@ $.ajax({
             produto: cbbProduto,
             dataInicio: txbDataInicio,
             cliente: cbbCliente,
-            valorHora: txbValorHora,
+            valorHoraCom: txbValorHoraCom,
+            valorHoraFat: txbValorHoraFat,
             obsProjeto: txaObsProjeto,
             action: "cadastrar"
           },
@@ -64,10 +65,11 @@ $.ajax({
     var cbbProduto = $("#cbbProduto").val();
     var txbDataInicio = $("#txbDataInicio").val();
     var cbbCliente = $("#cbbCliente").val();
-    var txbValorHora = $("#txbValorHora").val();
+    var txbValorHoraCom = $("#txbValorHoraCom").val();
+    var txbValorHoraFat = $("#txbValorHoraFat").val();
     var txaObsProjeto = $("#txaObsProjeto").val();
 
-    var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHora);
+    var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHoraCom);
 
     if(msgErro !== ""){
         jbkrAlert.alerta('Alerta!',msgErro);
@@ -83,7 +85,8 @@ $.ajax({
             produto: cbbProduto,
             dataInicio: txbDataInicio,
             cliente: cbbCliente,
-            valorHora: txbValorHora,
+            valorHoraCom: txbValorHoraCom,
+            valorHoraFat: txbValorHoraFat,
             obsProjeto: txaObsProjeto,
             action: "atualizar"
         },
@@ -111,7 +114,8 @@ function buscaProjetos(codigo){
     var cbbProduto = $("#cbbProduto").val();
     var txbDataInicio = $("#txbDataInicio").val();
     var cbbCliente = $("#cbbCliente").val();
-    var txbValorHora = $("#txbValorHora").val();
+    var txbValorHoraCom = $("#txbValorHoraCom").val();
+    var txbValorHoraFat = $("#txbValorHoraFat").val();
     var txaObsProjeto = $("#txaObsProjeto").val();
 
     $.ajax({
@@ -124,7 +128,8 @@ function buscaProjetos(codigo){
               produto: cbbProduto,
               dataInicio: txbDataInicio,
               cliente: cbbCliente,
-              valorHora: txbValorHora,
+              valorHoraCom: txbValorHoraCom,
+              valorHoraFat: txbValorHoraFat,
               obsProjeto: txaObsProjeto,
               action: "buscar"
         },
@@ -148,7 +153,8 @@ function buscaProjetos(codigo){
               grid = grid + "<td>" + projeto.codPro + "</td>";
               grid = grid + "<td>" + projeto.codCli + "</td>";
               grid = grid + "<td>" + projeto.datIni + "</td>";
-              grid = grid + "<td>" + projeto.vlrHor + "</td>";
+              grid = grid + "<td>" + projeto.vlrHorCom + "</td>";
+              grid = grid + "<td>" + projeto.vlrHorFat + "</td>";
 
               grid = grid + "<td href='javascript:void(0);' onClick='buscaProjetos(" + projeto.codPrj + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
               grid = grid + "</tr>";
@@ -167,7 +173,8 @@ function buscaProjetos(codigo){
                 $("#cbbProduto:first-child").text(projeto.desPro);
                 $("#cbbProduto:first-child").val(projeto.codPro);
                 $("#txbDataInicio").val(projeto.datIni);
-                $("#txbValorHora").val(projeto.vlrHor);
+                $("#txbValorHoraCom").val(projeto.vlrHorCom);
+                $("#txbValorHoraFat").val(projeto.vlrHorFat);
                 $("#txaObsProjeto").val(projeto.obsPrj);
             }
 
@@ -261,7 +268,7 @@ function buscaProdutoDropdown(){
     });
 }
 
-function validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHora){
+function validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHoraCom){
     msgErro = "";
     if(txbProjeto === ""){
         msgErro = msgErro + "<b>Projeto</b> é um campo de preenchimento obrigatorio<br/>";
@@ -275,8 +282,8 @@ function validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValo
     if(cbbCliente === ""){
         msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(txbValorHora === ""){
-        msgErro = msgErro + "<b>Valor Hora</b> é um campo de preenchimento obrigatorio";
+    if(txbValorHoraCom === ""){
+        msgErro = msgErro + "<b>Valor Hora Comissão</b> é um campo de preenchimento obrigatorio";
     }
     return msgErro;
 
@@ -296,3 +303,22 @@ function setaDataAtual(input){
 
   $(input).val(inputToday);
 }
+
+function aplicaMascaraProjeto(){
+  $("#txbValorHoraCom").mask('###0.00', {reverse: true});
+  $("#txbValorHoraFat").mask('###0.00', {reverse: true});
+}
+
+function removeMascaraProjeto(){
+  $("#txbValorHoraCom").unmask();
+  $("#txbValorHoraFat").unmask();
+}
+
+//Para calcular automaticamente o valor hora de faturamento arredondado
+$("#txbValorHoraCom").blur(function() {
+  var vlrHorCom = $("#txbValorHoraCom").val();
+  var vlrHorFat = vlrHorCom / 0.8985;
+  var vlrHorFatArredondado = vlrHorFat.toFixed(2);
+  $("#txbValorHoraFat").val(vlrHorFatArredondado);
+
+});

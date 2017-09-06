@@ -11,7 +11,8 @@ switch($_POST["action"]){
 		$model->setProduto($_POST["produto"]);
 		$model->setDataInicio($_POST["dataInicio"]);
 		$model->setCliente($_POST["cliente"]);
-		$model->setValorHora($_POST["valorHora"]);
+		$model->setValorHoraCom($_POST["valorHoraCom"]);
+		$model->setValorHoraFat($_POST["valorHoraFat"]);
 		$model->setObsProjeto($_POST["obsProjeto"]);
 
 		$persistencia = new ProjetoPersistencia();
@@ -31,7 +32,8 @@ switch($_POST["action"]){
 		$model->setProduto($_POST["produto"]);
 		$model->setDataInicio($_POST["dataInicio"]);
 		$model->setCliente($_POST["cliente"]);
-		$model->setValorHora($_POST["valorHora"]);
+		$model->setValorHoraCom($_POST["valorHoraCom"]);
+		$model->setValorHoraFat($_POST["valorHoraFat"]);
 		$model->setObsProjeto($_POST["obsProjeto"]);
 
 	$persistencia = new ProjetoPersistencia();
@@ -53,7 +55,8 @@ switch($_POST["action"]){
 		$model->setProduto($_POST["produto"]);
 		$model->setDataInicio($_POST["dataInicio"]);
 		$model->setCliente($_POST["cliente"]);
-		$model->setValorHora($_POST["valorHora"]);
+		$model->setValorHoraCom($_POST["valorHoraCom"]);
+		$model->setValorHoraFat($_POST["valorHoraFat"]);
 		$model->setObsProjeto($_POST["obsProjeto"]);
 
 	$persistencia = new ProjetoPersistencia();

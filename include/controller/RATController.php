@@ -213,7 +213,7 @@ switch($_POST["action"]){
 		$persistencia = new RATPersistencia();
 
 		$codRat = $persistencia->buscaCodigoRatInserido();
-		echo $codRat;
+
 		$persistencia->enviaEmailRAT($_SESSION["codUsu"]
 									,$_SESSION["nomUsu"]
 									,$_SESSION["sobrenomeUsu"]
@@ -221,6 +221,8 @@ switch($_POST["action"]){
 									,$_POST["cliente"]
 									,$_POST["responsavel"]);
 
+		$persistencia->atualizaEnvioRAT($codRat);
+			
 		break;
 
 }

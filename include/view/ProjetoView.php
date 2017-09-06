@@ -17,6 +17,7 @@
           <form id="formProjeto" class="form-horizontal" role="form">
             <input type="hidden" id="hidCodPrj"></input>
           <fieldset>
+          <legend class="scheduler-border">Projeto</legend>
               <div class="form-group">
                 <div class="col-md-4">
                   <label for="projeto">Projeto*</label>
@@ -25,10 +26,6 @@
                 <div class="col-md-2">
                   <label for="DataInicio">Data de Início*</label>
                   <input id="txbDataInicio" type="date" class="form-control" name="txbDataInicio"></input>
-                </div>
-                <div class="col-md-2">
-                  <label for="ValorHora">Valor Hora*</label>
-                  <input id="txbValorHora" type="text" class="form-control" name="txbValorHora" placeholder="Ex: 100.00" maxlength="8"></input>
                 </div>
               </div>
               <!--Combobox -->
@@ -58,6 +55,22 @@
                     </div>
                 </div>
               </div>
+              </fieldset>
+              <fieldset>
+              <legend class="scheduler-border">Valores</legend>
+              <div class="form-group">
+                <div class="col-md-2">
+                  <label for="ValorHoraCom">Valor Hora Comissão*</label>
+                    <input id="txbValorHoraCom" type="text" class="form-control" name="txbValorHoraCom" placeholder="Ex: 100.00" maxlength="8"></input>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="ValorHoraFat">Valor Hora Faturamento</label>
+                    <input id="txbValorHoraFat" type="text" class="form-control" name="txbValorHoraFat" maxlength="8"></input>
+                  </div>
+              </div>
+              </fieldset>
+              <fieldset>
+              <legend class="scheduler-border">Etc</legend>
               <div class="form-group">
                 <div class="col-md-4">
                   <label for="observacaoprojeto">Observação</label>
@@ -98,7 +111,10 @@
                 Data Inicio
               </th>
               <th>
-                Valor Hora
+                Vlr. Hor. Comissão
+              </th>
+              <th>
+                Vlr. Hor. Faturamento
               </th>
             </tr>
           </thead>

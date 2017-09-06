@@ -504,6 +504,19 @@ class RATPersistencia{
 
 	}
 
+	public function atualizaEnvioRAT($codRAT){
+		$this->getConexao()->conectaBanco();
+
+		$sSql = "UPDATE tbRAT rat
+				 		SET Situacao_codSit = 2
+				 		where codRAT = '" . $codRAT . "'
+				 		and Situacao_codSit in (1, 6)";
+
+		$this->getConexao()->query($sSql);
+
+		$this->getConexao()->fechaConexao();
+	}
+
 	public function enviaEmailRAT($codUsu, $nomUsu, $sobrenomeUsu, $codRAT, $cliente, $responsavel){
 	  $this->getConexao()->conectaBanco();
 	  
@@ -529,9 +542,7 @@ class RATPersistencia{
 
       $email = new Email();
       $email->enviaEmail($emailUsuario,$mensagem,$assunto);
-
   	}
-
 
 }
 ?>
