@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `tbatividade` (
   `datAti` date DEFAULT NULL,
   `horIni` time DEFAULT NULL,
   `horFin` time DEFAULT NULL,
+  `horTot` time DEFAULT NULL,
   `desAti` varchar(200) DEFAULT NULL,
   `tipFat` int(1) DEFAULT NULL,
   PRIMARY KEY (`codAti`),
@@ -95,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `tbatividade` (
 -- Copiando dados para a tabela dbprojetorat.tbatividade: ~1 rows (aproximadamente)
 DELETE FROM `tbatividade`;
 /*!40000 ALTER TABLE `tbatividade` DISABLE KEYS */;
-INSERT INTO `tbatividade` (`codAti`, `RAT_codRAT`, `Usuario_codUsu`, `datAti`, `horIni`, `horFin`, `desAti`, `tipFat`) VALUES
-	(1, 1, 1, '2017-09-04', '08:00:00', '10:00:00', 'InstalaÃ§Ã£o do .Net Framework 4.7InstalaÃ§Ã£o do SQL Server 2017', 0);
+INSERT INTO `tbatividade` (`codAti`, `RAT_codRAT`, `Usuario_codUsu`, `datAti`, `horIni`, `horFin`, `horTot`, `desAti`, `tipFat`) VALUES
+	(1, 1, 1, '2017-09-06', '10:00:00', '11:00:00', '01:00:00', 'desc', 1);
 /*!40000 ALTER TABLE `tbatividade` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbcidade
@@ -1393,7 +1394,7 @@ CREATE TABLE IF NOT EXISTS `tbdespesarat` (
 DELETE FROM `tbdespesarat`;
 /*!40000 ALTER TABLE `tbdespesarat` DISABLE KEYS */;
 INSERT INTO `tbdespesarat` (`seqDsp`, `Despesa_codDsp`, `RAT_codRAT`, `Fatdespesa_codTipFat`, `Usuario_codUsu`, `datDsp`, `obsDsp`, `qtdDsp`, `totDsp`) VALUES
-	(1, 3, 1, 1, 1, '2017-09-04', 'Obs', 2, 40.00);
+	(1, 1, 1, 1, 1, '2017-09-06', 'obs', 10, 9.00);
 /*!40000 ALTER TABLE `tbdespesarat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbempresa
@@ -1402,12 +1403,15 @@ CREATE TABLE IF NOT EXISTS `tbempresa` (
   `codEmp` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nomEmp` char(40) DEFAULT NULL,
   `emlEmp` varchar(50) DEFAULT NULL,
+  `vlrImp` float DEFAULT NULL,
   PRIMARY KEY (`codEmp`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Copiando dados para a tabela dbprojetorat.tbempresa: ~0 rows (aproximadamente)
 DELETE FROM `tbempresa`;
 /*!40000 ALTER TABLE `tbempresa` DISABLE KEYS */;
+INSERT INTO `tbempresa` (`codEmp`, `nomEmp`, `emlEmp`, `vlrImp`) VALUES
+	(1, 'Gestao', 'projetoratsis@gmail.com', 0.8985);
 /*!40000 ALTER TABLE `tbempresa` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbestado
@@ -1506,9 +1510,9 @@ CREATE TABLE IF NOT EXISTS `tbproduto` (
   `codPro` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `desPro` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`codPro`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbproduto: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbproduto: ~3 rows (aproximadamente)
 DELETE FROM `tbproduto`;
 /*!40000 ALTER TABLE `tbproduto` DISABLE KEYS */;
 INSERT INTO `tbproduto` (`codPro`, `desPro`) VALUES
@@ -1524,7 +1528,8 @@ CREATE TABLE IF NOT EXISTS `tbprojeto` (
   `Cliente_codCli` int(10) unsigned NOT NULL,
   `nomPrj` varchar(40) DEFAULT NULL,
   `datIni` date DEFAULT NULL,
-  `vlrHor` decimal(7,2) DEFAULT NULL,
+  `vlrHorCom` decimal(7,2) DEFAULT NULL,
+  `vlrHorFat` decimal(7,2) DEFAULT NULL,
   `obsPrj` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`codPrj`),
   KEY `Projeto_FKIndex1` (`Cliente_codCli`),
@@ -1536,9 +1541,9 @@ CREATE TABLE IF NOT EXISTS `tbprojeto` (
 -- Copiando dados para a tabela dbprojetorat.tbprojeto: ~2 rows (aproximadamente)
 DELETE FROM `tbprojeto`;
 /*!40000 ALTER TABLE `tbprojeto` DISABLE KEYS */;
-INSERT INTO `tbprojeto` (`codPrj`, `Produto_codPro`, `Cliente_codCli`, `nomPrj`, `datIni`, `vlrHor`, `obsPrj`) VALUES
-	(1, 2, 1, 'InstalaÃ§Ã£o SQL Server', '2017-09-05', 150.00, 'obs'),
-	(2, 1, 1, 'ImplantaÃ§Ã£o ERP', '2017-09-03', 100.00, 'Obs');
+INSERT INTO `tbprojeto` (`codPrj`, `Produto_codPro`, `Cliente_codCli`, `nomPrj`, `datIni`, `vlrHorCom`, `vlrHorFat`, `obsPrj`) VALUES
+	(1, 2, 1, 'Instalacao SQL Server', '2017-09-05', 150.00, 166.94, 'Obs'),
+	(2, 1, 1, 'Implantacao ERP', '2017-09-03', 100.00, 111.30, 'Obs');
 /*!40000 ALTER TABLE `tbprojeto` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbrat
@@ -1571,7 +1576,7 @@ CREATE TABLE IF NOT EXISTS `tbrat` (
 DELETE FROM `tbrat`;
 /*!40000 ALTER TABLE `tbrat` DISABLE KEYS */;
 INSERT INTO `tbrat` (`codRat`, `Usuario_codUsu`, `Cliente_codCli`, `Responsavel_codRes`, `Projeto_codPrj`, `Produto_codPro`, `Situacao_codSit`, `datRat`) VALUES
-	(1, 1, 1, 1, 1, 2, 1, '2017-09-04');
+	(1, 1, 1, 1, 1, 2, 1, '2017-09-06');
 /*!40000 ALTER TABLE `tbrat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbresponsavel
@@ -1641,7 +1646,8 @@ CREATE TABLE IF NOT EXISTS `tbusuario` (
   `senUsu` varchar(50) NOT NULL,
   `codSit` int(1) NOT NULL,
   `desEml` varchar(50) DEFAULT NULL,
-  `perCom` decimal(2,0) DEFAULT NULL,
+  `perComCli` decimal(2,0) DEFAULT NULL,
+  `perComInt` decimal(2,0) DEFAULT NULL,
   PRIMARY KEY (`codUsu`),
   KEY `Usuario_FKIndex1` (`Papel_codPap`),
   CONSTRAINT `fk_tbusuario_tbpapel` FOREIGN KEY (`Papel_codPap`) REFERENCES `tbpapel` (`codPap`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -1650,10 +1656,10 @@ CREATE TABLE IF NOT EXISTS `tbusuario` (
 -- Copiando dados para a tabela dbprojetorat.tbusuario: ~3 rows (aproximadamente)
 DELETE FROM `tbusuario`;
 /*!40000 ALTER TABLE `tbusuario` DISABLE KEYS */;
-INSERT INTO `tbusuario` (`codUsu`, `Papel_codPap`, `nomUsu`, `sobrenomeUsu`, `senUsu`, `codSit`, `desEml`, `perCom`) VALUES
-	(1, 1, 'Lucas', 'Nascimento', 'admin', 1, 'projetoratsis@gmail.com', 50),
-	(7, 2, 'Nome', 'Sobrenome', 'teste', 1, 'teste', 15),
-	(10, 1, 'Teste', 'Teste', 'teste', 1, 'teste@teste.com', 10);
+INSERT INTO `tbusuario` (`codUsu`, `Papel_codPap`, `nomUsu`, `sobrenomeUsu`, `senUsu`, `codSit`, `desEml`, `perComCli`, `perComInt`) VALUES
+	(1, 1, 'Lucas', 'Nascimento', 'admin', 1, 'projetoratsis@gmail.com', 10, 10),
+	(7, 2, 'Nome', 'Sobrenome', 'teste', 1, 'teste@teste.com', 15, 15),
+	(10, 1, 'Teste', 'Teste', 'teste', 1, 'teste@teste.com', 10, 10);
 /*!40000 ALTER TABLE `tbusuario` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.teste

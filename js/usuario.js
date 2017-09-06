@@ -1,5 +1,5 @@
 $("#document").ready(function() {
-  $("#txbPerCom").mask('99%', {reverse: false});
+  aplicaMascaraUsuario();
 
   $("#formUsuario #btnCadastrar").click(function () {
     var txbNomUsu = $("#txbNomUsu").val();
@@ -8,7 +8,8 @@ $("#document").ready(function() {
     var txbDesEml = $("#txbDesEml").val();
     var cbbPapel = $("#cbbPapel").val();
     var cbbSituacao = $("#cbbSituacao").val();
-    var txbPerCom = $("#txbPerCom").val();
+    var txbPerComCli = $("#txbPerComCli").val();
+    var txbPerComInt = $("#txbPerComInt").val();
 
     var msgErro = validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPapel, cbbSituacao);
 
@@ -27,7 +28,8 @@ $("#document").ready(function() {
             desEml: txbDesEml,
             codPap: cbbPapel,
             codSit: cbbSituacao,
-            perCom: txbPerCom,
+            perComCli: txbPerComCli,
+            perComInt: txbPerComInt,
             action: "cadastrar"
           },
 
@@ -62,7 +64,8 @@ $("#document").ready(function() {
     var txbDesEml = $("#txbDesEml").val();
     var cbbPapel = $("#cbbPapel").val();
     var cbbSituacao = $("#cbbSituacao").val();
-    var txbPerCom = $("#txbPerCom").val();
+    var txbPerComCli = $("#txbPerComCli").val();
+    var txbPerComInt = $("#txbPerComInt").val();
 
     var msgErro = validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPapel, cbbSituacao);
 
@@ -82,7 +85,8 @@ $("#document").ready(function() {
           desEml: txbDesEml,
           codPap: cbbPapel,
           codSit: cbbSituacao,
-          perCom: txbPerCom,
+          perComCli: txbPerComCli,
+          perComInt: txbPerComInt,
           action: "atualizar"
         },
 
@@ -148,7 +152,8 @@ function buscaUsuario(codigo){
   var txbDesEml = $("#txbDesEml").val();
   var cbbPapel = $("#cbbPapel").val();
   var cbbSituacao = $("#cbbSituacao").val();
-  var txbPerCom = $("#txbPerCom").val();
+  var txbPerComCli = $("#txbPerComCli").val();
+  var txbPerComInt = $("#txbPerComInt").val();
 
   $.ajax({
       //Tipo de envio POST ou GET
@@ -162,7 +167,8 @@ function buscaUsuario(codigo){
           desEml: txbDesEml,
           codPap: cbbPapel,
           codSit: cbbSituacao,
-          perCom: txbPerCom,
+          perComCli: txbPerComCli,
+          perComInt: txbPerComInt,
           action: "buscar"
       },
 
@@ -185,7 +191,8 @@ function buscaUsuario(codigo){
             grid = grid + "<td>" + usuario.sobrenomeUsu  + "</td>";
             grid = grid + "<td>" + usuario.desEml  + "</td>";
             grid = grid + "<td>" + usuario.desPap + "</td>";
-            grid = grid + "<td>" + usuario.perCom + "</td>";
+            grid = grid + "<td>" + usuario.perComCli + "</td>";
+            grid = grid + "<td>" + usuario.perComInt + "</td>";
             grid = grid + "<td>" + usuario.desSit + "</td>";
             grid = grid + "<td href='javascript:void(0);' onClick='buscaUsuario(" + usuario.codUsu + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
@@ -206,7 +213,8 @@ function buscaUsuario(codigo){
               $("#cbbPapel:first-child").val(usuario.codPap);
               $("#cbbSituacao:first-child").text(usuario.desSit);
               $("#cbbSituacao:first-child").val(usuario.codSit);
-              $("#txbPerCom").val(usuario.perCom);
+              $("#txbPerComCli").val(usuario.perComCli);
+              $("#txbPerComInt").val(usuario.perComInt);
 
           }
 
@@ -244,4 +252,9 @@ function validaCampos(txbNomUsu, txbSobrenomeUsu, txbSenUsu, txbDesEml, cbbPapel
 
     return msgErro;
 
+}
+
+function aplicaMascaraUsuario(){
+  $("#txbPerComCli").mask('99%', {reverse: false});
+  $("#txbPerComInt").mask('99%', {reverse: false});
 }

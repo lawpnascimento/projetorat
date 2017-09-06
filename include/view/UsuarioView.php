@@ -65,13 +65,17 @@
                 </div>
               </div>
             </div>
-            <legend class="scheduler-border">Atividades</legend>
+            <legend class="scheduler-border">Comissão</legend>
             <div class="form-group">
               <div class="col-md-2">
-                <label for="txbPerCom">Percentual de comissão</label>
-                <input id="txbPerCom" class="form-control" name="txbPerCom" maxlength="3" placeholder="Ex: 10%"></input>
-            </div>
+                <label for="txbPerComCli">% Comissão Clientes</label>
+                <input id="txbPerComCli" class="form-control" name="txbPerComCli" maxlength="3" placeholder="Ex: 10%"></input>
               </div>
+              <div class="col-md-2">
+                <label for="txbPerComInt">% Comissão Hora Interna</label>
+                <input id="txbPerComInt" class="form-control" name="txbPerComInt" maxlength="3" placeholder="Ex: 10%"></input>
+              </div>
+            </div>
             <br />
             <!-- BOTÕES -->
             <div id="actions" class="row">
@@ -107,7 +111,10 @@
                 Papel
               </th>
               <th>
-                % Comissão
+                % Com. Cli.
+              </th>
+              <th>
+                % Com. Int.
               </th>
               <th>
                 Situação

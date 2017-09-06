@@ -44,6 +44,8 @@ class ConsultaRATPersistencia{
 										 ,CONCAT(rat.Cliente_codCli, ' - ',cli.nomCli) Cliente_codCli
 										 ,CONCAT(rat.Responsavel_codRes, ' - ',res.nomRes) Responsavel_codRes
 										 ,CONCAT(rat.Projeto_codPrj, ' - ',prj.nomPrj) Projeto_codPrj
+										 ,prj.vlrHorCom vlrHorCom
+										 ,prj.vlrHorFat vlrHorFat
 									     ,CONCAT(rat.Produto_codPro,' - ',pro.desPro) Produto_codPro
 										 ,CONCAT(rat.Situacao_codSit,' - ',sit.desSit) Situacao_codSit
 							 	 FROM tbrat rat
@@ -105,6 +107,8 @@ class ConsultaRATPersistencia{
 										 ,CONCAT(rat.Cliente_codCli,' - ',cli.nomCli) Cliente_codCli
 										 ,CONCAT(rat.Responsavel_codRes,' - ',res.nomRes) Responsavel_codRes
 										 ,CONCAT(rat.Projeto_codPrj,' - ',prj.nomPrj) Projeto_codPrj
+										 ,prj.vlrHorCom vlrHorCom
+										 ,prj.vlrHorFat vlrHorFat
 									     ,CONCAT(rat.Produto_codPro,' - ',pro.desPro) Produto_codPro
 										 ,CONCAT(rat.Situacao_codSit,' - ',sit.desSit) Situacao_codSit
 							 	 FROM tbrat rat
@@ -141,6 +145,8 @@ class ConsultaRATPersistencia{
 														, "codCli" : "'.$linha["Cliente_codCli"].'"
 														, "codRes" : "'.$linha["Responsavel_codRes"].'"
 														, "codPrj" : "'.$linha["Projeto_codPrj"].'"
+														, "vlrHorCom" : "'.$linha["vlrHorCom"].'"
+														, "vlrHorFat" : "'.$linha["vlrHorFat"].'"
 														, "codPro" : "'.$linha["Produto_codPro"].'"
 														, "codSit" : "'.$linha["Situacao_codSit"].'"}';
 
@@ -165,6 +171,7 @@ class ConsultaRATPersistencia{
 						DATE_FORMAT(datAti, '%d-%m-%Y') datAti,
 						TIME_FORMAT(horIni,'%H:%i') horIni,
 						TIME_FORMAT(horFin,'%H:%i') horFin,
+						TIME_FORMAT(horTot,'%H:%i') horTot,
 						desAti,
 						tipFat
 				 		from tbatividade 
@@ -186,6 +193,7 @@ class ConsultaRATPersistencia{
 														, "datAti" : "'.$linha["datAti"].'"
 														, "horIni" : "'.$linha["horIni"].'"
 														, "horFin" : "'.$linha["horFin"].'"
+														, "horTot" : "'.$linha["horTot"].'"
 														, "desAti" : "'.$linha["desAti"].'"
 														, "tipFat" : "'.$linha["tipFat"].'"}';
 
@@ -212,7 +220,7 @@ class ConsultaRATPersistencia{
 								,tipdsp.desTipDsp desTipDsp
 								,dsp.vlrUni vlrUni
 								,dsprat.qtdDsp qtdDsp
-								,CONCAT('R$ ', dsprat.totDsp) totDsp
+								,dsprat.totDsp totDsp
 								,dsprat.obsDsp obsDsp
 								,fatdsp.desFatDsp desFatDsp
 					 		from tbdespesarat dsprat

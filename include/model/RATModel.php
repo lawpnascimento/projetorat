@@ -16,6 +16,7 @@ class RATModel {
 	private $dtAtividade;
 	private $hrInicial;
 	private $hrFinal;
+	private $hrTotal;
     private $dsAtividade;
     private $idFaturar;
 	private $dtDespesa;
@@ -135,6 +136,14 @@ class RATModel {
 
 	public function setHrFinal($hrFinal){
 		$this->hrFinal = $hrFinal;
+	}
+
+	public function getHrTotal(){
+		return $this->hrTotal;
+	}
+
+	public function setHrTotal($hrTotal){
+		$this->hrTotal = $hrTotal;
 	}
 
 	public function getDsAtividade(){

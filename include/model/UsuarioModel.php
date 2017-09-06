@@ -9,7 +9,8 @@ class UsuarioModel {
 	private $email;
 	private $papel;
 	private $situacao;
-	private $percentualComissao;
+	private $percentualComissaoCli;
+	private $percentualComissaoInt;
 
 	public function setCodigo($codigo){
  		$this->codigo = $codigo;
@@ -67,12 +68,20 @@ class UsuarioModel {
 		return $this->situacao;
 	}
 
-	public function setPercentualComissao($percentualComissao){
-		$this->percentualComissao = $percentualComissao;
+	public function setpercentualComissaoCli($percentualComissaoCli){
+		$this->percentualComissaoCli = $percentualComissaoCli;
 	}
 
-	public function getPercentualComissao(){
-		return $this->percentualComissao;
+	public function getpercentualComissaoCli(){
+		return $this->percentualComissaoCli;
+	}
+
+	public function setpercentualComissaoInt($percentualComissaoInt){
+		$this->percentualComissaoInt = $percentualComissaoInt;
+	}
+
+	public function getpercentualComissaoInt(){
+		return $this->percentualComissaoInt;
 	}
 }
 ?>

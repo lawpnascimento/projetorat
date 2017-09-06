@@ -360,16 +360,18 @@ class RATPersistencia{
 		$usuario = $this->getModel()->getUsuario();
 		$hrInicial = date("H:i", strtotime($this->getModel()->gethrInicial()));
     	$hrFinal = date("H:i", strtotime($this->getModel()->gethrFinal()));
+    	$hrTotal = date("H:i", strtotime($this->getModel()->gethrTotal()));
 		$dtAtividade = date("d/m/y",strtotime(str_replace('/','-',$this->getModel()->getdtAtividade())));
 		$dsAtividade = $this->getModel()->getdsAtividade();
 		$idFaturar = $this->getModel()->getIdFaturar();
 
-		$sSql =  "INSERT INTO tbatividade (RAT_codRAT, Usuario_codUsu, datAti, horIni, horFin, desAti, tipFat)
+		$sSql =  "INSERT INTO tbatividade (RAT_codRAT, Usuario_codUsu, datAti, horIni, horFin, horTot, desAti, tipFat)
 										VALUES (". $codigo ."
 													 ,". $usuario ."
 													 , STR_TO_DATE('". $dtAtividade ."','%d/%m/%Y')
 													 ,concat(hour('". $hrInicial ."'),':00:00')
 													 ,concat(hour('". $hrFinal ."'),':00:00')
+													 ,concat(hour('". $hrTotal ."'),':00:00')
 													 ,'". $dsAtividade ."'
 													 ,". $idFaturar .")";
 

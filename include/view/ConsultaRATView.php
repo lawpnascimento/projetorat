@@ -85,6 +85,12 @@
                   Projeto
                 </th>
                 <th>
+                  Vlr. Hor. Com.
+                </th>
+                <th>
+                  Vlr. Hor. Fat.
+                </th>
+                <th>
                   Produto
                 </th>
                 <th>
@@ -112,6 +118,9 @@
                 </th>
                 <th class="col-sm-1">
                   Hora Final
+                </th>
+                <th class="col-sm-1">
+                  Total Horas
                 </th>
                 <th>
                   Descrição

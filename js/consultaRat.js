@@ -111,10 +111,10 @@ function consultaRAT(){
               grid = grid + "<td>" + rat.codCli + "</td>";
               grid = grid + "<td>" + rat.codRes + "</td>";
               grid = grid + "<td>" + rat.codPrj + "</td>";
+              grid = grid + "<td>" + rat.vlrHorCom + "</td>";
+              grid = grid + "<td>" + rat.vlrHorFat + "</td>";
               grid = grid + "<td>" + rat.codPro + "</td>";  
               grid = grid + "<td>" + rat.codSit + "</td>";
-              //grid = grid + "<td>" + des.codDes + "</td>";
-              //grid = grid + "<td>" + ati.codAti + "</td>";
               grid = grid + "</tr>";
 
             }
@@ -194,6 +194,7 @@ function consultaAtividade(tdCodRAT){
                   grid = grid + "<td>" + atividade.datAti + "</td>";
                   grid = grid + "<td>" + atividade.horIni + "</td>";
                   grid = grid + "<td>" + atividade.horFin + "</td>";
+                  grid = grid + "<td>" + atividade.horTot + "</td>";
                   grid = grid + "<td>" + atividade.desAti + "</td>";
                   grid = grid + "<td>" + atividade.tipFat + "</td>";  
                   grid = grid + "</tr>";

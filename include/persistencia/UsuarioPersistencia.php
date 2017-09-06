@@ -34,16 +34,18 @@ class UsuarioPersistencia{
     $email = $this->getModel()->getEmail();
     $papel = $this->getModel()->getPapel();
     $situacao = $this->getModel()->getSituacao();
-    $percentualComissao = $this->getModel()->getPercentualComissao();
+    $percentualComissaoCli = $this->getModel()->getPercentualComissaoCli();
+    $percentualComissaoInt = $this->getModel()->getPercentualComissaoInt();
 
-		$sSql = "INSERT INTO tbusuario (nomUsu, sobrenomeUsu, senUsu, desEml, Papel_codPap, codSit, perCom)
+		$sSql = "INSERT INTO tbusuario (nomUsu, sobrenomeUsu, senUsu, desEml, Papel_codPap, codSit, perComCli, perComInt)
                           VALUES ('". $nome ."'
                          		 ,'". $sobrenome ."'
                                  ,'". $senha ."'
                                  ,'". $email ."'
                                  ,'". $papel ."'
                                  ,'". $situacao ."'
-                                 ,'". $percentualComissao ."')";
+                                 ,'". $percentualComissaoCli ."'
+                                 ,'". $percentualComissaoInt ."')";
 
     $this->getConexao()->query($sSql);
 
@@ -94,7 +96,8 @@ class UsuarioPersistencia{
     $email = $this->getModel()->getEmail();
     $papel = $this->getModel()->getPapel();
     $situacao = $this->getModel()->getSituacao();
-    $percentualComissao = $this->getModel()->getPercentualComissao();
+    $percentualComissaoCli = $this->getModel()->getPercentualComissaoCli();
+    $percentualComissaoInt = $this->getModel()->getPercentualComissaoInt();
 
 		if($codigo == null){
 
@@ -106,7 +109,8 @@ class UsuarioPersistencia{
                      ,usu.desEml desEml
                      ,pap.codPap codPap
                      ,pap.desPap desPap
-                     ,concat(usu.perCom, '%') perCom
+                     ,concat(usu.perComCli, '%') perComCli
+                     ,concat(usu.perComInt, '%') perComInt
                      , if(usu.codsit = 1 ,'Ativo','Inativo') desSit
                  FROM tbusuario usu
                  JOIN tbpapel pap
@@ -144,7 +148,8 @@ class UsuarioPersistencia{
                      ,usu.desEml desEml
                      ,pap.codPap codPap
                      ,pap.desPap desPap
-                     ,concat(usu.perCom, '%') perCom
+                     ,concat(usu.perComCli, '%') perComCli
+                     ,concat(usu.perComInt, '%') perComInt
                      , if(usu.codsit = 1 ,'Ativo','Inativo') desSit
                  FROM tbusuario usu
                  JOIN tbpapel pap
@@ -173,7 +178,8 @@ class UsuarioPersistencia{
 							                            , "desEml" : "'.$linha["desEml"].'"
 							                            , "codPap" : "'.$linha["codPap"].'"
 							                            , "desPap" : "'.$linha["desPap"].'"
-							                            , "perCom" : "'.$linha["perCom"].'"
+							                            , "perComCli" : "'.$linha["perComCli"].'"
+							                            , "perComInt" : "'.$linha["perComInt"].'"
 														, "desSit" : "'.$linha["desSit"].'"}';
 
 			//Para não concatenar a virgula no final do json
@@ -199,7 +205,8 @@ class UsuarioPersistencia{
 	    $email = $this->getModel()->getEmail();
 	    $papel = $this->getModel()->getPapel();
 	    $situacao = $this->getModel()->getSituacao();
-	    $percentualComissao = $this->getModel()->getPercentualComissao();
+    	$percentualComissaoCli = $this->getModel()->getPercentualComissaoCli();
+    	$percentualComissaoInt = $this->getModel()->getPercentualComissaoInt();
 
 			$sSql = "UPDATE tbusuario
 									SET nomUsu = '" . $nome ."'
@@ -208,7 +215,8 @@ class UsuarioPersistencia{
 										 ,desEml = '" . $email ."'
 										 ,Papel_codPap = '" . $papel ."'
 										 ,codSit = '" . $situacao ."'
-										 ,perCom= '" . $percentualComissao ."'
+										 ,perComCli = '" . $percentualComissaoCli ."'
+										 ,perComInt = '" . $percentualComissaoInt ."'
 								WHERE codUsu = " . $codigo;
 
 			$this->getConexao()->query($sSql);

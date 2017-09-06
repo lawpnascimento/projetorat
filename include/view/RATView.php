@@ -73,6 +73,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <th class="col-sm-1">Data Ati.</th>
                   <th class="col-sm-1">Hora Inicial</th>
                   <th class="col-sm-1">Hora Final</th>
+                  <th class="col-sm-1">Total Horas</th>
                   <th>Descrição das Atividades</th>
                   <th class="col-sm-1">Faturar Ati.</th>
                   <th class="col-sm-1"></th>
@@ -81,8 +82,9 @@ require_once("../../estrutura/iniciar_sessao.php");
               <tbody id="tbodyAtividades">
                 <tr class="fix">
                   <td id="tdDataAtividade" contenteditable="true" class="tdData"></td>
-                  <td id="tdHoraInicial" contenteditable="true" class="tdHora"></td>
-                  <td id="tdHoraFinal" contenteditable="true" class="tdHora"></td>
+                  <td id="tdHoraInicial" contenteditable="true" name="tdHrInicial" class="tdHora"></td>
+                  <td id="tdHoraFinal" contenteditable="true" name="tdHrFinal" class="tdHora"></td>
+                  <td id="tdHoraTotal" bgcolor="#EBEBE4" contenteditable="false" name="tdHrTotal" readonly></td>
                   <td id="tdDescricaoAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 200)"></td>
                   <td id="tdFatAtividade" class="checkbox col-sm-1"><label><input type="checkbox" value="1">Faturar</label></td>
                   <td id="tdButtonsAtividade">
@@ -93,8 +95,9 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <!-- Linha que será adicionada -->
                 <tr class="hide">
                   <td id="tdDataAtividade" contenteditable="true" class="tdData"></td>
-                  <td id="tdHoraInicial" contenteditable="true" class="tdHora"></td>
-                  <td id="tdHoraFinal" contenteditable="true" class="tdHora"></td>
+                  <td id="tdHoraInicial" contenteditable="true" name="tdHrInicial" class="tdHora"></td>
+                  <td id="tdHoraFinal" contenteditable="true" name="tdHrFinal" class="tdHora"></td>
+                  <td id="tdHoraTotal" bgcolor="#EBEBE4" contenteditable="false" name="tdHrTotal"></td>
                   <td id="tdDescricaoAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 200)"></td>
                   <td id="tdFatAtividade" class="checkbox col-sm-1"><label><input type="checkbox" value="1">Faturar</label></td>
                   <td id="tdButtonsAtividade">

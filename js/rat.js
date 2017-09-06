@@ -156,6 +156,7 @@ $("#document").ready(function(){
     headersAtividade.push("dtAtividade");
     headersAtividade.push("hrInicial");
     headersAtividade.push("hrFinal");
+    headersAtividade.push("hrTotal");
     headersAtividade.push("dsAtividade");
     headersAtividade.push("idFaturar");
 
@@ -187,7 +188,7 @@ $("#document").ready(function(){
     for (var i = 0; i < dataAtividade.length; i++) {
       atividade = dataAtividade[i];
 
-      var msgErroAtividade =  validaCamposAtividade(atividade.dtAtividade, atividade.hrInicial,atividade.hrFinal,atividade.dsAtividade);
+      var msgErroAtividade =  validaCamposAtividade(atividade.dtAtividade, atividade.hrInicial, atividade.hrFinal, atividade.hrTotal,atividade.dsAtividade);
 
       if(msgErroAtividade !== ""){
         jbkrAlert.alerta('Alerta!',msgErroAtividade);
@@ -520,7 +521,7 @@ function validaCamposDespesa(dtDespesa, dsDespesa, idDespesa, vlDespesa, qtDespe
 
 }
 
-function validaCamposAtividade(dtAtividade, hrInicial, hrFinal, dsAtividade){
+function validaCamposAtividade(dtAtividade, hrInicial, hrFinal, hrTotal, dsAtividade){
 
   var msgErro = "";
   if(dtAtividade === ""){
@@ -534,12 +535,14 @@ function validaCamposAtividade(dtAtividade, hrInicial, hrFinal, dsAtividade){
   if(hrFinal === ""){
     msgErro = msgErro + "<b>Hora Final</b> é um campo de preenchimento obrigatorio<br/>";
   }
-
+  if(hrTotal === ""){
+    msgErro = msgErro + "<b>Hora Total</b> é um campo de preenchimento obrigatorio<br/>";
+  }
   if(dsAtividade === ""){
     msgErro = msgErro + "<b>Descrição da atividade</b> é um campo de preenchimento obrigatorio<br/>";
   }
-  else if(hrInicial >= hrFinal){
-    msgErro = msgErro + "<b>Hora Inicial</b> deve ser menor que a hora final<br/>";
+  if (hrInicial >= hrFinal){
+    msgErro = msgErro + "<b>Hora Inicial</b> deve ser antes que a hora final<br/>";
   }
 
   return msgErro;
@@ -614,6 +617,7 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
                 dtAtividade: atividade.dtAtividade,
                 hrInicial: atividade.hrInicial,
                 hrFinal: atividade.hrFinal,
+                hrTotal: atividade.hrTotal,
                 dsAtividade: atividade.dsAtividade,
                 idFaturar: atividade.idFaturar,
                 action: "inseriratividade"
@@ -781,6 +785,7 @@ $("select[name='idDespesa']").change(function() {
 
 });
 
+//multiplica quantidade da despesa pelo seu valor unitário
 $("td[name='tdQtdDespesa']").blur(function() {
   vlUni = $(this).parent().find("td[name='tdVlUni']").text();
   qtdDespesa = $(this).text();
@@ -788,5 +793,17 @@ $("td[name='tdQtdDespesa']").blur(function() {
 
   $(this).parent().find("td[name='totDespesa']").text(total);
 
+
+});
+
+//calcula valor da hora total
+$("td[name='tdHrFinal']").blur(function() {
+  hrFinal = $(this).parent().find("td[name='tdHrFinal']").text();
+  hrInicial = $(this).parent().find("td[name='tdHrInicial']").text();
+
+  var hrTotal = moment.utc(moment(hrFinal,"HH:mm").diff(moment(hrInicial,"HH:mm"))).format("HH:mm");
+
+  $(this).parent().find("td[name='tdHrTotal']").text(hrTotal);
+  alert(hrTotal);
 
 });

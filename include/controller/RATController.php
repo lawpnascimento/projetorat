@@ -137,6 +137,7 @@ switch($_POST["action"]){
 		$model->setDtAtividade($_POST["dtAtividade"]);
 		$model->setHrInicial($_POST["hrInicial"]);
 		$model->setHrFinal($_POST["hrFinal"]);
+		$model->setHrTotal($_POST["hrTotal"]);
 		$model->setDsAtividade($_POST["dsAtividade"]);
 		$model->setIdFaturar($_POST["idFaturar"]);
 
