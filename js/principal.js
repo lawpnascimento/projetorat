@@ -161,6 +161,7 @@ $(document).ready(function(){
         url: "FaturamentoView.php",
         success: function(callback){
             $("#divPrincipal").html(callback);
+            consultaFatRAT();
         }
       });
   });

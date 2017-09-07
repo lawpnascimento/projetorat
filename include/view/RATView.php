@@ -108,8 +108,6 @@ require_once("../../estrutura/iniciar_sessao.php");
                 </tr>
               </tbody>
             </table>
-                <button id="btnExportarAtividade" class="btn btn-primary">Export Data</button>
-                <p id="msgExportarAtividade"></p>
             </div>
           </div>
           <!-- TELA DESPESA -->
@@ -185,8 +183,6 @@ require_once("../../estrutura/iniciar_sessao.php");
                   </tr>
                 </tbody>
                 </table>
-                <button id="btnExportarDespesa" class="btn btn-primary">Export Data</button>
-                <p id="msgExportarDespesa"></p>
               </div>
               <input type="hidden" id="hidVlUni"></input>
           </div>

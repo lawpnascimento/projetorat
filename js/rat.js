@@ -1,8 +1,6 @@
 //TABELA ATIVIDADE
 var $tableAtividade = $('#tableAtividade');
 var $tabDespesas = $('#tabDespesas');
-var $btnExportarAtividade = $('#btnExportarAtividade');
-var $msgExportarAtividade = $('#msgExportarAtividade');
 var descricaocarregada = false;
 
 $(".tdData").inputmask("date");
@@ -43,41 +41,8 @@ $('#addAtividade').click(function () {
   $(".tdHora").inputmask("99:99");
 });
 
-// A few jQuery helpers for exporting only
-jQuery.fn.pop = [].pop;
-jQuery.fn.shift = [].shift;
-
-$btnExportarAtividade.click(function () {
-  var $rows = $tableAtividade.find('tr:not(:hidden)');
-  var headers = [];
-  var data = [];
-
-  // Get the headers (add special header logic here)
-  $($rows.shift()).find('th:not(:empty)').each(function () {
-    headers.push($(this).text().toLowerCase());
-  });
-
-  // Turn all existing rows into a loopable array
-  $rows.each(function () {
-    var $td = $(this).find('td');
-    var h = {};
-
-    // Use the headers from earlier to name our hash keys
-    headers.forEach(function (header, i) {
-      h[header] = $td.eq(i).text();
-    });
-
-    data.push(h);
-  });
-
-  // Output the result
-  $msgExportarAtividade.text(JSON.stringify(data));
-});
-
 //TABELA DESPESA
 var $tableDespesa = $('#tableDespesa');
-var $btnExportarDespesa = $('#btnExportarDespesa');
-var $msgExportarDespesa = $('#msgExportarDespesa');
 
 $('#addDespesa').click(function () {
   $(".tdData").inputmask("remove");
@@ -86,37 +51,6 @@ $('#addDespesa').click(function () {
     $tableDespesa.find('table').append($clone);
 
   $(".tdData").inputmask("date");
-});
-
-// A few jQuery helpers for exporting only
-jQuery.fn.pop = [].pop;
-jQuery.fn.shift = [].shift;
-
-$btnExportarDespesa.click(function () {
-  var $rows = $tableDespesa.find('tr:not(:hidden)');
-  var headers = [];
-  var data = [];
-
-  // Get the headers (add special header logic here)
-  $($rows.shift()).find('th:not(:empty)').each(function () {
-    headers.push($(this).text().toLowerCase());
-  });
-
-  // Turn all existing rows into a loopable array
-  $rows.each(function () {
-    var $td = $(this).find('td');
-    var h = {};
-
-    // Use the headers from earlier to name our hash keys
-    headers.forEach(function (header, i) {
-      h[header] = $td.eq(i).text();
-    });
-
-    data.push(h);
-  });
-
-  // Output the result
-  $msgExportarDespesa.text(JSON.stringify(data));
 });
 
 $("#document").ready(function(){
@@ -804,6 +738,4 @@ $("td[name='tdHrFinal']").blur(function() {
   var hrTotal = moment.utc(moment(hrFinal,"HH:mm").diff(moment(hrInicial,"HH:mm"))).format("HH:mm");
 
   $(this).parent().find("td[name='tdHrTotal']").text(hrTotal);
-  alert(hrTotal);
-
 });

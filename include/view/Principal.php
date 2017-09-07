@@ -24,6 +24,7 @@ require_once("../../estrutura/iniciar_sessao.php");
   <script type="text/javascript" src="../../js/alerta.js"></script>
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/alerta.css">
+  <link rel="stylesheet" href="../../css/tabela.css">
   <!-- start orangechat code -->
   <!--  <link type="text/css" rel="stylesheet" media="all" href="../../orangechat/orangechat/orangecss.php" />
     <script type="text/javascript" src="../../orangechat/orangechat/orangejs.php"></script> -->

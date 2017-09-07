@@ -40,7 +40,8 @@ class ConsultaRATPersistencia{
 
 			$sSql = "SELECT rat.codRat
 										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
-										 ,CONCAT(usu.perCom, '%') perCom
+										 ,CONCAT(usu.perComCli, '%') perComCli
+										 ,CONCAT(usu.perComInt, '%') perComInt
 										 ,CONCAT(rat.Cliente_codCli, ' - ',cli.nomCli) Cliente_codCli
 										 ,CONCAT(rat.Responsavel_codRes, ' - ',res.nomRes) Responsavel_codRes
 										 ,CONCAT(rat.Projeto_codPrj, ' - ',prj.nomPrj) Projeto_codPrj
@@ -103,7 +104,8 @@ class ConsultaRATPersistencia{
 		}else{
 			$sSql = "SELECT rat.codRat
 										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
-										 ,CONCAT(usu.perCom, '%') perCom
+										 ,CONCAT(usu.perComCli, '%') perComCli
+										 ,CONCAT(usu.perComInt, '%') perComInt
 										 ,CONCAT(rat.Cliente_codCli,' - ',cli.nomCli) Cliente_codCli
 										 ,CONCAT(rat.Responsavel_codRes,' - ',res.nomRes) Responsavel_codRes
 										 ,CONCAT(rat.Projeto_codPrj,' - ',prj.nomPrj) Projeto_codPrj
@@ -141,7 +143,8 @@ class ConsultaRATPersistencia{
 
 			$retorno = $retorno . '{"codRat": "'.$linha["codRat"].'"
 														, "codUsu" : "'.$linha["Usuario_codUsu"].'"
-														, "perCom" : "'.$linha["perCom"].'"
+														, "perComCli" : "'.$linha["perComCli"].'"
+														, "perComInt" : "'.$linha["perComInt"].'"
 														, "codCli" : "'.$linha["Cliente_codCli"].'"
 														, "codRes" : "'.$linha["Responsavel_codRes"].'"
 														, "codPrj" : "'.$linha["Projeto_codPrj"].'"

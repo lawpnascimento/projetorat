@@ -73,7 +73,10 @@
                   Usuário
                 </th>
                 <th>
-                  % Comissão
+                  % Com. Cli.
+                </th>
+                <th>
+                  % Com. Int.
                 </th>
                 <th>
                   Cliente

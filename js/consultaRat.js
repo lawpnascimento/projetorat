@@ -107,7 +107,8 @@ function consultaRAT(){
               grid = grid + "<tr>";
               grid = grid + "<td>" + rat.codRat + "</td>";
               grid = grid + "<td>" + rat.codUsu + "</td>";
-              grid = grid + "<td>" + rat.perCom + "</td>";
+              grid = grid + "<td>" + rat.perComCli + "</td>";
+              grid = grid + "<td>" + rat.perComInt + "</td>";
               grid = grid + "<td>" + rat.codCli + "</td>";
               grid = grid + "<td>" + rat.codRes + "</td>";
               grid = grid + "<td>" + rat.codPrj + "</td>";
@@ -140,7 +141,7 @@ function aprovaRAT(tdCodRAT, tdSitRAT){
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            jbkrAlert.sucesso('RAT', 'RAT autorizado com sucesso!');
+            jbkrAlert.sucesso('RAT', 'RAT aprovado com sucesso e enviado para o faturamento!');
             $("#formConsultaRAT #btnCancelar").trigger("click");
         }
     });
