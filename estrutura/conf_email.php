@@ -13,7 +13,7 @@ class Email{
       $this->smtp   = 'tls';
   }
 
-  public function enviaEmail($email, $mensagem, $assunto){
+  public function enviaEmail($email, $mensagem, $assunto, $cc){
     global $error;
 
     require_once("../../lib/PHPMailer/PHPMailerAutoload.php");
@@ -34,6 +34,7 @@ class Email{
     $mail->Subject = utf8_decode($assunto);
     $mail->Body = $mensagem;
     $mail->AddAddress($email);
+    $mail->AddCC($cc);
 
     if(!$mail->Send()) {
       $error = 'Mail error: '.$mail->ErrorInfo;

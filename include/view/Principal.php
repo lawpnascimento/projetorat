@@ -82,10 +82,6 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <li>
                     <a id="lancarat">Lançamento RAT</a>
                   </li>
-                  <li class="divider"/>
-                  <li>
-                    <a id="avaliacaorat">Avaliação RAT</a>
-                  </li>
                 </ul>
               </li>
             </ul>

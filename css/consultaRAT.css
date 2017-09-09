@@ -1,1 +1,6 @@
 .highlight { background-color: #e4e4e4; }
+.digitado { color: violet; }
+.enviado { color: blue; }
+.aprovado { color: green; }
+.faturado { color: yellow; }
+.reprovado { color: red; }

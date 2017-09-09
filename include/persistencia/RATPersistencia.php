@@ -519,32 +519,47 @@ class RATPersistencia{
 		$this->getConexao()->fechaConexao();
 	}
 
-	public function enviaEmailRAT($codUsu, $nomUsu, $sobrenomeUsu, $codRAT, $cliente, $responsavel){
+	public function enviaEmailRAT($codUsu, $codRAT){
 	  $this->getConexao()->conectaBanco();
 	  
-      $sSql = "SELECT desEml
-                 FROM tbusuario usu
-               WHERE usu.codUsu = " . $codUsu;
+      $sSql = "SELECT rat.codRat
+      				  ,CONCAT(usu.nomUsu, ' ' ,sobrenomeUsu) nomUsu
+      				  ,usu.desEml desEml
+					  ,cli.desRazaoSocial desRazaoSocial
+					  ,res.nomRes nomRes
+					  ,res.emlRes emlRes
+                 FROM tbrat rat
+                 JOIN tbusuario usu
+				   ON usu.codUsu = rat.Usuario_codUsu
+				 JOIN tbcliente cli
+				   ON cli.codCli = rat.Cliente_codCli
+				 JOIN tbresponsavel res 
+				   ON res.codRes = rat.Responsavel_codRes
+				 WHERE rat.codRat = " . $codRAT . "
+				 AND usu.codUsu = " . $codUsu;
 
       $resultado = mysql_query($sSql);
 
-      $assunto = "Gestão - RAT " . $codRAT . " ref. " . $cliente . "";
-
-      $mensagem	= "Olá " . $responsavel . ", Segue RAT lançado por " . $nomUsu . " " . $sobrenomeUsu . ".";
-
-      $emailUsuario = null;
-
       while ($linha = mysql_fetch_assoc($resultado)) {
 
+      	  $nomeUsuario = $linha["nomUsu"];
           $emailUsuario = $linha["desEml"];
+          $razaoSocial = $linha["desRazaoSocial"];
+          $nomeResponsavel = $linha["nomRes"];
+          $emailResponsavel = $linha["emlRes"];
 
       }
+
+      $assunto = "Gestão - RAT " . $codRAT . " ref. " . $razaoSocial . "";
+
+      $mensagem	= "Olá " . $nomeResponsavel . ", Segue RAT lançado por " . $nomeUsuario . "";
 
 	  $this->getConexao()->fechaConexao();
 
       $email = new Email();
-      $email->enviaEmail($emailUsuario,$mensagem,$assunto);
+      $email->enviaEmail($emailResponsavel,$mensagem,$assunto,$emailUsuario);
   	}
 
 }
+
 ?>

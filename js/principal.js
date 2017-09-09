@@ -119,17 +119,6 @@ $(document).ready(function(){
     });
   });
 
-  $("#avaliacaorat").click(function(){
-    $.ajax({
-      type: "POST",
-      dataType: "text",
-      url: "AvaliacaoRATView.php",
-      success: function(callback){
-          $("#divPrincipal").html(callback);
-      }
-    });
-  });
-
   $("#perfil").click(function(){
       $.ajax({
         type: "POST",

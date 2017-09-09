@@ -100,7 +100,7 @@
         </div>
 
         <legend class="scheduler-border">Atividades</legend>
-        <div class="panel panel-default" style="overflow-y: scroll; height:100px !important;">
+        <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
           <table id="tableFatAtividade" class="table table-condensed table-bordered">
             <thead>
               <tr>
@@ -125,11 +125,12 @@
               </tr>
             </thead>
             <tbody id="grdFatAtividade"></tbody>
+            <tfoot id="footFatAtividade"></tfoot>
           </table>
         </div>
 
         <legend class="scheduler-border">Despesas</legend>
-        <div class="panel panel-default" style="overflow-y: scroll; height:150px !important;">
+        <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
           <table id="tableConsultaDespesa" class="table table-condensed table-bordered">
             <thead>
               <tr>
@@ -163,14 +164,12 @@
               </tr>
             </thead>
                 <tbody id="grdFatDespesa"></tbody>
-            <tfoot>
-              <tr>
-                <td colspan="2">Reembolso para o consultor</td> 
-              </tr>
-              <tr>
-                <td colspan="2">A Cobrar do cliente</td>
-              </tr>
-            </tfoot>
+                <tfoot>
+                  <tr id="footFatDespesaFat">
+                  </tr>
+                  <tr id="footFatDespesaRem">
+                  </tr>    
+                </tfoot>
           </table>
         </div>
 

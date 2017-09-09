@@ -216,11 +216,7 @@ switch($_POST["action"]){
 		$codRat = $persistencia->buscaCodigoRatInserido();
 
 		$persistencia->enviaEmailRAT($_SESSION["codUsu"]
-									,$_SESSION["nomUsu"]
-									,$_SESSION["sobrenomeUsu"]
-									,$codRat
-									,$_POST["cliente"]
-									,$_POST["responsavel"]);
+									,$codRat);
 
 		$persistencia->atualizaEnvioRAT($codRat);
 			

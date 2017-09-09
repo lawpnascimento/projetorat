@@ -587,7 +587,7 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
 
   }
 
-  var enviar = confirm('Deseja receber e-mail do RAT cadastrado por e-mail?');
+  var enviar = confirm('Deseja enviar o RAT por e-mail ao responsável?');
   if (enviar){
     $.ajax({
         //Tipo de envio POST ou GET

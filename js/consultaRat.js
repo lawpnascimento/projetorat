@@ -1,8 +1,5 @@
 $("#document").ready(function(){ 
   verificaPapelUsuario();
-  
-  var $msgTeste = $('#msgTeste');
-  var $VgrdConsultaRAT = $('#grdConsultaRAT');
 
   $("#formConsultaRAT #btnBuscar").click(function () {
       consultaRAT();
@@ -274,4 +271,27 @@ function verificaPapelUsuario(){
                   }
         }
     });
+
 }
+/*
+function aplicaCorRAT(){
+  $("#grdConsultaRAT tr").each(function(){
+    var tdSitRAT = $("#grdConsultaRAT tr").find('td:last').text().slice(0,1);
+    alert(tdSitRAT);
+    if (tdSitRAT = 1){
+      $(this).addClass('digitado');
+    }
+    else if (tdSitRAT = 2){
+      $(this).addClass('enviado');
+    }
+    else if (tdSitRAT = 3){
+      $(this).addClass('aprovado');
+    }
+    else if (tdSitRAT = 4){
+      $(this).addClass('faturado');
+    } 
+    else if (tdSitRAT = 6){
+      $(this).addClass('reprovado');
+    } 
+  });
+}*/
