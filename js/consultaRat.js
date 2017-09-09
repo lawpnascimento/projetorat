@@ -6,8 +6,20 @@ $("#document").ready(function(){
     });
 
   $("#formConsultaRAT #btnEmail").click(function(){
-    alert("teste");
+      var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
+      if (trSelecionado == true){
+        var tdUsuRAT = $("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-");
+        var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
+        var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
+      if (tdSitRAT == 1 || tdSitRAT == 6){
+        enviaEmailRAT(tdUsuRAT, tdCodRAT);
+          } else {
+                   jbkrAlert.alerta('Alerta', "O RAT deve estar com a situação '1 - Digitado' ou '6 - Reprovado' para ser enviado.");
+                 }  
+      } else {
+              jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser enviado.");
+             }
     });
 
   $("#formConsultaRAT #btnCancelar").click(function(){
@@ -18,6 +30,7 @@ $("#document").ready(function(){
   $("#grdConsultaRAT").on('click', 'tr', function () {
       var selected = $(this).hasClass("highlight");
       $("#grdConsultaRAT tr").removeClass("highlight");
+
       if(!selected){
               $(this).addClass("highlight")
       };
@@ -273,6 +286,36 @@ function verificaPapelUsuario(){
     });
 
 }
+
+function enviaEmailRAT(tdUsuRAT, tdCodRAT){
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+                usuariorat: tdUsuRAT[0],
+                codigorat: tdCodRAT,
+                action: "enviaemailrat"
+        },
+
+        url: "../controller/ConsultaRATController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+        var json = $.parseJSON(dados);
+
+        if (json.status == 1) {
+            jbkrAlert.alerta('Alerta','Somente o usuário que lançou o RAT pode enviá-lo por e-mail.');   
+          }else {
+            jbkrAlert.sucesso('Sucesso', 'RAT enviado com sucesso!');
+            $("#formConsultaRAT #btnCancelar").trigger("click");
+          }
+
+        }
+    });
+
+}
+
 /*
 function aplicaCorRAT(){
   $("#grdConsultaRAT tr").each(function(){

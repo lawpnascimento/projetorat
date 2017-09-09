@@ -1,6 +1,7 @@
 <?php
 
 require_once("../../estrutura/conexao.php");
+require_once("../../estrutura/conf_email.php");
 
 class ConsultaRATPersistencia{
 	protected $model;
@@ -302,6 +303,64 @@ class ConsultaRATPersistencia{
 		$this->getConexao()->fechaConexao();
 	}
 
+	public function enviaEmailRAT(){
+	  $this->getConexao()->conectaBanco();
+
+	  $usuRAT = $this->getModel()->getUsuario();
+	  $codRAT = $this->getModel()->getCodigo();
+	  
+      $sSql = "SELECT rat.codRat
+      				  ,CONCAT(usu.nomUsu, ' ' ,sobrenomeUsu) nomUsu
+      				  ,usu.desEml desEml
+					  ,cli.desRazaoSocial desRazaoSocial
+					  ,res.nomRes nomRes
+					  ,res.emlRes emlRes
+                 FROM tbrat rat
+                 JOIN tbusuario usu
+				   ON usu.codUsu = rat.Usuario_codUsu
+				 JOIN tbcliente cli
+				   ON cli.codCli = rat.Cliente_codCli
+				 JOIN tbresponsavel res 
+				   ON res.codRes = rat.Responsavel_codRes
+				 WHERE rat.codRat = " . $codRAT . "
+				 AND usu.codUsu = " . $usuRAT;
+
+      $resultado = mysql_query($sSql);
+
+      while ($linha = mysql_fetch_assoc($resultado)) {
+
+      	  $nomeUsuario = $linha["nomUsu"];
+          $emailUsuario = $linha["desEml"];
+          $razaoSocial = $linha["desRazaoSocial"];
+          $nomeResponsavel = $linha["nomRes"];
+          $emailResponsavel = $linha["emlRes"];
+
+      }
+
+      $assunto = "Gestão - RAT " . $codRAT . " ref. " . $razaoSocial . "";
+
+      $mensagem	= "Olá " . $nomeResponsavel . ", Segue RAT lançado por " . $nomeUsuario . "";
+
+	  $this->getConexao()->fechaConexao();
+
+      $email = new Email();
+      $email->enviaEmail($emailResponsavel,$mensagem,$assunto,$emailUsuario);
+  	}
+
+	public function atualizaEnvioRAT(){
+		$this->getConexao()->conectaBanco();
+
+		$codRAT = $this->getModel()->getCodigo();
+
+		$sSql = "UPDATE tbRAT rat
+				 		SET Situacao_codSit = 2
+				 		where codRAT = '" . $codRAT . "'
+				 		and Situacao_codSit in (1, 6)";
+
+		$this->getConexao()->query($sSql);
+
+		$this->getConexao()->fechaConexao();
+	}
 
 }
 ?>

@@ -107,6 +107,28 @@ switch($_POST["action"]){
 
     break;
 
+    case 'enviaemailrat':
+    	if (($_SESSION["codUsu"]) != ($_POST["usuariorat"])){
+    		
+	    	$model = new ConsultaRATModel();
+
+				$model->setUsuario($_POST["usuariorat"]);
+				$model->setCodigo($_POST["codigorat"]);
+
+				$persistencia = new ConsultaRATPersistencia();
+
+				$persistencia->setModel($model);
+
+				$persistencia->enviaEmailRAT();
+
+				$persistencia->atualizaEnvioRAT();	
+		}
+		else {  
+				echo '{"status" : 1 }';	    	
+	    }
+			
+	break;
+
 }
 
 ?>

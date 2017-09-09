@@ -220,7 +220,7 @@ switch($_POST["action"]){
 
 		$persistencia->atualizaEnvioRAT($codRat);
 			
-		break;
+	break;
 
 }
 
