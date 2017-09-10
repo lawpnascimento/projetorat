@@ -91,13 +91,16 @@ CREATE TABLE IF NOT EXISTS `tbatividade` (
   KEY `fk_tbatividade_tbusuario` (`Usuario_codUsu`),
   CONSTRAINT `fk_tbatividade_tbrat` FOREIGN KEY (`RAT_codRAT`) REFERENCES `tbrat` (`codRat`),
   CONSTRAINT `fk_tbatividade_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbatividade: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbatividade: ~4 rows (aproximadamente)
 DELETE FROM `tbatividade`;
 /*!40000 ALTER TABLE `tbatividade` DISABLE KEYS */;
 INSERT INTO `tbatividade` (`codAti`, `RAT_codRAT`, `Usuario_codUsu`, `datAti`, `horIni`, `horFin`, `horTot`, `desAti`, `tipFat`) VALUES
-	(1, 1, 1, '2017-09-06', '10:00:00', '11:00:00', '01:00:00', 'desc', 1);
+	(1, 1, 1, '2017-09-06', '09:00:00', '11:00:00', '02:00:00', 'desc', 1),
+	(2, 1, 1, '2017-09-08', '11:00:00', '12:00:00', '01:00:00', 'desc', 1),
+	(3, 2, 1, '2017-09-08', '08:00:00', '12:00:00', '04:00:00', 'Desc', 1),
+	(4, 3, 1, '2017-09-08', '08:00:00', '12:00:00', '04:00:00', 'descr', 1);
 /*!40000 ALTER TABLE `tbatividade` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbcidade
@@ -1331,7 +1334,7 @@ DELETE FROM `tbcliente`;
 /*!40000 ALTER TABLE `tbcliente` DISABLE KEYS */;
 INSERT INTO `tbcliente` (`codCli`, `Cidade_seqCid`, `desRazaoSocial`, `nomCli`, `numCNPJ`, `iesCli`, `numCEP`, `telCli`) VALUES
 	(1, 37, 'Gestao Sistemas de Informacao Eireli', 'Gestao', '73932394000190', '', '89022000', '4831292031'),
-	(2, 137, 'Senior Joinville', 'Senior Joinville', '99999999999999', '', '', '4738021000');
+	(2, 137, 'Senior Joinville', 'Senior Joinville', '88888888888888', '', '', '4738021000');
 /*!40000 ALTER TABLE `tbcliente` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbcomissao
@@ -1388,13 +1391,16 @@ CREATE TABLE IF NOT EXISTS `tbdespesarat` (
   CONSTRAINT `fk_tbdespesarat_tbfatdespesa` FOREIGN KEY (`Fatdespesa_codTipFat`) REFERENCES `tbfatdespesa` (`codFatDsp`),
   CONSTRAINT `fk_tbdespesarat_tbrat` FOREIGN KEY (`RAT_codRAT`) REFERENCES `tbrat` (`codRat`),
   CONSTRAINT `fk_tbdespesarat_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbdespesarat: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbdespesarat: ~4 rows (aproximadamente)
 DELETE FROM `tbdespesarat`;
 /*!40000 ALTER TABLE `tbdespesarat` DISABLE KEYS */;
 INSERT INTO `tbdespesarat` (`seqDsp`, `Despesa_codDsp`, `RAT_codRAT`, `Fatdespesa_codTipFat`, `Usuario_codUsu`, `datDsp`, `obsDsp`, `qtdDsp`, `totDsp`) VALUES
-	(1, 1, 1, 1, 1, '2017-09-06', 'obs', 10, 9.00);
+	(1, 1, 1, 1, 1, '2017-09-08', 'Obs', 1, 30.00),
+	(2, 1, 1, 2, 1, '2017-09-08', 'teste', 1, 20.00),
+	(3, 1, 1, 4, 1, '2017-09-08', 'obs', 100, 90.00),
+	(4, 1, 1, 4, 1, '2017-09-08', 'teste', 1, 10.00);
 /*!40000 ALTER TABLE `tbdespesarat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbempresa
@@ -1473,7 +1479,7 @@ DELETE FROM `tbfatdespesa`;
 INSERT INTO `tbfatdespesa` (`codFatDsp`, `desFatDsp`, `detFatDsp`) VALUES
 	(1, 'FR', 'Fatura e reembolsa'),
 	(2, 'FN', 'Fatura e não reembolsa'),
-	(3, 'NR', 'Não reembolsa'),
+	(3, 'NR', 'Não fatura e reembolsa'),
 	(4, 'NN', 'Não fatura e não reembolsa');
 /*!40000 ALTER TABLE `tbfatdespesa` ENABLE KEYS */;
 
@@ -1543,7 +1549,7 @@ DELETE FROM `tbprojeto`;
 /*!40000 ALTER TABLE `tbprojeto` DISABLE KEYS */;
 INSERT INTO `tbprojeto` (`codPrj`, `Produto_codPro`, `Cliente_codCli`, `nomPrj`, `datIni`, `vlrHorCom`, `vlrHorFat`, `obsPrj`) VALUES
 	(1, 2, 1, 'Instalacao SQL Server', '2017-09-05', 150.00, 166.94, 'Obs'),
-	(2, 1, 1, 'Implantacao ERP', '2017-09-03', 100.00, 111.30, 'Obs');
+	(2, 1, 1, 'Hora Interna', '2017-09-03', 100.00, 0.00, 'Obs');
 /*!40000 ALTER TABLE `tbprojeto` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbrat
@@ -1570,13 +1576,15 @@ CREATE TABLE IF NOT EXISTS `tbrat` (
   CONSTRAINT `fk_tbrat_tbresponsavel` FOREIGN KEY (`Responsavel_codRes`) REFERENCES `tbresponsavel` (`codRes`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbrat_tbsituacao` FOREIGN KEY (`Situacao_codSit`) REFERENCES `tbsituacaorat` (`codSit`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbrat_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbrat: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbrat: ~3 rows (aproximadamente)
 DELETE FROM `tbrat`;
 /*!40000 ALTER TABLE `tbrat` DISABLE KEYS */;
 INSERT INTO `tbrat` (`codRat`, `Usuario_codUsu`, `Cliente_codCli`, `Responsavel_codRes`, `Projeto_codPrj`, `Produto_codPro`, `Situacao_codSit`, `datRat`) VALUES
-	(1, 1, 1, 1, 1, 2, 1, '2017-09-06');
+	(1, 1, 1, 1, 1, 2, 2, '2017-09-06'),
+	(2, 1, 1, 1, 2, 1, 2, '2017-09-08'),
+	(3, 10, 1, 1, 1, 2, 1, '2017-09-08');
 /*!40000 ALTER TABLE `tbrat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbresponsavel
@@ -1595,7 +1603,7 @@ CREATE TABLE IF NOT EXISTS `tbresponsavel` (
 DELETE FROM `tbresponsavel`;
 /*!40000 ALTER TABLE `tbresponsavel` DISABLE KEYS */;
 INSERT INTO `tbresponsavel` (`codRes`, `Cliente_codCli`, `nomRes`, `emlRes`) VALUES
-	(1, 1, 'Eder', 'eder@gmail.com'),
+	(1, 1, 'Cliente Lucas', 'lawpnascimento@gmail.com'),
 	(2, 2, 'Joao', 'joao@gmail.com');
 /*!40000 ALTER TABLE `tbresponsavel` ENABLE KEYS */;
 
@@ -1657,23 +1665,10 @@ CREATE TABLE IF NOT EXISTS `tbusuario` (
 DELETE FROM `tbusuario`;
 /*!40000 ALTER TABLE `tbusuario` DISABLE KEYS */;
 INSERT INTO `tbusuario` (`codUsu`, `Papel_codPap`, `nomUsu`, `sobrenomeUsu`, `senUsu`, `codSit`, `desEml`, `perComCli`, `perComInt`) VALUES
-	(1, 1, 'Lucas', 'Nascimento', 'admin', 1, 'projetoratsis@gmail.com', 10, 10),
-	(7, 2, 'Nome', 'Sobrenome', 'teste', 1, 'teste@teste.com', 15, 15),
+	(1, 1, 'Lucas', 'Nascimento', 'admin', 1, 'lawpnascimento@gmail.com', 10, 10),
+	(2, 2, 'Nome', 'Sobrenome', 'teste', 1, 'teste@teste.com', 15, 15),
 	(10, 1, 'Teste', 'Teste', 'teste', 1, 'teste@teste.com', 10, 10);
 /*!40000 ALTER TABLE `tbusuario` ENABLE KEYS */;
-
--- Copiando estrutura para tabela dbprojetorat.teste
-DROP TABLE IF EXISTS `teste`;
-CREATE TABLE IF NOT EXISTS `teste` (
-  `desc` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela dbprojetorat.teste: ~0 rows (aproximadamente)
-DELETE FROM `teste`;
-/*!40000 ALTER TABLE `teste` DISABLE KEYS */;
-INSERT INTO `teste` (`desc`) VALUES
-	('First line\r\nSecond line\r\nThird line');
-/*!40000 ALTER TABLE `teste` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
