@@ -8,7 +8,7 @@ $("#document").ready(function(){
   $("#formConsultaRAT #btnEmail").click(function(){
       var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
       if (trSelecionado == true){
-        var tdUsuRAT = $("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-");
+        var tdUsuRAT = $("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-").trim();
         var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
         var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 

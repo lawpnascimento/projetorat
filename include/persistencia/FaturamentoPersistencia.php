@@ -351,8 +351,7 @@ class FaturamentoPersistencia{
 							    JOIN tbfatdespesa fatdsp
 							      ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
 					 		where rat.codRAT = " . $codigo . "
-					 		AND dsprat.Fatdespesa_codTipFat = 1
-					 		OR dsprat.Fatdespesa_codTipFat = 2)
+					 		AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 2))
 					 		AS TotDspFat";
 
 		$resultado = mysql_query($sSql);
@@ -397,8 +396,7 @@ class FaturamentoPersistencia{
 							    JOIN tbfatdespesa fatdsp
 							      ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
 					 		where rat.codRAT = " . $codigo . "
-					 		AND dsprat.Fatdespesa_codTipFat = 1
-					 		OR dsprat.Fatdespesa_codTipFat = 3)
+					 		AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 3))
 					 		AS TotDspRem";
 
 		$resultado = mysql_query($sSql);

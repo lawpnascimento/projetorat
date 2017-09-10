@@ -108,23 +108,28 @@ switch($_POST["action"]){
     break;
 
     case 'enviaemailrat':
-    	if (($_SESSION["codUsu"]) != ($_POST["usuariorat"])){
-    		
+    	/*echo gettype($_SESSION['codUsu']);
+    	echo gettype($_POST['usuariorat']);
+	    echo $_SESSION['codUsu'];
+	    echo $_POST['usuariorat'];*/
+	    
+    	if ($_SESSION['codUsu'] == $_POST['usuariorat']){
+
 	    	$model = new ConsultaRATModel();
 
-				$model->setUsuario($_POST["usuariorat"]);
-				$model->setCodigo($_POST["codigorat"]);
+			$model->setUsuario($_POST["usuariorat"]);
+			$model->setCodigo($_POST["codigorat"]);
 
-				$persistencia = new ConsultaRATPersistencia();
+			$persistencia = new ConsultaRATPersistencia();
 
-				$persistencia->setModel($model);
+			$persistencia->setModel($model);
 
-				$persistencia->enviaEmailRAT();
+			$persistencia->enviaEmailRAT();
 
-				$persistencia->atualizaEnvioRAT();	
+			$persistencia->atualizaEnvioRAT();	
 		}
 		else {  
-				echo '{"status" : 1 }';	    	
+			echo '{"status" : 1 }';	    	
 	    }
 			
 	break;
