@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="../../js/geral.js"></script>
     <script type="text/javascript" src="../../js/alerta.js"></script>
+    <script type="text/javascript" src="../../js/relatorioExtratoComissao.js"></script>
     <link rel="stylesheet" href="../../css/alerta.css">
   </head>
   <body>
@@ -37,7 +38,7 @@
                   <label for="cliente">Cliente</label>
                   <input id="txbCliente" type="text" class="form-control" name="txbCliente" placeholder="Nome" maxlength="50"></input>
                 </div>
-              </div> 
+              </div>
               <div id="actions" class="row">
               <div class="col-md-12">
                 <button id="btnExecutar" type="button" class="btn btn-success">Executar</button>

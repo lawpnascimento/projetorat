@@ -40,10 +40,10 @@ class LoginPersistencia {
 		$this->getConexao()->conectaBanco();
 
 		if( $oDados = $this->getConexao()->fetch_query($sSql) ) {
-     			$_SESSION["codUsu"] = $oDados->codUsu;
-     			$_SESSION["nomUsu"] = $oDados->nomUsu;
-     			$_SESSION["sobrenomeUsu"] = $oDados->sobrenomeUsu;
-		   		$_SESSION["codSit"] = $oDados->codSit;
+   			$_SESSION["codUsu"] = $oDados->codUsu;
+   			$_SESSION["nomUsu"] = $oDados->nomUsu;
+   			$_SESSION["sobrenomeUsu"] = $oDados->sobrenomeUsu;
+	   		$_SESSION["codSit"] = $oDados->codSit;
 				$_SESSION["desEml"] = $oDados->desEml;
 				$_SESSION["codPap"] = $oDados->codPap;
 				$logado = true;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ExtratoComissao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
-	<property name="ireport.zoom" value="1.3310000000000024"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="158"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -43,6 +43,10 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<parameter name="txbDatIni" class="java.lang.String"/>
+	<parameter name="txbDatFin" class="java.lang.String"/>
+	<parameter name="txbConsultor" class="java.lang.String"/>
+	<parameter name="txbCliente" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT                usu.codUsu
                      ,usu.nomUsu
@@ -50,7 +54,8 @@
                      ,usu.senUsu
                      ,usu.codSit
                      ,usu.desEml
-                     ,usu.perCom
+                     ,usu.perComCli
+                     ,usu.perComInt
                      ,rat.codRat
                      ,ati.codAti
                      ,ati.desAti
@@ -60,7 +65,8 @@
                      ,cli.codCli
                      ,cli.nomCli
                      ,prj.nomPrj
-                     ,prj.vlrHor
+                     ,prj.vlrHorCom
+                     ,prj.vlrHorFat
                  FROM tbrat rat
                  JOIN tbusuario usu
                     ON usu.codUsu = rat.Usuario_codUsu
@@ -70,7 +76,7 @@
                       ON cli.codCli = rat.Cliente_codCli
                  JOIN tbprojeto prj
                          ON prj.codPrj = rat.Projeto_codPrj
-               WHERE CODUSU=7]]>
+               WHERE CODUSU=1]]>
 	</queryString>
 	<field name="codUsu" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -90,7 +96,10 @@
 	<field name="desEml" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="perCom" class="java.lang.Float">
+	<field name="perComCli" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="perComInt" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="codRat" class="java.lang.Long">
@@ -120,7 +129,10 @@
 	<field name="nomPrj" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="vlrHor" class="java.lang.Float">
+	<field name="vlrHorCom" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vlrHorFat" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -132,6 +144,22 @@
 				<reportElement x="0" y="0" width="100" height="20" uuid="8f72e9bb-b412-4cb0-b5df-22a52a25b154"/>
 				<text><![CDATA[Extrato de Comissão]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="274" y="59" width="100" height="20" uuid="e058176a-0c95-4e1f-800a-e1067eb0a841"/>
+				<textFieldExpression><![CDATA[$P{txbDatIni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="42" width="100" height="20" uuid="79ca7367-667a-4d67-b16a-39add65194e9"/>
+				<textFieldExpression><![CDATA[$P{txbDatFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="314" y="22" width="100" height="20" uuid="046fd43c-7a5e-4cbf-a1b8-94702954a52e"/>
+				<textFieldExpression><![CDATA[$P{txbConsultor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="2" width="100" height="20" uuid="a9cdd474-1086-4858-8e2a-07d687e9258f"/>
+				<textFieldExpression><![CDATA[$P{txbCliente}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -186,7 +214,7 @@
 		<band height="125" splitType="Stretch">
 			<textField>
 				<reportElement x="203" y="0" width="55" height="20" uuid="06e5267e-08b6-4871-b109-72c908d41baf"/>
-				<textFieldExpression><![CDATA[$F{perCom}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{perComCli}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="49" height="20" uuid="085ede2a-3eb2-4fb1-b734-374e37a6b611"/>
@@ -205,7 +233,7 @@
 			</textField>
 			<textField>
 				<reportElement x="258" y="0" width="29" height="20" uuid="9177ce7d-1c5d-4121-bc3e-db76d8441839"/>
-				<textFieldExpression><![CDATA[$F{vlrHor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{vlrHorCom}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

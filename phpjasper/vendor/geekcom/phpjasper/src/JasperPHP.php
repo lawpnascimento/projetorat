@@ -119,8 +119,10 @@ class JasperPHP
             ];
 
             foreach ($options['db_connection'] as $key => $value) {
+
                 $this->command .= " {$mapDbParams[$key]} {$value}";
             }
+
         }
 
         return $this;
@@ -191,7 +193,7 @@ class JasperPHP
 
         $output = [];
         $return_var = 0;
-
+        
         chdir($this->path_executable);
         exec($this->command, $output, $return_var);
         if ($return_var !== 0) {
