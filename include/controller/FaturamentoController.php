@@ -118,6 +118,24 @@ switch($_POST["action"]){
 
 	break;
 
+	case 'inserir':
+
+		$model = new FaturamentoModel();
+
+		$model->setCodigo($_POST["codigo"]);
+		$model->setUsuario($_POST["usuario"]);
+		$model->setDataFechamento($_POST["dataFechamento"]);
+
+		$persistencia = new FaturamentoPersistencia();
+
+	  	$persistencia->setModel($model);
+
+	   	$retorno = $persistencia->insereFatRAT();
+
+	  	echo $retorno;
+
+	break;
+
 }
 
 ?>

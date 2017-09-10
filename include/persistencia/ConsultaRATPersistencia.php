@@ -41,6 +41,7 @@ class ConsultaRATPersistencia{
 
 			$sSql = "SELECT rat.codRat
 										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
+										 ,DATE_FORMAT(datRat, '%d-%m-%Y') datRat
 										 ,CONCAT(usu.perComCli, '%') perComCli
 										 ,CONCAT(usu.perComInt, '%') perComInt
 										 ,CONCAT(rat.Cliente_codCli, ' - ',cli.nomCli) Cliente_codCli
@@ -105,6 +106,7 @@ class ConsultaRATPersistencia{
 		}else{
 			$sSql = "SELECT rat.codRat
 										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
+										 ,DATE_FORMAT(datRat, '%d-%m-%Y') datRat
 										 ,CONCAT(usu.perComCli, '%') perComCli
 										 ,CONCAT(usu.perComInt, '%') perComInt
 										 ,CONCAT(rat.Cliente_codCli,' - ',cli.nomCli) Cliente_codCli
@@ -144,6 +146,7 @@ class ConsultaRATPersistencia{
 
 			$retorno = $retorno . '{"codRat": "'.$linha["codRat"].'"
 														, "codUsu" : "'.$linha["Usuario_codUsu"].'"
+														, "datRat" : "'.$linha["datRat"].'"
 														, "perComCli" : "'.$linha["perComCli"].'"
 														, "perComInt" : "'.$linha["perComInt"].'"
 														, "codCli" : "'.$linha["Cliente_codCli"].'"

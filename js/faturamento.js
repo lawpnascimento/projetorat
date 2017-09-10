@@ -1,4 +1,5 @@
 $("#document").ready(function(){ 
+setaDataAtual("#txbDatFec");
 
   $("#formFaturamento #btnBuscar").click(function () {
       consultaFatRAT();
@@ -12,12 +13,15 @@ $("#document").ready(function(){
   $("#formFaturamento #btnProcessar").click(function () {
       var trSelecionado = $("#grdFatRAT tr").hasClass('highlight');
       if (trSelecionado == true){
+        var txbDatFec = $("#txbDatFec").val();
         var tdCodRAT = $("#grdFatRAT tr.highlight").find('td:first').text();
+        var tdCodUsu = $.trim($("#grdFatRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-"));
         var tdSitRAT = $("#grdFatRAT tr.highlight").find('td:last').text().slice(0,1);
 
           if (tdSitRAT != 3){
                               jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '3 - Aprovado' para ser faturado.");
           } else {
+                   inserirFatRAT(tdCodRAT, tdCodUsu, txbDatFec);
                    processarFatRAT(tdCodRAT, tdSitRAT);
                    }     
       } else {
@@ -82,6 +86,7 @@ function consultaFatRAT(){
               grid = grid + "<tr>";
               grid = grid + "<td>" + rat.codRat + "</td>";
               grid = grid + "<td>" + rat.codUsu + "</td>";
+              grid = grid + "<td>" + rat.datRat + "</td>";
               grid = grid + "<td>" + rat.perComCli + "</td>";
               grid = grid + "<td>" + rat.perComInt + "</td>";
               grid = grid + "<td>" + rat.codCli + "</td>";
@@ -291,9 +296,49 @@ function processarFatRAT(tdCodRAT, tdSitRAT){
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            jbkrAlert.sucesso('RAT', 'RAT faturado com sucesso.');
+          alert("atualizado");
+            //jbkrAlert.sucesso('RAT', 'RAT atualizado com sucesso.');
+            //$("#formFaturamento #btnCancelar").trigger("click");
+        }
+    });
+
+}
+
+function inserirFatRAT(tdCodRAT, tdCodUsu, txbDatFec){
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            codigo: tdCodRAT,
+            usuario: tdCodUsu,
+            dataFechamento: txbDatFec,
+
+            action: 'inserir'
+        },
+
+        url: "../controller/FaturamentoController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+            jbkrAlert.sucesso('RAT', 'RAT faturado com sucesso');
             $("#formFaturamento #btnCancelar").trigger("click");
         }
     });
 
+}
+
+function setaDataAtual(input){
+  var date = new Date();
+
+  var day = date.getDate();
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
+
+  if (month < 10) month = "0" + month;
+  if (day < 10) day = "0" + day;
+
+  inputToday = year + "-" + month + "-" + day;
+
+  $(input).val(inputToday);
 }

@@ -1483,6 +1483,27 @@ INSERT INTO `tbfatdespesa` (`codFatDsp`, `desFatDsp`, `detFatDsp`) VALUES
 	(4, 'NN', 'Não fatura e não reembolsa');
 /*!40000 ALTER TABLE `tbfatdespesa` ENABLE KEYS */;
 
+-- Copiando estrutura para tabela dbprojetorat.tbfaturamento
+DROP TABLE IF EXISTS `tbfaturamento`;
+CREATE TABLE IF NOT EXISTS `tbfaturamento` (
+  `codFat` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RAT_codRAT` int(10) unsigned DEFAULT NULL,
+  `Usuario_codUsu` int(10) unsigned DEFAULT NULL,
+  `datFec` date DEFAULT NULL,
+  PRIMARY KEY (`codFat`),
+  KEY `fk_tbfaturamento_tbrat` (`RAT_codRAT`),
+  KEY `fk_tbfaturamento_tbusuario` (`Usuario_codUsu`),
+  CONSTRAINT `fk_tbfaturamento_tbrat` FOREIGN KEY (`RAT_codRAT`) REFERENCES `tbrat` (`codRat`),
+  CONSTRAINT `fk_tbfaturamento_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela dbprojetorat.tbfaturamento: ~0 rows (aproximadamente)
+DELETE FROM `tbfaturamento`;
+/*!40000 ALTER TABLE `tbfaturamento` DISABLE KEYS */;
+INSERT INTO `tbfaturamento` (`codFat`, `RAT_codRAT`, `Usuario_codUsu`, `datFec`) VALUES
+	(1, 2, 1, '2017-09-10');
+/*!40000 ALTER TABLE `tbfaturamento` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela dbprojetorat.tbhistoricoemail
 DROP TABLE IF EXISTS `tbhistoricoemail`;
 CREATE TABLE IF NOT EXISTS `tbhistoricoemail` (
@@ -1582,9 +1603,9 @@ CREATE TABLE IF NOT EXISTS `tbrat` (
 DELETE FROM `tbrat`;
 /*!40000 ALTER TABLE `tbrat` DISABLE KEYS */;
 INSERT INTO `tbrat` (`codRat`, `Usuario_codUsu`, `Cliente_codCli`, `Responsavel_codRes`, `Projeto_codPrj`, `Produto_codPro`, `Situacao_codSit`, `datRat`) VALUES
-	(1, 1, 1, 1, 1, 2, 2, '2017-09-06'),
-	(2, 1, 1, 1, 2, 1, 2, '2017-09-08'),
-	(3, 10, 1, 1, 1, 2, 1, '2017-09-08');
+	(1, 10, 1, 1, 1, 2, 3, '2017-09-06'),
+	(2, 1, 1, 1, 2, 1, 4, '2017-09-08'),
+	(3, 1, 1, 1, 1, 2, 3, '2017-09-08');
 /*!40000 ALTER TABLE `tbrat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbresponsavel
@@ -1666,8 +1687,8 @@ DELETE FROM `tbusuario`;
 /*!40000 ALTER TABLE `tbusuario` DISABLE KEYS */;
 INSERT INTO `tbusuario` (`codUsu`, `Papel_codPap`, `nomUsu`, `sobrenomeUsu`, `senUsu`, `codSit`, `desEml`, `perComCli`, `perComInt`) VALUES
 	(1, 1, 'Lucas', 'Nascimento', 'admin', 1, 'lawpnascimento@gmail.com', 10, 10),
-	(2, 2, 'Nome', 'Sobrenome', 'teste', 1, 'teste@teste.com', 15, 15),
-	(10, 1, 'Teste', 'Teste', 'teste', 1, 'teste@teste.com', 10, 10);
+	(2, 2, 'Nome', 'Sobrenome', 'teste', 1, 'teste@teste.com2', 15, 15),
+	(10, 2, 'Consultor', 'Teste', 'teste', 1, 'teste@teste.com', 10, 10);
 /*!40000 ALTER TABLE `tbusuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -73,6 +73,9 @@
                   Usuário
                 </th>
                 <th>
+                  Data
+                </th>
+                <th>
                   % Com. Cli.
                 </th>
                 <th>

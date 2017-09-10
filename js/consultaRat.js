@@ -8,7 +8,7 @@ $("#document").ready(function(){
   $("#formConsultaRAT #btnEmail").click(function(){
       var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
       if (trSelecionado == true){
-        var tdUsuRAT = $("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-").trim();
+        var tdUsuRAT = $.trim($("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-"));
         var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
         var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
@@ -117,6 +117,7 @@ function consultaRAT(){
               grid = grid + "<tr>";
               grid = grid + "<td>" + rat.codRat + "</td>";
               grid = grid + "<td>" + rat.codUsu + "</td>";
+              grid = grid + "<td>" + rat.datRat + "</td>";
               grid = grid + "<td>" + rat.perComCli + "</td>";
               grid = grid + "<td>" + rat.perComInt + "</td>";
               grid = grid + "<td>" + rat.codCli + "</td>";

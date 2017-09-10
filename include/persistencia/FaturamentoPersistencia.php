@@ -40,6 +40,7 @@ class FaturamentoPersistencia{
 
 			$sSql = "SELECT rat.codRat
 										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
+										 ,DATE_FORMAT(datRat, '%d-%m-%Y') datRat
 										 ,CONCAT(usu.perComCli, '%') perComCli
 										 ,CONCAT(usu.perComInt, '%') perComInt
 										 ,CONCAT(rat.Cliente_codCli, ' - ',cli.nomCli) Cliente_codCli
@@ -96,6 +97,7 @@ class FaturamentoPersistencia{
 		}else{
 			$sSql = "SELECT rat.codRat
 										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
+										 ,DATE_FORMAT(datRat, '%d-%m-%Y') datRat
 										 ,CONCAT(usu.perComCli, '%') perComCli
 										 ,CONCAT(usu.perComInt, '%') perComInt
 										 ,CONCAT(rat.Cliente_codCli,' - ',cli.nomCli) Cliente_codCli
@@ -136,6 +138,7 @@ class FaturamentoPersistencia{
 
 			$retorno = $retorno . '{"codRat": "'.$linha["codRat"].'"
 														, "codUsu" : "'.$linha["Usuario_codUsu"].'"
+														, "datRat" : "'.$linha["datRat"].'"
 														, "perComCli" : "'.$linha["perComCli"].'"
 														, "perComInt" : "'.$linha["perComInt"].'"
 														, "codCli" : "'.$linha["Cliente_codCli"].'"
@@ -439,6 +442,25 @@ class FaturamentoPersistencia{
 
 		$this->getConexao()->fechaConexao();
 	}
+
+	public function insereFatRAT(){
+		$this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+		$usuario = $this->getModel()->getUsuario();
+		$data = $this->getModel()->getDataFechamento();
+
+		$sSql =  "INSERT INTO tbfaturamento (RAT_codRAT
+																		,Usuario_codUsu
+																		,datFec)
+											VALUES ('". $codigo ."'
+																	    ,'". $usuario ."'
+																	    ,'". $data ."')";
+
+		$this->getConexao()->query($sSql);
+
+        $this->getConexao()->fechaConexao();
+  }
 
 }
 ?>
