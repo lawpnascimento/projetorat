@@ -11,9 +11,10 @@ $txbCliente = $_POST["txbCliente"];
 $nmRelatorio = $_POST["nmRelatorio"];
 
 $input = __DIR__ . '\ExtratoComissao.jrxml';
-$output = __DIR__ . '\\' . $nmRelatorio;
+$output = __DIR__ . '\\pdf\\' . $nmRelatorio;
 
-$jdbc_dir = '..\phpjasper\bin\jasperstarter\jdbc';
+//$jdbc_dir = 'D:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
+$jdbc_dir = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
 
 $options = [
     'format' => ['pdf'],

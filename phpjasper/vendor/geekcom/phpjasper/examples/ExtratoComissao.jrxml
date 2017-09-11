@@ -43,20 +43,19 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<parameter name="txbDatIni" class="java.lang.String"/>
+	<parameter name="txbDatIni" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<parameter name="txbDatFin" class="java.lang.String"/>
 	<parameter name="txbConsultor" class="java.lang.String"/>
 	<parameter name="txbCliente" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT                usu.codUsu
+		<![CDATA[SELECT                rat.codRat
+                     ,usu.codUsu
                      ,usu.nomUsu
                      ,usu.sobrenomeUsu
-                     ,usu.senUsu
-                     ,usu.codSit
-                     ,usu.desEml
                      ,usu.perComCli
                      ,usu.perComInt
-                     ,rat.codRat
                      ,ati.codAti
                      ,ati.desAti
                      ,ati.datAti
@@ -65,19 +64,40 @@
                      ,cli.codCli
                      ,cli.nomCli
                      ,prj.nomPrj
+                     ,pro.desPro
                      ,prj.vlrHorCom
                      ,prj.vlrHorFat
-                 FROM tbrat rat
-                 JOIN tbusuario usu
-                    ON usu.codUsu = rat.Usuario_codUsu
-                 JOIN tbatividade ati
-                    ON ati.RAT_codRAT = rat.codRat
-                 JOIN tbcliente cli
-                      ON cli.codCli = rat.Cliente_codCli
-                 JOIN tbprojeto prj
-                         ON prj.codPrj = rat.Projeto_codPrj
-               WHERE CODUSU=1]]>
+                     ,rsmati.SumHorTot
+                     ,rsmati.SumFatTot
+                     ,rsmati.SumBasCalCom
+                     ,rsmati.SumComTot
+                     FROM tbrat rat
+                                     JOIN tbatividade ati
+                                        ON ati.RAT_codRAT = rat.codRat
+                                     JOIN tbfaturamento fat
+                                     	 ON fat.RAT_codRAT = rat.codRat
+												 JOIN tbresumoatividade rsmati
+                                     	 ON rsmati.Faturamento_codFat = fat.codFat
+                                     JOIN tbusuario usu
+                                       ON usu.codUsu = rat.Usuario_codUsu
+                                     JOIN tbcliente cli
+                                       ON cli.codCli = rat.Cliente_codCli
+                                     JOIN tbresponsavel res
+                                       ON res.codRes = rat.Responsavel_codRes
+                                     JOIN tbprojeto prj
+                                       ON prj.codPrj = rat.Projeto_codPrj
+                                     JOIN tbproduto pro
+                                       ON pro.codPro = rat.Produto_codPro
+                                     JOIN tbsituacaorat sit
+                                       ON sit.codSit = rat.Situacao_codSit
+               WHERE rat.Situacao_codSit = 4
+                    AND fat.datFec BETWEEN '$P{txbDatIni}' AND '$P{txbDatFin}'
+                    AND usu.codUsu = $P{txbConsultor}
+                    AND cli.codCli = $P{txbCliente}]]>
 	</queryString>
+	<field name="codRat" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="codUsu" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -87,22 +107,10 @@
 	<field name="sobrenomeUsu" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="senUsu" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="codSit" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="desEml" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="perComCli" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="perComInt" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="codRat" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="codAti" class="java.lang.Long">
@@ -129,10 +137,25 @@
 	<field name="nomPrj" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="desPro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="vlrHorCom" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="vlrHorFat" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SumHorTot" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SumFatTot" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SumBasCalCom" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SumComTot" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>

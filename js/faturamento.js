@@ -22,6 +22,7 @@ setaDataAtual("#txbDatFec");
                               jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '3 - Aprovado' para ser faturado.");
           } else {
                    inserirFatRAT(tdCodRAT, tdCodUsu, txbDatFec);
+                   inserirResumoAtividade(tdCodRAT);
                    processarFatRAT(tdCodRAT, tdSitRAT);
                    }     
       } else {
@@ -314,7 +315,7 @@ function inserirFatRAT(tdCodRAT, tdCodUsu, txbDatFec){
             usuario: tdCodUsu,
             dataFechamento: txbDatFec,
 
-            action: 'inserir'
+            action: 'inserirfatrat'
         },
 
         url: "../controller/FaturamentoController.php",
@@ -326,6 +327,21 @@ function inserirFatRAT(tdCodRAT, tdCodUsu, txbDatFec){
         }
     });
 
+}
+
+function inserirResumoAtividade(tdCodRAT){
+      $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+                codigoRat: tdCodRAT,
+                action: "inserirresumoatividade"
+        },
+
+        url: "../controller/FaturamentoController.php"
+
+      });
 }
 
 function setaDataAtual(input){

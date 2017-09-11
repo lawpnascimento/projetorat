@@ -118,7 +118,7 @@ switch($_POST["action"]){
 
 	break;
 
-	case 'inserir':
+	case 'inserirfatrat':
 
 		$model = new FaturamentoModel();
 
@@ -133,6 +133,23 @@ switch($_POST["action"]){
 	   	$retorno = $persistencia->insereFatRAT();
 
 	  	echo $retorno;
+
+	break;
+
+	case 'inserirresumoatividade':
+
+		$model = new FaturamentoModel();
+
+		$persistencia = new FaturamentoPersistencia();
+
+		$codFat = $persistencia->buscaCodigoFatInserido();
+
+		$model->setCodigo($_POST["codigoRat"]);
+		$model->setCodigoFat($codFat);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->insereResumoAtividade();
 
 	break;
 

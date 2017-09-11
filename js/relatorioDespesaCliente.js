@@ -1,29 +1,14 @@
-$("#document").ready(function(){ 
+$("#btnExecutar").click(function(){
 
-  $("#formRelatorioExtratoComissoes #btnCancelar").click(function(){
-      limpaCampos($(this).closest("form"));
-  });
+  gerarRelatorio();
 
-  $("#btnExecutar").click(function(){
-    txbDatIni = $("#txbDatIni").val();
-    txbDatFin = $("#txbDatFin").val();
-    txbConsultor = $("#txbConsultor").val();
-    txbCliente = $("#txbCliente").val();
-
-    var msgErro = validaCampos(txbDatIni, txbDatFin);
-
-    if(msgErro !== ""){
-        jbkrAlert.alerta('Alerta!',msgErro);
-    }
-    else {  
-          gerarRelatorio(txbDatIni, txbDatFin, txbConsultor, txbCliente);
-    }
-
-  });
 });
 
-
-function gerarRelatorio(txbDatIni, txbDatFin, txbConsultor, txbCliente){
+function gerarRelatorio(){
+  txbDatIni = $("#txbDatIni").val();
+  txbDatFin = $("#txbDatFin").val();
+  txbConsultor = $("#txbConsultor").val();
+  txbCliente = $("#txbCliente").val();
 
   nmRelatorio = "ExtratoComissao_" + dataAtual() + '_' +  horaAtual();
 
@@ -48,7 +33,6 @@ function gerarRelatorio(txbDatIni, txbDatFin, txbConsultor, txbCliente){
   });
 
 }
-
 function downLoadExtratoComissao(nmRelatorio){
 
   window.open("http://localhost/projetorat/trunk/estrutura/downloadFile.php?nmRelatorio=" + nmRelatorio , "_blank");
@@ -64,17 +48,4 @@ function dataAtual() {
 function horaAtual() {
     var date = new Date();
     return String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds());
-}
-
-function validaCampos(txbDatIni, txbDatFin){
-    msgErro = "";
-    if(txbDatIni === ""){
-        msgErro = msgErro + "<b>Data Inicial</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-    if(txbDatFin === ""){
-        msgErro = msgErro + "<b>Data Final</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-
-    return msgErro;
-
 }

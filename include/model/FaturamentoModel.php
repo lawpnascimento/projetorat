@@ -13,6 +13,7 @@ class FaturamentoModel {
 	private $situacao;
 	private $termo;
 	private $dataFechamento;
+	private $codigoFat;
 
 	 public function setCodigo($codigo){
 		 $this->codigo = $codigo;
@@ -98,6 +99,14 @@ class FaturamentoModel {
 
 	public function setDataFechamento($dataFechamento){
 		$this->dataFechamento = $dataFechamento;
+	}
+
+	public function getCodigoFat(){
+		return $this->codigoFat;
+	}
+
+	public function setCodigoFat($codigoFat){
+		$this->codigoFat = $codigoFat;
 	}
 
 }

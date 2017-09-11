@@ -1337,18 +1337,6 @@ INSERT INTO `tbcliente` (`codCli`, `Cidade_seqCid`, `desRazaoSocial`, `nomCli`, 
 	(2, 137, 'Senior Joinville', 'Senior Joinville', '88888888888888', '', '', '4738021000');
 /*!40000 ALTER TABLE `tbcliente` ENABLE KEYS */;
 
--- Copiando estrutura para tabela dbprojetorat.tbcomissao
-DROP TABLE IF EXISTS `tbcomissao`;
-CREATE TABLE IF NOT EXISTS `tbcomissao` (
-  `codCom` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`codCom`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Copiando dados para a tabela dbprojetorat.tbcomissao: ~0 rows (aproximadamente)
-DELETE FROM `tbcomissao`;
-/*!40000 ALTER TABLE `tbcomissao` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbcomissao` ENABLE KEYS */;
-
 -- Copiando estrutura para tabela dbprojetorat.tbdespesa
 DROP TABLE IF EXISTS `tbdespesa`;
 CREATE TABLE IF NOT EXISTS `tbdespesa` (
@@ -1497,11 +1485,11 @@ CREATE TABLE IF NOT EXISTS `tbfaturamento` (
   CONSTRAINT `fk_tbfaturamento_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbfaturamento: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbfaturamento: ~1 rows (aproximadamente)
 DELETE FROM `tbfaturamento`;
 /*!40000 ALTER TABLE `tbfaturamento` DISABLE KEYS */;
 INSERT INTO `tbfaturamento` (`codFat`, `RAT_codRAT`, `Usuario_codUsu`, `datFec`) VALUES
-	(1, 2, 1, '2017-09-10');
+	(1, 3, 1, '2017-09-11');
 /*!40000 ALTER TABLE `tbfaturamento` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbhistoricoemail
@@ -1604,8 +1592,8 @@ DELETE FROM `tbrat`;
 /*!40000 ALTER TABLE `tbrat` DISABLE KEYS */;
 INSERT INTO `tbrat` (`codRat`, `Usuario_codUsu`, `Cliente_codCli`, `Responsavel_codRes`, `Projeto_codPrj`, `Produto_codPro`, `Situacao_codSit`, `datRat`) VALUES
 	(1, 10, 1, 1, 1, 2, 3, '2017-09-06'),
-	(2, 1, 1, 1, 2, 1, 4, '2017-09-08'),
-	(3, 1, 1, 1, 1, 2, 3, '2017-09-08');
+	(2, 1, 1, 1, 2, 1, 3, '2017-09-08'),
+	(3, 1, 1, 1, 1, 2, 4, '2017-09-08');
 /*!40000 ALTER TABLE `tbrat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbresponsavel
@@ -1627,6 +1615,45 @@ INSERT INTO `tbresponsavel` (`codRes`, `Cliente_codCli`, `nomRes`, `emlRes`) VAL
 	(1, 1, 'Cliente Lucas', 'lawpnascimento@gmail.com'),
 	(2, 2, 'Joao', 'joao@gmail.com');
 /*!40000 ALTER TABLE `tbresponsavel` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela dbprojetorat.tbresumoatividade
+DROP TABLE IF EXISTS `tbresumoatividade`;
+CREATE TABLE IF NOT EXISTS `tbresumoatividade` (
+  `codRsmAti` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Faturamento_codFat` int(10) unsigned DEFAULT NULL,
+  `SumHorTot` time DEFAULT NULL,
+  `SumFatTot` decimal(10,2) DEFAULT NULL,
+  `SumBasCalCom` decimal(10,2) DEFAULT NULL,
+  `SumComTot` decimal(10,2) DEFAULT NULL,
+  `SumVlrLiq` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`codRsmAti`),
+  KEY `fk_tbresumoatividade_tbfaturamento` (`Faturamento_codFat`),
+  CONSTRAINT `fk_tbresumoatividade_tbfaturamento` FOREIGN KEY (`Faturamento_codFat`) REFERENCES `tbfaturamento` (`codFat`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela dbprojetorat.tbresumoatividade: ~0 rows (aproximadamente)
+DELETE FROM `tbresumoatividade`;
+/*!40000 ALTER TABLE `tbresumoatividade` DISABLE KEYS */;
+INSERT INTO `tbresumoatividade` (`codRsmAti`, `Faturamento_codFat`, `SumHorTot`, `SumFatTot`, `SumBasCalCom`, `SumComTot`, `SumVlrLiq`) VALUES
+	(1, 1, '04:00:00', 667.76, 600.00, 60.00, 607.76);
+/*!40000 ALTER TABLE `tbresumoatividade` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela dbprojetorat.tbresumodespesa
+DROP TABLE IF EXISTS `tbresumodespesa`;
+CREATE TABLE IF NOT EXISTS `tbresumodespesa` (
+  `codRsmDsp` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Faturamento_codFat` int(10) unsigned DEFAULT NULL,
+  `TotDspFat` decimal(10,2) DEFAULT NULL,
+  `TotDspRem` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`codRsmDsp`),
+  KEY `fk_tbresumodespesa_tbfaturamento` (`Faturamento_codFat`),
+  CONSTRAINT `fk_tbresumodespesa_tbfaturamento` FOREIGN KEY (`Faturamento_codFat`) REFERENCES `tbfaturamento` (`codFat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela dbprojetorat.tbresumodespesa: ~0 rows (aproximadamente)
+DELETE FROM `tbresumodespesa`;
+/*!40000 ALTER TABLE `tbresumodespesa` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbresumodespesa` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbsituacaorat
 DROP TABLE IF EXISTS `tbsituacaorat`;

@@ -462,5 +462,64 @@ class FaturamentoPersistencia{
         $this->getConexao()->fechaConexao();
   }
 
+  public function insereResumoAtividade(){
+		$this->getConexao()->conectaBanco();
+
+		$codigoRat = $this->getModel()->getCodigo();
+		$codigoFat = $this->getModel()->getCodigoFat();
+
+		$sSql =  "INSERT INTO tbresumoatividade (Faturamento_codFat
+																		,sumHorTot
+																		,sumFatTot
+																		,sumBasCalCom
+																		,sumComTot
+																		,sumVlrLiq)
+										(SELECT 
+										" . $codigoFat . "
+										,SEC_TO_TIME(SUM(TIME_TO_SEC(`horTot`))) sumHorTot
+										,SUM((prj.vlrHorFat * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumFatTot
+										,SUM((prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumBasCalCom
+										,SUM(CONCAT('0.',usu.perComCli) * (prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumComTot
+										,SUM((prj.vlrHorFat * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1))) - CONCAT('0.',usu.perComCli) * (prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumVlrLiq
+								 	 FROM tbrat rat
+								 	 JOIN tbatividade ati
+								 	 	ON ati.RAT_codRAT = rat.codRat
+								 	 JOIN tbusuario usu
+								       ON usu.codUsu = rat.Usuario_codUsu
+								     JOIN tbcliente cli
+									   ON cli.codCli = rat.Cliente_codCli
+									 JOIN tbresponsavel res 
+									   ON res.codRes = rat.Responsavel_codRes
+									 JOIN tbprojeto prj 
+									   ON prj.codPrj = rat.Projeto_codPrj
+									 JOIN tbproduto pro
+									   ON pro.codPro = rat.Produto_codPro
+									 JOIN tbsituacaorat = sit
+									   ON sit.codSit = rat.Situacao_codSit  
+						 				where rat.codRat = " . $codigoRat . "
+						 				and ati.tipFat = 1)";
+
+		$this->getConexao()->query($sSql);
+
+        $this->getConexao()->fechaConexao();
+  }
+
+public function buscaCodigoFatInserido(){
+		$this->getConexao()->conectaBanco();
+
+		$sSql = "SELECT MAX(codFat) codFat
+							 FROM tbfaturamento";
+
+	  $resultado = mysql_query($sSql);
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+			$retorno = $linha["codFat"];
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+  }
+
 }
 ?>
