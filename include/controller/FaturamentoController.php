@@ -153,6 +153,22 @@ switch($_POST["action"]){
 
 	break;
 
+	case 'inserirresumodespesa':
+
+		$model = new FaturamentoModel();
+
+		$persistencia = new FaturamentoPersistencia();
+
+		$codFat = $persistencia->buscaCodigoFatInserido();
+
+		$model->setCodigo($_POST["codigoRat"]);
+		$model->setCodigoFat($codFat);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->insereResumoDespesa();
+
+	break;
 }
 
 ?>

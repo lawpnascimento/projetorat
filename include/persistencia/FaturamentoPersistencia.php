@@ -343,7 +343,7 @@ class FaturamentoPersistencia{
 		$codigo = $this->getModel()->getCodigo();
 
 		$sSql = "SELECT
-						(SELECT SUM(totDsp) TotDspFR
+						(SELECT SUM(totDsp) TotDspFat
 								FROM tbrat rat
 								JOIN tbdespesarat dsprat
 								  ON rat.codRat = dsprat.RAT_codRAT
@@ -388,7 +388,7 @@ class FaturamentoPersistencia{
 		$codigo = $this->getModel()->getCodigo();
 
 		$sSql = "SELECT
-						(SELECT SUM(totDsp) TotDspFR
+						(SELECT SUM(totDsp) TotDspRem
 								FROM tbrat rat
 								JOIN tbdespesarat dsprat
 								  ON rat.codRat = dsprat.RAT_codRAT
@@ -469,13 +469,15 @@ class FaturamentoPersistencia{
 		$codigoFat = $this->getModel()->getCodigoFat();
 
 		$sSql =  "INSERT INTO tbresumoatividade (Faturamento_codFat
+																		,RAT_codRAT
 																		,sumHorTot
 																		,sumFatTot
 																		,sumBasCalCom
 																		,sumComTot
 																		,sumVlrLiq)
-										(SELECT 
+									SELECT 
 										" . $codigoFat . "
+										," . $codigoRat . "
 										,SEC_TO_TIME(SUM(TIME_TO_SEC(`horTot`))) sumHorTot
 										,SUM((prj.vlrHorFat * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumFatTot
 										,SUM((prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumBasCalCom
@@ -497,7 +499,50 @@ class FaturamentoPersistencia{
 									 JOIN tbsituacaorat = sit
 									   ON sit.codSit = rat.Situacao_codSit  
 						 				where rat.codRat = " . $codigoRat . "
-						 				and ati.tipFat = 1)";
+						 				and ati.tipFat = 1";
+
+		$this->getConexao()->query($sSql);
+
+        $this->getConexao()->fechaConexao();
+  }
+
+  public function insereResumoDespesa(){
+		$this->getConexao()->conectaBanco();
+
+		$codigoRat = $this->getModel()->getCodigo();
+		$codigoFat = $this->getModel()->getCodigoFat();
+
+		$sSql =  "INSERT INTO tbresumodespesa (Faturamento_codFat
+																		,RAT_codRAT
+																		,TotDspFat
+																		,TotDspRem)
+								SELECT
+												" . $codigoFat . "
+												," . $codigoRat . "
+												,(SELECT SUM(totDsp) TotDspFat
+											FROM tbrat rat
+											JOIN tbdespesarat dsprat
+											  ON rat.codRat = dsprat.RAT_codRAT
+							 		        JOIN tbdespesa dsp
+										      ON dsp.codDsp = dsprat.Despesa_codDsp
+										    JOIN tbtipodespesa tipdsp
+										      ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
+										    JOIN tbfatdespesa fatdsp
+										      ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
+									 		where rat.codRAT = " . $codigoRat . "
+									 		AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 2)) as TotDspFat
+									 			,(SELECT SUM(totDsp) TotDspRem
+											FROM tbrat rat
+											JOIN tbdespesarat dsprat
+											  ON rat.codRat = dsprat.RAT_codRAT
+							 		        JOIN tbdespesa dsp
+										      ON dsp.codDsp = dsprat.Despesa_codDsp
+										    JOIN tbtipodespesa tipdsp
+										      ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
+										    JOIN tbfatdespesa fatdsp
+										      ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
+							 				where rat.codRAT = " . $codigoRat . "
+							 				AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 3)) as TotDspRem";
 
 		$this->getConexao()->query($sSql);
 

@@ -23,6 +23,7 @@ setaDataAtual("#txbDatFec");
           } else {
                    inserirFatRAT(tdCodRAT, tdCodUsu, txbDatFec);
                    inserirResumoAtividade(tdCodRAT);
+                   inserirResumoDespesa(tdCodRAT);
                    processarFatRAT(tdCodRAT, tdSitRAT);
                    }     
       } else {
@@ -337,6 +338,21 @@ function inserirResumoAtividade(tdCodRAT){
         data: {
                 codigoRat: tdCodRAT,
                 action: "inserirresumoatividade"
+        },
+
+        url: "../controller/FaturamentoController.php"
+
+      });
+}
+
+function inserirResumoDespesa(tdCodRAT){
+      $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+                codigoRat: tdCodRAT,
+                action: "inserirresumodespesa"
         },
 
         url: "../controller/FaturamentoController.php"
