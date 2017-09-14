@@ -14,18 +14,18 @@ $("#document").ready(function(){
           type: "POST",
           dataType: "text",
           data: {
-                  descricao: txbDescricaoProduto,
-                  action: "cadastrar"
+            descricao: txbDescricaoProduto,
+            action: "cadastrar"
           },
 
           url: "../controller/ProdutoController.php",
 
           //Se der tudo ok no envio...
           success: function (dados) {
-              jbkrAlert.sucesso('Produto', 'Produto cadastrado com sucesso!');
-              $("#formProduto #btnCancelar").trigger("click");
+            jbkrAlert.sucesso('Produto', 'Produto cadastrado com sucesso!');
+            $("#formProduto #btnCancelar").trigger("click");
           }
-      });
+        });
     }
   });
 
@@ -36,7 +36,7 @@ $("#document").ready(function(){
     var msgErro = validaCampos(txbDescricaoProduto);
 
     if(msgErro !== ""){
-        jbkrAlert.alerta('Alerta!',msgErro);
+      jbkrAlert.alerta('Alerta!',msgErro);
     }
     else{
       $.ajax({
@@ -82,9 +82,9 @@ function buscaProdutos(codigo){
       type: "POST",
       dataType: "text",
       data: {
-          codigo: codigo,
-          descricao: txbDescricaoProduto,
-          action: "buscar"
+        codigo: codigo,
+        descricao: txbDescricaoProduto,
+        action: "buscar"
       },
 
       url: "../controller/ProdutoController.php",
@@ -112,24 +112,24 @@ function buscaProdutos(codigo){
         }else{
           formularioModoAtualizar();
           for (var j = 0; j < json.length; j++) {
-              produto = json[j];
-              $("#hidCodPro").val(produto.codPro);
-              $("#txbDescricaoProduto").val(produto.desPro);
+            produto = json[j];
+            $("#hidCodPro").val(produto.codPro);
+            $("#txbDescricaoProduto").val(produto.desPro);
           }
 
         }
 
       }
-  });
+    });
 
 }
 
 function validaCampos(txbDescricaoProduto){
-    msgErro = "";
-    if(txbDescricaoProduto === ""){
-        msgErro = msgErro + "<b>Descrição do produto</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  msgErro = "";
+  if(txbDescricaoProduto === ""){
+    msgErro = msgErro + "<b>Descrição do produto</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    return msgErro;
+  return msgErro;
 
 }

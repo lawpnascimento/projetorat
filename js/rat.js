@@ -13,8 +13,8 @@ validaSomenteNumerico("#tbodyDespesas", ".tdNumerico");
 $('.selectTipoDespesa').attr("disabled", true);
 
 $("#formGeral #btnCancelar").click(function(){
-    limpaCamposRAT($(this).closest("form"));
-  });
+  limpaCamposRAT($(this).closest("form"));
+});
 
 $('.table-remove').click(function () {
   $(this).parents('tr').not('.fix').detach();
@@ -34,7 +34,7 @@ $('.table-down').click(function () {
 $('#addAtividade').click(function () {
   $(".tdData").inputmask("remove");
   $(".tdHora").inputmask("remove");
-    var $clone = $tableAtividade.find('tr.hide').clone(true).removeClass('hide table-line');
+  var $clone = $tableAtividade.find('tr.hide').clone(true).removeClass('hide table-line');
 
   $tableAtividade.find('table').append($clone);
   $(".tdData").inputmask("date");
@@ -47,27 +47,27 @@ var $tableDespesa = $('#tableDespesa');
 $('#addDespesa').click(function () {
   $(".tdData").inputmask("remove");
 
-    var $clone = $tableDespesa.find('tr.hide').clone(true).removeClass('hide table-line');
-    $tableDespesa.find('table').append($clone);
+  var $clone = $tableDespesa.find('tr.hide').clone(true).removeClass('hide table-line');
+  $tableDespesa.find('table').append($clone);
 
   $(".tdData").inputmask("date");
 });
 
 $("#document").ready(function(){
-    var date = new Date();
+  var date = new Date();
 
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
+  var day = date.getDate();
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
 
-    if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
+  if (month < 10) month = "0" + month;
+  if (day < 10) day = "0" + day;
 
-    var inputToday = year + "-" + month + "-" + day;
-    var tdToday = day + "/" + month + "/" + year;
+  var inputToday = year + "-" + month + "-" + day;
+  var tdToday = day + "/" + month + "/" + year;
 
-    $("#txbDataRAT").val(inputToday);
-    $(".tdData").val(tdToday);
+  $("#txbDataRAT").val(inputToday);
+  $(".tdData").val(tdToday);
 
   $("#tabLancar #btnLancarRAT").click(function () {
     var txbCliente = $("#txbCliente").val();
@@ -164,8 +164,8 @@ $("#document").ready(function(){
             h[header] = $idDespesa.val();
           }
           else if(typeof $cdDespesa.val() !== "undefined"){
-              h[header] = $cdDespesa.val();
-            }
+            h[header] = $cdDespesa.val();
+          }
           else {
             if($td.eq(i).text() !== ""){
               h[header] = $td.eq(i).text();
@@ -175,7 +175,7 @@ $("#document").ready(function(){
         }
       });
 
-        dataDespesa.push(h);
+      dataDespesa.push(h);
 
     });
 
@@ -395,13 +395,13 @@ function buscaRAT(codigo){
       type: "POST",
       dataType: "text",
       data: {
-          codigo: codigo,
-          usuario: txbUsuario,
-          cliente: txbCliente,
-          responsavel: txbResponsavel,
-          projeto: txbProjeto,
+        codigo: codigo,
+        usuario: txbUsuario,
+        cliente: txbCliente,
+        responsavel: txbResponsavel,
+        projeto: txbProjeto,
 
-          action: "buscar"
+        action: "buscar"
       },
 
       url: "../controller/RATController.php",
@@ -412,46 +412,46 @@ function buscaRAT(codigo){
 
 
       }
-  });
+    });
 
 }
 
 function validaCamposDespesa(dtDespesa, dsDespesa, idDespesa, vlDespesa, qtDespesa, totDespesa, cdFaturamento, dsOberservacao){
 
-    var msgErro = "";
-    if(typeof dtDespesa === "undefined"){
-      msgErro = msgErro + "<b>Data de Despesa</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  var msgErro = "";
+  if(typeof dtDespesa === "undefined"){
+    msgErro = msgErro + "<b>Data de Despesa</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    if(typeof idDespesa === "undefined"){
-      msgErro = msgErro + "<b>Tipo da Despesa</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  if(typeof idDespesa === "undefined"){
+    msgErro = msgErro + "<b>Tipo da Despesa</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    if(typeof vlDespesa === "undefined"){
-      msgErro = msgErro + "<b>Valor da Unitário</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  if(typeof vlDespesa === "undefined"){
+    msgErro = msgErro + "<b>Valor da Unitário</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    if(typeof qtDespesa === "undefined"){
-      msgErro = msgErro + "<b>Quantidade</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  if(typeof qtDespesa === "undefined"){
+    msgErro = msgErro + "<b>Quantidade</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    if(typeof totDespesa === "undefined"){
-      msgErro = msgErro + "<b>Total</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  if(typeof totDespesa === "undefined"){
+    msgErro = msgErro + "<b>Total</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    if(typeof dsOberservacao === "undefined"){
-      msgErro = msgErro + "<b>Observação</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  if(typeof dsOberservacao === "undefined"){
+    msgErro = msgErro + "<b>Observação</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    if(typeof cdFaturamento === "undefined"){
-      msgErro = msgErro + "<b>Faturamento</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  if(typeof cdFaturamento === "undefined"){
+    msgErro = msgErro + "<b>Faturamento</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    if(typeof dsDespesa === "undefined"){
-      msgErro = msgErro + "<b>Descrição da despesa</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  if(typeof dsDespesa === "undefined"){
+    msgErro = msgErro + "<b>Descrição da despesa</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    return msgErro;
+  return msgErro;
 
 }
 
@@ -522,23 +522,23 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
       type: "POST",
       dataType: "text",
       data: {
-              cliente: cliente[0],
-              responsavel: responsavel[0],
-              projeto: projeto[0],
-              produto: produto[0],
-              datarat: txbDataRAT,
-              action: "inserirrat"
+        cliente: cliente[0],
+        responsavel: responsavel[0],
+        projeto: projeto[0],
+        produto: produto[0],
+        datarat: txbDataRAT,
+        action: "inserirrat"
       },
 
       url: "../controller/RATController.php",
 
       //Se der tudo ok no envio...
       success: function (dados) {
-              jbkrAlert.sucesso('RAT', 'RAT cadastrado com sucesso!');
-              $("#formGeral #btnCancelar").trigger("click");
-          }
+        jbkrAlert.sucesso('RAT', 'RAT cadastrado com sucesso!');
+        $("#formGeral #btnCancelar").trigger("click");
+      }
 
-  });
+    });
 
   for (var i = 0; i < dataAtividade.length; i++) {
     atividade = dataAtividade[i];
@@ -548,18 +548,18 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
         type: "POST",
         dataType: "text",
         data: {
-                dtAtividade: atividade.dtAtividade,
-                hrInicial: atividade.hrInicial,
-                hrFinal: atividade.hrFinal,
-                hrTotal: atividade.hrTotal,
-                dsAtividade: atividade.dsAtividade,
-                idFaturar: atividade.idFaturar,
-                action: "inseriratividade"
+          dtAtividade: atividade.dtAtividade,
+          hrInicial: atividade.hrInicial,
+          hrFinal: atividade.hrFinal,
+          hrTotal: atividade.hrTotal,
+          dsAtividade: atividade.dsAtividade,
+          idFaturar: atividade.idFaturar,
+          action: "inseriratividade"
         },
 
         url: "../controller/RATController.php"
 
-    });
+      });
 
   }
 
@@ -570,20 +570,20 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
         type: "POST",
         dataType: "text",
         data: {
-                cdDespesa: despesa.cdDespesa,
-                dtDespesa: despesa.dtDespesa,
-                idDespesa: despesa.idDespesa,
-                vlDespesa: despesa.vlDespesa,
-                qtDespesa: despesa.qtDespesa,
-                totDespesa: despesa.totDespesa,
-                cdFaturamento: despesa.cdFaturamento,
-                dsOberservacao: despesa.dsOberservacao,
-                action: "inserirdespesa"
+          cdDespesa: despesa.cdDespesa,
+          dtDespesa: despesa.dtDespesa,
+          idDespesa: despesa.idDespesa,
+          vlDespesa: despesa.vlDespesa,
+          qtDespesa: despesa.qtDespesa,
+          totDespesa: despesa.totDespesa,
+          cdFaturamento: despesa.cdFaturamento,
+          dsOberservacao: despesa.dsOberservacao,
+          action: "inserirdespesa"
         },
 
         url: "../controller/RATController.php"
 
-    });
+      });
 
   }
 
@@ -594,9 +594,9 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
         type: "POST",
         dataType: "text",
         data: {
-                cliente: cliente[0],
-                responsavel: responsavel[0],
-                action: "enviaemailrat"
+          cliente: cliente[0],
+          responsavel: responsavel[0],
+          action: "enviaemailrat"
         },
 
         url: "../controller/RATController.php",
@@ -606,7 +606,7 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
 
         }
 
-    });
+      });
   }
   else{
     alert("não apagou");
@@ -621,7 +621,7 @@ function buscaDescricaoDespesa(flgadd){
       type: "POST",
       dataType: "text",
       data: {
-              action: "buscadescricaodespesa"
+        action: "buscadescricaodespesa"
       },
 
       url: "../controller/RATController.php",
@@ -632,9 +632,9 @@ function buscaDescricaoDespesa(flgadd){
         dropdown = '<option value="0"></option>';
         for (var i = 0; i < json.length; i++) {
 
-            var descricaoDespesa = json[i];
+          var descricaoDespesa = json[i];
 
-            dropdown = dropdown + '<option value="' + descricaoDespesa.codDsp  + '">'+ descricaoDespesa.desDsp +'</option>';
+          dropdown = dropdown + '<option value="' + descricaoDespesa.codDsp  + '">'+ descricaoDespesa.desDsp +'</option>';
 
         }
         if(flgadd)
@@ -649,7 +649,7 @@ function buscaDescricaoDespesa(flgadd){
         }
       }
 
-  });
+    });
 
 }
 
@@ -660,8 +660,8 @@ function buscaTipoDespesa(codDsp, element) {
       type: "POST",
       dataType: "text",
       data: {
-              codDsp: codDsp,
-              action: "buscatipodespesadropdown"
+        codDsp: codDsp,
+        action: "buscatipodespesadropdown"
       },
 
       url: "../controller/RATController.php",
@@ -671,16 +671,16 @@ function buscaTipoDespesa(codDsp, element) {
         var dropdown;
         for (var i = 0; i < json.length; i++) {
 
-            var tipoDespesa = json[i];
+          var tipoDespesa = json[i];
 
-            dropdown = dropdown + '<option value="' + tipoDespesa.codTipDsp  + '">'+ tipoDespesa.desTipDsp +'</option>';
+          dropdown = dropdown + '<option value="' + tipoDespesa.codTipDsp  + '">'+ tipoDespesa.desTipDsp +'</option>';
 
         }
         element.html(dropdown);
 
       }
 
-  });
+    });
 
 
 }
@@ -700,9 +700,43 @@ function buscaValorUnitarioDespesa(idDespesa, element){
         element.text(dados);
       }
 
-  });
+    });
+}
+
+function gerarRelatorio(txbConsultor, txbCliente, txbResponsavel){
+
+  nmRelatorio = "RAT_" + dataAtual() + '_' +  horaAtual();
+
+  $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+        txbConsultor: txbConsultor,
+        txbCliente: txbCliente,
+        txbResponsavel: txbResponsavel,
+        nmRelatorio: nmRelatorio
+      },
+
+      url: "../../phpjasper/vendor/geekcom/phpjasper/templates/EnvioRAT.php",
+      //Se der tudo ok no envio...
+      success: function (dados) {
+        alert("gerou relatorio");
+      }
+
+    });
+
+}
+
+function dataAtual() {
+  var date = new Date();
+  return String(date.getDate()) + String(date.getMonth()) + String(date.getFullYear());
+}
 
 
+function horaAtual() {
+  var date = new Date();
+  return String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds());
 }
 
 $("select[name='idDespesa']").bind("DOMSubtreeModified",function(){
@@ -710,12 +744,12 @@ $("select[name='idDespesa']").bind("DOMSubtreeModified",function(){
 });
 
 $("select[name='dsDespesa']").change(function() {
-    buscaTipoDespesa($(this).find(":selected").val(),$(this).parent().parent().find("select[name='idDespesa']"));
+  buscaTipoDespesa($(this).find(":selected").val(),$(this).parent().parent().find("select[name='idDespesa']"));
 
 });
 
 $("select[name='idDespesa']").change(function() {
-    buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
+  buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
 
 });
 

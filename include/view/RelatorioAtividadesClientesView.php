@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="../../js/geral.js"></script>
     <script type="text/javascript" src="../../js/alerta.js"></script>
+    <script type="text/javascript" src="../../js/relatorioAtividadeCliente.js"></script>
     <link rel="stylesheet" href="../../css/alerta.css">
   </head>
   <body>

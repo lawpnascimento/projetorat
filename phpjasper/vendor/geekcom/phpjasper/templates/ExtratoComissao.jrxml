@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ExtratoComissao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ExtratoComissao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
 	<property name="ireport.zoom" value="1.363636363636365"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -151,9 +151,9 @@
                                      JOIN tbsituacaorat sit
                                        ON sit.codSit = rat.Situacao_codSit
                WHERE rat.Situacao_codSit = 4
-                    AND fat.datFec BETWEEN $P{txbDatIni} AND $P{txbDatFin}
                     AND usu.codUsu = $P{txbConsultor}
                     AND cli.codCli = $P{txbCliente}
+                    AND fat.datFec BETWEEN $P{txbDatIni} AND $P{txbDatFin}
 	     ORDER by rat.codRat asc]]>
 	</queryString>
 	<field name="codRat" class="java.lang.Long">
@@ -204,11 +204,14 @@
 	<field name="SumComTot" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<variable name="SumHorTot_1" class="java.lang.Integer" resetType="Column" calculation="Count">
-		<variableExpression><![CDATA[$F{SumHorTot}]]></variableExpression>
+	<variable name="TotalComissao" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SumComTot}]]></variableExpression>
 	</variable>
-	<variable name="SumHorTot_2" class="java.lang.Integer" resetType="Column" calculation="Count">
-		<variableExpression><![CDATA[$F{SumHorTot}]]></variableExpression>
+	<variable name="TotalBaseComissao" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SumBasCalCom}]]></variableExpression>
+	</variable>
+	<variable name="TotalFaturamento" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SumFatTot}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -285,14 +288,14 @@
 				<text><![CDATA[Faturamento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="470" y="0" width="30" height="19" uuid="aa248a81-a2e6-432c-908e-2803162882ec"/>
+				<reportElement x="470" y="0" width="40" height="19" uuid="aa248a81-a2e6-432c-908e-2803162882ec"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[B. Com.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="510" y="0" width="35" height="19" uuid="f1514296-ff4e-4dcb-bda9-cd75be179579"/>
+				<reportElement x="510" y="0" width="45" height="19" uuid="f1514296-ff4e-4dcb-bda9-cd75be179579"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -325,7 +328,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125">
+		<band height="36">
 			<textField>
 				<reportElement x="200" y="1" width="45" height="20" uuid="06e5267e-08b6-4871-b109-72c908d41baf"/>
 				<textElement markup="html">
@@ -369,7 +372,7 @@
 				<textFieldExpression><![CDATA[$F{vlrHorFat}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="1" width="30" height="20" uuid="aa505a21-2d04-4217-b3cb-d7ff154a3727"/>
+				<reportElement x="470" y="1" width="40" height="19" uuid="aa505a21-2d04-4217-b3cb-d7ff154a3727"/>
 				<textElement markup="html">
 					<font size="8"/>
 				</textElement>
@@ -383,7 +386,7 @@
 				<textFieldExpression><![CDATA[$F{SumHorTot}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="510" y="1" width="35" height="20" uuid="7c2b75e9-99a8-4393-aa51-338dfd159765"/>
+				<reportElement x="510" y="1" width="45" height="19" uuid="7c2b75e9-99a8-4393-aa51-338dfd159765"/>
 				<textElement markup="html">
 					<font size="8"/>
 				</textElement>
@@ -404,7 +407,7 @@
 				<textFieldExpression><![CDATA[$F{nomPrj}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="419" y="1" width="51" height="20" uuid="f1031841-6eb9-4130-b37b-67777a91db36"/>
+				<reportElement x="419" y="1" width="51" height="19" uuid="f1031841-6eb9-4130-b37b-67777a91db36"/>
 				<textElement markup="html">
 					<font size="8"/>
 				</textElement>
@@ -413,7 +416,39 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="58">
+			<textField>
+				<reportElement x="510" y="0" width="45" height="20" uuid="4fd29c03-96d8-4be5-94ee-e83a62a06786"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalComissao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="374" y="0" width="37" height="20" uuid="4fd1ad8a-d755-496d-aba0-df62931088c4"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Totais:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="0" width="40" height="20" uuid="0ef6f1e9-d3ac-4333-9155-7a1f25604ff7"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalBaseComissao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="0" width="51" height="20" uuid="a9e314f4-f8a6-4b16-9010-7e0c7e28dd99"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalFaturamento}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="374" y="0" width="181" height="20" uuid="1f6cdc37-dede-422c-9dc5-b7843e60a98d"/>
+			</rectangle>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">

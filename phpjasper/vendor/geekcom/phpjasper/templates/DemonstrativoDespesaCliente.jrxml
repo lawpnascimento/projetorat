@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DemonstrativoDespesaCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
+	<property name="ireport.zoom" value="1.363636363636365"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="17b1eaf2-fbce-4e62-82f2-5827a306ee7a"/>
+	<parameter name="txbDatIni" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="txbDatFin" class="java.lang.String"/>
+	<parameter name="txbConsultor" class="java.lang.String"/>
+	<parameter name="txbCliente" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\xampp\\htdocs\\projetorat\\trunk\\phpjasper\\vendor\\geekcom\\phpjasper\\templates\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT                rat.codRat
+                     ,usu.codUsu
+                     ,concat(usu.nomUsu, ' ', usu.sobrenomeUsu) nomUsu
+                     ,cli.codCli
+                     ,cli.nomCli
+                     ,prj.nomPrj
+                     ,pro.desPro
+                     ,fat.datFec
+                     ,dsprat.datDsp
+                     ,dsp.desDsp
+                     ,tipdsp.desTipDsp
+                     ,fatdsp.desFatDsp
+                     ,dsp.vlrUni
+                     ,dsprat.qtdDsp
+                     ,dsprat.totDsp
+                     ,dsprat.obsDsp
+                     ,rsmdsp.TotDspFat
+                     ,rsmdsp.TotDspRem
+                     ,rsmdsp.TotDspFR
+                     ,rsmdsp.TotDspFN
+                     ,rsmdsp.TotDspNR
+                     FROM tbrat rat
+                                     JOIN tbfaturamento fat
+                                         ON fat.RAT_codRAT = rat.codRat
+                                    JOIN tbresumodespesa rsmdsp
+                                         ON rsmdsp.Faturamento_codFat = fat.codFat
+                                     JOIN tbusuario usu
+                                       ON usu.codUsu = rat.Usuario_codUsu
+                                     JOIN tbcliente cli
+                                       ON cli.codCli = rat.Cliente_codCli
+                                     JOIN tbresponsavel res
+                                       ON res.codRes = rat.Responsavel_codRes
+                                     JOIN tbprojeto prj
+                                       ON prj.codPrj = rat.Projeto_codPrj
+                                     JOIN tbproduto pro
+                                       ON pro.codPro = rat.Produto_codPro
+                                     JOIN tbsituacaorat sit
+                                       ON sit.codSit = rat.Situacao_codSit
+                                     JOIN tbdespesarat dsprat
+                                     	ON dsprat.RAT_codRAT = rat.codRat
+                                     JOIN tbdespesa dsp
+                                     	ON dsp.codDsp = dsprat.Despesa_codDsp
+                                     JOIN tbtipodespesa tipdsp
+                                     	ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
+                                     JOIN tbfatdespesa fatdsp
+                                     	ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
+               WHERE rat.Situacao_codSit = 4
+                    AND fat.datFec BETWEEN $P{txbDatIni} AND $P{txbDatFin}
+                    AND cli.codCli in (1,2)
+                    AND usu.codUsu in (1,10)
+	          AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 2)
+               ORDER by cli.codCli asc, fat.datFec asc]]>
+	</queryString>
+	<field name="codRat" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codUsu" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomUsu" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codCli" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomCli" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomPrj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desPro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="datFec" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="datDsp" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desDsp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desTipDsp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desFatDsp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vlrUni" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qtdDsp" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="totDsp" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obsDsp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotDspFat" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotDspRem" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotDspFR" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotDspFN" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotDspNR" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="TotalFaturamento" class="java.math.BigDecimal" resetType="Column" incrementType="Group" incrementGroup="Cliente" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotDspFat}]]></variableExpression>
+	</variable>
+	<variable name="TotalReembolso" class="java.math.BigDecimal" resetType="Column" incrementType="Group" incrementGroup="Cliente" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotDspRem}]]></variableExpression>
+	</variable>
+	<group name="Cliente" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{codCli}]]></groupExpression>
+		<groupHeader>
+			<band height="34">
+				<staticText>
+					<reportElement x="0" y="0" width="36" height="20" uuid="d540aeee-835a-4854-9117-0d8dd800fd03"/>
+					<text><![CDATA[Cliente:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="36" y="0" width="150" height="20" uuid="d5e63d16-1f03-4f84-bfa8-93cb39341f5e"/>
+					<textFieldExpression><![CDATA[$F{nomCli}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="218" y="0" width="52" height="20" uuid="7782c202-da83-47b1-8504-0566d3146222"/>
+					<text><![CDATA[Código Cli:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="270" y="0" width="55" height="20" uuid="9d7e19da-66ed-42e3-8377-b948d8435955"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{codCli}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="73"/>
+		</groupFooter>
+	</group>
+	<group name="Data Fechamento" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{datFec}]]></groupExpression>
+		<groupHeader>
+			<band height="46">
+				<staticText>
+					<reportElement x="0" y="27" width="31" height="18" uuid="e5892b54-01a0-4c8a-ac8d-82f36465a5b1"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Cod Rat]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="31" y="26" width="85" height="18" uuid="4042d7d7-0683-4b20-8e9c-0beedb488b16"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Consultor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="116" y="26" width="38" height="18" uuid="9d114637-45b3-473a-80fe-f9d16403ab0a"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Projeto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="27" width="64" height="18" uuid="bd2b1e63-ceb2-48a3-a090-d4c906224e54"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Descrição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="218" y="27" width="64" height="18" uuid="687e4e8f-ff0e-4a9e-b063-fd34244bbfb4"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Tip Despesa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="282" y="27" width="118" height="18" uuid="c33ca863-39d0-474e-a3af-0df1c4d904a2"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Observação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="400" y="27" width="30" height="18" uuid="04fd3919-09e4-46f1-b8b5-0eca21df6e49"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Tip Fat.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="430" y="27" width="33" height="18" uuid="f2fab446-c921-4cb2-aca3-5195310a1d79"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Unitario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="463" y="27" width="44" height="18" uuid="5a24784c-4eaf-4100-9b79-e7da839f4b4c"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Quantidade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="507" y="27" width="46" height="18" uuid="59d30381-e46b-4f6b-958a-b5f68bd9b317"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Total ]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="83" y="1" width="60" height="20" uuid="46efd2de-2c8a-45e2-9f9d-50705a789a4f"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{datFec}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="1" width="83" height="19" uuid="dd722f00-cada-4e50-b39e-069b3b7debd8"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Data Fechamento]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="58">
+				<textField>
+					<reportElement x="501" y="0" width="54" height="20" uuid="af594008-1ef6-4520-99b3-13fef0e5e4b2"/>
+					<textFieldExpression><![CDATA[$V{TotalFaturamento}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="501" y="20" width="52" height="20" uuid="dd886bd3-df7e-47aa-b50f-1947b194448d"/>
+					<textFieldExpression><![CDATA[$V{TotalReembolso}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="411" y="0" width="90" height="20" uuid="8adb1333-127f-40e7-b81d-16aaa380a268"/>
+					<text><![CDATA[Total Faturamento:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="418" y="20" width="83" height="20" uuid="45cc8936-e09d-421e-8e0c-41cde270a8f6"/>
+					<text><![CDATA[Total Reembolso:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="134" height="25" uuid="8f72e9bb-b412-4cb0-b5df-22a52a25b154"/>
+				<text><![CDATA[Demonstrativo de Despesas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="36">
+			<textField>
+				<reportElement x="400" y="1" width="30" height="20" uuid="95e4ea2b-a11c-4e21-830b-ae02f7ec0474"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desFatDsp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="0" width="44" height="20" uuid="c9dccc21-e088-4cff-b5bb-bb5073fe48fe"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtdDsp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="507" y="1" width="46" height="20" uuid="c9ed9e2c-f632-4ee3-86c7-c90f5b4fce86"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totDsp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="1" width="33" height="20" uuid="d78ffaa5-ab3c-4277-b427-f82a317d77c8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vlrUni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="1" width="64" height="20" uuid="6e179c43-025d-45b4-ab99-4a5e117bf6c8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desTipDsp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="0" width="118" height="36" uuid="0c1e5cb3-a907-4e66-9ce6-29af45f91a15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obsDsp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="1" width="64" height="20" uuid="99999252-0b49-459c-be7f-12a10ce04aac"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desDsp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="31" y="0" width="85" height="35" uuid="a7c03393-edea-4fb5-8649-7c47450f1c99"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomUsu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="1" width="38" height="35" uuid="a4facff0-014e-44b5-a83c-14e76eb710d8"/>
+				<textElement markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomPrj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="31" height="20" uuid="085ede2a-3eb2-4fb1-b734-374e37a6b611"/>
+				<textElement markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codRat}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="430" y="34" width="45" height="20" uuid="79ca7367-667a-4d67-b16a-39add65194e9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txbDatFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="34" width="45" height="20" uuid="e058176a-0c95-4e1f-800a-e1067eb0a841"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txbDatIni}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="354" y="34" width="31" height="20" uuid="422c9314-cdfb-49f6-818f-509b3bba58bc"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="532" y="34" width="23" height="20" uuid="db73b9bb-b7aa-4819-ab43-343b27e1b0c2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="501" y="34" width="31" height="20" uuid="22ac254a-0845-4ad9-a5a6-f24bfc58d229"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -194,7 +194,8 @@ class ClientePersistencia{
 
 		$sSql = "SELECT CONCAT(seqCid,'-',desCid) desCid
 						   FROM tbcidade
-						  WHERE desCid LIKE '%". $termo ."%'";
+						  WHERE desCid LIKE '%". $termo ."%'
+						  LIMIT 10";
 
 		$resultado = mysql_query($sSql);
 

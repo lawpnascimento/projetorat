@@ -515,7 +515,10 @@ class FaturamentoPersistencia{
 		$sSql =  "INSERT INTO tbresumodespesa (Faturamento_codFat
 																		,RAT_codRAT
 																		,TotDspFat
-																		,TotDspRem)
+																		,TotDspRem
+																		,TotDspFR
+																		,TotDspFN
+																		,TotDspNR)
 								SELECT
 												" . $codigoFat . "
 												," . $codigoRat . "
@@ -542,7 +545,44 @@ class FaturamentoPersistencia{
 										    JOIN tbfatdespesa fatdsp
 										      ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
 							 				where rat.codRAT = " . $codigoRat . "
-							 				AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 3)) as TotDspRem";
+							 				AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 3)) as TotDspRem
+							 					,(SELECT SUM(totDsp) TotDspFat
+											FROM tbrat rat
+											JOIN tbdespesarat dsprat
+											  ON rat.codRat = dsprat.RAT_codRAT
+							 		        JOIN tbdespesa dsp
+										      ON dsp.codDsp = dsprat.Despesa_codDsp
+										    JOIN tbtipodespesa tipdsp
+										      ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
+										    JOIN tbfatdespesa fatdsp
+										      ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
+									 		where rat.codRAT = " . $codigoRat . "
+									 		AND (dsprat.Fatdespesa_codTipFat = 1)) as TotDspFR
+									 			,(SELECT SUM(totDsp) TotDspFat
+											FROM tbrat rat
+											JOIN tbdespesarat dsprat
+											  ON rat.codRat = dsprat.RAT_codRAT
+							 		        JOIN tbdespesa dsp
+										      ON dsp.codDsp = dsprat.Despesa_codDsp
+										    JOIN tbtipodespesa tipdsp
+										      ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
+										    JOIN tbfatdespesa fatdsp
+										      ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
+									 		where rat.codRAT = " . $codigoRat . "
+									 		AND (dsprat.Fatdespesa_codTipFat = 2)) as TotDspFN
+							 					,(SELECT SUM(totDsp) TotDspFat
+											FROM tbrat rat
+											JOIN tbdespesarat dsprat
+											  ON rat.codRat = dsprat.RAT_codRAT
+							 		        JOIN tbdespesa dsp
+										      ON dsp.codDsp = dsprat.Despesa_codDsp
+										    JOIN tbtipodespesa tipdsp
+										      ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
+										    JOIN tbfatdespesa fatdsp
+										      ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
+									 		where rat.codRAT = " . $codigoRat . "
+									 		AND (dsprat.Fatdespesa_codTipFat = 3)) as TotDspNR
+							 				";
 
 		$this->getConexao()->query($sSql);
 

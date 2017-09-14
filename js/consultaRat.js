@@ -2,78 +2,78 @@ $("#document").ready(function(){
   verificaPapelUsuario();
 
   $("#formConsultaRAT #btnBuscar").click(function () {
-      consultaRAT();
-    });
+    consultaRAT();
+  });
 
   $("#formConsultaRAT #btnEmail").click(function(){
-      var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
-      if (trSelecionado == true){
-        var tdUsuRAT = $.trim($("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-"));
-        var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
-        var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
+    var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
+    if (trSelecionado == true){
+      var tdUsuRAT = $.trim($("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-"));
+      var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
+      var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
       if (tdSitRAT == 1 || tdSitRAT == 6){
         enviaEmailRAT(tdUsuRAT, tdCodRAT);
-          } else {
-                   jbkrAlert.alerta('Alerta', "O RAT deve estar com a situação '1 - Digitado' ou '6 - Reprovado' para ser enviado.");
-                 }  
       } else {
-              jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser enviado.");
-             }
-    });
+       jbkrAlert.alerta('Alerta', "O RAT deve estar com a situação '1 - Digitado' ou '6 - Reprovado' para ser enviado.");
+     }  
+   } else {
+    jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser enviado.");
+  }
+});
 
   $("#formConsultaRAT #btnCancelar").click(function(){
-      limpaCampos($(this).closest("form"));
-      consultaRAT();
-    });
+    limpaCampos($(this).closest("form"));
+    consultaRAT();
+  });
 
   $("#grdConsultaRAT").on('click', 'tr', function () {
-      var selected = $(this).hasClass("highlight");
-      $("#grdConsultaRAT tr").removeClass("highlight");
+    var selected = $(this).hasClass("highlight");
+    $("#grdConsultaRAT tr").removeClass("highlight");
 
-      if(!selected){
-              $(this).addClass("highlight")
-      };
+    if(!selected){
+      $(this).addClass("highlight")
+    };
 
-      var tdCodRAT = $(this).closest('tr').find('td:first').text();
-      var tdSitRAT = $(this).closest('tr').find('td:last').text().slice(0,1);
+    var tdCodRAT = $(this).closest('tr').find('td:first').text();
+    var tdSitRAT = $(this).closest('tr').find('td:last').text().slice(0,1);
 
-      consultaAtividade(tdCodRAT);
-      consultaDespesa(tdCodRAT);
+    consultaAtividade(tdCodRAT);
+    consultaDespesa(tdCodRAT);
 
-    });
+  });
 
   $("#formConsultaRAT #btnAprovar").click(function(){
-      var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
-      if (trSelecionado == true){
-        var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
-        var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
+    var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
+    if (trSelecionado == true){
+      var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
+      var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
-          if (tdSitRAT != 2){
-                              jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '2 - Enviado' para ser aprovado.");
-          } else {
-                   aprovaRAT(tdCodRAT, tdSitRAT);
-                   }     
+      if (tdSitRAT != 2){
+        jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '2 - Enviado' para ser aprovado.");
       } else {
-              jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser aprovado.");
-             }
-    });
+       aprovaRAT(tdCodRAT, tdSitRAT);
+     }     
+   } else {
+    jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser aprovado.");
+  }
+});
 
   $("#formConsultaRAT #btnReprovar").click(function(){
-      var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
-      if (trSelecionado == true){
-        var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
-        var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
+    var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
+    if (trSelecionado == true){
+      var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
+      var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
-          if (tdSitRAT != 2){
-                              jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '2 - Enviado' para ser reprovado.");
-          } else {
-                   reprovaRAT(tdCodRAT, tdSitRAT);
-                   }     
+      if (tdSitRAT != 2){
+        jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '2 - Enviado' para ser reprovado.");
       } else {
-              jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser reprovado.");
-             }
-    });
+       reprovaRAT(tdCodRAT, tdSitRAT);
+     }     
+   } else {
+    jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser reprovado.");
+  }
+});
 
 });
 
@@ -87,19 +87,19 @@ function consultaRAT(){
   var txbNomPro = $("#txbNomPro").val();
   var txbSitRAT = $("#txbSitRAT").val();
 
-    $.ajax({
+  $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            codigo: txbCodRat,
-            usuario: txbNomUsu,
-            cliente: txbNomCli,
-            responsavel: txbNomRes,
-            projeto: txbNomPrj,
-            produto: txbNomPro,
-            situacao: txbSitRAT,
-            action: "buscar"
+          codigo: txbCodRat,
+          usuario: txbNomUsu,
+          cliente: txbNomCli,
+          responsavel: txbNomRes,
+          projeto: txbNomPrj,
+          produto: txbNomPro,
+          situacao: txbSitRAT,
+          action: "buscar"
         },
 
         url: "../controller/ConsultaRATController.php",
@@ -110,91 +110,91 @@ function consultaRAT(){
           var rat = null;
 
           //Carregando a grid
-            var grid = "";
-            for (var i = 0; i < json.length; i++) {
-              rat = json[i];
+          var grid = "";
+          for (var i = 0; i < json.length; i++) {
+            rat = json[i];
 
-              grid = grid + "<tr>";
-              grid = grid + "<td>" + rat.codRat + "</td>";
-              grid = grid + "<td>" + rat.codUsu + "</td>";
-              grid = grid + "<td>" + rat.datRat + "</td>";
-              grid = grid + "<td>" + rat.perComCli + "</td>";
-              grid = grid + "<td>" + rat.perComInt + "</td>";
-              grid = grid + "<td>" + rat.codCli + "</td>";
-              grid = grid + "<td>" + rat.codRes + "</td>";
-              grid = grid + "<td>" + rat.codPrj + "</td>";
-              grid = grid + "<td>" + rat.vlrHorCom + "</td>";
-              grid = grid + "<td>" + rat.vlrHorFat + "</td>";
-              grid = grid + "<td>" + rat.codPro + "</td>";  
-              grid = grid + "<td>" + rat.codSit + "</td>";
-              grid = grid + "</tr>";
+            grid = grid + "<tr>";
+            grid = grid + "<td>" + rat.codRat + "</td>";
+            grid = grid + "<td>" + rat.codUsu + "</td>";
+            grid = grid + "<td>" + rat.datRat + "</td>";
+            grid = grid + "<td>" + rat.perComCli + "</td>";
+            grid = grid + "<td>" + rat.perComInt + "</td>";
+            grid = grid + "<td>" + rat.codCli + "</td>";
+            grid = grid + "<td>" + rat.codRes + "</td>";
+            grid = grid + "<td>" + rat.codPrj + "</td>";
+            grid = grid + "<td>" + rat.vlrHorCom + "</td>";
+            grid = grid + "<td>" + rat.vlrHorFat + "</td>";
+            grid = grid + "<td>" + rat.codPro + "</td>";  
+            grid = grid + "<td>" + rat.codSit + "</td>";
+            grid = grid + "</tr>";
 
-            }
+          }
 
-            $("#grdConsultaRAT").html(grid);
+          $("#grdConsultaRAT").html(grid);
           
         }
-    });
+      });
 }
 
 function aprovaRAT(tdCodRAT, tdSitRAT){
-    $.ajax({
+  $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            codigo: tdCodRAT,
-            situacao: tdSitRAT,
-            action: "aprovar"
+          codigo: tdCodRAT,
+          situacao: tdSitRAT,
+          action: "aprovar"
         },
 
         url: "../controller/ConsultaRATController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            jbkrAlert.sucesso('RAT', 'RAT aprovado com sucesso e enviado para o faturamento!');
-            $("#formConsultaRAT #btnCancelar").trigger("click");
+          jbkrAlert.sucesso('RAT', 'RAT aprovado com sucesso e enviado para o faturamento!');
+          $("#formConsultaRAT #btnCancelar").trigger("click");
         }
-    });
+      });
 }
 
 function reprovaRAT(tdCodRAT, tdSitRAT){
-    $.ajax({
+  $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            codigo: tdCodRAT,
-            situacao: tdSitRAT,
-            action: "reprovar"
+          codigo: tdCodRAT,
+          situacao: tdSitRAT,
+          action: "reprovar"
         },
 
         url: "../controller/ConsultaRATController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            jbkrAlert.sucesso('RAT', 'RAT reprovado com sucesso!');
-            $("#formConsultaRAT #btnCancelar").trigger("click");
+          jbkrAlert.sucesso('RAT', 'RAT reprovado com sucesso!');
+          $("#formConsultaRAT #btnCancelar").trigger("click");
         }
-    });
+      });
 }
 
 function consultaAtividade(tdCodRAT){
-        $.ajax({
+  $.ajax({
           //Tipo de envio POST ou GET
           type: "POST",
           dataType: "text",
           data: {
-                  codigo: tdCodRAT,
-                  action: "buscaatividade"
+            codigo: tdCodRAT,
+            action: "buscaatividade"
           },
 
           url: "../controller/ConsultaRATController.php",
 
           //Se der tudo ok no envio...
-            success: function (dados) {
-              var json = $.parseJSON(dados);
-              var atividade = null;
+          success: function (dados) {
+            var json = $.parseJSON(dados);
+            var atividade = null;
 
                 //Carregando a grid
                 var grid = "";
@@ -214,26 +214,26 @@ function consultaAtividade(tdCodRAT){
                 }
 
                 $("#grdConsultaAtividade").html(grid);
-            }
-          });
+              }
+            });
 }
 
 function consultaDespesa(tdCodRAT){
-        $.ajax({
+  $.ajax({
           //Tipo de envio POST ou GET
           type: "POST",
           dataType: "text",
           data: {
-                  codigo: tdCodRAT,
-                  action: "buscadespesa"
+            codigo: tdCodRAT,
+            action: "buscadespesa"
           },
 
           url: "../controller/ConsultaRATController.php",
 
           //Se der tudo ok no envio...
-            success: function (dados) {
-              var json = $.parseJSON(dados);
-              var despesa = null;
+          success: function (dados) {
+            var json = $.parseJSON(dados);
+            var despesa = null;
 
                 //Carregando a grid
                 var grid = "";
@@ -255,8 +255,8 @@ function consultaDespesa(tdCodRAT){
                 }
 
                 $("#grdConsultaDespesa").html(grid);
-            }
-          });
+              }
+            });
 
 }
 
@@ -266,46 +266,46 @@ function telaModoConsultor(){
 }
 
 function verificaPapelUsuario(){
-    $.ajax({
+  $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            action: "verificapapelusuario"
+          action: "verificapapelusuario"
         },
 
         url: "../controller/ConsultaRATController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-        var json = $.parseJSON(dados);
+          var json = $.parseJSON(dados);
 
-        if (json.status == 2) {
-          telaModoConsultor();
-                  }
+          if (json.status == 2) {
+            telaModoConsultor();
+          }
         }
-    });
+      });
 
 }
 
 function enviaEmailRAT(tdUsuRAT, tdCodRAT){
-    $.ajax({
+  $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-                usuariorat: tdUsuRAT[0],
-                codigorat: tdCodRAT,
-                action: "enviaemailrat"
+          usuariorat: tdUsuRAT[0],
+          codigorat: tdCodRAT,
+          action: "enviaemailrat"
         },
 
         url: "../controller/ConsultaRATController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-        var json = $.parseJSON(dados);
+          var json = $.parseJSON(dados);
 
-        if (json.status == 1) {
+          if (json.status == 1) {
             jbkrAlert.alerta('Alerta','Somente o usuário que lançou o RAT pode enviá-lo por e-mail.');   
           }else {
             jbkrAlert.sucesso('Sucesso', 'RAT enviado com sucesso!');
@@ -313,7 +313,7 @@ function enviaEmailRAT(tdUsuRAT, tdCodRAT){
           }
 
         }
-    });
+      });
 
 }
 

@@ -3,29 +3,29 @@ $("#document").ready(function() {
 
 //para chamar a data atual depois de buscar todos os projetos para a grid
 $.ajax({
-   url:buscaProjetos(),
-   success:function(){
+ url:buscaProjetos(),
+ success:function(){
    setaDataAtual("#txbDataInicio");
-}
+ }
 })
 
-  $("#formProjeto #btnCadastrar").click(function () {
+$("#formProjeto #btnCadastrar").click(function () {
 
-    var txbProjeto = $("#txbProjeto").val();
-    var cbbProduto = $("#cbbProduto").val();
-    var txbDataInicio = $("#txbDataInicio").val();
-    var cbbCliente = $("#cbbCliente").val();
-    var txbValorHoraCom = $("#txbValorHoraCom").val();
-    var txbValorHoraFat = $("#txbValorHoraFat").val();
-    var txaObsProjeto = $("#txaObsProjeto").val();
+  var txbProjeto = $("#txbProjeto").val();
+  var cbbProduto = $("#cbbProduto").val();
+  var txbDataInicio = $("#txbDataInicio").val();
+  var cbbCliente = $("#cbbCliente").val();
+  var txbValorHoraCom = $("#txbValorHoraCom").val();
+  var txbValorHoraFat = $("#txbValorHoraFat").val();
+  var txaObsProjeto = $("#txaObsProjeto").val();
 
-    var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHoraCom);
+  var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHoraCom);
 
-    if(msgErro !== ""){
-      jbkrAlert.alerta('Alerta!',msgErro);
-    }
-    else {
-      $.ajax({
+  if(msgErro !== ""){
+    jbkrAlert.alerta('Alerta!',msgErro);
+  }
+  else {
+    $.ajax({
           //Tipo de envio POST ou GET
           type: "POST",
           dataType: "text",
@@ -44,51 +44,51 @@ $.ajax({
 
           //Se der tudo ok no envio...
           success: function (dados) {
-              jbkrAlert.sucesso('Projeto', 'Projeto cadastrado com sucesso!');
-              $("#formProjeto #btnCancelar").trigger("click");
+            jbkrAlert.sucesso('Projeto', 'Projeto cadastrado com sucesso!');
+            $("#formProjeto #btnCancelar").trigger("click");
           }
-      });
-    }
+        });
+  }
 
 
-  });
+});
 
-  $("#formProjeto #btnCancelar").click(function(){
-    limpaCampos($(this).closest("form"));
-    formularioModoInserir();
-    buscaProjetos();
-  });
+$("#formProjeto #btnCancelar").click(function(){
+  limpaCampos($(this).closest("form"));
+  formularioModoInserir();
+  buscaProjetos();
+});
 
-  $("#formProjeto #btnAtualizar").click(function () {
-    var codigo = $("#hidCodPrj").val();
-    var txbProjeto = $("#txbProjeto").val();
-    var cbbProduto = $("#cbbProduto").val();
-    var txbDataInicio = $("#txbDataInicio").val();
-    var cbbCliente = $("#cbbCliente").val();
-    var txbValorHoraCom = $("#txbValorHoraCom").val();
-    var txbValorHoraFat = $("#txbValorHoraFat").val();
-    var txaObsProjeto = $("#txaObsProjeto").val();
+$("#formProjeto #btnAtualizar").click(function () {
+  var codigo = $("#hidCodPrj").val();
+  var txbProjeto = $("#txbProjeto").val();
+  var cbbProduto = $("#cbbProduto").val();
+  var txbDataInicio = $("#txbDataInicio").val();
+  var cbbCliente = $("#cbbCliente").val();
+  var txbValorHoraCom = $("#txbValorHoraCom").val();
+  var txbValorHoraFat = $("#txbValorHoraFat").val();
+  var txaObsProjeto = $("#txaObsProjeto").val();
 
-    var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHoraCom);
+  var msgErro = validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHoraCom);
 
-    if(msgErro !== ""){
-        jbkrAlert.alerta('Alerta!',msgErro);
-    }
-    else{
-      $.ajax({
+  if(msgErro !== ""){
+    jbkrAlert.alerta('Alerta!',msgErro);
+  }
+  else{
+    $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            codigo: codigo,
-            projeto: txbProjeto,
-            produto: cbbProduto,
-            dataInicio: txbDataInicio,
-            cliente: cbbCliente,
-            valorHoraCom: txbValorHoraCom,
-            valorHoraFat: txbValorHoraFat,
-            obsProjeto: txaObsProjeto,
-            action: "atualizar"
+          codigo: codigo,
+          projeto: txbProjeto,
+          produto: cbbProduto,
+          dataInicio: txbDataInicio,
+          cliente: cbbCliente,
+          valorHoraCom: txbValorHoraCom,
+          valorHoraFat: txbValorHoraFat,
+          obsProjeto: txaObsProjeto,
+          action: "atualizar"
         },
 
         url: "../controller/ProjetoController.php",
@@ -99,39 +99,39 @@ $.ajax({
           $("#formProjeto #btnCancelar").trigger("click");
         }
       });
-    }
-  });
+  }
+});
 
-  $("#formProjeto #btnBuscar").click(function () {
-    buscaProjetos();
+$("#formProjeto #btnBuscar").click(function () {
+  buscaProjetos();
 
-  });
-  
+});
+
 });
 
 function buscaProjetos(codigo){
-    var txbProjeto = $("#txbProjeto").val();
-    var cbbProduto = $("#cbbProduto").val();
-    var txbDataInicio = $("#txbDataInicio").val();
-    var cbbCliente = $("#cbbCliente").val();
-    var txbValorHoraCom = $("#txbValorHoraCom").val();
-    var txbValorHoraFat = $("#txbValorHoraFat").val();
-    var txaObsProjeto = $("#txaObsProjeto").val();
+  var txbProjeto = $("#txbProjeto").val();
+  var cbbProduto = $("#cbbProduto").val();
+  var txbDataInicio = $("#txbDataInicio").val();
+  var cbbCliente = $("#cbbCliente").val();
+  var txbValorHoraCom = $("#txbValorHoraCom").val();
+  var txbValorHoraFat = $("#txbValorHoraFat").val();
+  var txaObsProjeto = $("#txaObsProjeto").val();
 
-    $.ajax({
+  $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-              codigo: codigo,
-              projeto: txbProjeto,
-              produto: cbbProduto,
-              dataInicio: txbDataInicio,
-              cliente: cbbCliente,
-              valorHoraCom: txbValorHoraCom,
-              valorHoraFat: txbValorHoraFat,
-              obsProjeto: txaObsProjeto,
-              action: "buscar"
+          codigo: codigo,
+          projeto: txbProjeto,
+          produto: cbbProduto,
+          dataInicio: txbDataInicio,
+          cliente: cbbCliente,
+          valorHoraCom: txbValorHoraCom,
+          valorHoraFat: txbValorHoraFat,
+          obsProjeto: txaObsProjeto,
+          action: "buscar"
         },
 
         url: "../controller/ProjetoController.php",
@@ -165,23 +165,23 @@ function buscaProjetos(codigo){
           }else{
             formularioModoAtualizar();
             for (var j = 0; j < json.length; j++) {
-                projeto = json[j];
-                $("#hidCodPrj").val(projeto.codPrj);
-                $("#txbProjeto").val(projeto.nomPrj);
-                $("#cbbCliente:first-child").text(projeto.nomCli);
-                $("#cbbCliente:first-child").val(projeto.codCli);
-                $("#cbbProduto:first-child").text(projeto.desPro);
-                $("#cbbProduto:first-child").val(projeto.codPro);
-                $("#txbDataInicio").val(projeto.datIni);
-                $("#txbValorHoraCom").val(projeto.vlrHorCom);
-                $("#txbValorHoraFat").val(projeto.vlrHorFat);
-                $("#txaObsProjeto").val(projeto.obsPrj);
+              projeto = json[j];
+              $("#hidCodPrj").val(projeto.codPrj);
+              $("#txbProjeto").val(projeto.nomPrj);
+              $("#cbbCliente:first-child").text(projeto.nomCli);
+              $("#cbbCliente:first-child").val(projeto.codCli);
+              $("#cbbProduto:first-child").text(projeto.desPro);
+              $("#cbbProduto:first-child").val(projeto.codPro);
+              $("#txbDataInicio").val(projeto.datIni);
+              $("#txbValorHoraCom").val(projeto.vlrHorCom);
+              $("#txbValorHoraFat").val(projeto.vlrHorFat);
+              $("#txaObsProjeto").val(projeto.obsPrj);
             }
 
           }
 
         }
-    });
+      });
 
 }
 
@@ -191,39 +191,39 @@ function buscaClienteDropdown(){
         type: "POST",
         dataType: "text",
         data: {
-            action: "clientedropdown"
+          action: "clientedropdown"
         },
 
         url: "../controller/ProjetoController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            var json = $.parseJSON(dados);
+          var json = $.parseJSON(dados);
 
-            var dropdown = "";
-            for (var i = 0; i < json.length; i++) {
+          var dropdown = "";
+          for (var i = 0; i < json.length; i++) {
 
-                var cliente = json[i];
+            var cliente = json[i];
 
-                dropdown = dropdown + '<li role="presentation" value="' + cliente.codCli  + '"><a role="menuitem" tabindex="-1" href="#">' + cliente.nomCli + '</a></li>';
+            dropdown = dropdown + '<li role="presentation" value="' + cliente.codCli  + '"><a role="menuitem" tabindex="-1" href="#">' + cliente.nomCli + '</a></li>';
 
-            }
-            $("#ulCliente").html(dropdown);
+          }
+          $("#ulCliente").html(dropdown);
 
-            $("#ulCliente li a").click(function(){
-                $("#cbbCliente:first-child").text($(this).text());
+          $("#ulCliente li a").click(function(){
+            $("#cbbCliente:first-child").text($(this).text());
 
-                $("#ulCliente li").each(function(){
+            $("#ulCliente li").each(function(){
 
-                    if ($(this).text() == $("#cbbCliente").text().trim()){
-                        $("#cbbCliente").val($(this).val());
-                    }
-                });
-
+              if ($(this).text() == $("#cbbCliente").text().trim()){
+                $("#cbbCliente").val($(this).val());
+              }
             });
+
+          });
         }
 
-    });
+      });
 }
 
 function buscaProdutoDropdown(){
@@ -232,60 +232,60 @@ function buscaProdutoDropdown(){
         type: "POST",
         dataType: "text",
         data: {
-            action: "produtodropdown"
+          action: "produtodropdown"
         },
 
         url: "../controller/ProjetoController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            var json = $.parseJSON(dados);
+          var json = $.parseJSON(dados);
 
-            var dropdown = "";
-            for (var i = 0; i < json.length; i++) {
+          var dropdown = "";
+          for (var i = 0; i < json.length; i++) {
 
-                var produto = json[i];
+            var produto = json[i];
 
-                dropdown = dropdown + '<li role="presentation" value="' + produto.codPro  + '"><a role="menuitem" tabindex="-1" href="#">' + produto.desPro + '</a></li>';
+            dropdown = dropdown + '<li role="presentation" value="' + produto.codPro  + '"><a role="menuitem" tabindex="-1" href="#">' + produto.desPro + '</a></li>';
 
-            }
-            $("#ulProduto").html(dropdown);
+          }
+          $("#ulProduto").html(dropdown);
 
-            $("#ulProduto li a").click(function(){
+          $("#ulProduto li a").click(function(){
 
-                $("#cbbProduto:first-child").text($(this).text());
+            $("#cbbProduto:first-child").text($(this).text());
 
-                $("#ulProduto li").each(function(){
+            $("#ulProduto li").each(function(){
 
-                    if ($(this).text() == $("#cbbProduto").text().trim()){
-                        $("#cbbProduto").val($(this).val());
-                    }
-                });
-
+              if ($(this).text() == $("#cbbProduto").text().trim()){
+                $("#cbbProduto").val($(this).val());
+              }
             });
+
+          });
         }
 
-    });
+      });
 }
 
 function validaCampos(txbProjeto, cbbProduto, txbDataInicio, cbbCliente, txbValorHoraCom){
-    msgErro = "";
-    if(txbProjeto === ""){
-        msgErro = msgErro + "<b>Projeto</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-    if(cbbProduto === ""){
-        msgErro = msgErro + "<b>Produto</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-    if(txbDataInicio === ""){
-        msgErro = msgErro + "<b>Data Inicial</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-    if(cbbCliente === ""){
-        msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-    if(txbValorHoraCom === ""){
-        msgErro = msgErro + "<b>Valor Hora Comissão</b> é um campo de preenchimento obrigatorio";
-    }
-    return msgErro;
+  msgErro = "";
+  if(txbProjeto === ""){
+    msgErro = msgErro + "<b>Projeto</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(cbbProduto === ""){
+    msgErro = msgErro + "<b>Produto</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(txbDataInicio === ""){
+    msgErro = msgErro + "<b>Data Inicial</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(cbbCliente === ""){
+    msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(txbValorHoraCom === ""){
+    msgErro = msgErro + "<b>Valor Hora Comissão</b> é um campo de preenchimento obrigatorio";
+  }
+  return msgErro;
 
 }
 

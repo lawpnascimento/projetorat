@@ -2,16 +2,16 @@ $(document).ready(function(){
   $("#cliente").click(function(){
     $.ajax({
 
-        type: "POST",
-        dataType: "text",
+      type: "POST",
+      dataType: "text",
 
-        url: "ClienteView.php",
+      url: "ClienteView.php",
 
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-            buscaClientes();
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        buscaClientes();
 
-        }
+      }
     });
 
   });
@@ -19,16 +19,16 @@ $(document).ready(function(){
   $("#projeto").click(function(){
     $.ajax({
 
-        type: "POST",
-        dataType: "text",
+      type: "POST",
+      dataType: "text",
 
-        url: "ProjetoView.php",
+      url: "ProjetoView.php",
 
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-            buscaClienteDropdown();
-            buscaProdutoDropdown();
-        }
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        buscaClienteDropdown();
+        buscaProdutoDropdown();
+      }
     });
 
   });
@@ -36,16 +36,16 @@ $(document).ready(function(){
   $("#responsavel").click(function(){
     $.ajax({
 
-        type: "POST",
-        dataType: "text",
+      type: "POST",
+      dataType: "text",
 
-        url: "ResponsavelView.php",
+      url: "ResponsavelView.php",
 
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-            buscaClienteDropdown();
-            buscaResponsavel();
-        }
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        buscaClienteDropdown();
+        buscaResponsavel();
+      }
     });
 
   });
@@ -53,14 +53,14 @@ $(document).ready(function(){
   $("#lancarat").click(function(){
     $.ajax({
 
-        type: "POST",
-        dataType: "text",
+      type: "POST",
+      dataType: "text",
 
-        url: "RATView.php",
+      url: "RATView.php",
 
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-        }
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+      }
     });
 
   });
@@ -68,16 +68,16 @@ $(document).ready(function(){
   $("#despesa").click(function(){
     $.ajax({
 
-        type: "POST",
-        dataType: "text",
+      type: "POST",
+      dataType: "text",
 
-        url: "DespesaView.php",
+      url: "DespesaView.php",
 
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-            buscaDespesas();
-            buscaDespesaDropdown();
-        }
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        buscaDespesas();
+        buscaDespesaDropdown();
+      }
     });
 
   });
@@ -113,102 +113,102 @@ $(document).ready(function(){
       dataType: "text",
       url: "ProdutoView.php",
       success: function(callback){
-          $("#divPrincipal").html(callback);
-          buscaProdutos();
+        $("#divPrincipal").html(callback);
+        buscaProdutos();
       }
     });
   });
 
   $("#perfil").click(function(){
-      $.ajax({
-        type: "POST",
-        dataType: "text",
-        url: "PerfilView.php",
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-            buscaPerfil();
-        }
-      });
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "PerfilView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        buscaPerfil();
+      }
+    });
   });
 
   $("#consultarat").click(function(){
-      $.ajax({
-        type: "POST",
-        dataType: "text",
-        url: "ConsultaRATView.php",
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-            consultaRAT();
-        }
-      });
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "ConsultaRATView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        consultaRAT();
+      }
+    });
   });
 
   $("#faturamento").click(function(){
-      $.ajax({
-        type: "POST",
-        dataType: "text",
-        url: "FaturamentoView.php",
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-            consultaFatRAT();
-        }
-      });
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "FaturamentoView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        consultaFatRAT();
+      }
+    });
   });
 
-    $("#extratocomissoes").click(function(){
-      $.ajax({
-        type: "POST",
-        dataType: "text",
-        url: "RelatorioExtratoComissoesView.php",
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-        }
-      });
+  $("#extratocomissoes").click(function(){
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "RelatorioExtratoComissoesView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+      }
+    });
   });
 
-    $("#despesasconsultor").click(function(){
-      $.ajax({
-        type: "POST",
-        dataType: "text",
-        url: "RelatorioDespesasConsultorView.php",
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-        }
-      });
+  $("#despesaconsultor").click(function(){
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "RelatorioDespesaConsultorView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+      }
+    });
   });
 
-    $("#despesasclientes").click(function(){
-      $.ajax({
-        type: "POST",
-        dataType: "text",
-        url: "RelatorioDespesasClientesView.php",
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-        }
-      });
+  $("#despesacliente").click(function(){
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "RelatorioDespesaClienteView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+      }
+    });
   });
 
-    $("#atividadesclientes").click(function(){
-      $.ajax({
-        type: "POST",
-        dataType: "text",
-        url: "RelatorioAtividadesClientesView.php",
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-        }
-      });
+  $("#atividadesclientes").click(function(){
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "RelatorioAtividadesClientesView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+      }
+    });
   });
 
-    $("#tipodespesa").click(function(){
-      $.ajax({
-        type: "POST",
-        dataType: "text",
-        url: "TipoDespesaView.php",
-        success: function(callback){
-            $("#divPrincipal").html(callback);
-            buscaTipoDespesas();
-        }
-      });
+  $("#tipodespesa").click(function(){
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "TipoDespesaView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        buscaTipoDespesas();
+      }
+    });
   });
 
 });

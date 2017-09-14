@@ -38,10 +38,10 @@ $("#document").ready(function() {
 
           //Se der tudo ok no envio...
           success: function (dados) {
-              jbkrAlert.sucesso('Cliente', 'Cliente cadastrado com sucesso!');
-              $("#formCliente #btnCancelar").trigger("click");
+            jbkrAlert.sucesso('Cliente', 'Cliente cadastrado com sucesso!');
+            $("#formCliente #btnCancelar").trigger("click");
           }
-      });
+        });
     }
 
 
@@ -70,7 +70,7 @@ $("#document").ready(function() {
     var msgErro = validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, seqCidade, txbTelefone);
 
     if(msgErro !== ""){
-        jbkrAlert.alerta('Alerta!',msgErro);
+      jbkrAlert.alerta('Alerta!',msgErro);
     }
     else{
       $.ajax({
@@ -105,7 +105,7 @@ $("#document").ready(function() {
   });
 
   $('#txbCidade').autocomplete({
-    minLength: 1,
+    minLength: 2,
     autoFocus: true,
     delay: 300,
     position: {
@@ -152,15 +152,15 @@ function buscaClientes(codigo){
       type: "POST",
       dataType: "text",
       data: {
-          codigo: codigo,
-          razaoSocial: txbRazaoSocial,
-          nomeFantasia: txbNomeFantasia,
-          cnpj: txbCnpj,
-          inscricao: txbInscricao,
-          cep: txbCep,
-          cidade: txbCidade,
-          telefone: txbTelefone,
-          action: "buscar"
+        codigo: codigo,
+        razaoSocial: txbRazaoSocial,
+        nomeFantasia: txbNomeFantasia,
+        cnpj: txbCnpj,
+        inscricao: txbInscricao,
+        cep: txbCep,
+        cidade: txbCidade,
+        telefone: txbTelefone,
+        action: "buscar"
       },
 
       url: "../controller/ClienteController.php",
@@ -193,41 +193,41 @@ function buscaClientes(codigo){
         }else{
           formularioModoAtualizar();
           for (var j = 0; j < json.length; j++) {
-              cliente = json[j];
+            cliente = json[j];
 
-              $("#hidCodCli").val(cliente.codCli);
-              $("#txbRazaoSocial").val(cliente.desRazaoSocial);
-              $("#txbNomeFantasia").val(cliente.nomCli);
-              $("#txbCnpj").val(cliente.numCNPJ);
-              $("#txbInscricao").val(cliente.iesCli);
-              $("#txbCep").val(cliente.numCEP);
-              $("#txbCidade").val(cliente.Cidade_seqCid);
-              $("#txbTelefone").val(cliente.telCli);
+            $("#hidCodCli").val(cliente.codCli);
+            $("#txbRazaoSocial").val(cliente.desRazaoSocial);
+            $("#txbNomeFantasia").val(cliente.nomCli);
+            $("#txbCnpj").val(cliente.numCNPJ);
+            $("#txbInscricao").val(cliente.iesCli);
+            $("#txbCep").val(cliente.numCEP);
+            $("#txbCidade").val(cliente.Cidade_seqCid);
+            $("#txbTelefone").val(cliente.telCli);
               // Para aplicar a máscara nos campos recebidos por ajax
               removeMascara();
               aplicaMascara();
+            }
+
           }
 
         }
-
-      }
-  });
+      });
 
 }
 
 function validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbCidade, txbTelefone){
-    msgErro = "";
-    if(txbRazaoSocial === ""){
-        msgErro = msgErro + "<b>Razão Social</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-    if(txbNomeFantasia === ""){
-        msgErro = msgErro + "<b>Nome Fantasia</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-    if(txbCidade === ""){
-        msgErro = msgErro + "<b>Cidade</b> é um campo de preenchimento obrigatorio";
-    }
+  msgErro = "";
+  if(txbRazaoSocial === ""){
+    msgErro = msgErro + "<b>Razão Social</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(txbNomeFantasia === ""){
+    msgErro = msgErro + "<b>Nome Fantasia</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(txbCidade === ""){
+    msgErro = msgErro + "<b>Cidade</b> é um campo de preenchimento obrigatorio";
+  }
 
-    return msgErro;
+  return msgErro;
 
 }
 

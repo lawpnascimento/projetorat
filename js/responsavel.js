@@ -26,9 +26,9 @@ $("#document").ready(function() {
           //Se der tudo ok no envio...
           success: function (dados) {
             $("#formResponsavel #btnCancelar").trigger("click");
-              jbkrAlert.sucesso('Responsavel', 'Responsavel cadastrado com sucesso!');
+            jbkrAlert.sucesso('Responsavel', 'Responsavel cadastrado com sucesso!');
           }
-      });
+        });
     }
 
   });
@@ -53,7 +53,7 @@ $("#document").ready(function() {
     var msgErro = validaCampos(txbNomRes, txbEmail, cbbCliente);
 
     if(msgErro !== ""){
-        jbkrAlert.alerta('Alerta!',msgErro);
+      jbkrAlert.alerta('Alerta!',msgErro);
     }
     else{
       $.ajax({
@@ -87,40 +87,40 @@ function buscaClienteDropdown(){
         type: "POST",
         dataType: "text",
         data: {
-            action: "clientedropdown"
+          action: "clientedropdown"
         },
 
         url: "../controller/ResponsavelController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            var json = $.parseJSON(dados);
+          var json = $.parseJSON(dados);
 
-            var dropdown = "";
-            for (var i = 0; i < json.length; i++) {
+          var dropdown = "";
+          for (var i = 0; i < json.length; i++) {
 
-                var cliente = json[i];
+            var cliente = json[i];
 
-                dropdown = dropdown + '<li role="presentation" value="' + cliente.codCli  + '"><a role="menuitem" tabindex="-1" href="#">' + cliente.nomCli + '</a></li>';
+            dropdown = dropdown + '<li role="presentation" value="' + cliente.codCli  + '"><a role="menuitem" tabindex="-1" href="#">' + cliente.nomCli + '</a></li>';
 
-            }
-            $("#ulCliente").html(dropdown);
+          }
+          $("#ulCliente").html(dropdown);
 
-            $("#ulCliente li a").click(function(){
+          $("#ulCliente li a").click(function(){
 
-                $("#cbbCliente:first-child").text($(this).text());
+            $("#cbbCliente:first-child").text($(this).text());
 
-                $("#ulCliente li").each(function(){
+            $("#ulCliente li").each(function(){
 
-                    if ($(this).text() == $("#cbbCliente").text().trim()){
-                        $("#cbbCliente").val($(this).val());
-                    }
-                });
-
+              if ($(this).text() == $("#cbbCliente").text().trim()){
+                $("#cbbCliente").val($(this).val());
+              }
             });
+
+          });
         }
 
-    });
+      });
 }
 
 function buscaResponsavel(codigo){
@@ -133,11 +133,11 @@ function buscaResponsavel(codigo){
       type: "POST",
       dataType: "text",
       data: {
-          codigo: codigo,
-          nomRes: txbNomRes,
-          email: txbEmail,
-          codCli: cbbCliente,
-          action: "buscar"
+        codigo: codigo,
+        nomRes: txbNomRes,
+        email: txbEmail,
+        codCli: cbbCliente,
+        action: "buscar"
       },
 
       url: "../controller/ResponsavelController.php",
@@ -166,35 +166,35 @@ function buscaResponsavel(codigo){
         }else{
           formularioModoAtualizar();
           for (var j = 0; j < json.length; j++) {
-              responsavel = json[j];
+            responsavel = json[j];
 
-              $("#txbNomRes").val(responsavel.nomRes);
-              $("#txbEmail").val(responsavel.emlRes);
-              $("#cbbCliente:first-child").text(responsavel.nomCli);
-              $("#cbbCliente:first-child").val(responsavel.codCli);
-              $("#hidCodRes").val(responsavel.codRes);
+            $("#txbNomRes").val(responsavel.nomRes);
+            $("#txbEmail").val(responsavel.emlRes);
+            $("#cbbCliente:first-child").text(responsavel.nomCli);
+            $("#cbbCliente:first-child").val(responsavel.codCli);
+            $("#hidCodRes").val(responsavel.codRes);
 
           }
 
         }
 
       }
-  });
+    });
 
 }
 
 function validaCampos(txbNomRes, txbEmail, cbbCliente){
-    msgErro = "";
-    if(txbNomRes === ""){
-        msgErro = msgErro + "<b>Nome do responsavel</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-    if(txbEmail === ""){
-        msgErro = msgErro + "<b>E-mail</b> é um campo de preenchimento obrigatorio<br/>";
-    }
-    if(cbbCliente === ""){
-        msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio";
-    }
+  msgErro = "";
+  if(txbNomRes === ""){
+    msgErro = msgErro + "<b>Nome do responsavel</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(txbEmail === ""){
+    msgErro = msgErro + "<b>E-mail</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(cbbCliente === ""){
+    msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio";
+  }
 
-    return msgErro;
+  return msgErro;
 
 }

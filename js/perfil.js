@@ -33,10 +33,10 @@ $("#document").ready(function() {
         }
     });
 
-   $("#formPerfil #btnCancelar").click(function(){
+    $("#formPerfil #btnCancelar").click(function(){
      limpaCampos($(this).closest("form"));
      buscaPerfil();
-   });
+ });
 
 });
 
@@ -47,7 +47,7 @@ function buscaPerfil(codigo){
   var txbEmail = $("#txbEmail").val();
   var txbPapel = $("#txbPapel").val();
 
-        $.ajax({
+  $.ajax({
             //Tipo de envio POST ou GET
             type: "POST",
             dataType: "text",
@@ -74,7 +74,7 @@ function buscaPerfil(codigo){
             }
         });
 
-    };
+};
 
 function validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail){
     msgErro = "";

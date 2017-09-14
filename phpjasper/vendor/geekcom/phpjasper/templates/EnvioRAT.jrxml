@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EnvioRAT" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
+	<property name="ireport.zoom" value="1.4641000000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="17b1eaf2-fbce-4e62-82f2-5827a306ee7a"/>
+	<parameter name="txbConsultor" class="java.lang.String"/>
+	<parameter name="txbCliente" class="java.lang.String"/>
+	<parameter name="txbResponsavel" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT                usu.codUsu
+                     ,concat(usu.nomUsu, ' ', usu.sobrenomeUsu) nomUsu
+                     ,usu.codSit
+                     ,usu.desEml
+                     ,rat.codRat
+                     ,ati.codAti
+                     ,ati.datAti
+                     ,ati.desAti
+                     ,DATE_FORMAT(ati.horIni,'%H:%i') horIni
+                     ,DATE_FORMAT(ati.horFin,'%H:%i') horFin
+                     ,ati.horTot
+                     ,ati.tipFat
+                     ,cli.codCli
+                     ,cli.nomCli
+                     ,res.codRes
+                     ,res.nomRes
+                     ,prj.nomPrj
+		,pro.desPro
+                	 FROM tbrat rat
+                 	 JOIN tbusuario usu
+                        ON usu.codUsu = rat.Usuario_codUsu
+                     JOIN tbatividade ati
+                        ON ati.RAT_codRAT = rat.codRat
+                     JOIN tbcliente cli
+                        ON cli.codCli = rat.Cliente_codCli
+                     JOIN tbresponsavel res
+                        ON res.codRes = rat.Responsavel_codRes
+                     JOIN tbprojeto prj
+                         ON prj.codPrj = rat.Projeto_codPrj
+		JOIN tbproduto pro
+		    ON pro.codPro = rat.Produto_codPro
+                     WHERE usu.codUsu = $P{txbConsultor}
+                     AND cli.codCli = $P{txbCliente}
+	           AND res.codRes = $P{txbResponsavel}
+	  ORDER BY ati.codAti asc]]>
+	</queryString>
+	<field name="codUsu" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomUsu" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codSit" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desEml" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codRat" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codAti" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="datAti" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desAti" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horIni" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horFin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horTot" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipFat" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codCli" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomCli" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codRes" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomRes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomPrj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desPro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="TotalHoras" class="java.sql.Time">
+		<variableExpression><![CDATA[$F{horTot}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="218" y="0" width="337" height="40" uuid="8f72e9bb-b412-4cb0-b5df-22a52a25b154"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[RAT - Registro de Atendimento Técnico]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="218" height="40" uuid="bfe00c84-5f72-4ac5-86af-f169dfb71596"/>
+				<imageExpression><![CDATA["C:\\xampp\\htdocs\\projetorat\\trunk\\phpjasper\\vendor\\geekcom\\phpjasper\\templates\\img\\gestao-logotipo.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="40" width="555" height="1" uuid="7dda8b38-f5f3-400f-9c2d-ea3f354ac71f"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="436" y="0" width="119" height="20" uuid="026b883d-bd7f-494a-85e3-26c323edc779"/>
+				<textFieldExpression><![CDATA[$F{nomUsu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="0" width="165" height="20" uuid="af00dac9-7080-4300-af89-539622460a40"/>
+				<textElement markup="html">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomCli}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="38" height="20" uuid="4042d7d7-0683-4b20-8e9c-0beedb488b16"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="0" width="40" height="20" uuid="9d114637-45b3-473a-80fe-f9d16403ab0a"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Projeto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="387" y="0" width="49" height="20" uuid="d540aeee-835a-4854-9117-0d8dd800fd03"/>
+				<text><![CDATA[Consultor:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="243" y="20" width="144" height="20" uuid="b00ef41b-ab1c-4e1b-8c85-4f0aa08fee5f"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desPro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="203" y="20" width="40" height="20" uuid="11ef880c-2256-49da-9110-14a4bd2f048f"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Produto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="61" height="20" uuid="6dcccbc2-3e05-40a4-9533-98c038de25b8"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Responsável:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="61" y="20" width="142" height="20" uuid="4e3991e7-4f3a-4dcf-b8b0-f86e45cce78b"/>
+				<textFieldExpression><![CDATA[$F{nomRes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="0" width="146" height="20" uuid="a4facff0-014e-44b5-a83c-14e76eb710d8"/>
+				<textElement markup="html">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomPrj}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="40" width="555" height="1" uuid="999aee39-9c87-4177-8532-d84f8345b37c"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="142" y="0" width="35" height="20" uuid="f2fc19f7-0564-4034-90bf-e51bcd0340eb"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Horas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="20" uuid="e5892b54-01a0-4c8a-ac8d-82f36465a5b1"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Cod Rat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="0" width="40" height="20" uuid="52784836-c5e5-4e37-a13c-0f1eed129dbb"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="22" height="20" uuid="4959fd38-2e56-41df-b9a9-fef8278540a3"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="0" width="22" height="20" uuid="491ef932-baf4-4aaf-9dc3-12b618ff3016"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fim]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="177" y="0" width="28" height="20" uuid="7ee7a177-9f2f-4175-8e0d-4bc3e4c2704f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fat.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="0" width="350" height="20" uuid="99937eee-b81c-4544-9e5e-6f2aa576424d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Atividades Realizadas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="0" width="30" height="20" uuid="2e1463fd-17bc-47b5-a156-48d752b4ff6a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Cod Ati]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37">
+			<textField>
+				<reportElement x="60" y="0" width="40" height="20" uuid="55f0afde-402c-4958-a4cb-76beedba1b0b"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datAti}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="177" y="0" width="28" height="20" uuid="c3967f6e-de93-4c5b-aa5c-031743397a08"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipFat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="144" y="0" width="35" height="20" uuid="0bcbe20f-404c-4e55-a4b3-30d65ce6e756"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{horTot}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="1" width="350" height="35" uuid="487a5f71-fb36-4423-a81b-e2887fd5c03c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desAti}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="122" y="0" width="22" height="20" uuid="df3892f1-e7a1-4887-93af-1a3d023bded5"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{horFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="31" height="20" uuid="085ede2a-3eb2-4fb1-b734-374e37a6b611"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codRat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="0" width="31" height="20" uuid="93bf19e7-f357-4fc7-8a3b-b9c725d0bc88"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codAti}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="100" y="0" width="22" height="20" uuid="4524f3d7-184e-4dbd-a8e7-d771d6d5ab5b"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{horIni}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21">
+			<textField pattern="HH.mm">
+				<reportElement x="0" y="0" width="100" height="20" uuid="27b13291-0e0f-4c8a-a7e4-8a365ea9ba42"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalHoras}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="19" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

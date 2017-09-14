@@ -22,6 +22,7 @@ require_once("../../estrutura/iniciar_sessao.php");
   <script type="text/javascript" src="../../js/rat.js"></script>
   <script type="text/javascript" src="../../js/usuario.js"></script>
   <script type="text/javascript" src="../../js/alerta.js"></script>
+  <link rel="stylesheet" href="../../lib/jquery/jquery-ui.css">
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/alerta.css">
   <!-- start orangechat code -->
@@ -119,11 +120,11 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <li class="divider"/>
                     </li>
                     <li>
-                    <a id="despesasconsultor">Despesas por Consultor</a>
+                    <a id="despesaconsultor">Despesas por Consultor</a>
                     </li>
                   <li class="divider"/>
                     <li>
-                    <a id="despesasclientes">Despesas por Cliente</a>
+                    <a id="despesacliente">Despesas por Cliente</a>
                     </li>
                   </ul>
                 </li>

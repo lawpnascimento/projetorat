@@ -3,14 +3,12 @@ require_once("../../../autoload.php");
 
 use JasperPHP\JasperPHP;
 
-
 $txbDatIni = $_POST["txbDatIni"];
 $txbDatFin = $_POST["txbDatFin"];
 $txbConsultor = $_POST["txbConsultor"];
-$txbCliente = $_POST["txbCliente"];
 $nmRelatorio = $_POST["nmRelatorio"];
 
-$input = __DIR__ . '\ExtratoComissao.jrxml';
+$input = __DIR__ . '\ExtratoDespesaConsultor.jrxml';
 $output = __DIR__ . '\\pdf\\' . $nmRelatorio;
 
 //$jdbc_dir = 'D:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
@@ -21,8 +19,7 @@ $options = [
     'locale' => 'en',
     'params' => ['txbDatIni' => $txbDatIni,
                  'txbDatFin' => $txbDatFin,
-                 'txbConsultor' => $txbConsultor,
-                 'txbCliente' => $txbCliente],
+                 'txbConsultor' => $txbConsultor],
     'db_connection' => [
         'driver' => 'mysql',
         'host' => 'localhost',

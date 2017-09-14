@@ -1,7 +1,7 @@
 $("#document").ready(function(){
 
-    $("#formTipoDespesa #btnCadastrar").click(function () {
-      
+  $("#formTipoDespesa #btnCadastrar").click(function () {
+    
     var txbDescricaoTipoDespesa = $("#txbDescricaoTipoDespesa").val();
 
     var msgErro = validaCampos(txbDescricaoTipoDespesa);
@@ -24,41 +24,41 @@ $("#document").ready(function(){
 
           //Se der tudo ok no envio...
           success: function (dados) {
-              jbkrAlert.sucesso('TipoDespesa', 'Tipo da despesa cadastrado com sucesso!');
-              $("#formTipoDespesa #btnCancelar").trigger("click");
+            jbkrAlert.sucesso('TipoDespesa', 'Tipo da despesa cadastrado com sucesso!');
+            $("#formTipoDespesa #btnCancelar").trigger("click");
           }
-      });
+        });
     }
 
   });
 
   $("#formTipoDespesa #btnBuscar").click(function () {
-      buscaTipoDespesas();
+    buscaTipoDespesas();
 
-     });
+  });
 
 });
 
-  $("#formTipoDespesa #btnAtualizar").click(function () {
+$("#formTipoDespesa #btnAtualizar").click(function () {
 
-    var codigo = $("#hidCodTipDsp").val();
-    var txbDescricaoTipoDespesa = $("#txbDescricaoTipoDespesa").val();
+  var codigo = $("#hidCodTipDsp").val();
+  var txbDescricaoTipoDespesa = $("#txbDescricaoTipoDespesa").val();
 
-    var msgErro = validaCampos(txbDescricaoTipoDespesa);
+  var msgErro = validaCampos(txbDescricaoTipoDespesa);
 
-    if(msgErro !== ""){
-        jbkrAlert.alerta('Alerta!',msgErro);
-    }
-    else{
-      $.ajax({
+  if(msgErro !== ""){
+    jbkrAlert.alerta('Alerta!',msgErro);
+  }
+  else{
+    $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            codigo: codigo,
-            descricao: txbDescricaoTipoDespesa,
+          codigo: codigo,
+          descricao: txbDescricaoTipoDespesa,
 
-            action: "atualizar"
+          action: "atualizar"
         },
 
         url: "../controller/TipoDespesaController.php",
@@ -69,28 +69,28 @@ $("#document").ready(function(){
           $("#formTipoDespesa #btnCancelar").trigger("click");
         }
       });
-    }
-  });
+  }
+});
 
-  $("#formTipoDespesa #btnCancelar").click(function () {
-    limpaCampos($(this).closest("form"));
-    formularioModoInserir();
-    buscaTipoDespesas();
+$("#formTipoDespesa #btnCancelar").click(function () {
+  limpaCampos($(this).closest("form"));
+  formularioModoInserir();
+  buscaTipoDespesas();
 
-   });
+});
 
 function buscaTipoDespesas(codigo){
-      var txbDescricaoTipoDespesa = $("#txbDescricaoTipoDespesa").val();
+  var txbDescricaoTipoDespesa = $("#txbDescricaoTipoDespesa").val();
 
   $.ajax({
       //Tipo de envio POST ou GET
       type: "POST",
       dataType: "text",
       data: {
-          codigo: codigo,
-          descricao: txbDescricaoTipoDespesa,
+        codigo: codigo,
+        descricao: txbDescricaoTipoDespesa,
 
-          action: "buscar"
+        action: "buscar"
       },
 
       url: "../controller/TipoDespesaController.php",
@@ -118,24 +118,24 @@ function buscaTipoDespesas(codigo){
         }else{
           formularioModoAtualizar();
           for (var j = 0; j < json.length; j++) {
-              tipodespesa = json[j];
-              $("#hidCodTipDsp").val(tipodespesa.codTipDsp);
-              $("#txbDescricaoTipoDespesa").val(tipodespesa.desTipDsp);
+            tipodespesa = json[j];
+            $("#hidCodTipDsp").val(tipodespesa.codTipDsp);
+            $("#txbDescricaoTipoDespesa").val(tipodespesa.desTipDsp);
           }
 
         }
 
       }
-  });
+    });
 
 }
 
 function validaCampos(txbDescricaoTipoDespesa){
-    msgErro = "";
-    if(txbDescricaoTipoDespesa === ""){
-        msgErro = msgErro + "<b>Descrição do tipo da despesa</b> é um campo de preenchimento obrigatorio<br/>";
-    }
+  msgErro = "";
+  if(txbDescricaoTipoDespesa === ""){
+    msgErro = msgErro + "<b>Descrição do tipo da despesa</b> é um campo de preenchimento obrigatorio<br/>";
+  }
 
-    return msgErro;
+  return msgErro;
 
 }
