@@ -36,8 +36,10 @@ class ConsultaRATPersistencia{
 		$projeto = $this->getModel()->getProjeto();
 		$produto = $this->getModel()->getProduto();
 		$situacao = $this->getModel()->getSituacao();
+		$papel = $this->getModel()->getPapel();
+		$usuarioLogado = $this->getModel()->getUsuarioLogado();
 
-		if($codigo == null){
+		if($papel == 1){
 
 			$sSql = "SELECT rat.codRat
 										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
@@ -102,10 +104,10 @@ class ConsultaRATPersistencia{
 					$sSql = $sSql . " AND ati.codAti = '" . $atividade ."'";
 			}*/
 
-			$sSql = $sSql . " ORDER BY rat.codRat desc";
+			$sSql = $sSql . "ORDER BY rat.codRat desc";
 		}else{
 			$sSql = "SELECT rat.codRat
-										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
+										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,usu.sobrenomeUsu) Usuario_codUsu
 										 ,DATE_FORMAT(datRat, '%d-%m-%Y') datRat
 										 ,CONCAT(usu.perComCli, '%') perComCli
 										 ,CONCAT(usu.perComInt, '%') perComInt
@@ -129,8 +131,37 @@ class ConsultaRATPersistencia{
 								   ON pro.codPro = rat.Produto_codPro
 								 JOIN tbsituacaorat = sit
 								   ON sit.codSit = rat.Situacao_codSit
-							   WHERE rat.codRat = " . $codigo . "
-								ORDER BY rat.codRat";
+							   WHERE rat.Usuario_codUsu = " . $usuarioLogado;
+
+			if($codigo != null){
+					$sSql = $sSql . " AND rat.codRat = '" . $codigo ."'";
+			}
+
+			if($usuario != null){
+					$sSql = $sSql . " AND rat.Usuario_codUsu = '" . $usuario ."'";
+			}
+
+			if($cliente != null){
+					$sSql = $sSql . " AND rat.Cliente_codCli = '" . $cliente ."'";
+			}
+
+			if($responsavel != null){
+					$sSql = $sSql . " AND rat.Responsavel_codRes = '" . $responsavel ."'";
+			}
+
+			if($projeto != null){
+					$sSql = $sSql . " AND rat.Projeto_codPrj = '" . $projeto ."'";
+			}
+
+			if($produto != null){
+					$sSql = $sSql . " AND rat.Produto_codPro = '" . $produto ."'";
+			}
+
+			if($situacao != null){
+					$sSql = $sSql . " AND rat.Situacao_codSit = '" . $situacao ."'";
+			}
+
+			$sSql = $sSql . " ORDER BY rat.codRat desc";
 		}
 
 		$resultado = mysql_query($sSql);

@@ -28,15 +28,15 @@
                 </div>
                 <div class="col-md-2">
                   <label for="nomUsu">Usuário</label>
-                  <input id="txbNomUsu" type="text" class="form-control" name="txbNomUsu" maxlength="50"></input>
+                  <input id="txbNomUsu" type="text" class="form-control" name="txbNomUsu" maxlength="50" placeholder="Nome do usuario"></input>
                 </div>
                 <div class="col-md-2">
                   <label for="nomCli">Cliente</label>
-                  <input id="txbNomCli" type="text" class="form-control" name="txbNomCli"></input>
+                  <input id="txbNomCli" type="text" class="form-control" name="txbNomCli" placeholder="Nome do cliente"></input>
                 </div>
                 <div class="col-md-2">
                   <label for="nomPrj">Projeto</label>
-                  <input id="txbNomPrj" type="text" class="form-control" name="txbNomPrj"></input>
+                  <input id="txbNomPrj" type="text" class="form-control" name="txbNomPrj" placeholder="Nome do projeto"></input>
                 </div>
               </div>
               <!-- BOTÕES -->

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ExtratoComissao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
 	<property name="ireport.zoom" value="1.3636363636363653"/>
-	<property name="ireport.x" value="150"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="87"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -477,21 +477,21 @@
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement x="411" y="34" width="45" height="20" uuid="79ca7367-667a-4d67-b16a-39add65194e9"/>
+				<reportElement x="81" y="34" width="45" height="20" uuid="79ca7367-667a-4d67-b16a-39add65194e9"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{txbDatFin}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="366" y="34" width="45" height="20" uuid="e058176a-0c95-4e1f-800a-e1067eb0a841"/>
-				<textElement>
+				<reportElement x="31" y="34" width="45" height="20" uuid="e058176a-0c95-4e1f-800a-e1067eb0a841"/>
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{txbDatIni}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="335" y="34" width="31" height="20" uuid="422c9314-cdfb-49f6-818f-509b3bba58bc"/>
+				<reportElement x="0" y="34" width="31" height="20" uuid="422c9314-cdfb-49f6-818f-509b3bba58bc"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -524,6 +524,27 @@
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Página:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="369" y="34" width="110" height="20" uuid="36cbc887-4d5f-4766-889d-e5856ee82409"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="34" width="77" height="20" uuid="aaa556bd-1721-4c65-909e-48ef0c3f8f45"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Relatório gerado em:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="34" width="5" height="20" uuid="bbf1eefa-9eab-4810-9a02-864161474c5e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

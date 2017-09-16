@@ -13,10 +13,12 @@
 
 
 -- Copiando estrutura do banco de dados para dbprojetorat
+DROP DATABASE IF EXISTS `dbprojetorat`;
 CREATE DATABASE IF NOT EXISTS `dbprojetorat` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `dbprojetorat`;
 
 -- Copiando estrutura para tabela dbprojetorat.chat
+DROP TABLE IF EXISTS `chat`;
 CREATE TABLE IF NOT EXISTS `chat` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `from` varchar(255) NOT NULL DEFAULT '',
@@ -36,6 +38,7 @@ INSERT INTO `chat` (`id`, `from`, `to`, `message`, `sent`, `recd`) VALUES
 /*!40000 ALTER TABLE `chat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.chat_lastactivity
+DROP TABLE IF EXISTS `chat_lastactivity`;
 CREATE TABLE IF NOT EXISTS `chat_lastactivity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(255) NOT NULL,
@@ -54,6 +57,7 @@ INSERT INTO `chat_lastactivity` (`id`, `user`, `time`) VALUES
 /*!40000 ALTER TABLE `chat_lastactivity` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.sample_friends
+DROP TABLE IF EXISTS `sample_friends`;
 CREATE TABLE IF NOT EXISTS `sample_friends` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user1` int(11) NOT NULL,
@@ -71,6 +75,7 @@ INSERT INTO `sample_friends` (`id`, `user1`, `user2`, `confirmed`) VALUES
 /*!40000 ALTER TABLE `sample_friends` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbatividade
+DROP TABLE IF EXISTS `tbatividade`;
 CREATE TABLE IF NOT EXISTS `tbatividade` (
   `codAti` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `RAT_codRAT` int(10) unsigned DEFAULT NULL,
@@ -86,19 +91,21 @@ CREATE TABLE IF NOT EXISTS `tbatividade` (
   KEY `fk_tbatividade_tbusuario` (`Usuario_codUsu`),
   CONSTRAINT `fk_tbatividade_tbrat` FOREIGN KEY (`RAT_codRAT`) REFERENCES `tbrat` (`codRat`),
   CONSTRAINT `fk_tbatividade_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbatividade: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbatividade: ~5 rows (aproximadamente)
 DELETE FROM `tbatividade`;
 /*!40000 ALTER TABLE `tbatividade` DISABLE KEYS */;
 INSERT INTO `tbatividade` (`codAti`, `RAT_codRAT`, `Usuario_codUsu`, `datAti`, `horIni`, `horFin`, `horTot`, `desAti`, `tipFat`) VALUES
-	(1, 1, 1, '2017-09-06', '09:00:00', '11:00:00', '02:00:00', 'desc 1', 1),
-	(2, 1, 1, '2017-09-08', '11:00:00', '12:00:00', '01:00:00', 'desc 2', 1),
-	(3, 2, 1, '2017-09-08', '08:00:00', '12:00:00', '04:00:00', 'desc 3', 1),
-	(4, 3, 1, '2017-09-08', '08:00:00', '12:00:00', '04:00:00', 'desc 4', 1);
+	(1, 1, 1, '2017-09-15', '08:00:00', '12:00:00', '04:50:00', 'Teste Manha', 1),
+	(2, 1, 1, '2017-09-15', '13:00:00', '18:00:00', '04:50:00', 'Teste Tarde', 1),
+	(3, 2, 1, '2017-09-15', '08:00:00', '12:00:00', '04:00:00', 'Teste Manha', 1),
+	(4, 3, 10, '2017-09-15', '08:00:00', '12:00:00', '04:00:00', 'Desc', 1),
+	(5, 4, 10, '2017-09-16', '08:00:00', '12:00:00', '04:00:00', 'manha', 1);
 /*!40000 ALTER TABLE `tbatividade` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbcidade
+DROP TABLE IF EXISTS `tbcidade`;
 CREATE TABLE IF NOT EXISTS `tbcidade` (
   `seqCid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `codCid` int(11) NOT NULL,
@@ -1308,6 +1315,7 @@ INSERT INTO `tbcidade` (`seqCid`, `codCid`, `desCid`, `ufEst`, `Estado_seqEst`) 
 /*!40000 ALTER TABLE `tbcidade` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbcliente
+DROP TABLE IF EXISTS `tbcliente`;
 CREATE TABLE IF NOT EXISTS `tbcliente` (
   `codCli` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Cidade_seqCid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1331,6 +1339,7 @@ INSERT INTO `tbcliente` (`codCli`, `Cidade_seqCid`, `desRazaoSocial`, `nomCli`, 
 /*!40000 ALTER TABLE `tbcliente` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbdespesa
+DROP TABLE IF EXISTS `tbdespesa`;
 CREATE TABLE IF NOT EXISTS `tbdespesa` (
   `codDsp` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Tipodespesa_CodTipDsp` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1351,6 +1360,7 @@ INSERT INTO `tbdespesa` (`codDsp`, `Tipodespesa_CodTipDsp`, `desDsp`, `vlrUni`) 
 /*!40000 ALTER TABLE `tbdespesa` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbdespesarat
+DROP TABLE IF EXISTS `tbdespesarat`;
 CREATE TABLE IF NOT EXISTS `tbdespesarat` (
   `seqDsp` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Despesa_codDsp` int(10) unsigned DEFAULT NULL,
@@ -1370,19 +1380,24 @@ CREATE TABLE IF NOT EXISTS `tbdespesarat` (
   CONSTRAINT `fk_tbdespesarat_tbfatdespesa` FOREIGN KEY (`Fatdespesa_codTipFat`) REFERENCES `tbfatdespesa` (`codFatDsp`),
   CONSTRAINT `fk_tbdespesarat_tbrat` FOREIGN KEY (`RAT_codRAT`) REFERENCES `tbrat` (`codRat`),
   CONSTRAINT `fk_tbdespesarat_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbdespesarat: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbdespesarat: ~7 rows (aproximadamente)
 DELETE FROM `tbdespesarat`;
 /*!40000 ALTER TABLE `tbdespesarat` DISABLE KEYS */;
 INSERT INTO `tbdespesarat` (`seqDsp`, `Despesa_codDsp`, `RAT_codRAT`, `Fatdespesa_codTipFat`, `Usuario_codUsu`, `datDsp`, `obsDsp`, `qtdDsp`, `totDsp`) VALUES
-	(1, 1, 1, 1, 1, '2017-09-08', 'Obs', 1, 30.00),
-	(2, 1, 1, 2, 1, '2017-09-08', 'teste', 1, 20.00),
-	(3, 1, 1, 4, 1, '2017-09-08', 'obs', 100, 90.00),
-	(4, 1, 1, 4, 1, '2017-09-08', 'teste', 1, 10.00);
+	(1, 1, 1, 1, 1, '2017-09-15', 'Teste FR', 10, 9.00),
+	(2, 1, 1, 2, 1, '2017-09-15', 'Teste FN', 10, 9.00),
+	(3, 1, 1, 3, 1, '2017-09-15', 'Teste NR', 10, 9.00),
+	(4, 1, 2, 3, 1, '2017-09-15', 'Teste NR', 20, 18.00),
+	(5, 1, 2, 2, 1, '2017-09-15', 'Teste FN', 20, 18.00),
+	(6, 1, 2, 1, 1, '2017-09-15', 'Teste FR', 20, 18.00),
+	(7, 1, 3, 1, 10, '2017-09-15', 'Teste FR', 10, 9.00),
+	(8, 1, 4, 1, 10, '2017-09-16', 'obser', 1, 0.90);
 /*!40000 ALTER TABLE `tbdespesarat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbempresa
+DROP TABLE IF EXISTS `tbempresa`;
 CREATE TABLE IF NOT EXISTS `tbempresa` (
   `codEmp` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nomEmp` char(40) DEFAULT NULL,
@@ -1399,6 +1414,7 @@ INSERT INTO `tbempresa` (`codEmp`, `nomEmp`, `emlEmp`, `vlrImp`) VALUES
 /*!40000 ALTER TABLE `tbempresa` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbestado
+DROP TABLE IF EXISTS `tbestado`;
 CREATE TABLE IF NOT EXISTS `tbestado` (
   `seqEst` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `codEst` int(11) NOT NULL,
@@ -1442,6 +1458,7 @@ INSERT INTO `tbestado` (`seqEst`, `codEst`, `desEst`, `ufEst`, `regEst`) VALUES
 /*!40000 ALTER TABLE `tbestado` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbfatdespesa
+DROP TABLE IF EXISTS `tbfatdespesa`;
 CREATE TABLE IF NOT EXISTS `tbfatdespesa` (
   `codFatDsp` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `desFatDsp` varchar(2) DEFAULT NULL,
@@ -1460,6 +1477,7 @@ INSERT INTO `tbfatdespesa` (`codFatDsp`, `desFatDsp`, `detFatDsp`) VALUES
 /*!40000 ALTER TABLE `tbfatdespesa` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbfaturamento
+DROP TABLE IF EXISTS `tbfaturamento`;
 CREATE TABLE IF NOT EXISTS `tbfaturamento` (
   `codFat` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `RAT_codRAT` int(10) unsigned DEFAULT NULL,
@@ -1472,16 +1490,17 @@ CREATE TABLE IF NOT EXISTS `tbfaturamento` (
   CONSTRAINT `fk_tbfaturamento_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbfaturamento: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbfaturamento: ~3 rows (aproximadamente)
 DELETE FROM `tbfaturamento`;
 /*!40000 ALTER TABLE `tbfaturamento` DISABLE KEYS */;
 INSERT INTO `tbfaturamento` (`codFat`, `RAT_codRAT`, `Usuario_codUsu`, `datFec`) VALUES
-	(1, 3, 1, '2017-09-11'),
-	(2, 2, 1, '2017-09-11'),
-	(3, 1, 1, '2017-09-12');
+	(1, 1, 1, '2017-09-15'),
+	(2, 2, 1, '2017-09-16'),
+	(3, 3, 10, '2017-09-15');
 /*!40000 ALTER TABLE `tbfaturamento` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbhistoricoemail
+DROP TABLE IF EXISTS `tbhistoricoemail`;
 CREATE TABLE IF NOT EXISTS `tbhistoricoemail` (
   `codHis` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1492,6 +1511,7 @@ DELETE FROM `tbhistoricoemail`;
 /*!40000 ALTER TABLE `tbhistoricoemail` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbpapel
+DROP TABLE IF EXISTS `tbpapel`;
 CREATE TABLE IF NOT EXISTS `tbpapel` (
   `codPap` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `desPap` char(50) DEFAULT NULL,
@@ -1507,6 +1527,7 @@ INSERT INTO `tbpapel` (`codPap`, `desPap`) VALUES
 /*!40000 ALTER TABLE `tbpapel` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbproduto
+DROP TABLE IF EXISTS `tbproduto`;
 CREATE TABLE IF NOT EXISTS `tbproduto` (
   `codPro` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `desPro` varchar(40) DEFAULT NULL,
@@ -1522,6 +1543,7 @@ INSERT INTO `tbproduto` (`codPro`, `desPro`) VALUES
 /*!40000 ALTER TABLE `tbproduto` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbprojeto
+DROP TABLE IF EXISTS `tbprojeto`;
 CREATE TABLE IF NOT EXISTS `tbprojeto` (
   `codPrj` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Produto_codPro` int(10) unsigned NOT NULL,
@@ -1547,6 +1569,7 @@ INSERT INTO `tbprojeto` (`codPrj`, `Produto_codPro`, `Cliente_codCli`, `nomPrj`,
 /*!40000 ALTER TABLE `tbprojeto` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbrat
+DROP TABLE IF EXISTS `tbrat`;
 CREATE TABLE IF NOT EXISTS `tbrat` (
   `codRat` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Usuario_codUsu` int(10) unsigned NOT NULL,
@@ -1569,18 +1592,20 @@ CREATE TABLE IF NOT EXISTS `tbrat` (
   CONSTRAINT `fk_tbrat_tbresponsavel` FOREIGN KEY (`Responsavel_codRes`) REFERENCES `tbresponsavel` (`codRes`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbrat_tbsituacao` FOREIGN KEY (`Situacao_codSit`) REFERENCES `tbsituacaorat` (`codSit`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbrat_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbrat: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbrat: ~4 rows (aproximadamente)
 DELETE FROM `tbrat`;
 /*!40000 ALTER TABLE `tbrat` DISABLE KEYS */;
 INSERT INTO `tbrat` (`codRat`, `Usuario_codUsu`, `Cliente_codCli`, `Responsavel_codRes`, `Projeto_codPrj`, `Produto_codPro`, `Situacao_codSit`, `datRat`) VALUES
-	(1, 1, 1, 1, 1, 2, 4, '2017-09-06'),
-	(2, 1, 1, 1, 2, 1, 4, '2017-09-08'),
-	(3, 1, 1, 1, 1, 2, 4, '2017-09-08');
+	(1, 1, 1, 1, 1, 1, 4, '2017-09-15'),
+	(2, 1, 1, 1, 1, 1, 4, '2017-09-15'),
+	(3, 10, 2, 1, 1, 1, 2, '2017-09-15'),
+	(4, 10, 2, 2, 2, 2, 2, '2017-09-16');
 /*!40000 ALTER TABLE `tbrat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbresponsavel
+DROP TABLE IF EXISTS `tbresponsavel`;
 CREATE TABLE IF NOT EXISTS `tbresponsavel` (
   `codRes` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Cliente_codCli` int(10) unsigned NOT NULL,
@@ -1600,6 +1625,7 @@ INSERT INTO `tbresponsavel` (`codRes`, `Cliente_codCli`, `nomRes`, `emlRes`) VAL
 /*!40000 ALTER TABLE `tbresponsavel` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbresumoatividade
+DROP TABLE IF EXISTS `tbresumoatividade`;
 CREATE TABLE IF NOT EXISTS `tbresumoatividade` (
   `codRsmAti` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Faturamento_codFat` int(10) unsigned DEFAULT NULL,
@@ -1616,37 +1642,44 @@ CREATE TABLE IF NOT EXISTS `tbresumoatividade` (
   CONSTRAINT `fk_tbresumoatividade_tbrat` FOREIGN KEY (`RAT_codRat`) REFERENCES `tbrat` (`codRat`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbresumoatividade: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbresumoatividade: ~2 rows (aproximadamente)
 DELETE FROM `tbresumoatividade`;
 /*!40000 ALTER TABLE `tbresumoatividade` DISABLE KEYS */;
 INSERT INTO `tbresumoatividade` (`codRsmAti`, `Faturamento_codFat`, `RAT_codRAT`, `SumHorTot`, `SumFatTot`, `SumBasCalCom`, `SumComTot`, `SumVlrLiq`) VALUES
-	(1, 1, 3, '04:00:00', 667.76, 600.00, 60.00, 607.76),
-	(2, 2, 2, '04:00:00', 0.00, 400.00, 40.00, -40.00),
-	(3, 3, 1, '03:00:00', 500.82, 450.00, 45.00, 455.82);
+	(1, 1, 1, '08:00:00', 1335.52, 1200.00, 120.00, 1215.52),
+	(2, 2, 2, '04:00:00', 667.76, 600.00, 60.00, 607.76),
+	(3, 3, 3, '04:00:00', 667.76, 600.00, 60.00, 607.76);
 /*!40000 ALTER TABLE `tbresumoatividade` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbresumodespesa
+DROP TABLE IF EXISTS `tbresumodespesa`;
 CREATE TABLE IF NOT EXISTS `tbresumodespesa` (
   `codRsmDsp` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Faturamento_codFat` int(10) unsigned DEFAULT NULL,
   `RAT_codRAT` int(19) unsigned DEFAULT NULL,
   `TotDspFat` decimal(10,2) DEFAULT NULL,
   `TotDspRem` decimal(10,2) DEFAULT NULL,
+  `TotDspFR` decimal(10,2) DEFAULT NULL,
+  `TotDspFN` decimal(10,2) DEFAULT NULL,
+  `TotDspNR` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`codRsmDsp`),
   KEY `fk_tbresumodespesa_tbfaturamento` (`Faturamento_codFat`),
   KEY `fk_tbresumodespesa_tbrat` (`RAT_codRAT`),
   CONSTRAINT `fk_tbresumodespesa_tbfaturamento` FOREIGN KEY (`Faturamento_codFat`) REFERENCES `tbfaturamento` (`codFat`),
   CONSTRAINT `fk_tbresumodespesa_tbrat` FOREIGN KEY (`RAT_codRAT`) REFERENCES `tbrat` (`codRat`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbresumodespesa: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbresumodespesa: ~2 rows (aproximadamente)
 DELETE FROM `tbresumodespesa`;
 /*!40000 ALTER TABLE `tbresumodespesa` DISABLE KEYS */;
-INSERT INTO `tbresumodespesa` (`codRsmDsp`, `Faturamento_codFat`, `RAT_codRAT`, `TotDspFat`, `TotDspRem`) VALUES
-	(1, 3, 1, 50.00, 30.00);
+INSERT INTO `tbresumodespesa` (`codRsmDsp`, `Faturamento_codFat`, `RAT_codRAT`, `TotDspFat`, `TotDspRem`, `TotDspFR`, `TotDspFN`, `TotDspNR`) VALUES
+	(1, 1, 1, 18.00, 18.00, 9.00, 9.00, 9.00),
+	(2, 2, 2, 36.00, 36.00, 18.00, 18.00, 18.00),
+	(3, 3, 3, 9.00, 9.00, 9.00, NULL, NULL);
 /*!40000 ALTER TABLE `tbresumodespesa` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbsituacaorat
+DROP TABLE IF EXISTS `tbsituacaorat`;
 CREATE TABLE IF NOT EXISTS `tbsituacaorat` (
   `codSit` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `desSit` varchar(50) DEFAULT NULL,
@@ -1666,6 +1699,7 @@ INSERT INTO `tbsituacaorat` (`codSit`, `desSit`) VALUES
 /*!40000 ALTER TABLE `tbsituacaorat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbtipodespesa
+DROP TABLE IF EXISTS `tbtipodespesa`;
 CREATE TABLE IF NOT EXISTS `tbtipodespesa` (
   `codTipDsp` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `desTipDsp` varchar(100) DEFAULT NULL,
@@ -1682,6 +1716,7 @@ INSERT INTO `tbtipodespesa` (`codTipDsp`, `desTipDsp`) VALUES
 /*!40000 ALTER TABLE `tbtipodespesa` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbusuario
+DROP TABLE IF EXISTS `tbusuario`;
 CREATE TABLE IF NOT EXISTS `tbusuario` (
   `codUsu` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Papel_codPap` int(10) unsigned NOT NULL,

@@ -12,6 +12,8 @@ class ConsultaRATModel {
 	private $produto;
 	private $situacao;
 	private $termo;
+	private $papel;
+	private $usuarioLogado;
 
 
 	 public function setCodigo($codigo){
@@ -90,6 +92,22 @@ class ConsultaRATModel {
 
 	public function setTermo($termo){
 		$this->termo = $termo;
+	}
+
+	public function getPapel(){
+		return $this->papel;
+	}
+
+	public function setPapel($papel){
+		$this->papel = $papel;
+	}
+
+	public function getUsuarioLogado(){
+		return $this->usuarioLogado;
+	}
+
+	public function setUsuarioLogado($usuarioLogado){
+		$this->usuarioLogado = $usuarioLogado;
 	}
 
 }
