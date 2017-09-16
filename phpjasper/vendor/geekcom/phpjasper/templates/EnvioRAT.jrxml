@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EnvioRAT" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
-	<property name="ireport.zoom" value="1.4641000000000017"/>
+	<property name="ireport.zoom" value="1.500000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="28"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -107,6 +107,7 @@
 		</box>
 	</style>
 	<subDataset name="Table Dataset 1" uuid="17b1eaf2-fbce-4e62-82f2-5827a306ee7a"/>
+	<parameter name="txbRat" class="java.lang.String"/>
 	<parameter name="txbConsultor" class="java.lang.String"/>
 	<parameter name="txbCliente" class="java.lang.String"/>
 	<parameter name="txbResponsavel" class="java.lang.String"/>
@@ -142,9 +143,10 @@
                          ON prj.codPrj = rat.Projeto_codPrj
 		JOIN tbproduto pro
 		    ON pro.codPro = rat.Produto_codPro
-                     WHERE usu.codUsu = $P{txbConsultor}
+                     WHERE rat.codRAT =  $P{txbRat}
+		 AND usu.codUsu = $P{txbConsultor}
                      AND cli.codCli = $P{txbCliente}
-	           AND res.codRes = $P{txbResponsavel}
+ 	           AND res.codRes = $P{txbResponsavel}
 	  ORDER BY ati.codAti asc]]>
 	</queryString>
 	<field name="codUsu" class="java.lang.Long">
@@ -201,8 +203,17 @@
 	<field name="desPro" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<variable name="TotalHoras" class="java.sql.Time">
-		<variableExpression><![CDATA[$F{horTot}]]></variableExpression>
+	<variable name="TotalHoras" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{horTot}.getHours() * 60]]></variableExpression>
+	</variable>
+	<variable name="Minutos" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{horTot}.getMinutes()]]></variableExpression>
+	</variable>
+	<variable name="TotalMinutos" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{TotalHoras} + $V{Minutos}]]></variableExpression>
+	</variable>
+	<variable name="ResultadoTotalHoras" class="java.lang.String">
+		<variableExpression><![CDATA[String.valueOf((int)$V{TotalMinutos}.intValue() / 60) + ":" + ( String.valueOf($V{TotalMinutos}.intValue() % 60).length() > 1 ? String.valueOf($V{TotalMinutos}.intValue() % 60) : "0" + String.valueOf($V{TotalMinutos}.intValue() % 60) )]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -297,7 +308,7 @@
 		<band height="21" splitType="Stretch">
 			<staticText>
 				<reportElement x="142" y="0" width="35" height="20" uuid="f2fc19f7-0564-4034-90bf-e51bcd0340eb"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Total Horas]]></text>
@@ -318,21 +329,21 @@
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="0" width="22" height="20" uuid="4959fd38-2e56-41df-b9a9-fef8278540a3"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Inicio]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="122" y="0" width="22" height="20" uuid="491ef932-baf4-4aaf-9dc3-12b618ff3016"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Fim]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="177" y="0" width="28" height="20" uuid="7ee7a177-9f2f-4175-8e0d-4bc3e4c2704f"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Fat.]]></text>
@@ -354,7 +365,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="37">
+		<band height="36">
 			<textField>
 				<reportElement x="60" y="0" width="40" height="20" uuid="55f0afde-402c-4958-a4cb-76beedba1b0b"/>
 				<textElement textAlignment="Center">
@@ -364,14 +375,14 @@
 			</textField>
 			<textField>
 				<reportElement x="177" y="0" width="28" height="20" uuid="c3967f6e-de93-4c5b-aa5c-031743397a08"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tipFat}]]></textFieldExpression>
 			</textField>
 			<textField pattern="HH.mm">
 				<reportElement x="144" y="0" width="35" height="20" uuid="0bcbe20f-404c-4e55-a4b3-30d65ce6e756"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{horTot}]]></textFieldExpression>
@@ -385,7 +396,7 @@
 			</textField>
 			<textField pattern="HH.mm">
 				<reportElement x="122" y="0" width="22" height="20" uuid="df3892f1-e7a1-4887-93af-1a3d023bded5"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{horFin}]]></textFieldExpression>
@@ -406,7 +417,7 @@
 			</textField>
 			<textField pattern="HH.mm">
 				<reportElement x="100" y="0" width="22" height="20" uuid="4524f3d7-184e-4dbd-a8e7-d771d6d5ab5b"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{horIni}]]></textFieldExpression>
@@ -415,12 +426,19 @@
 	</detail>
 	<columnFooter>
 		<band height="21">
-			<textField pattern="HH.mm">
-				<reportElement x="0" y="0" width="100" height="20" uuid="27b13291-0e0f-4c8a-a7e4-8a365ea9ba42"/>
+			<staticText>
+				<reportElement x="97" y="0" width="45" height="21" uuid="715b73aa-fd3f-4c9f-b7b8-1869a31c9461"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{TotalHoras}]]></textFieldExpression>
+				<text><![CDATA[Total Horas:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="144" y="0" width="33" height="20" uuid="62a28bf6-9938-4063-b60c-cee22a91e2e6"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ResultadoTotalHoras}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

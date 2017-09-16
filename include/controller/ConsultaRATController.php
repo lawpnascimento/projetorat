@@ -113,7 +113,7 @@ switch($_POST["action"]){
 	    echo $_SESSION['codUsu'];
 	    echo $_POST['usuariorat'];*/
 	    
-    	if ($_SESSION['codUsu'] == $_POST['usuariorat']){
+    	if ($_SESSION['codUsu'] == trim($_POST['usuariorat'])){
 
 	    	$model = new ConsultaRATModel();
 
@@ -132,6 +132,22 @@ switch($_POST["action"]){
 			echo '{"status" : 1 }';	    	
 	    }
 			
+	break;
+
+	case 'autocompletesituacao':
+
+		$model = new ConsultaRATModel();
+
+		$model->setTermo($_POST["termo"]);
+
+		$persistencia = new ConsultaRATPersistencia();
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->buscaSituacaoAutoComplete();
+
+		echo $retorno;
+
 	break;
 
 }

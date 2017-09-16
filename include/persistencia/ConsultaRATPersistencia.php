@@ -274,6 +274,40 @@ class ConsultaRATPersistencia{
 		return $retorno;
 	}
 
+	public function buscaSituacaoAutoComplete(){
+		$this->getConexao()->conectaBanco();
+		$termo = $this->getModel()->getTermo();
+
+		$sSql = "SELECT CONCAT(codSit,'-',desSit) desSit
+						   FROM tbsituacaorat
+						  WHERE desSit LIKE '%". $termo ."%'";
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = null;
+
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . $linha["desSit"];
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+
+	}
+
 	public function aprovaRAT(){
 		$this->getConexao()->conectaBanco();
 

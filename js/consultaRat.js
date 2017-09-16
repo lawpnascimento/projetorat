@@ -8,7 +8,7 @@ $("#document").ready(function(){
   $("#formConsultaRAT #btnEmail").click(function(){
     var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
     if (trSelecionado == true){
-      var tdUsuRAT = $.trim($("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-"));
+      var tdUsuRAT = $("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-");
       var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
       var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
@@ -74,6 +74,192 @@ $("#document").ready(function(){
     jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser reprovado.");
   }
 });
+
+  $('#txbNomUsu').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompleteusuario"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
+  $('#txbNomCli').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompletecliente"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
+  $('#txbNomRes').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompleteresponsavel"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
+  $('#txbNomPrj').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'left top',
+      at: 'right top'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompleteprojeto"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
+  $('#txbNomPro').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'bottom top',
+      at: 'bottom'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/RATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompleteproduto"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
+
+  $('#txbSitRAT').autocomplete({
+    minLength: 1,
+    autoFocus: true,
+    delay: 300,
+    position: {
+      my: 'bottom top',
+      at: 'bottom'
+    },
+    appendTo: '#tabGeral',
+    source: function(request, response){
+      $.ajax({
+        url: '../controller/ConsultaRATController.php',
+        type: 'POST',
+        dataType: 'text',
+        data: {
+          termo: request.term,
+          action: "autocompletesituacao"
+        }
+      }).done(function(data){
+        if(data.length > 0){
+          data = data.split(',');
+          response( $.each(data, function(key, item){
+            return({
+              label: item
+            });
+          }));
+        }
+      });
+    }
+  });
 
 });
 

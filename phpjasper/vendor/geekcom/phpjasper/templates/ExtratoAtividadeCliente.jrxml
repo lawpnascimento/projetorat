@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ExtratoAtividadeCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
-	<property name="ireport.zoom" value="1.363636363636365"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="1.8150000000000095"/>
+	<property name="ireport.x" value="222"/>
+	<property name="ireport.y" value="167"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -149,6 +149,8 @@
                                        ON sit.codSit = rat.Situacao_codSit
                WHERE rat.Situacao_codSit = 4
                     AND fat.datFec BETWEEN $P{txbDatIni} AND $P{txbDatFin}
+                    AND ((usu.codUsu > $P{txbConsultor}) OR (usu.codUsu = $P{txbConsultor}))
+                    AND ((cli.codCli > $P{txbCliente}) OR (cli.codCli = $P{txbCliente}))
 	     ORDER by cli.codCli asc, fat.datFec asc]]>
 	</queryString>
 	<field name="codRat" class="java.lang.Long">
@@ -196,6 +198,33 @@
 	<variable name="TotalFaturamento" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{SumFatTot}]]></variableExpression>
 	</variable>
+	<variable name="TotalFaturamentoFechamento" class="java.math.BigDecimal" resetType="Group" resetGroup="Data Fechamento" calculation="Sum">
+		<variableExpression><![CDATA[$F{SumFatTot}]]></variableExpression>
+	</variable>
+	<variable name="TotalHoras" class="java.lang.Integer" resetType="Group" resetGroup="Cliente" calculation="Sum">
+		<variableExpression><![CDATA[$F{horTot}.getHours() * 60]]></variableExpression>
+	</variable>
+	<variable name="Minutos" class="java.lang.Integer" resetType="Group" resetGroup="Cliente" calculation="Sum">
+		<variableExpression><![CDATA[$F{horTot}.getMinutes()]]></variableExpression>
+	</variable>
+	<variable name="TotalMinutos" class="java.lang.Integer" resetType="Group" resetGroup="Cliente">
+		<variableExpression><![CDATA[$V{TotalHoras} + $V{Minutos}]]></variableExpression>
+	</variable>
+	<variable name="ResultadoTotalHoras" class="java.lang.String" resetType="Group" resetGroup="Cliente">
+		<variableExpression><![CDATA[String.valueOf((int)$V{TotalMinutos}.intValue() / 60) + ":" + ( String.valueOf($V{TotalMinutos}.intValue() % 60).length() > 1 ? String.valueOf($V{TotalMinutos}.intValue() % 60) : "0" + String.valueOf($V{TotalMinutos}.intValue() % 60) )]]></variableExpression>
+	</variable>
+	<variable name="TotalHorasFechamento" class="java.lang.Integer" resetType="Group" resetGroup="Data Fechamento" calculation="Sum">
+		<variableExpression><![CDATA[$F{horTot}.getHours() * 60]]></variableExpression>
+	</variable>
+	<variable name="MinutosFechamento" class="java.lang.Integer" resetType="Group" resetGroup="Data Fechamento" calculation="Sum">
+		<variableExpression><![CDATA[$F{horTot}.getMinutes()]]></variableExpression>
+	</variable>
+	<variable name="TotalMinutosFechamento" class="java.lang.Integer" resetType="Group" resetGroup="Data Fechamento">
+		<variableExpression><![CDATA[$V{TotalHorasFechamento} + $V{MinutosFechamento}]]></variableExpression>
+	</variable>
+	<variable name="ResultadoTotalHorasFechamento" class="java.lang.String" resetType="Group" resetGroup="Data Fechamento">
+		<variableExpression><![CDATA[String.valueOf((int)$V{TotalMinutosFechamento}.intValue() / 60) + ":" + ( String.valueOf($V{TotalMinutosFechamento}.intValue() % 60).length() > 1 ? String.valueOf($V{TotalMinutos}.intValue() % 60) : "0" + String.valueOf($V{TotalMinutosFechamento}.intValue() % 60) )]]></variableExpression>
+	</variable>
 	<group name="Cliente" isStartNewPage="true">
 		<groupExpression><![CDATA[$F{codCli}]]></groupExpression>
 		<groupHeader>
@@ -222,19 +251,32 @@
 		<groupFooter>
 			<band height="50">
 				<textField>
-					<reportElement x="455" y="0" width="100" height="20" uuid="fc5d19ab-fee6-4c6d-a24b-83bdfbd33929"/>
+					<reportElement x="385" y="2" width="70" height="20" uuid="fc5d19ab-fee6-4c6d-a24b-83bdfbd33929"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$V{TotalFaturamento}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="385" y="0" width="70" height="20" uuid="7261a64b-e932-46e2-b14f-a803eb2253ae"/>
+					<reportElement x="183" y="1" width="71" height="20" uuid="7261a64b-e932-46e2-b14f-a803eb2253ae"/>
 					<textElement>
-						<font size="10"/>
+						<font size="8"/>
 					</textElement>
-					<text><![CDATA[Totais cliente:]]></text>
+					<text><![CDATA[Totais a Receber]]></text>
 				</staticText>
 				<rectangle>
-					<reportElement mode="Transparent" x="385" y="0" width="170" height="20" uuid="e236627c-a1db-4a37-bd2f-ad9d85c7e85d"/>
+					<reportElement mode="Transparent" x="174" y="2" width="305" height="20" uuid="e236627c-a1db-4a37-bd2f-ad9d85c7e85d"/>
 				</rectangle>
+				<textField>
+					<reportElement x="313" y="2" width="43" height="20" uuid="c12c7a4b-db8f-4b8a-89c2-596f3976a6fe"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ResultadoTotalHoras}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="e78571ac-4aff-4e73-9ebb-744c9b99250b"/>
+				</line>
 			</band>
 		</groupFooter>
 	</group>
@@ -258,49 +300,49 @@
 				</staticText>
 				<staticText>
 					<reportElement x="0" y="35" width="31" height="15" uuid="884ea961-a952-485d-b3d7-8a206346fd2b"/>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[Cod Rat]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="31" y="35" width="85" height="15" uuid="69a242b1-9860-423e-8344-2e218edeb705"/>
-					<textElement>
+					<textElement textAlignment="Left">
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[Consultor]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="116" y="35" width="70" height="15" uuid="a186cd28-ac6c-498f-8e30-7c47f3cddb82"/>
-					<textElement>
+					<textElement textAlignment="Left">
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[Projeto]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="186" y="35" width="70" height="15" uuid="24aff0b7-f63c-42a9-aff3-019078aaf99b"/>
-					<textElement>
+					<textElement textAlignment="Left">
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[Produto]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="296" y="35" width="43" height="15" uuid="f0519c52-c9ba-45ec-b056-3bcc628006b8"/>
-					<textElement>
+					<reportElement x="313" y="35" width="43" height="15" uuid="f0519c52-c9ba-45ec-b056-3bcc628006b8"/>
+					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[Total Horas]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="256" y="35" width="40" height="15" uuid="723de714-ca1c-46f2-93bb-288c85a1d4d9"/>
-					<textElement>
+					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[Vlr Hor Fat]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="339" y="35" width="70" height="15" uuid="1a3fb71e-3207-4136-bdfb-d69f2530f01e"/>
-					<textElement>
+					<reportElement x="385" y="35" width="70" height="15" uuid="1a3fb71e-3207-4136-bdfb-d69f2530f01e"/>
+					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[Total Faturamento]]></text>
@@ -308,7 +350,39 @@
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="19"/>
+			<band height="36">
+				<staticText>
+					<reportElement x="184" y="0" width="70" height="19" uuid="790d324b-91df-4fc1-80bc-699fa71e18d1"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Total Fechamento]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="385" y="0" width="70" height="20" uuid="7a5f7b3b-5e0f-4eee-9378-01de0af1ac77"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TotalFaturamentoFechamento}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="264" y="0" width="49" height="20" uuid="6e82d3e3-d0e7-44b4-8ba9-141a86c3adaf"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{datFec}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Transparent" x="174" y="0" width="291" height="20" uuid="ef42ed2f-d087-424d-8889-31aa72b8a41d"/>
+				</rectangle>
+				<textField>
+					<reportElement x="313" y="0" width="43" height="20" uuid="47abf62f-429d-4b96-9f88-1032ac095b1e"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ResultadoTotalHorasFechamento}]]></textFieldExpression>
+				</textField>
+			</band>
 		</groupFooter>
 	</group>
 	<background>
@@ -329,7 +403,7 @@
 		<band height="15" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="48">
+		<band height="37">
 			<textField>
 				<reportElement x="0" y="0" width="31" height="20" uuid="4895049d-e228-4479-b905-7beed50012c6"/>
 				<textElement>
@@ -359,22 +433,22 @@
 				<textFieldExpression><![CDATA[$F{desPro}]]></textFieldExpression>
 			</textField>
 			<textField pattern="HH.mm">
-				<reportElement x="296" y="1" width="43" height="20" uuid="3f86155e-ef76-4b55-949e-4800b51409b6"/>
-				<textElement>
+				<reportElement x="313" y="1" width="43" height="20" uuid="3f86155e-ef76-4b55-949e-4800b51409b6"/>
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{horTot}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="256" y="0" width="40" height="20" uuid="d1525b55-df75-4999-9389-3a0c67052763"/>
-				<textElement>
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{vlrHorFat}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="339" y="0" width="70" height="20" uuid="a5591d74-3c02-4717-bbed-9fc68f354165"/>
-				<textElement>
+				<reportElement x="385" y="0" width="70" height="20" uuid="a5591d74-3c02-4717-bbed-9fc68f354165"/>
+				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{SumFatTot}]]></textFieldExpression>
@@ -387,26 +461,54 @@
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement x="510" y="34" width="45" height="20" uuid="79ca7367-667a-4d67-b16a-39add65194e9"/>
+				<reportElement x="401" y="34" width="45" height="20" uuid="79ca7367-667a-4d67-b16a-39add65194e9"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{txbDatFin}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="465" y="34" width="45" height="20" uuid="e058176a-0c95-4e1f-800a-e1067eb0a841"/>
+				<reportElement x="356" y="34" width="45" height="20" uuid="e058176a-0c95-4e1f-800a-e1067eb0a841"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{txbDatIni}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="434" y="34" width="31" height="20" uuid="422c9314-cdfb-49f6-818f-509b3bba58bc"/>
+				<reportElement x="325" y="34" width="31" height="20" uuid="422c9314-cdfb-49f6-818f-509b3bba58bc"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Período:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="479" y="34" width="31" height="20" uuid="553a51ae-3488-4670-816f-91423b64461a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="530" y="34" width="5" height="20" uuid="0df3c3ec-ad3a-492f-b9c2-79c804338e8e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="535" y="34" width="20" height="20" uuid="7ada6b0a-6baa-41ce-aff2-8b5b7c423031"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="510" y="34" width="20" height="20" uuid="e4ebee1d-4452-44be-88c0-3d0785a7aa2f"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 	<summary>

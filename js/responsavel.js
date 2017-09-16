@@ -191,6 +191,9 @@ function validaCampos(txbNomRes, txbEmail, cbbCliente){
   if(txbEmail === ""){
     msgErro = msgErro + "<b>E-mail</b> é um campo de preenchimento obrigatorio<br/>";
   }
+  else if(!validaEmail(txbEmail)){
+    msgErro = msgErro + "<b>E-mail</b> deve ser válido<br/>";
+  }
   if(cbbCliente === ""){
     msgErro = msgErro + "<b>Cliente</b> é um campo de preenchimento obrigatorio";
   }
