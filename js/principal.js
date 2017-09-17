@@ -143,6 +143,18 @@ $(document).ready(function(){
     });
   });
 
+  $("#consultaatividade").click(function(){
+    $.ajax({
+      type: "POST",
+      dataType: "text",
+      url: "ConsultaAtividadeView.php",
+      success: function(callback){
+        $("#divPrincipal").html(callback);
+        consultaAtiRAT();
+      }
+    });
+  });
+
   $("#faturamento").click(function(){
     $.ajax({
       type: "POST",

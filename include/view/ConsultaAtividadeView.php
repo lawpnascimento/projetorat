@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="../../js/geral.js"></script>
     <script type="text/javascript" src="../../js/alerta.js"></script>
-    <script type="text/javascript" src="../../js/ConsultaRAT.js"></script>
+    <script type="text/javascript" src="../../js/ConsultaAtividade.js"></script>
     <link rel="stylesheet" href="../../css/tabela.css">
     <link rel="stylesheet" href="../../css/alerta.css">
   </head>
@@ -13,10 +13,10 @@
     <div class="container-fluid">
       <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="panel-title">Consulta RAT</div>
+            <div class="panel-title">Consulta Atividades</div>
         </div>
           <div class="panel-body">
-            <form id="formConsultaRAT" class="form-horizontal" role="form">
+            <form id="formConsultaAtividade" class="form-horizontal" role="form">
               <div class="form-group">
                 <div class="col-md-1">
                   <label for="codRat">Código</label>
@@ -42,19 +42,12 @@
                   <label for="nomPrj">Produto</label>
                     <input id="txbNomPro" type="text" class="form-control" name="txbNomPro" placeholder="Nome do produto"></input>
                 </div>
-                <div class="col-md-1">
-                  <label for="sitRAT">Situação</label>
-                    <input id="txbSitRAT" type="text" class="form-control" name="txbSitRAT" placeholder="Cod Sit"></input>
-                </div>
               </div>
               <!-- BOTÕES -->
               <div id="actions" class="row">
                 <div class="col-md-12">
                   <button id="btnBuscar" type="button" class="btn btn-info">Buscar</button>
-                  <button id="btnEmail" type="button" class="btn btn-info">Enviar e-mail</button>
                   <button id="btnCancelar" type="button" class="btn btn-warning">Cancelar</button>
-                  <button id="btnAprovar" type="button" class="btn btn-success">Aprovar</button>
-                  <button id="btnReprovar" type="button" class="btn btn-danger">Reprovar</button>
                 </div>
               </div>
             </form>
@@ -76,12 +69,6 @@
                   Data
                 </th>
                 <th>
-                  % Com. Cli.
-                </th>
-                <th>
-                  % Com. Int.
-                </th>
-                <th>
                   Cliente
                 </th>
                 <th>
@@ -91,20 +78,11 @@
                   Projeto
                 </th>
                 <th>
-                  Vlr. Hor. Com.
-                </th>
-                <th>
-                  Vlr. Hor. Fat.
-                </th>
-                <th>
                   Produto
-                </th>
-                <th>
-                  Situação
                 </th>
               </tr>
             </thead>
-            <tbody id="grdConsultaRAT"></tbody>
+            <tbody id="grdConsultaAtiRAT"></tbody>
           </table>
     </div>
 
@@ -131,52 +109,11 @@
                 <th>
                   Descrição
                 </th>
-                <th class="col-sm-1">
-                  Tip. Fat.
-                </th>
               </tr>
             </thead>
-            <tbody id="grdConsultaAtividade"></tbody>
+            <tbody id="grdConsultaAtiAtividade"></tbody>
           </table>
     </div>
 
-    <legend class="scheduler-border">Despesas</legend>
-        <div class="panel panel-default" style="overflow-y: scroll; height:100px !important;">
-          <table id="tableConsultaDespesa" class="table table-condensed table-bordered">
-            <thead>
-              <tr>
-                <th class="col-sm-1">
-                  Código
-                </th>
-                <th class="col-sm-1">
-                  Data
-                </th>
-                <th class="col-sm-2">
-                  Descrição
-                </th>
-                <th class="col-sm-2">
-                  Tip. Desp.
-                </th>
-                <th class="col-sm-1">
-                  Valor Unitário
-                </th>
-                <th class="col-sm-1">
-                  Quantidade
-                </th>
-                <th class="col-sm-1">
-                  Total
-                </th>
-               <th>
-                  Observações
-                </th>
-               <th class="col-sm-1">
-                  Tip. Fat.
-                </th>
-              </tr>
-            </thead>
-            <tbody id="grdConsultaDespesa"></tbody>
-          </table>
-    </div>
-      
   </body>
 </html>

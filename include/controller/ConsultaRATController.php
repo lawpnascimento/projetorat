@@ -17,6 +17,7 @@ switch($_POST["action"]){
 			if(isset($_SESSION["codPap"])){
 					$model->setPapel($_SESSION["codPap"]);
 			}
+
 			$model->setUsuario($_POST["usuario"]);
 			$model->setCliente($_POST["cliente"]);
 			$model->setResponsavel($_POST["responsavel"]);

@@ -93,6 +93,10 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <li>
                     <a id="consultarat">Consulta RAT</a>
                   </li>
+                  <li class="divider"/>
+                  <li>
+                    <a id="consultaatividade">Consulta Atividades</a>
+                  </li>
                 </ul>
               </li>
             </ul>

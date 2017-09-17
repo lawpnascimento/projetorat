@@ -6,7 +6,7 @@
     <script type="text/javascript" src="../../js/geral.js"></script>
     <script type="text/javascript" src="../../js/alerta.js"></script>
     <script type="text/javascript" src="../../js/faturamento.js"></script>
-    <link rel="stylesheet" href="../../css/faturamento.css">
+    <link rel="stylesheet" href="../../css/tabela.css">
   </head>
   <body>
     <div class="container-fluid">

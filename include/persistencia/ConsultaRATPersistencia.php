@@ -104,7 +104,7 @@ class ConsultaRATPersistencia{
 					$sSql = $sSql . " AND ati.codAti = '" . $atividade ."'";
 			}*/
 
-			$sSql = $sSql . "ORDER BY rat.codRat desc";
+			$sSql = $sSql . " ORDER BY rat.codRat desc";
 		}else{
 			$sSql = "SELECT rat.codRat
 										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,usu.sobrenomeUsu) Usuario_codUsu
