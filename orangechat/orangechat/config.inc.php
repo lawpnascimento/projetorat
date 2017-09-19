@@ -7,7 +7,7 @@ define ('DBPASS','root');
 define ('DBNAME','dbprojetorat');
 
 /* Path to orangechat folder (relative to server root) */
-define('ORANGE_BASE', '/projetorat/orangechat/orangechat/');
+define('ORANGE_BASE', '/projetorat/trunk/orangechat/orangechat/');
 
 /* Language ISO code. It must be in "lang" folder */
 define('LANGUAGE', 'pt');

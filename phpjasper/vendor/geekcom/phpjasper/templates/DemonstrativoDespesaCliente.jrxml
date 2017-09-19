@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DemonstrativoDespesaCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
-	<property name="ireport.zoom" value="3.2153832150000117"/>
+	<property name="ireport.zoom" value="1.3636363636363682"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="731"/>
+	<property name="ireport.y" value="92"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -107,14 +107,17 @@
 		</box>
 	</style>
 	<subDataset name="Table Dataset 1" uuid="17b1eaf2-fbce-4e62-82f2-5827a306ee7a"/>
-	<parameter name="txbDatIni" class="java.lang.String">
+	<parameter name="txbDatIni" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="txbDatFin" class="java.lang.String"/>
-	<parameter name="txbConsultor" class="java.lang.String">
+	<parameter name="txbDatFin" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="txbConsultor" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="txbCliente" class="java.lang.String"/>
+	<parameter name="txbCliente" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="whereClause" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT                rat.codRat
                      ,usu.codUsu
@@ -161,12 +164,7 @@
                                      	ON tipdsp.codTipDsp = dsp.Tipodespesa_CodTipDsp
                                      JOIN tbfatdespesa fatdsp
                                      	ON fatdsp.codFatDsp = dsprat.Fatdespesa_codTipFat
-               WHERE rat.Situacao_codSit = 4
-                    AND fat.datFec BETWEEN $P{txbDatIni} AND $P{txbDatFin}
-                    AND (usu.codUsu > $P{txbConsultor} OR usu.codUsu = $P{txbConsultor})
-                    AND (cli.codCli > $P{txbCliente} OR cli.codCli = $P{txbCliente})
-	          AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 2)
-               ORDER by cli.codCli asc, fat.datFec asc]]>
+			      WHERE $P!{whereClause}]]>
 	</queryString>
 	<field name="codRat" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>

@@ -3,10 +3,24 @@ require_once("../../../autoload.php");
 
 use JasperPHP\JasperPHP;
 
+
 $txbDatIni = $_POST["txbDatIni"];
 $txbDatFin = $_POST["txbDatFin"];
 $txbConsultor = $_POST["txbConsultor"];
 $nmRelatorio = $_POST["nmRelatorio"];
+
+$whereClause = "rat.Situacao_codSit = 4";
+$whereClause = $whereClause . " AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 3)";
+
+if ($txbDatIni != null && $txbDatFin != null) {
+    $whereClause = $whereClause . " AND fat.datFec BETWEEN '" . $txbDatIni . "' AND '" . $txbDatFin . "'";
+}
+
+if ($txbConsultor != null) {
+    $whereClause = $whereClause . " AND usu.codUsu = '" . $txbConsultor . "'";
+}
+
+$whereClause = $whereClause . " ORDER by cli.codCli asc";
 
 $input = __DIR__ . '\ExtratoDespesaConsultor.jrxml';
 $output = __DIR__ . '\\pdf\\' . $nmRelatorio;
@@ -19,7 +33,7 @@ $options = [
     'locale' => 'en',
     'params' => ['txbDatIni' => $txbDatIni,
                  'txbDatFin' => $txbDatFin,
-                 'txbConsultor' => $txbConsultor],
+                 'whereClause' => $whereClause],
     'db_connection' => [
         'driver' => 'mysql',
         'host' => 'localhost',

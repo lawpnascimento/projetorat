@@ -609,7 +609,7 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
       });
   }
   else{
-    alert("não apagou");
+    alert("E-mail não enviado.");
   }
 
 }

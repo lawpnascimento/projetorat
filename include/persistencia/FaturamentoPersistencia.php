@@ -167,6 +167,7 @@ class FaturamentoPersistencia{
 		$codigo = $this->getModel()->getCodigo();
 
 		$sSql = "SELECT rat.codRat
+										,ati.codAti
 										,(SELECT SEC_TO_TIME(TIME_TO_SEC(`horTot`))) horTot
 										,(prj.vlrHorFat * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1))) fatTot
 										,(prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1))) basCalCom
@@ -201,7 +202,8 @@ class FaturamentoPersistencia{
 
 			$contador = $contador + 1;
 
-			$retorno = $retorno . '{"horTot": "'.$linha["horTot"].'"
+			$retorno = $retorno . '{"codAti": "'.$linha["codAti"].'"
+														,"horTot": "'.$linha["horTot"].'"
 														, "fatTot" : "'.$linha["fatTot"].'"
 														, "basCalCom" : "'.$linha["basCalCom"].'"
 														, "comTot" : "'.$linha["comTot"].'"

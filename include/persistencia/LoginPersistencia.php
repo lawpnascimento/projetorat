@@ -44,9 +44,9 @@ class LoginPersistencia {
    			$_SESSION["nomUsu"] = $oDados->nomUsu;
    			$_SESSION["sobrenomeUsu"] = $oDados->sobrenomeUsu;
 	   		$_SESSION["codSit"] = $oDados->codSit;
-				$_SESSION["desEml"] = $oDados->desEml;
-				$_SESSION["codPap"] = $oDados->codPap;
-				$logado = true;
+			$_SESSION["desEml"] = $oDados->desEml;
+			$_SESSION["codPap"] = $oDados->codPap;
+			$logado = true;
 		} else {
       Session_destroy();
 

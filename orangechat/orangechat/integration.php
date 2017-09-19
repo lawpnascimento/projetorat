@@ -16,7 +16,12 @@ define('SESSION', 'userid');
 */
 function getcontacts($userid) {
 	$userid = mysql_real_escape_string(stripslashes(getuserid()));
-	$qry = mysql_query("SELECT u.codUsu FROM tbusuario u LEFT JOIN sample_friends f ON (f.user1=u.codUsu OR f.user2=u.codUsu) WHERE (f.user1='$userid' OR f.user2='$userid') AND u.codUsu!='$userid'");
+	$qry = mysql_query("SELECT u.codUsu 
+						FROM tbusuario u 
+						LEFT JOIN sample_friends f 
+						ON (f.user1=u.codUsu OR f.user2=u.codUsu) 
+						WHERE (f.user1='$userid' OR f.user2='$userid') 
+						AND u.codUsu!='$userid'");
 	$users = array();
 	if(mysql_num_rows($qry)) {
 		while($row = mysql_fetch_array($qry)) {

@@ -492,9 +492,9 @@ function enviaEmailRAT(tdUsuRAT, tdCodRAT){
           var json = $.parseJSON(dados);
 
           if (json.status == 1) {
-            jbkrAlert.alerta('Alerta','Somente o usuário que lançou o RAT pode enviá-lo por e-mail.');   
+            jbkrAlert.alerta('Alerta', json.mensagem);   
           }else {
-            jbkrAlert.sucesso('Sucesso', 'RAT enviado com sucesso!');
+            jbkrAlert.sucesso('Alerta', json.mensagem);
             $("#formConsultaRAT #btnCancelar").trigger("click");
           }
 
@@ -504,12 +504,12 @@ function enviaEmailRAT(tdUsuRAT, tdCodRAT){
 }
 
 /*
-function aplicaCorRAT(){
+function aplicaCorRAT(){ 
   $("#grdConsultaRAT tr").each(function(){
     var tdSitRAT = $("#grdConsultaRAT tr").find('td:last').text().slice(0,1);
-    alert(tdSitRAT);
+    alert (tdSitRAT);
     if (tdSitRAT = 1){
-      $(this).addClass('digitado');
+      $(this).closest('tr').addClass('digitado');
     }
     else if (tdSitRAT = 2){
       $(this).addClass('enviado');
@@ -524,4 +524,5 @@ function aplicaCorRAT(){
       $(this).addClass('reprovado');
     } 
   });
-}*/
+}
+*/

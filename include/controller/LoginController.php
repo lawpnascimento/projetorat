@@ -30,7 +30,7 @@ if($bLogou){
 	   echo '{ "mensagem": "Login realizado com sucesso", "status" : "0" }';
   }
   else{
-     echo '{ "mensagem": "Usuário bloqueado, contatar administração", "status" : "1" }';
+     echo '{ "mensagem": "Usuário bloqueado, favor contatar o administrador", "status" : "1" }';
   }
 }
 else{

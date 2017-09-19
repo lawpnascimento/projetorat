@@ -191,10 +191,11 @@ require_once("../../estrutura/iniciar_sessao.php");
             <div class="tab-pane" id="tabLancar">
               <div id="actions" class="row">
                 <div class="col-md-12">
-                  <button id="btnLancarRAT" type="button" class="btn btn-success">Lançar RAT</button>
+                  <p align="right">
+                    <button id="btnLancarRAT" type="button" class="btn btn-success">Lançar RAT</button>
+                  </p>
                 </div>
               </div>
-           </div>
-    
+           </div>  
 </body>
 </html>

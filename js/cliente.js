@@ -10,6 +10,7 @@ $("#document").ready(function() {
     var txbCep = $("#txbCep").val();
     var txbCidade = $("#txbCidade").val();
     var seqCidade = txbCidade.split("-");
+    var seqEstado = seqEstado.split("-");
     var txbTelefone = $("#txbTelefone").val(); 
 
     var msgErro = validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbCidade, txbTelefone);
@@ -30,6 +31,7 @@ $("#document").ready(function() {
             inscricao: txbInscricao,
             cep: txbCep,
             cidade: seqCidade[0],
+            estado: seqEstado[0],
             telefone: txbTelefone,
             action: "cadastrar"
           },
@@ -182,7 +184,7 @@ function buscaClientes(codigo){
             grid = grid + "<td>" + cliente.nomCli + "</td>";
             grid = grid + "<td>" + cliente.numCNPJ + "</td>";
             grid = grid + "<td>" + cliente.Cidade_seqCid + "</td>";
-            grid = grid + "<td>" + "SC (fixo)" + "</td>";
+            grid = grid + "<td>" + cliente.Estado_seqEst + "</td>";
             grid = grid + "<td>" + cliente.telCli + "</td>";
             grid = grid + "<td href='javascript:void(0);' onClick='buscaClientes(" + cliente.codCli + ")'><a>Editar <span class='glyphicon glyphicon-pencil'></span></a></td>";
             grid = grid + "</tr>";
@@ -202,6 +204,7 @@ function buscaClientes(codigo){
             $("#txbInscricao").val(cliente.iesCli);
             $("#txbCep").val(cliente.numCEP);
             $("#txbCidade").val(cliente.Cidade_seqCid);
+            $("#txbEstado").val(cliente.Estado_seqEst);
             $("#txbTelefone").val(cliente.telCli);
               // Para aplicar a máscara nos campos recebidos por ajax
               removeMascara();
@@ -212,6 +215,38 @@ function buscaClientes(codigo){
 
         }
       });
+
+}
+
+function buscaEstado(cidade) {
+
+  $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+        cidade: cidade[0],
+        action: "buscaestado"
+      },
+
+      url: "../controller/ClienteController.php",
+        success: function (dados) {
+          var json = $.parseJSON(dados);
+          var cliente = null;
+
+          var estado = "";
+          for (var i = 0; i < json.length; i++) {
+            cliente = json[i];
+
+            estado = estado + cliente.seqEst + "-" + cliente.desEst;
+
+          }
+
+          $("#txbEstado").val(estado);
+          
+        }
+
+    });
 
 }
 
@@ -242,3 +277,9 @@ function removeMascara(){
   $('#txbCep').unmask();
   $('#txbTelefone').unmask();
 }
+
+$("#txbCidade").focusout(function() {
+  var txbCidade = $("#txbCidade").val();
+  cidade = txbCidade.split("-");
+  buscaEstado(cidade);
+});

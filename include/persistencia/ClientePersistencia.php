@@ -72,6 +72,7 @@ class ClientePersistencia{
 
 			$sSql = "SELECT codCli
 										 ,CONCAT(cli.Cidade_seqCid,'-',cid.desCid) Cidade_seqCid
+										 ,CONCAT(est.codEst,'-',est.desEst) Estado_seqEst
 										 ,desRazaoSocial
 										 ,nomCli
 										 ,CONCAT(SUBSTRING(numCNPJ, 1,2), '.', SUBSTRING(numCNPJ,3,3), '.', SUBSTRING(numCNPJ,6,3), '/', SUBSTRING(numCNPJ,9,4), '-', SUBSTRING(numCNPJ,13, 2)) numCNPJ
@@ -80,7 +81,9 @@ class ClientePersistencia{
 									     ,CONCAT(SUBSTRING(telCli, 1,0), '(', SUBSTRING(telCli,1,2), ')', ' ', SUBSTRING(telCli,3,4), '-', SUBSTRING(telCli,7,4)) telCli
 							 	 FROM tbcliente cli
 							 	 JOIN tbcidade cid
-							 	 ON cid.seqCid = cli.Cidade_seqCid
+							 	 	ON cid.seqCid = cli.Cidade_seqCid
+							 	 JOIN tbestado est
+							 	 	ON est.seqEst = cid.Estado_seqEst
 								WHERE 1 = 1";
 
 			if($razaoSocial != null){
@@ -115,6 +118,7 @@ class ClientePersistencia{
 		}else{
 			$sSql = "SELECT codCli
 										 ,CONCAT(cli.Cidade_seqCid,'-',cid.desCid) Cidade_seqCid
+										 ,CONCAT(est.codEst,'-',est.desEst) Estado_seqEst
 										 ,desRazaoSocial
 										 ,nomCli
 										 ,CONCAT(SUBSTRING(numCNPJ, 1,2), '.', SUBSTRING(numCNPJ,3,3), '.', SUBSTRING(numCNPJ,6,3), '/', SUBSTRING(numCNPJ,9,4), '-', SUBSTRING(numCNPJ,13, 2)) numCNPJ
@@ -123,7 +127,9 @@ class ClientePersistencia{
 									     ,CONCAT(SUBSTRING(telCli, 1,0), '(', SUBSTRING(telCli,1,2), ')', ' ', SUBSTRING(telCli,3,4), '-', SUBSTRING(telCli,7,4)) telCli
 							 	 FROM tbcliente cli
 							 	 JOIN tbcidade cid
-							 	 ON cid.seqCid = cli.Cidade_seqCid
+							 	 	ON cid.seqCid = cli.Cidade_seqCid
+							 	 JOIN tbestado est
+							 	 	ON est.seqEst = cid.Estado_seqEst
 							  WHERE codCli = " . $codigo . "
 								ORDER BY nomCli";
 		}
@@ -141,6 +147,7 @@ class ClientePersistencia{
 
 			$retorno = $retorno . '{"codCli": "'.$linha["codCli"].'"
 														, "Cidade_seqCid" : "'.$linha["Cidade_seqCid"].'"
+														, "Estado_seqEst" : "'.$linha["Estado_seqEst"].'"
 														, "desRazaoSocial" : "'.$linha["desRazaoSocial"].'"
 														, "nomCli" : "'.$linha["nomCli"].'"
 														, "numCNPJ" : "'.$linha["numCNPJ"].'"
@@ -224,14 +231,14 @@ class ClientePersistencia{
 
 	public function buscaEstado(){
 		$this->getConexao()->conectaBanco();
+		$cidade = $this->getModel()->getCidade();
 
-		$seqCid = $this->getModel()->getCodigo();
-
-		$sSql = "SELECT seqEst, desEst, ufEst
+		$sSql = "SELECT est.seqEst, 
+						est.desEst
 						  FROM tbestado est
 						  JOIN tbcidade cid
 						   ON cid.Estado_seqEst = est.seqEst
-						 WHERE cid.seqCid = " . $seqCid;
+						 WHERE cid.seqCid = " . $cidade;
 
 		$resultado = mysql_query($sSql);
 

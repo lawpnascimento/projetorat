@@ -133,9 +133,12 @@ switch($_POST["action"]){
 			$persistencia->enviaEmailRAT();
 
 			$persistencia->atualizaEnvioRAT();	
+			
+			echo '{"mensagem": "E-mail enviado com sucesso!"}';
+
 		}
 		else {  
-			echo '{"status" : 1 }';	    	
+			echo '{"mensagem": "Somente o usuário que lançou o RAT pode enviá-lo por e-mail.", "status" : "1" }';	    	
 	    }
 			
 	break;

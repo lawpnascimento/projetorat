@@ -234,6 +234,7 @@ function consultaFatAtividade(tdCodRAT){
                   atividade = json[i];
 
                   grid = grid + "<tr>";
+                  grid = grid + "<td>" + atividade.codAti + "</td>";
                   grid = grid + "<td>" + atividade.horTot + "</td>";
                   grid = grid + "<td>" + atividade.fatTot + "</td>";
                   grid = grid + "<td>" + atividade.basCalCom + "</td>";
@@ -268,6 +269,7 @@ function consultaFatAtividade(tdCodRAT){
                   totalatividade = json[i];
 
                   grid = grid + "<tr>";
+                  grid = grid + "<td>" + "Totais:" + "</td>";
                   grid = grid + "<td>" + totalatividade.sumHorTot + "</td>";
                   grid = grid + "<td>" + totalatividade.sumFatTot + "</td>";
                   grid = grid + "<td>" + totalatividade.sumBasCalCom + "</td>";

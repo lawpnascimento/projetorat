@@ -10,6 +10,23 @@ $txbConsultor = $_POST["txbConsultor"];
 $txbCliente = $_POST["txbCliente"];
 $nmRelatorio = $_POST["nmRelatorio"];
 
+$whereClause = "rat.Situacao_codSit = 4";
+$whereClause = $whereClause . " AND (dsprat.Fatdespesa_codTipFat = 1 OR dsprat.Fatdespesa_codTipFat = 2)";
+
+if ($txbDatIni != null && $txbDatFin != null) {
+    $whereClause = $whereClause . " AND fat.datFec BETWEEN '" . $txbDatIni . "' AND '" . $txbDatFin . "'";
+}
+
+if ($txbConsultor != null) {
+    $whereClause = $whereClause . " AND usu.codUsu = '" . $txbConsultor . "'";
+}
+
+if ($txbCliente != null) {
+    $whereClause = $whereClause . " AND cli.codCli = '" . $txbCliente . "'";
+}
+
+$whereClause = $whereClause . " ORDER by cli.codCli asc, fat.datFec asc";
+
 $input = __DIR__ . '\DemonstrativoDespesaCliente.jrxml';
 $output = __DIR__ . '\\pdf\\' . $nmRelatorio;
 
@@ -21,8 +38,7 @@ $options = [
     'locale' => 'en',
     'params' => ['txbDatIni' => $txbDatIni,
                  'txbDatFin' => $txbDatFin,
-                 'txbConsultor' => $txbConsultor,
-                 'txbCliente' => $txbCliente],
+                 'whereClause' => $whereClause],
     'db_connection' => [
         'driver' => 'mysql',
         'host' => 'localhost',

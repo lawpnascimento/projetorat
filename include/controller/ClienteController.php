@@ -13,6 +13,7 @@ switch($_POST["action"]){
 		$model->setInscricao($_POST["inscricao"]);
 		$model->setCep($_POST["cep"]);
 		$model->setCidade($_POST["cidade"]);
+		$model->setCidade($_POST["estado"]);
 		$model->setTelefone($_POST["telefone"]);
 
 		$persistencia = new ClientePersistencia();
@@ -84,17 +85,17 @@ switch($_POST["action"]){
  	case 'buscaestado':
 		$model = new ClienteModel();
 
-		$persistencia = new RATPersistencia();
+		$persistencia = new ClientePersistencia();
 
-		$model->setCodigo($_POST["codDsp"]);
+		$model->setCidade($_POST["cidade"]);
 
 		$persistencia->setModel($model);
 
-		$retorno = $persistencia->buscaTipoDespesa();
+		$retorno = $persistencia->buscaEstado();
 
 		echo $retorno;
 
-		break;
+	break;
 
 }
 

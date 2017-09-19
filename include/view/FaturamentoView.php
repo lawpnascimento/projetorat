@@ -118,6 +118,9 @@
             <thead>
               <tr>
                 <th class="col-sm-1">
+                  Código Ati.
+                </th>
+                <th class="col-sm-1">
                   Horas Faturar
                 </th>
                 <!--<th class="col-sm-1">
@@ -148,7 +151,7 @@
             <thead>
               <tr>
                 <th class="col-sm-1">
-                  Código
+                  Código Desp.
                 </th>
                 <th class="col-sm-1">
                   Data

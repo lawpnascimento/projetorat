@@ -1,7 +1,11 @@
 <?php
 session_start();
 require_once("../../estrutura/iniciar_sessao.php");
-//$_SESSION['userid'] = "1" // You may want to set it on login
+$usuarioLogado = $_SESSION["codUsu"]; 
+$papel = $_SESSION["codPap"]; 
+
+$_SESSION['userid'] = $usuarioLogado;
+
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +30,10 @@ require_once("../../estrutura/iniciar_sessao.php");
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/alerta.css">
   <!-- start orangechat code -->
-  <!--  <link type="text/css" rel="stylesheet" media="all" href="../../orangechat/orangechat/orangecss.php" />
-    <script type="text/javascript" src="../../orangechat/orangechat/orangejs.php"></script> -->
+  <!--
+  <link type="text/css" rel="stylesheet" media="all" href="../../orangechat/orangechat/orangecss.php" />
+  <script type="text/javascript" src="../../orangechat/orangechat/orangejs.php"></script>
+  -->
   <!-- end orangechat code -->
 </head>
 <body>
@@ -39,7 +45,7 @@ require_once("../../estrutura/iniciar_sessao.php");
             <a class="navbar-brand" href="Principal.php"><i class="glyphicon glyphicon-home"></i> Projeto RAT</a>
           </div>
           <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" <?php echo $papel != 1 ? "style='display:none;'" : "style='display:block;'"?>>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastros<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -85,7 +91,6 @@ require_once("../../estrutura/iniciar_sessao.php");
                 </ul>
               </li>
             </ul>
-            </ul>
             <ul class="nav navbar-nav">
               <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Consultas<span class="caret"></span></a>
@@ -100,7 +105,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                 </ul>
               </li>
             </ul>
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" <?php echo $papel != 1 ? "style='display:none;'" : "style='display:block;'"?>>
               <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Financeiro<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -110,7 +115,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                 </ul>
               </li>
             </ul>
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" <?php echo $papel != 1 ? "style='display:none;'" : "style='display:block;'"?>>
               <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Relatórios<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -158,7 +163,6 @@ require_once("../../estrutura/iniciar_sessao.php");
                 </li>
             </ul>
             </ul>
-            
           </div>
         </div>
       </nav>

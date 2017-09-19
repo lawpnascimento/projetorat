@@ -33,6 +33,6 @@ SELECT                rat.codRat
                                        ON sit.codSit = rat.Situacao_codSit
                WHERE rat.Situacao_codSit = 4
                     AND fat.datFec BETWEEN $P{txbDatIni} AND $P{txbDatFin}
-                    AND usu.codUsu = $P{txbConsultor}
-                    AND cli.codCli = $P{txbCliente}
+                    AND ((usu.codUsu > $P{txbConsultor}) OR (usu.codUsu = $P{txbConsultor}))
+                    AND ((cli.codCli > $P{txbCliente}) OR (cli.codCli = $P{txbCliente}))
          ORDER by rat.codRat asc
