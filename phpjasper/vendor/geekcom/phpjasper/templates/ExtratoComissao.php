@@ -29,8 +29,8 @@ $whereClause = $whereClause . " ORDER by rat.codRat asc";
 $input = __DIR__ . '\ExtratoComissao.jrxml';
 $output = __DIR__ . '\\pdf\\' . $nmRelatorio;
 
-//$jdbc_dir = 'D:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
-$jdbc_dir = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
+$jdbc_dir = 'D:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
+//$jdbc_dir = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
 
 $options = [
     'format' => ['pdf'],

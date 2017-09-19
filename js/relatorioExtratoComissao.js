@@ -1,4 +1,4 @@
-$("#document").ready(function(){ 
+$("#document").ready(function(){
 
   $("#formRelatorioExtratoComissoes #btnCancelar").click(function(){
     limpaCampos($(this).closest("form"));
@@ -15,7 +15,7 @@ $("#document").ready(function(){
     if(msgErro !== ""){
       jbkrAlert.alerta('Alerta!',msgErro);
     }
-    else {  
+    else {
       gerarRelatorio(txbDatIni, txbDatFin, txbConsultor, txbCliente);
     }
   });

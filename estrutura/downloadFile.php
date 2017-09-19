@@ -1,6 +1,7 @@
 <?php
 
-  $file =  "../phpjasper/geekcom/phpjasper/examples/" .  $_GET["nmRelatorio"];
+
+  $file =  "../phpjasper/vendor/geekcom/phpjasper/templates/pdf/" .  $_GET["nmRelatorio"] . ".pdf";
 
   if (file_exists($file)) {
     $fp = fopen($file,"r");
@@ -8,7 +9,7 @@
     fclose($fp);
 
     header('Content-Type: application/x-download');
-    header("Content-disposition: attachment; filename=\"". $_GET["nmRelatorio"] . "\"");
+    header("Content-disposition: attachment; filename=\"". $_GET["nmRelatorio"] . ".pdf\"");
     header("Expires: 0");
     header("Cache-Control: no-cache");
     header('Cache-Control: private, max-age=0, must-revalidate');
@@ -17,7 +18,7 @@
     echo $strPDF;
 
   } else {
-    //mensagem que arquivo não existe
+   echo "nao encontrou";
   }
 
 
