@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ExtratoAtividadeCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="5bed7544-a302-4dd7-9604-1d1cfe132bef">
 	<property name="ireport.zoom" value="1.1269722013523724"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -130,6 +130,7 @@
                      ,prj.vlrHorFat
                      ,fat.datFec
                      ,ati.horTot
+		,(prj.vlrHorFat * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 0))) FatTot
 		,rsmati.SumFatTot
                      FROM tbrat rat
                                      JOIN tbatividade ati
@@ -191,14 +192,15 @@
 	<field name="horTot" class="java.sql.Time">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="FatTot" class="java.math.BigDecimal"/>
 	<field name="SumFatTot" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="TotalFaturamento" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
-		<variableExpression><![CDATA[$F{SumFatTot}]]></variableExpression>
+		<variableExpression><![CDATA[$F{FatTot}]]></variableExpression>
 	</variable>
 	<variable name="TotalFaturamentoFechamento" class="java.math.BigDecimal" resetType="Group" resetGroup="Data Fechamento" calculation="Sum">
-		<variableExpression><![CDATA[$F{SumFatTot}]]></variableExpression>
+		<variableExpression><![CDATA[$F{FatTot}]]></variableExpression>
 	</variable>
 	<variable name="TotalHoras" class="java.lang.Integer" resetType="Group" resetGroup="Cliente" calculation="Sum">
 		<variableExpression><![CDATA[$F{horTot}.getHours() * 60]]></variableExpression>
@@ -446,11 +448,11 @@
 				<textFieldExpression><![CDATA[$F{vlrHorFat}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="385" y="0" width="70" height="20" uuid="a5591d74-3c02-4717-bbed-9fc68f354165"/>
+				<reportElement x="385" y="0" width="70" height="20" uuid="90f4a3d4-5bb3-443a-96b5-3cea77872ea1"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{SumFatTot}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{FatTot}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

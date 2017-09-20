@@ -73,7 +73,7 @@ function gerarRelatorio(txbDatIni, txbDatFin, txbConsultor){
 
       //Se der tudo ok no envio...
       success: function (dados) {
-        downLoadExtratoComissao(nmRelatorio);
+        downLoadExtratoDespesaConsultor(nmRelatorio);
       }
     });
 

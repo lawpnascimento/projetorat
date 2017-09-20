@@ -369,14 +369,14 @@ class RATPersistencia{
 										VALUES (". $codigo ."
 													 ,". $usuario ."
 													 , STR_TO_DATE('". $dtAtividade ."','%d/%m/%Y')
-													 ,concat(hour('". $hrInicial ."'),':00:00')
-													 ,concat(hour('". $hrFinal ."'),':00:00')
-													 ,concat(hour('". $hrTotal ."'),':00:00')
+													 ,'". $hrInicial ."'
+													 ,'". $hrFinal ."'
+													 ,'". $hrTotal ."'
 													 ,'". $dsAtividade ."'
 													 ,". $idFaturar .")";
 
 		$this->getConexao()->query($sSql);
-
+		echo $sSql;
     $this->getConexao()->fechaConexao();
 
 	}
