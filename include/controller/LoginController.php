@@ -24,6 +24,7 @@ $oPersistencia->setModel($oModel);
 
 $bLogou = $oPersistencia->validaLogin();
 
+$oPersistencia->validaSenha();
 
 if($bLogou){
   if($_SESSION["codSit"] == "1"){

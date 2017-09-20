@@ -6,17 +6,18 @@ switch($_POST["action"]){
 
 	case 'cadastrar':
 		$model = new UsuarioModel();
+    $persistencia = new UsuarioPersistencia();
 
     $model->setNome($_POST["nomUsu"]);
     $model->setSobrenome($_POST["sobrenomeUsu"]);
-    $model->setSenha($_POST["senUsu"]);
+    $senha = $persistencia->criptografaSenha(($_POST["senUsu"]));
+    $model->setSenha($senha);
     $model->setEmail($_POST["desEml"]);
     $model->setPapel($_POST["codPap"]);
     $model->setSituacao($_POST["codSit"]);
     $model->setPercentualComissaoCli($_POST["perComCli"]);
     $model->setPercentualComissaoInt($_POST["perComInt"]);
-
-		$persistencia = new UsuarioPersistencia();
+		
 		$persistencia->setModel($model);
 		$persistencia->inserirUsuario();
 
