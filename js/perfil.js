@@ -3,9 +3,10 @@ $("#document").ready(function() {
         var txbNome = $("#txbNome").val();
         var txbSobrenome = $("#txbSobrenome").val();
         var txbSenha = $("#txbSenha").val();
+        var txbSenhaConfirma = $("#txbSenhaConfirma").val();
         var txbEmail = $("#txbEmail").val();
 
-        var msgErro = validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail);
+        var msgErro = validaCampos(txbNome, txbSobrenome, txbSenha, txbSenhaConfirma, txbEmail);
 
         if(msgErro != ""){
             jbkrAlert.alerta('Alerta!',msgErro);
@@ -28,6 +29,7 @@ $("#document").ready(function() {
                 //Se der tudo ok no envio...
                 success: function (callback) {
                     jbkrAlert.sucesso('Perfil', 'Perfil atualizado com sucesso!');
+                    $("#formPerfil #btnCancelar").trigger("click");
                 }
             });
         }
@@ -67,7 +69,6 @@ function buscaPerfil(codigo){
 
                     $("#txbNome").val(perfil.nomUsu);
                     $("#txbSobrenome").val(perfil.sobrenomeUsu);
-                    $("#txbSenha").val(perfil.senUsu);
                     $("#txbEmail").val(perfil.desEml);
                     $("#txbPapel").val(perfil.desPap);
                 }
@@ -76,7 +77,7 @@ function buscaPerfil(codigo){
 
 };
 
-function validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail){
+function validaCampos(txbNome, txbSobrenome, txbSenha, txbSenhaConfirma, txbEmail){
     msgErro = "";
     if(txbNome == ""){
         msgErro = msgErro + "<b>Nome</b> é um campo de preenchimento obrigatorio<br/>";
@@ -84,14 +85,14 @@ function validaCampos(txbNome, txbSobrenome, txbSenha, txbEmail){
     if(txbSobrenome == ""){
         msgErro = msgErro + "<b>Sobrenome</b> é um campo de preenchimento obrigatorio<br/>";
     }
-    if(txbSenha == ""){
-        msgErro = msgErro + "<b>Senha</b> é um campo de preenchimento obrigatorio<br/>";
-    }
     if(txbEmail == ""){
         msgErro = msgErro + "<b>Email</b> é um campo de preenchimento obrigatorio<br/>";
     }
     else if(!validaEmail(txbEmail)){
         msgErro = msgErro + "<b>E-mail</b> deve ser válido<br/>";
+    }
+    if(txbSenha != txbSenhaConfirma){
+        msgErro = msgErro + "<b>Senhas</b> não coincidem<br/>";
     }
     return msgErro;
 

@@ -92,7 +92,6 @@ class UsuarioPersistencia{
 		$codigo = $this->getModel()->getCodigo();
 		$nome = $this->getModel()->getNome();
 		$sobrenome = $this->getModel()->getSobrenome();
-		$senha = $this->getModel()->getSenha();
 		$email = $this->getModel()->getEmail();
 		$papel = $this->getModel()->getPapel();
 		$situacao = $this->getModel()->getSituacao();
@@ -104,7 +103,6 @@ class UsuarioPersistencia{
 			$sSql = "SELECT usu.codUsu codUsu
 			,usu.nomUsu nomUsu
 			,usu.sobrenomeUsu sobrenomeUsu
-			,usu.senUsu senUsu
 			,usu.codSit codSit
 			,usu.desEml desEml
 			,pap.codPap codPap
@@ -143,7 +141,6 @@ class UsuarioPersistencia{
 			$sSql = "SELECT usu.codUsu codUsu
 			,usu.nomUsu nomUsu
 			,usu.sobrenomeUsu sobrenomeUsu
-			,usu.senUsu senUsu
 			,usu.codSit codSit
 			,usu.desEml desEml
 			,pap.codPap codPap
@@ -173,7 +170,6 @@ class UsuarioPersistencia{
 			$retorno = $retorno . '{"codUsu": "'.$linha["codUsu"].'"
 			, "nomUsu" : "'.$linha["nomUsu"].'"
 			, "sobrenomeUsu" : "'.$linha["sobrenomeUsu"].'"
-			, "senUsu" : "'.$linha["senUsu"].'"
 			, "codSit" : "'.$linha["codSit"].'"
 			, "desEml" : "'.$linha["desEml"].'"
 			, "codPap" : "'.$linha["codPap"].'"
@@ -208,16 +204,33 @@ class UsuarioPersistencia{
 		$percentualComissaoCli = $this->getModel()->getPercentualComissaoCli();
 		$percentualComissaoInt = $this->getModel()->getPercentualComissaoInt();
 
-		$sSql = "UPDATE tbusuario
-		SET nomUsu = '" . $nome ."'
-		,sobrenomeUsu = '" . $sobrenome ."'
-		,senUsu = '" . $senha ."'
-		,desEml = '" . $email ."'
-		,Papel_codPap = '" . $papel ."'
-		,codSit = '" . $situacao ."'
-		,perComCli = '" . $percentualComissaoCli ."'
-		,perComInt = '" . $percentualComissaoInt ."'
-		WHERE codUsu = " . $codigo;
+		if($senha == null){
+
+			$sSql = "UPDATE tbusuario
+			SET nomUsu = '" . $nome ."'
+			,sobrenomeUsu = '" . $sobrenome ."'
+			,desEml = '" . $email ."'
+			,Papel_codPap = '" . $papel ."'
+			,codSit = '" . $situacao ."'
+			,perComCli = '" . $percentualComissaoCli ."'
+			,perComInt = '" . $percentualComissaoInt ."'
+			WHERE codUsu = " . $codigo;
+
+		}else{
+			$senhaCript = $this->criptografaSenha($senha);
+
+			$sSql = "UPDATE tbusuario
+			SET nomUsu = '" . $nome ."'
+			,sobrenomeUsu = '" . $sobrenome ."'
+			,senUsu = '" . $senhaCript ."'
+			,desEml = '" . $email ."'
+			,Papel_codPap = '" . $papel ."'
+			,codSit = '" . $situacao ."'
+			,perComCli = '" . $percentualComissaoCli ."'
+			,perComInt = '" . $percentualComissaoInt ."'
+			WHERE codUsu = " . $codigo;
+
+		}
 
 		$this->getConexao()->query($sSql);
 

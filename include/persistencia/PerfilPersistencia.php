@@ -32,17 +32,17 @@ class PerfilPersistencia {
         $senha = $this->getModel()->getSenha();
         $email = $this->getModel()->getEmail();
 
-              $sSql = "SELECT usu.codUsu
-                             ,usu.nomUsu
-                             ,usu.sobrenomeUsu
-                             ,usu.senUsu
-                             ,usu.desEml
-                             ,pap.codPap
-                             ,pap.desPap
-                         FROM tbusuario usu
-                          JOIN tbpapel pap
-                          ON usu.Papel_codpap = pap.codPap
-                        WHERE usu.codUsu = " . $codigo;
+        $sSql = "SELECT usu.codUsu
+        ,usu.nomUsu
+        ,usu.sobrenomeUsu
+        ,usu.senUsu
+        ,usu.desEml
+        ,pap.codPap
+        ,pap.desPap
+        FROM tbusuario usu
+        JOIN tbpapel pap
+        ON usu.Papel_codpap = pap.codPap
+        WHERE usu.codUsu = " . $codigo;
 
         $resultado = mysql_query($sSql);
 
@@ -57,10 +57,9 @@ class PerfilPersistencia {
             $contador = $contador + 1;
 
             $retorno = $retorno . '{"nomUsu": "'.$linha["nomUsu"].'"
-                                   , "sobrenomeUsu" : "'.$linha["sobrenomeUsu"].'"
-                                   , "senUsu" : "'.$linha["senUsu"].'"
-                                   , "desEml" : "'.$linha["desEml"].'"
-                                   , "desPap" : "'.$linha["desPap"].'"}';
+            , "sobrenomeUsu" : "'.$linha["sobrenomeUsu"].'"
+            , "desEml" : "'.$linha["desEml"].'"
+            , "desPap" : "'.$linha["desPap"].'"}';
 
             //Para não concatenar a virgula no final do json
             if($qtdLinhas != $contador)
@@ -83,16 +82,31 @@ class PerfilPersistencia {
         $senha = $this->getModel()->getSenha();
         $email = $this->getModel()->getEmail();
 
-        $sSql = "UPDATE tbusuario usu
-                    SET usu.nomUsu = '" . $nome ."'
-                       ,usu.sobrenomeUsu = '" . $sobrenome ."'
-                       ,usu.senUsu = '" . $senha ."'
-                       ,usu.desEml = '". $email ."'
-                  WHERE usu.codUsu = " . $codigo;
+        if($senha == null){
+
+            $sSql = "UPDATE tbusuario usu
+            SET usu.nomUsu = '" . $nome ."'
+            ,usu.sobrenomeUsu = '" . $sobrenome ."'
+            ,usu.desEml = '". $email ."'
+            WHERE usu.codUsu = " . $codigo;
+
+        }else{
+            $senhaCript = $this->criptografaSenha($senha);
+            $sSql = "UPDATE tbusuario usu
+            SET usu.nomUsu = '" . $nome ."'
+            ,usu.sobrenomeUsu = '" . $sobrenome ."'
+            ,usu.senUsu = '" . $senhaCript ."'
+            ,usu.desEml = '". $email ."'
+            WHERE usu.codUsu = " . $codigo; 
+        }
 
         $this->getConexao()->query($sSql);
 
         $this->getConexao()->fechaConexao();
+    }
+
+    public function criptografaSenha($senha){
+        return sha1($senha);
     }
 }
 ?>

@@ -61,12 +61,12 @@ switch($_POST["action"]){
 		$model->setCodigo($_POST["codigo"]);
 		$model->setNome($_POST["nomUsu"]);
 		$model->setSobrenome($_POST["sobrenomeUsu"]);
-		$model->setSenha($_POST["senUsu"]);
+        $model->setSenha($_POST["senUsu"]);
 		$model->setEmail($_POST["desEml"]);
 		$model->setPapel($_POST["codPap"]);
 		$model->setSituacao($_POST["codSit"]);
-    $model->setPercentualComissaoCli($_POST["perComCli"]);
-    $model->setPercentualComissaoInt($_POST["perComInt"]);
+        $model->setPercentualComissaoCli($_POST["perComCli"]);
+        $model->setPercentualComissaoInt($_POST["perComInt"]);
 
 		$persistencia = new UsuarioPersistencia();
 
