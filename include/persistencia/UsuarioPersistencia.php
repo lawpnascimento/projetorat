@@ -30,7 +30,7 @@ class UsuarioPersistencia{
 
 		$nome = $this->getModel()->getNome();
 		$sobrenome = $this->getModel()->getSobrenome();
-		$senha = $this->getModel()->getSenha();
+		$senha = $this->criptografaSenha($this->getModel()->getSenha());
 		$email = $this->getModel()->getEmail();
 		$papel = $this->getModel()->getPapel();
 		$situacao = $this->getModel()->getSituacao();
@@ -225,13 +225,14 @@ class UsuarioPersistencia{
 	}
 
 	public function criptografaSenha($senha){
-		$options = [
+		/*$options = [
 			'cost' => 11,
 			'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
 		];
 		$senhaCript = password_hash($senha, PASSWORD_BCRYPT, $options)."\n";
 
-		return $senhaCript;
+		return $senhaCript;*/
+		return sha1($senha);
 	}
 }
 

@@ -10,14 +10,13 @@ switch($_POST["action"]){
 
     $model->setNome($_POST["nomUsu"]);
     $model->setSobrenome($_POST["sobrenomeUsu"]);
-    $senha = $persistencia->criptografaSenha(($_POST["senUsu"]));
     $model->setSenha($senha);
     $model->setEmail($_POST["desEml"]);
     $model->setPapel($_POST["codPap"]);
     $model->setSituacao($_POST["codSit"]);
     $model->setPercentualComissaoCli($_POST["perComCli"]);
     $model->setPercentualComissaoInt($_POST["perComInt"]);
-		
+
 		$persistencia->setModel($model);
 		$persistencia->inserirUsuario();
 
@@ -59,13 +58,13 @@ switch($_POST["action"]){
 	case 'atualizar':
 		$model = new UsuarioModel();
 
-	$model->setCodigo($_POST["codigo"]);
-	$model->setNome($_POST["nomUsu"]);
-	$model->setSobrenome($_POST["sobrenomeUsu"]);
-	$model->setSenha($_POST["senUsu"]);
-	$model->setEmail($_POST["desEml"]);
-	$model->setPapel($_POST["codPap"]);
-	$model->setSituacao($_POST["codSit"]);
+		$model->setCodigo($_POST["codigo"]);
+		$model->setNome($_POST["nomUsu"]);
+		$model->setSobrenome($_POST["sobrenomeUsu"]);
+		$model->setSenha($_POST["senUsu"]);
+		$model->setEmail($_POST["desEml"]);
+		$model->setPapel($_POST["codPap"]);
+		$model->setSituacao($_POST["codSit"]);
     $model->setPercentualComissaoCli($_POST["perComCli"]);
     $model->setPercentualComissaoInt($_POST["perComInt"]);
 

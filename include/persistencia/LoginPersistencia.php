@@ -25,7 +25,8 @@ class LoginPersistencia {
 	public function validaLogin(){
 		$login = $this->getModel()->getLogin();
 		$senha = $this->getModel()->getSenha();
-
+		$senha = $this->criptografaSenha($senha);
+		
 		$sSql = "SELECT usu.codUsu codUsu
 		,usu.nomUsu nomUsu
 		,usu.sobrenomeUsu sobrenomeUsu
@@ -76,11 +77,21 @@ class LoginPersistencia {
 		$resultado = $this->getConexao()->fetch_query($sSql);
 		$senhaBanco = $resultado->senUsu;
 
-		if (password_verify($senhaRecebida, $senhaBanco)) {
+		/*if (password_verify($senhaRecebida, $senhaBanco)) {
 			echo 'Password is valid!';
 		} else {
 			echo 'Invalid password.';
-		}
+		}*/
+	}
+
+	public function criptografaSenha($senha){
+	/*	$options = [
+			'cost' => 11,
+			'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+		];
+		$senhaCript = password_hash($senha, PASSWORD_BCRYPT, $options)."\n";*/
+
+		return sha1($senha);
 	}
 }
 ?>
