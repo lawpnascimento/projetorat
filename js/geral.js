@@ -78,8 +78,10 @@ function formularioModoInserir(){
 function formularioModoAtualizar(){
   $("#btnCadastrar").css("display","none");
   $("#btnBuscar").css("display","none");
+  $("#btnLancarRAT").css("display","none");
   $("#btnExcluir").css("display","inline-block");
   $("#btnAtualizar").css("display","inline-block");
+  $("#btnAlterarRAT").css("display","inline-block");
 
 }
 

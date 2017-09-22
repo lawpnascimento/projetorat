@@ -136,7 +136,9 @@ function validaCampos(txbDatIni, txbDatFin){
   if(txbDatFin === ""){
     msgErro = msgErro + "<b>Data Final</b> é um campo de preenchimento obrigatorio<br/>";
   }
-
+  else if (txbDatIni > txbDatFin){
+    msgErro = msgErro + "<b>Data Inicial</b> deve ser antes que a hora final<br/>";
+  }
   return msgErro;
 
 }

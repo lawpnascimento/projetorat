@@ -35,7 +35,7 @@ switch($_POST["action"]){
 
 	  	echo $retorno;
 
-	   	break;
+	break;
 
 	case 'buscaatividade':
 		$model = new ConsultaRATModel();
@@ -156,6 +156,22 @@ switch($_POST["action"]){
 		$retorno = $persistencia->buscaSituacaoAutoComplete();
 
 		echo $retorno;
+
+	break;
+
+	case 'alterar':
+	   	$model = new ConsultaRATModel();
+
+			$model->setCodigo($_POST["codigo"]);
+			$model->setSituacao($_POST["situacao"]);
+
+	   	$persistencia = new ConsultaRATPersistencia();
+
+	  	$persistencia->setModel($model);
+
+	   	$retorno = $persistencia->buscaAlteraRAT();
+
+	  	echo $retorno;
 
 	break;
 

@@ -193,6 +193,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                 <div class="col-md-12">
                   <p align="right">
                     <button id="btnLancarRAT" type="button" class="btn btn-success">Lançar RAT</button>
+                    <button id="btnAlterarRAT" type="button" class="btn btn-primary" style="display:none;">Alterar RAT</button>
                   </p>
                 </div>
               </div>

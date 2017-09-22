@@ -38,8 +38,6 @@ class ConsultaAtividadePersistencia{
 		$papel = $this->getModel()->getPapel();
 		$usuarioLogado = $this->getModel()->getUsuarioLogado();
 
-		if($papel == 1){
-
 			$sSql = "SELECT rat.codRat
 										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
 										 ,DATE_FORMAT(datRat, '%d-%m-%Y') datRat
@@ -85,53 +83,6 @@ class ConsultaAtividadePersistencia{
 			}
 
 			$sSql = $sSql . " ORDER BY rat.codRat desc";
-		}else{
-			$sSql = "SELECT rat.codRat
-										 ,CONCAT(rat.Usuario_codUsu,' - ',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
-										 ,DATE_FORMAT(datRat, '%d-%m-%Y') datRat
-										 ,CONCAT(rat.Cliente_codCli, ' - ',cli.nomCli) Cliente_codCli
-										 ,CONCAT(rat.Responsavel_codRes, ' - ',res.nomRes) Responsavel_codRes
-										 ,CONCAT(rat.Projeto_codPrj, ' - ',prj.nomPrj) Projeto_codPrj
-									     ,CONCAT(rat.Produto_codPro,' - ',pro.desPro) Produto_codPro
-							 	 FROM tbrat rat
-							 	 JOIN tbusuario usu
-							       ON usu.codUsu = rat.Usuario_codUsu
-							     JOIN tbcliente cli
-								   ON cli.codCli = rat.Cliente_codCli
-								 JOIN tbresponsavel res 
-								   ON res.codRes = rat.Responsavel_codRes
-								 JOIN tbprojeto prj 
-								   ON prj.codPrj = rat.Projeto_codPrj
-								 JOIN tbproduto pro
-								   ON pro.codPro = rat.Produto_codPro
-							   WHERE rat.Usuario_codUsu = " . $usuarioLogado;
-
-			if($codigo != null){
-					$sSql = $sSql . " AND rat.codRat = '" . $codigo ."'";
-			}
-
-			if($usuario != null){
-					$sSql = $sSql . " AND rat.Usuario_codUsu = '" . $usuario ."'";
-			}
-
-			if($cliente != null){
-					$sSql = $sSql . " AND rat.Cliente_codCli = '" . $cliente ."'";
-			}
-
-			if($responsavel != null){
-					$sSql = $sSql . " AND rat.Responsavel_codRes = '" . $responsavel ."'";
-			}
-
-			if($projeto != null){
-					$sSql = $sSql . " AND rat.Projeto_codPrj = '" . $projeto ."'";
-			}
-
-			if($produto != null){
-					$sSql = $sSql . " AND rat.Produto_codPro = '" . $produto ."'";
-			}
-
-			$sSql = $sSql . " ORDER BY rat.codRat desc";
-		}
 
 		$resultado = mysql_query($sSql);
 

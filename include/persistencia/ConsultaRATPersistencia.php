@@ -430,5 +430,77 @@ class ConsultaRATPersistencia{
 		$this->getConexao()->fechaConexao();
 	}
 
+	public function buscaAlteraRAT(){
+		$this->getConexao()->conectaBanco();
+
+		$codigo = $this->getModel()->getCodigo();
+		$situacao = $this->getModel()->getSituacao();
+
+		if($codigo != null){
+
+			$sSql = "SELECT rat.codRat
+										 ,CONCAT(rat.Usuario_codUsu,'-',usu.nomUsu, ' ' ,sobrenomeUsu) Usuario_codUsu
+										 ,DATE_FORMAT(datRat, '%Y-%m-%d') datRat
+										 ,CONCAT(usu.perComCli, '%') perComCli
+										 ,CONCAT(usu.perComInt, '%') perComInt
+										 ,CONCAT(rat.Cliente_codCli, '-',cli.nomCli) Cliente_codCli
+										 ,CONCAT(rat.Responsavel_codRes, '-',res.nomRes) Responsavel_codRes
+										 ,CONCAT(rat.Projeto_codPrj, '-',prj.nomPrj) Projeto_codPrj
+										 ,prj.vlrHorCom vlrHorCom
+										 ,prj.vlrHorFat vlrHorFat
+									     ,CONCAT(rat.Produto_codPro,'-',pro.desPro) Produto_codPro
+										 ,CONCAT(rat.Situacao_codSit,'-',sit.desSit) Situacao_codSit
+							 	 FROM tbrat rat
+							 	 JOIN tbusuario usu
+							       ON usu.codUsu = rat.Usuario_codUsu
+							     JOIN tbcliente cli
+								   ON cli.codCli = rat.Cliente_codCli
+								 JOIN tbresponsavel res 
+								   ON res.codRes = rat.Responsavel_codRes
+								 JOIN tbprojeto prj 
+								   ON prj.codPrj = rat.Projeto_codPrj
+								 JOIN tbproduto pro
+								   ON pro.codPro = rat.Produto_codPro
+								 JOIN tbsituacaorat = sit
+								   ON sit.codSit = rat.Situacao_codSit
+								WHERE rat.codRat = " . $codigo;
+		}
+
+		$resultado = mysql_query($sSql);
+
+		$qtdLinhas = mysql_num_rows($resultado);
+
+		$contador = 0;
+
+		$retorno = '[';
+		while ($linha = mysql_fetch_assoc($resultado)) {
+
+			$contador = $contador + 1;
+
+			$retorno = $retorno . '{"codRat": "'.$linha["codRat"].'"
+														, "codUsu" : "'.$linha["Usuario_codUsu"].'"
+														, "datRat" : "'.$linha["datRat"].'"
+														, "perComCli" : "'.$linha["perComCli"].'"
+														, "perComInt" : "'.$linha["perComInt"].'"
+														, "codCli" : "'.$linha["Cliente_codCli"].'"
+														, "codRes" : "'.$linha["Responsavel_codRes"].'"
+														, "codPrj" : "'.$linha["Projeto_codPrj"].'"
+														, "vlrHorCom" : "'.$linha["vlrHorCom"].'"
+														, "vlrHorFat" : "'.$linha["vlrHorFat"].'"
+														, "codPro" : "'.$linha["Produto_codPro"].'"
+														, "codSit" : "'.$linha["Situacao_codSit"].'"}';
+
+			//Para não concatenar a virgula no final do json
+			if($qtdLinhas != $contador)
+					$retorno = $retorno . ',';
+
+		}
+		$retorno = $retorno . "]";
+
+		$this->getConexao()->fechaConexao();
+
+		return $retorno;
+	}
+
 }
 ?>

@@ -75,6 +75,22 @@ $("#document").ready(function(){
   }
 });
 
+  $("#formConsultaRAT #btnAlterar").click(function(){
+    var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
+    if (trSelecionado == true){
+      var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
+      var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
+
+      if (tdSitRAT == 1 || tdSitRAT == 6){
+        alteraRAT(tdCodRAT, tdSitRAT);
+      } else {
+       jbkrAlert.alerta('Alerta', "O RAT deve estar com a situação '1 - Digitado' ou '6 - Reprovado' para ser alterado.");
+     }     
+   } else {
+    jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser alterado.");
+  }
+});
+
   $('#txbNomUsu').autocomplete({
     minLength: 1,
     autoFocus: true,
@@ -500,6 +516,56 @@ function enviaEmailRAT(tdUsuRAT, tdCodRAT){
 
         }
       });
+
+}
+
+function alteraRAT(tdCodRAT, tdSitRAT){
+ var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
+ var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
+ var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
+
+ $.ajax({
+
+  type: "POST",
+  dataType: "text",
+
+  url: "RATView.php",
+
+  success: function(callback){
+    $("#divPrincipal").html(callback);
+    formularioModoAtualizar();
+
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+          codigo: tdCodRAT,
+          situacao: tdSitRAT,
+          action: "alterar"
+        },
+
+        url: "../controller/ConsultaRATController.php",
+
+        success: function (dados) {
+          var json = $.parseJSON(dados);
+          var rat = null;
+
+          for (var j = 0; j < json.length; j++) {
+            rat = json[j];
+
+            $("#txbCliente").val(rat.codCli);
+            $("#txbResponsavel").val(rat.codRes);
+            $("#txbProjeto").val(rat.codPrj);
+            $("#txbProduto").val(rat.codPro);
+            $("#txbDataRAT").val(rat.datRat);
+          };
+
+        }
+
+      });
+  }
+});
 
 }
 

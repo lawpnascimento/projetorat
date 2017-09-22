@@ -30,8 +30,7 @@ $_SESSION['userid'] = $usuarioLogado;
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/alerta.css">
   <!-- start orangechat code -->
-  <!--
-  <link type="text/css" rel="stylesheet" media="all" href="../../orangechat/orangechat/orangecss.php" />
+  <!--<link type="text/css" rel="stylesheet" media="all" href="../../orangechat/orangechat/orangecss.php" />
   <script type="text/javascript" src="../../orangechat/orangechat/orangejs.php"></script>
   -->
   <!-- end orangechat code -->
