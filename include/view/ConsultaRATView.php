@@ -52,7 +52,7 @@
                 <div class="col-md-12">
                   <button id="btnBuscar" type="button" class="btn btn-info">Buscar</button>
                   <button id="btnEmail" type="button" class="btn btn-info">Enviar e-mail</button>
-                  <button id="btnAlterar" type="button" class="btn btn-info">Alterar RAT</button>
+                  <button id="btnAlterar" type="button" class="btn btn-primary">Alterar RAT</button>
                   <button id="btnCancelar" type="button" class="btn btn-warning">Cancelar</button>
                   <button id="btnAprovar" type="button" class="btn btn-success">Aprovar</button>
                   <button id="btnReprovar" type="button" class="btn btn-danger">Reprovar</button>

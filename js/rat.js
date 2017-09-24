@@ -12,7 +12,7 @@ validaSomenteNumerico("#tbodyDespesas", ".tdNumerico");
 //Desabilita o select do tipo da despesa para cliques
 $('.selectTipoDespesa').attr("disabled", true);
 
-$("#formGeral #btnCancelar").click(function(){
+$("#formGeralCancelar #btnCancelar").click(function(){
   limpaCamposRAT($(this).closest("form"));
 });
 

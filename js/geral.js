@@ -82,7 +82,8 @@ function formularioModoAtualizar(){
   $("#btnExcluir").css("display","inline-block");
   $("#btnAtualizar").css("display","inline-block");
   $("#btnAlterarRAT").css("display","inline-block");
-
+  $("#txbAlterarCodRat").css("display","inline-block");
+  $("#labelAlterarCodRat").css("display","inline-block");
 }
 
 function validaSomenteNumerico(form, campo) {

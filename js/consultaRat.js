@@ -559,6 +559,7 @@ function alteraRAT(tdCodRAT, tdSitRAT){
             $("#txbProjeto").val(rat.codPrj);
             $("#txbProduto").val(rat.codPro);
             $("#txbDataRAT").val(rat.datRat);
+            $("#txbAlterarCodRat").val(rat.codRat);
           };
 
         }

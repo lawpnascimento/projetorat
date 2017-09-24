@@ -25,7 +25,7 @@ if ($txbCliente != null) {
     $whereClause = $whereClause . " AND cli.codCli = '" . $txbCliente . "'";
 }
 
-$whereClause = $whereClause . " ORDER by cli.codCli asc, fat.datFec asc";
+$whereClause = $whereClause . " ORDER by cli.codCli asc, fat.datFec asc, rat.codRat asc";
 
 $input = __DIR__ . '\DemonstrativoDespesaCliente.jrxml';
 $output = __DIR__ . '\\pdf\\' . $nmRelatorio;

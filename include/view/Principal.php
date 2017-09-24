@@ -32,8 +32,8 @@ $_SESSION['userid'] = $usuarioLogado;
   <!-- start orangechat code -->
   <!--<link type="text/css" rel="stylesheet" media="all" href="../../orangechat/orangechat/orangecss.php" />
   <script type="text/javascript" src="../../orangechat/orangechat/orangejs.php"></script>
-  -->
-  <!-- end orangechat code -->
+-->
+<!-- end orangechat code -->
 </head>
 <body>
   <div class="container-fluid">
@@ -41,9 +41,14 @@ $_SESSION['userid'] = $usuarioLogado;
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navPrincipal">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
             <a class="navbar-brand" href="Principal.php"><i class="glyphicon glyphicon-home"></i> Projeto RAT</a>
           </div>
-          <div class="collapse navbar-collapse">
+          <div class="collapse navbar-collapse" id="navPrincipal">
             <ul class="nav navbar-nav" <?php echo $papel != 1 ? "style='display:none;'" : "style='display:block;'"?>>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastros<span class="caret"></span></a>
@@ -51,13 +56,13 @@ $_SESSION['userid'] = $usuarioLogado;
                   <li>
                     <a id="usuario">Usuários</a>
                   </li>
-                  </li>
-                    <li class="divider"/>
-                  <li>
+                </li>
+                <li class="divider"/>
+                <li>
                   <li>
                     <a id="cliente">Clientes</a>
                   </li>
-                    <li class="divider"/>
+                  <li class="divider"/>
                   <li>
                     <a id="projeto">Projetos</a>
                   </li>
@@ -120,57 +125,55 @@ $_SESSION['userid'] = $usuarioLogado;
                 <ul class="dropdown-menu" role="menu">
                   <li>
                     <li>
-                    <a id="extratocomissoes">Extrato de Comissões</a>
+                      <a id="extratocomissoes">Extrato de Comissões</a>
                     </li>
-                  <li class="divider"/>
+                    <li class="divider"/>
                     <li>
-                    <a id="atividadesclientes">Atividades por Clientes</a>
-                  <li class="divider"/>
+                      <a id="atividadesclientes">Atividades por Clientes</a>
+                      <li class="divider"/>
                     </li>
                     <li>
-                    <a id="despesaconsultor">Despesas por Consultor</a>
+                      <a id="despesaconsultor">Despesas por Consultor</a>
                     </li>
-                  <li class="divider"/>
+                    <li class="divider"/>
                     <li>
-                    <a id="despesacliente">Despesas por Cliente</a>
+                      <a id="despesacliente">Despesas por Cliente</a>
                     </li>
                   </ul>
                 </li>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <?php echo ucfirst($_SESSION["nomUsu"]) ?><span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                      <li>
-                          <a id="perfil" href="#">Perfil</a>
-                      </li>
-                      <li class="divider"/>
-                      <li>
-                          <a id="btnAjuda" href="#">Ajuda</a>
-                      </li>
-                     </ul>
-                </li>
-                <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-off"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                      <li>
-                          <a href="Sair.php">Sair</a>
-                      </li>
-                     </ul>
-                </li>
-            </ul>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <?php echo ucfirst($_SESSION["nomUsu"]); echo " " . ucfirst($_SESSION["sobrenomeUsu"]) ?><span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a id="perfil" href="#">Perfil</a>
+                  </li>
+                  <li class="divider"/>
+                  <li>
+                    <a id="btnAjuda" href="#">Ajuda</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-off"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="Sair.php">Sair</a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-<!--Navegaçao-->
-<div class="row">
-  <div id="divPrincipal" role="divPrincipal">
-  </div>
-</div>
+    <!--Navegaçao-->
+    <div class="row">
+      <div id="divPrincipal" role="divPrincipal">
+      </div>
+    </div>
 
-</body>
-</html>
+  </body>
+  </html>
