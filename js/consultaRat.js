@@ -1,4 +1,4 @@
-$("#document").ready(function(){ 
+$("#document").ready(function(){
   verificaPapelUsuario();
 
   $("#formConsultaRAT #btnBuscar").click(function () {
@@ -16,7 +16,7 @@ $("#document").ready(function(){
         enviaEmailRAT(tdUsuRAT, tdCodRAT);
       } else {
        jbkrAlert.alerta('Alerta', "O RAT deve estar com a situação '1 - Digitado' ou '6 - Reprovado' para ser enviado.");
-     }  
+     }
    } else {
     jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser enviado.");
   }
@@ -53,7 +53,7 @@ $("#document").ready(function(){
         jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '2 - Enviado' para ser aprovado.");
       } else {
        aprovaRAT(tdCodRAT, tdSitRAT);
-     }     
+     }
    } else {
     jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser aprovado.");
   }
@@ -69,7 +69,7 @@ $("#document").ready(function(){
         jbkrAlert.alerta('Alerta', "O RAT precisa estar com a situação '2 - Enviado' para ser reprovado.");
       } else {
        reprovaRAT(tdCodRAT, tdSitRAT);
-     }     
+     }
    } else {
     jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser reprovado.");
   }
@@ -85,7 +85,7 @@ $("#document").ready(function(){
         alteraRAT(tdCodRAT, tdSitRAT);
       } else {
        jbkrAlert.alerta('Alerta', "O RAT deve estar com a situação '1 - Digitado' ou '6 - Reprovado' para ser alterado.");
-     }     
+     }
    } else {
     jbkrAlert.alerta('Alerta', "Favor selecionar o RAT para ser alterado.");
   }
@@ -327,14 +327,14 @@ function consultaRAT(){
             grid = grid + "<td>" + rat.codPrj + "</td>";
             grid = grid + "<td>" + rat.vlrHorCom + "</td>";
             grid = grid + "<td>" + rat.vlrHorFat + "</td>";
-            grid = grid + "<td>" + rat.codPro + "</td>";  
+            grid = grid + "<td>" + rat.codPro + "</td>";
             grid = grid + "<td>" + rat.codSit + "</td>";
             grid = grid + "</tr>";
 
           }
 
           $("#grdConsultaRAT").html(grid);
-          
+
         }
       });
 }
@@ -410,7 +410,7 @@ function consultaAtividade(tdCodRAT){
                   grid = grid + "<td>" + atividade.horFin + "</td>";
                   grid = grid + "<td>" + atividade.horTot + "</td>";
                   grid = grid + "<td>" + atividade.desAti + "</td>";
-                  grid = grid + "<td>" + atividade.tipFat + "</td>";  
+                  grid = grid + "<td>" + atividade.tipFat + "</td>";
                   grid = grid + "</tr>";
 
                 }
@@ -508,7 +508,7 @@ function enviaEmailRAT(tdUsuRAT, tdCodRAT){
           var json = $.parseJSON(dados);
 
           if (json.status == 1) {
-            jbkrAlert.alerta('Alerta', json.mensagem);   
+            jbkrAlert.alerta('Alerta', json.mensagem);
           }else {
             jbkrAlert.sucesso('Alerta', json.mensagem);
             $("#formConsultaRAT #btnCancelar").trigger("click");
@@ -521,8 +521,6 @@ function enviaEmailRAT(tdUsuRAT, tdCodRAT){
 
 function alteraRAT(tdCodRAT, tdSitRAT){
  var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
- var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
- var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
  $.ajax({
 
@@ -560,7 +558,7 @@ function alteraRAT(tdCodRAT, tdSitRAT){
             $("#txbProduto").val(rat.codPro);
             $("#txbDataRAT").val(rat.datRat);
             $("#txbAlterarCodRat").val(rat.codRat);
-          };
+          }
 
         }
 
@@ -581,11 +579,33 @@ function alteraRAT(tdCodRAT, tdSitRAT){
             var json = $.parseJSON(dados);
             var atividade = null;
 
+            var grid = "";
+            var tipFat = null;
             for (var j = 0; j < json.length; j++) {
               atividade = json[j];
-             
-            };
 
+              if(atividade.tipFat == 1)
+                tipFat = "checked";
+              else
+                tipFat = "";
+
+              grid = grid + '<tr>';
+              grid = grid + '<input type="hidden" value="' + atividade.codAti + '"/>';
+              grid = grid + '<td id="tdDataAtividade" contenteditable="true" class="tdData">' + atividade.datAti + '</td>';
+              grid = grid + '<td id="tdHoraInicial" contenteditable="true" name="tdHrInicial" class="tdHora">' + atividade.horIni + '</td>';
+              grid = grid + '<td id="tdHoraFinal" contenteditable="true" name="tdHrFinal" class="tdHora">' + atividade.horFin + '</td>';
+              grid = grid + '<td id="tdHoraTotal" bgcolor="#EBEBE4" contenteditable="false" name="tdHrTotal" readonly>' + atividade.horTot + '</td>';
+              grid = grid + '<td id="tdDescricaoAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 200)">' + atividade.desAti + '</td>';
+              grid = grid + '<td id="tdFatAtividade" class="checkbox col-sm-1"> <label><input type="checkbox" value="' + atividade.tipFat + '" ' + tipFat + '   >Faturar</label></td>';
+              grid = grid + '<td id="tdButtonsAtividade">';
+              grid = grid + '<span class="table-up glyphicon glyphicon-arrow-up"></span>';
+              grid = grid + '<span class="table-down glyphicon glyphicon-arrow-down"></span>';
+              grid = grid + '<span class="table-remove glyphicon glyphicon-remove" onClick="ExcluiAtividade(' + atividade.codAti + ')"></span>';
+              grid = grid + '</td>';
+              grid = grid + '</tr>';
+            }
+
+            $("#tbAtividades #tbodyAtividades").html(grid);
           }
 
         });
@@ -603,13 +623,88 @@ function alteraRAT(tdCodRAT, tdSitRAT){
 
           success: function (dados) {
             var json = $.parseJSON(dados);
-            var atividade = null;
+            var despesa = null;
+            var grid = "";
+            var fr = null;
+            var fn = null;
+            var nr = null;
+            var nn = null;
 
             for (var j = 0; j < json.length; j++) {
               despesa = json[j];
 
-            };
+              if(despesa.codFatDsp == 1)
+                fr = "selected";
+              else if(despesa.codFatDsp == 2)
+                fn = "selected";
+              else if(despesa.codFatDsp == 3)
+                nr = "selected";
+              else if(despesa.codFatDsp == 4)
+                nn = "selected";
 
+              grid = grid + '<tr class="fix">';
+              grid = grid + '<td id="tdDataDespesa" contenteditable="true" class="tdData">' + despesa.datDsp + '</td>';
+              grid = grid + '<td id="tdDsDespesa" contenteditable="false"><select class="selectDsDespesa" style="width:100%;" name="dsDespesa" onChange="buscaTipoDespesaConsulta(this);" onblur="buscaValorUnitarioDespesaConsulta(this);"></select></td>';
+              grid = grid + '<td id="tdTipoDespesa" bgcolor="#EBEBE4" contenteditable="false" readonly><select class="selectTipoDespesa" style="width:100%;" name="idDespesa"></select></td>';
+              grid = grid + '<td id="tdVlUni" bgcolor="#EBEBE4" contenteditable="false"readonly  name="tdVlUni">' + despesa.vlrUni + '</td>';
+              grid = grid + '<td id="tdQtdDespesa" contenteditable="true" name="tdQtdDespesa" class="tdNumerico" onkeyup="javascript:calculaTotal(this);">' + despesa.qtdDsp + '</td>';
+              grid = grid + '<td id="tdTotDespesa" bgcolor="#EBEBE4" contenteditable="false" name="totDespesa">' + despesa.totDsp + '</td>';
+              grid = grid + '<td id="tdFatDespesa" contenteditable="false">';
+              grid = grid + '<select style="width:100%;" id="cdFaturamento">';
+              grid = grid + '<option value="1" ' + fr + '> FR </option>';
+              grid = grid + '<option value="2" ' + fn + '> FN </option>';
+              grid = grid + '<option value="3" ' + nr + '> NR </option>';
+              grid = grid + '<option value="4" ' + nn + '> NN </option>';
+              grid = grid + '</select>';
+              grid = grid + '</td>';
+              grid = grid + '<td id="tdObsDespesa" contenteditable="true" onkeypress="return (this.innerText.length <= 200)">' + despesa.obsDsp + '</td>';
+
+                  /*<td id="tdTotDespesa" bgcolor="#EBEBE4" contenteditable="false" name="totDespesa"></td>
+                  <td id="tdFatDespesa" contenteditable="false">
+                    <select style="width:100%;" id="cdFaturamento">
+                      <option value="1"> FR </option>
+                      <option value="2"> FN </option>
+                      <option value="3"> NR </option>
+                      <option value="4"> NN </option>
+                    </select>
+                  </td>
+                  <td id="tdObsDespesa" contenteditable="true" onkeypress="return (this.innerText.length <= 200)"></td>
+                  <td id="tdButtonsDespesa">
+                    <span class="table-up glyphicon glyphicon-arrow-up"></span>
+                    <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                  </td>
+                </tr>
+                <!-- Linha que será adicionada -->
+                <tr class="hide" >
+                  <td id="tdDataDespesa" contenteditable="true" class="tdData"></td>
+                  <td id="tdDsDespesa">
+                    <select class="selectDsDespesa" style="width:100%;" name="dsDespesa"></select>
+                  </td>
+                  <td id="tdTipoDespesa" bgcolor="#EBEBE4" contenteditable="false" readonly>
+                    <select class="selectTipoDespesa" style="width:100%;" name="idDespesa"></select>
+                  </td>
+                  <td id="tdVlUni" bgcolor="#EBEBE4" contenteditable="false" readonly name="tdVlUni"></td>
+                  <td id="tdQtdDespesa" contenteditable="true" name="tdQtdDespesa" class="tdNumerico"></td>
+                  <td id="tdTotDespesa" bgcolor="#EBEBE4" contenteditable="false" name="totDespesa"></td>
+                  <td id="tdFatDespesa">
+                    <select style="width:100%;" id="cdFaturamento">
+                      <option value="1"> FR </option>
+                      <option value="2"> FN </option>
+                      <option value="3"> NR </option>
+                      <option value="4"> NN </option>
+                    </select>
+                  </td>
+                  <td id="tdObsDespesa" contenteditable="true" onkeypress="return (this.innerText.length <= 200)"></td>
+                  <td id="tdButtonsDespesa">
+                    <span class="table-up glyphicon glyphicon-arrow-up"></span>
+                    <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                    <span class="table-remove glyphicon glyphicon-remove"></span>
+                  </td>
+                </tr>
+              </tbody>*/
+
+            }
+            $("#tbDespesa #tbodyDespesas").html(grid);
           }
 
         });
@@ -619,7 +714,7 @@ function alteraRAT(tdCodRAT, tdSitRAT){
 }
 
 /*
-function aplicaCorRAT(){ 
+function aplicaCorRAT(){
   $("#grdConsultaRAT tr").each(function(){
     var tdSitRAT = $("#grdConsultaRAT tr").find('td:last').text().slice(0,1);
     alert (tdSitRAT);
@@ -634,10 +729,19 @@ function aplicaCorRAT(){
     }
     else if (tdSitRAT = 4){
       $(this).addClass('faturado');
-    } 
+    }
     else if (tdSitRAT = 6){
       $(this).addClass('reprovado');
-    } 
+    }
   });
 }
 */
+
+function excluiAtividade(codAti){
+  alert(codAti);
+
+}
+
+function alteraRat(){
+
+}

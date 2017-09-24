@@ -614,7 +614,6 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
 
 }
 
-
 function buscaDescricaoDespesa(flgadd){
   $.ajax({
       //Tipo de envio POST ou GET
@@ -733,15 +732,14 @@ function dataAtual() {
   return String(date.getDate()) + String(date.getMonth()) + String(date.getFullYear());
 }
 
-
 function horaAtual() {
   var date = new Date();
   return String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds());
 }
 
-$("select[name='idDespesa']").bind("DOMSubtreeModified",function(){
+/*$("select[name='idDespesa']").bind("DOMSubtreeModified",function(){
   buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
-});
+});*/
 
 $("select[name='dsDespesa']").change(function() {
   buscaTipoDespesa($(this).find(":selected").val(),$(this).parent().parent().find("select[name='idDespesa']"));
@@ -773,3 +771,144 @@ $("td[name='tdHrFinal']").blur(function() {
 
   $(this).parent().find("td[name='tdHrTotal']").text(hrTotal);
 });
+
+$("#tabLancar #btnAlterarRAT").click(function () {
+  var txbCliente = $("#txbCliente").val();
+  var txbResponsavel = $("#txbResponsavel").val();
+  var txbProjeto = $("#txbProjeto").val();
+  var txbProduto = $("#txbProduto").val();
+  var txbDataRAT = $("#txbDataRAT").val();
+
+  /*msgErroGeral = validaCamposGeral(txbCliente, txbResponsavel, txbProjeto, txbProduto, txbDataRAT);
+
+  if(msgErroGeral !== ""){
+    jbkrAlert.alerta('Alerta!',msgErroGeral);
+    return;
+  }*/
+
+  var $rowsAtividade = $tableAtividade.find('tr:not(.hide):not(.notselect)');
+  var headersAtividade = [];
+  var dataAtividade = [];
+
+  headersAtividade.push("dtAtividade");
+  headersAtividade.push("hrInicial");
+  headersAtividade.push("hrFinal");
+  headersAtividade.push("hrTotal");
+  headersAtividade.push("dsAtividade");
+  headersAtividade.push("idFaturar");
+
+  // Turn all existing rows into a loopable array
+  $rowsAtividade.each(function () {
+    var $td = $(this).find('td');
+    var h = {};
+
+
+    // Use the headers from earlier to name our hash keys
+    headersAtividade.forEach(function (header, i) {
+      var $idFaturar = $td.eq(i).find('input:checkbox:first');
+
+      if(typeof $idFaturar.val() !== "undefined") {
+        if ($idFaturar.is(":checked"))
+          h[header] = "1";
+        else
+          h[header] = "0";
+      }
+      else
+        h[header] = $td.eq(i).text();
+    });
+
+    dataAtividade.push(h);
+
+  });
+
+  //Validando os campos para ver se está vazio
+  /*for (var i = 0; i < dataAtividade.length; i++) {
+    atividade = dataAtividade[i];
+
+    var msgErroAtividade =  validaCamposAtividade(atividade.dtAtividade, atividade.hrInicial, atividade.hrFinal, atividade.hrTotal,atividade.dsAtividade);
+
+    if(msgErroAtividade !== ""){
+      jbkrAlert.alerta('Alerta!',msgErroAtividade);
+      return;
+    }
+  }*/
+
+
+  /*var $rowsDespesa = $tabDespesas.find('tr:not(.hide):not(.notselect)');
+  var headersDespesa = [];
+  var dataDespesa = [];
+
+  headersDespesa.push("dtDespesa");
+  headersDespesa.push("cdDespesa");
+  headersDespesa.push("idDespesa");
+  headersDespesa.push("vlDespesa");
+  headersDespesa.push("qtDespesa");
+  headersDespesa.push("totDespesa");
+  headersDespesa.push("cdFaturamento");
+  headersDespesa.push("dsOberservacao");
+
+  // Turn all existing rows into a loopable array
+  $rowsDespesa.each(function () {
+    var $td = $(this).find('td');
+    var h = {};
+
+    // Use the headers from earlier to name our hash keys
+    headersDespesa.forEach(function (header, i) {
+      var $cdFaturamento = $td.eq(i).find('select#cdFaturamento');
+      var $idDespesa = $td.eq(i).find("select[name='idDespesa']");
+      var $cdDespesa = $td.eq(i).find("select[name='dsDespesa']");
+
+      if($td.eq(i).text() !== ""){
+
+        if(typeof $cdFaturamento.val() !== "undefined") {
+          h[header] = $cdFaturamento.val();
+        }
+        else if(typeof $idDespesa.val() !== "undefined"){
+          h[header] = $idDespesa.val();
+        }
+        else if(typeof $cdDespesa.val() !== "undefined"){
+          h[header] = $cdDespesa.val();
+        }
+        else {
+          if($td.eq(i).text() !== ""){
+            h[header] = $td.eq(i).text();
+          }
+        }
+
+      }
+    });
+
+    dataDespesa.push(h);
+
+  });*/
+
+  //Validando os campos para ver se está vazio
+  /*for (var t = 0; t < dataDespesa.length; t++) {
+    despesa = dataDespesa[t];
+
+    var msgErroDespesa =  validaCamposDespesa(despesa.dtDespesa, despesa.cdDespesa, despesa.idDespesa,despesa.vlDespesa,despesa.qtDespesa,despesa.totDespesa,despesa.cdFaturamento,despesa.dsOberservacao);
+
+    if(msgErroDespesa !== ""){
+      jbkrAlert.alerta('Alerta!',msgErroDespesa);
+      return;
+    }
+  }*/
+
+});
+
+function buscaTipoDespesaConsulta(e){
+  buscaTipoDespesa($(e).find(":selected").val(),$(e).parent().parent().find("select[name='idDespesa']"));
+
+}
+
+function buscaValorUnitarioDespesaConsulta(e){
+  buscaValorUnitarioDespesa($(e).find(":selected").val(),$(e).parent().parent().find("td[name='tdVlUni']"));
+}
+
+function calculaTotal(e){
+  vlUni = $(e).parent().find("td[name='tdVlUni']").text();
+  qtdDespesa = $(e).text();
+  total = vlUni * qtdDespesa;
+
+  $(e).parent().find("td[name='totDespesa']").text(total);
+}

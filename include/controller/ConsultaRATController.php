@@ -35,22 +35,22 @@ switch($_POST["action"]){
 
 	  	echo $retorno;
 
-	break;
+			break;
 
 	case 'buscaatividade':
 		$model = new ConsultaRATModel();
 
-			$model->setCodigo($_POST["codigo"]);
+		$model->setCodigo($_POST["codigo"]);
 
 		$persistencia = new ConsultaRATPersistencia();
 
-	  	$persistencia->setModel($model);
+  	$persistencia->setModel($model);
 
-	   	$retorno = $persistencia->buscaAtividade();
+   	$retorno = $persistencia->buscaAtividade();
 
-	  	echo $retorno;
+  	echo $retorno;
 
-	   	break;
+   	break;
 
 	case 'buscadespesa':
 		$model = new ConsultaRATModel();
@@ -82,7 +82,7 @@ switch($_POST["action"]){
 
 	  	echo $retorno;
 
-	break;
+			break;
 
 	case 'reprovar':
 
@@ -93,13 +93,13 @@ switch($_POST["action"]){
 
 		$persistencia = new ConsultaRATPersistencia();
 
-	  	$persistencia->setModel($model);
+  	$persistencia->setModel($model);
 
-	   	$retorno = $persistencia->reprovaRAT();
+   	$retorno = $persistencia->reprovaRAT();
 
-	  	echo $retorno;
+  	echo $retorno;
 
-	break;
+		break;
 
 	case 'verificapapelusuario':
 		//administrador
@@ -118,7 +118,7 @@ switch($_POST["action"]){
     	echo gettype($_POST['usuariorat']);
 	    echo $_SESSION['codUsu'];
 	    echo $_POST['usuariorat'];*/
-	    
+
     	if ($_SESSION['codUsu'] == trim($_POST['usuariorat'])){
 
 	    	$model = new ConsultaRATModel();
@@ -132,16 +132,16 @@ switch($_POST["action"]){
 
 			$persistencia->enviaEmailRAT();
 
-			$persistencia->atualizaEnvioRAT();	
-			
+			$persistencia->atualizaEnvioRAT();
+
 			echo '{"mensagem": "E-mail enviado com sucesso!"}';
 
 		}
-		else {  
-			echo '{"mensagem": "Somente o usuário que lançou o RAT pode enviá-lo por e-mail.", "status" : "1" }';	    	
+		else {
+			echo '{"mensagem": "Somente o usuário que lançou o RAT pode enviá-lo por e-mail.", "status" : "1" }';
 	    }
-			
-	break;
+
+		break;
 
 	case 'autocompletesituacao':
 
@@ -157,23 +157,23 @@ switch($_POST["action"]){
 
 		echo $retorno;
 
-	break;
+		break;
 
 	case 'alterar':
-	   	$model = new ConsultaRATModel();
+   	$model = new ConsultaRATModel();
 
-			$model->setCodigo($_POST["codigo"]);
-			$model->setSituacao($_POST["situacao"]);
+		$model->setCodigo($_POST["codigo"]);
+		$model->setSituacao($_POST["situacao"]);
 
-	   	$persistencia = new ConsultaRATPersistencia();
+   	$persistencia = new ConsultaRATPersistencia();
 
-	  	$persistencia->setModel($model);
+  	$persistencia->setModel($model);
 
-	   	$retorno = $persistencia->buscaAlteraRAT();
+   	$retorno = $persistencia->buscaAlteraRAT();
 
-	  	echo $retorno;
+  	echo $retorno;
 
-	break;
+		break;
 
 }
 

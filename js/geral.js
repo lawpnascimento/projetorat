@@ -6,7 +6,7 @@ function limpaCampos($form){
     $(this).html($(this).attr('name') + "&nbsp<span class='caret'></span>");
     $(this).val('');
   });
-};
+}
 
 function limpaCamposRAT($form){
   $form.trigger('reset');
@@ -14,7 +14,7 @@ function limpaCamposRAT($form){
   $("#tbodyDespesas tr td").not("#tdDsDespesa, #tdTipoDespesa, #tdFatDespesa, #tdButtonsDespesa").empty();
   $(".selectDsDespesa").val($(".selectDsDespesa option:first").val());
   $(".selectTipoDespesa").val($(".selectTipoDespesa option:first").val());
-};
+}
 
 function validaEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

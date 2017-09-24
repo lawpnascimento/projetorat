@@ -32,7 +32,7 @@ class ConsultaRATPersistencia{
 		$codigo = $this->getModel()->getCodigo();
 		$usuario = $this->getModel()->getUsuario();
 		$cliente = $this->getModel()->getCliente();
-		$responsavel = $this->getModel()->getResponsavel();		
+		$responsavel = $this->getModel()->getResponsavel();
 		$projeto = $this->getModel()->getProjeto();
 		$produto = $this->getModel()->getProduto();
 		$situacao = $this->getModel()->getSituacao();
@@ -58,9 +58,9 @@ class ConsultaRATPersistencia{
 							       ON usu.codUsu = rat.Usuario_codUsu
 							     JOIN tbcliente cli
 								   ON cli.codCli = rat.Cliente_codCli
-								 JOIN tbresponsavel res 
+								 JOIN tbresponsavel res
 								   ON res.codRes = rat.Responsavel_codRes
-								 JOIN tbprojeto prj 
+								 JOIN tbprojeto prj
 								   ON prj.codPrj = rat.Projeto_codPrj
 								 JOIN tbproduto pro
 								   ON pro.codPro = rat.Produto_codPro
@@ -123,9 +123,9 @@ class ConsultaRATPersistencia{
 							       ON usu.codUsu = rat.Usuario_codUsu
 							     JOIN tbcliente cli
 								   ON cli.codCli = rat.Cliente_codCli
-								 JOIN tbresponsavel res 
+								 JOIN tbresponsavel res
 								   ON res.codRes = rat.Responsavel_codRes
-								 JOIN tbprojeto prj 
+								 JOIN tbprojeto prj
 								   ON prj.codPrj = rat.Projeto_codPrj
 								 JOIN tbproduto pro
 								   ON pro.codPro = rat.Produto_codPro
@@ -212,7 +212,7 @@ class ConsultaRATPersistencia{
 						TIME_FORMAT(horTot,'%H:%i') horTot,
 						desAti,
 						tipFat
-				 		from tbatividade 
+				 		from tbatividade
 				 		where RAT_codRAT = " . $codigo . "
 				 		order by codAti";
 
@@ -261,6 +261,7 @@ class ConsultaRATPersistencia{
 								,dsprat.totDsp totDsp
 								,dsprat.obsDsp obsDsp
 								,fatdsp.desFatDsp desFatDsp
+								,fatdsp.codFatDsp codFatDsp
 					 		from tbdespesarat dsprat
 				 		    JOIN tbdespesa dsp
 							ON dsp.codDsp = dsprat.Despesa_codDsp
@@ -290,6 +291,7 @@ class ConsultaRATPersistencia{
 													    , "qtdDsp" : "'.$linha["qtdDsp"].'"
 													    , "totDsp" : "'.$linha["totDsp"].'"
 													    , "obsDsp" : "'.$linha["obsDsp"].'"
+															, "codFatDsp" : "'.$linha["codFatDsp"].'"
 													    , "desFatDsp" : "'.$linha["desFatDsp"].'"
 												}';
 
@@ -376,7 +378,7 @@ class ConsultaRATPersistencia{
 
 	  $usuRAT = $this->getModel()->getUsuario();
 	  $codRAT = $this->getModel()->getCodigo();
-	  
+
       $sSql = "SELECT rat.codRat
       				  ,CONCAT(usu.nomUsu, ' ' ,sobrenomeUsu) nomUsu
       				  ,usu.desEml desEml
@@ -388,7 +390,7 @@ class ConsultaRATPersistencia{
 				   ON usu.codUsu = rat.Usuario_codUsu
 				 JOIN tbcliente cli
 				   ON cli.codCli = rat.Cliente_codCli
-				 JOIN tbresponsavel res 
+				 JOIN tbresponsavel res
 				   ON res.codRes = rat.Responsavel_codRes
 				 WHERE rat.codRat = " . $codRAT . "
 				 AND usu.codUsu = " . $usuRAT;
@@ -455,9 +457,9 @@ class ConsultaRATPersistencia{
 							       ON usu.codUsu = rat.Usuario_codUsu
 							     JOIN tbcliente cli
 								   ON cli.codCli = rat.Cliente_codCli
-								 JOIN tbresponsavel res 
+								 JOIN tbresponsavel res
 								   ON res.codRes = rat.Responsavel_codRes
-								 JOIN tbprojeto prj 
+								 JOIN tbprojeto prj
 								   ON prj.codPrj = rat.Projeto_codPrj
 								 JOIN tbproduto pro
 								   ON pro.codPro = rat.Produto_codPro

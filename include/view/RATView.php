@@ -15,7 +15,7 @@ require_once("../../estrutura/iniciar_sessao.php");
   <link rel="stylesheet" href="../../css/editableTable.css">
   <link rel="stylesheet" href="../../lib/jquery/jquery-ui.css">
 </head>
-<body>
+<body>  
   <div class="container-fluid">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -49,7 +49,7 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <div class="col-md-3">
                     <label for="cliente">Cliente*</label>
                     <input id="txbCliente" type="text" class="form-control" name="txbCliente" placeholder="Nome do Cliente"></input>
-                  </div>  
+                  </div>
                   <div class="col-md-3">
                     <label for="responsavel">Responsavel*</label>
                     <input id="txbResponsavel" type="text" class="form-control" name="txbResponsavel" placeholder="Nome do Responsável"></input>
@@ -211,6 +211,6 @@ require_once("../../estrutura/iniciar_sessao.php");
               </p>
             </div>
           </div>
-        </div>  
+        </div>
       </body>
       </html>
