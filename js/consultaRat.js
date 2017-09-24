@@ -565,6 +565,54 @@ function alteraRAT(tdCodRAT, tdSitRAT){
         }
 
       });
+
+    $.ajax({
+          //Tipo de envio POST ou GET
+          type: "POST",
+          dataType: "text",
+          data: {
+            codigo: tdCodRAT,
+            action: "buscaatividade"
+          },
+
+          url: "../controller/ConsultaRATController.php",
+
+          success: function (dados) {
+            var json = $.parseJSON(dados);
+            var atividade = null;
+
+            for (var j = 0; j < json.length; j++) {
+              atividade = json[j];
+             
+            };
+
+          }
+
+        });
+
+        $.ajax({
+          //Tipo de envio POST ou GET
+          type: "POST",
+          dataType: "text",
+          data: {
+            codigo: tdCodRAT,
+            action: "buscadespesa"
+          },
+
+          url: "../controller/ConsultaRATController.php",
+
+          success: function (dados) {
+            var json = $.parseJSON(dados);
+            var atividade = null;
+
+            for (var j = 0; j < json.length; j++) {
+              despesa = json[j];
+
+            };
+
+          }
+
+        });
   }
 });
 
