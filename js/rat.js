@@ -3,8 +3,7 @@ var $tableAtividade = $('#tableAtividade');
 var $tabDespesas = $('#tabDespesas');
 var descricaocarregada = false;
 
-$(".tdData").inputmask("date");
-$(".tdHora").inputmask("99:99");
+aplicaMascaraRat();
 
 //Campo somente numérico
 validaSomenteNumerico("#tbodyDespesas", ".tdNumerico");
@@ -32,25 +31,18 @@ $('.table-down').click(function () {
 });
 
 $('#addAtividade').click(function () {
-  $(".tdData").inputmask("remove");
-  $(".tdHora").inputmask("remove");
   var $clone = $tableAtividade.find('tr.hide').clone(true).removeClass('hide table-line');
-
   $tableAtividade.find('table').append($clone);
-  $(".tdData").inputmask("date");
-  $(".tdHora").inputmask("99:99");
+  aplicaMascaraRat();
 });
 
 //TABELA DESPESA
 var $tableDespesa = $('#tableDespesa');
 
 $('#addDespesa').click(function () {
-  $(".tdData").inputmask("remove");
-
   var $clone = $tableDespesa.find('tr.hide').clone(true).removeClass('hide table-line');
   $tableDespesa.find('table').append($clone);
-
-  $(".tdData").inputmask("date");
+  aplicaMascaraRat();
 });
 
 $("#document").ready(function(){
@@ -196,191 +188,321 @@ $("#document").ready(function(){
 
   });
 
-  $('#txbCliente').autocomplete({
-    minLength: 1,
-    autoFocus: true,
-    delay: 300,
-    position: {
-      my: 'left top',
-      at: 'right top'
-    },
-    appendTo: '#tabGeral',
-    source: function(request, response){
-      $.ajax({
-        url: '../controller/RATController.php',
-        type: 'POST',
-        dataType: 'text',
-        data: {
-          termo: request.term,
-          action: "autocompletecliente"
+  $("#tabLancar #btnAlterarRAT").click(function () {
+
+    var txbAlterarCodRat = $("#txbAlterarCodRat").val();
+    var txbCliente = $("#txbCliente").val();
+    var txbResponsavel = $("#txbResponsavel").val();
+    var txbProjeto = $("#txbProjeto").val();
+    var txbProduto = $("#txbProduto").val();
+    var txbDataRAT = $("#txbDataRAT").val();
+
+    msgErroGeral = validaCamposGeral(txbCliente, txbResponsavel, txbProjeto, txbProduto, txbDataRAT);
+
+    if(msgErroGeral !== ""){
+      jbkrAlert.alerta('Alerta!',msgErroGeral);
+      return;
+    }
+
+    var $rowsAtividade = $tableAtividade.find('tr:not(.hide):not(.notselect)');
+    var headersAtividade = [];
+    var dataAtividade = [];
+
+    headersAtividade.push("codAtividade");
+    headersAtividade.push("dtAtividade");
+    headersAtividade.push("hrInicial");
+    headersAtividade.push("hrFinal");
+    headersAtividade.push("hrTotal");
+    headersAtividade.push("dsAtividade");
+    headersAtividade.push("idFaturar");
+
+    // Turn all existing rows into a loopable array
+    $rowsAtividade.each(function () {
+      var $td = $(this).find('td');
+      var h = {};
+
+
+      // Use the headers from earlier to name our hash keys
+      headersAtividade.forEach(function (header, i) {
+        var $idFaturar = $td.eq(i).find('input:checkbox:first');
+
+        if(typeof $idFaturar.val() !== "undefined") {
+          if ($idFaturar.is(":checked"))
+            h[header] = "1";
+          else
+            h[header] = "0";
         }
-      }).done(function(data){
-        if(data.length > 0){
-          data = data.split(',');
-          response( $.each(data, function(key, item){
-            return({
-              label: item
-            });
-          }));
+        else
+          h[header] = $td.eq(i).text();
+      });
+
+      dataAtividade.push(h);
+
+    });
+
+    //Validando os campos para ver se está vazio
+    for (var i = 0; i < dataAtividade.length; i++) {
+      atividade = dataAtividade[i];
+      var msgErroAtividade =  validaCamposAlterarAtividade(atividade.codAtividade, atividade.dtAtividade, atividade.hrInicial, atividade.hrFinal, atividade.hrTotal,atividade.dsAtividade);
+
+      if(msgErroAtividade !== ""){
+        jbkrAlert.alerta('Alerta!',msgErroAtividade);
+        return;
+      }
+    }
+
+
+    var $rowsDespesa = $tabDespesas.find('tr:not(.hide):not(.notselect)');
+    var headersDespesa = [];
+    var dataDespesa = [];
+
+    headersDespesa.push("seqDespesa");
+    headersDespesa.push("dtDespesa");
+    headersDespesa.push("cdDespesa");
+    headersDespesa.push("idDespesa");
+    headersDespesa.push("vlDespesa");
+    headersDespesa.push("qtDespesa");
+    headersDespesa.push("totDespesa");
+    headersDespesa.push("cdFaturamento");
+    headersDespesa.push("dsOberservacao");
+
+    // Turn all existing rows into a loopable array
+    $rowsDespesa.each(function () {
+      var $td = $(this).find('td');
+      var h = {};
+
+      // Use the headers from earlier to name our hash keys
+      headersDespesa.forEach(function (header, i) {
+        var $cdFaturamento = $td.eq(i).find('select#cdFaturamento');
+        var $idDespesa = $td.eq(i).find("select[name='idDespesa']");
+        var $cdDespesa = $td.eq(i).find("select[name='dsDespesa']");
+
+        if($td.eq(i).text() !== ""){
+
+          if(typeof $cdFaturamento.val() !== "undefined") {
+            h[header] = $cdFaturamento.val();
+          }
+          else if(typeof $idDespesa.val() !== "undefined"){
+            h[header] = $idDespesa.val();
+          }
+          else if(typeof $cdDespesa.val() !== "undefined"){
+            h[header] = $cdDespesa.val();
+          }
+          else {
+            if($td.eq(i).text() !== ""){
+              h[header] = $td.eq(i).text();
+            }
+          }
+
         }
       });
+
+      dataDespesa.push(h);
+
+    });
+
+    //Validando os campos para ver se está vazio
+    for (var t = 0; t < dataDespesa.length; t++) {
+      despesa = dataDespesa[t];
+
+      var msgErroDespesa =  validaCamposDespesa(despesa.dtDespesa, despesa.cdDespesa, despesa.idDespesa,despesa.vlDespesa,despesa.qtDespesa,despesa.totDespesa,despesa.cdFaturamento,despesa.dsOberservacao);
+
+      if(msgErroDespesa !== ""){
+        jbkrAlert.alerta('Alerta!',msgErroDespesa);
+        return;
+      }
     }
+
+    //Metodo para inserir no banco todas as informações coletadas
+    alterarRat(txbAlterarCodRat, txbCliente, txbResponsavel, txbProjeto, txbProduto, dataAtividade, dataDespesa, txbDataRAT);
+
   });
 
-  $('#txbUsuario').autocomplete({
-    minLength: 1,
-    autoFocus: true,
-    delay: 300,
-    position: {
-      my: 'left top',
-      at: 'right top'
-    },
-    appendTo: '#tabGeral',
-    source: function(request, response){
-      $.ajax({
-        url: '../controller/RATController.php',
-        type: 'POST',
-        dataType: 'text',
-        data: {
-          termo: request.term,
-          action: "autocompleteusuario"
-        }
-      }).done(function(data){
-        if(data.length > 0){
-          data = data.split(',');
-          response( $.each(data, function(key, item){
-            return({
-              label: item
-            });
-          }));
-        }
-      });
-    }
-  });
+$('#txbCliente').autocomplete({
+  minLength: 1,
+  autoFocus: true,
+  delay: 300,
+  position: {
+    my: 'left top',
+    at: 'right top'
+  },
+  appendTo: '#tabGeral',
+  source: function(request, response){
+    $.ajax({
+      url: '../controller/RATController.php',
+      type: 'POST',
+      dataType: 'text',
+      data: {
+        termo: request.term,
+        action: "autocompletecliente"
+      }
+    }).done(function(data){
+      if(data.length > 0){
+        data = data.split(',');
+        response( $.each(data, function(key, item){
+          return({
+            label: item
+          });
+        }));
+      }
+    });
+  }
+});
 
-  $('#txbResponsavel').autocomplete({
-    minLength: 1,
-    autoFocus: true,
-    delay: 300,
-    position: {
-      my: 'left top',
-      at: 'right top'
-    },
-    appendTo: '#tabGeral',
-    source: function(request, response){
-      $.ajax({
-        url: '../controller/RATController.php',
-        type: 'POST',
-        dataType: 'text',
-        data: {
-          termo: request.term,
-          action: "autocompleteresponsavel"
-        }
-      }).done(function(data){
-        if(data.length > 0){
-          data = data.split(',');
-          response( $.each(data, function(key, item){
-            return({
-              label: item
-            });
-          }));
-        }
-      });
-    }
-  });
+$('#txbUsuario').autocomplete({
+  minLength: 1,
+  autoFocus: true,
+  delay: 300,
+  position: {
+    my: 'left top',
+    at: 'right top'
+  },
+  appendTo: '#tabGeral',
+  source: function(request, response){
+    $.ajax({
+      url: '../controller/RATController.php',
+      type: 'POST',
+      dataType: 'text',
+      data: {
+        termo: request.term,
+        action: "autocompleteusuario"
+      }
+    }).done(function(data){
+      if(data.length > 0){
+        data = data.split(',');
+        response( $.each(data, function(key, item){
+          return({
+            label: item
+          });
+        }));
+      }
+    });
+  }
+});
 
-  $('#txbProjeto').autocomplete({
-    minLength: 1,
-    autoFocus: true,
-    delay: 300,
-    position: {
-      my: 'left top',
-      at: 'right top'
-    },
-    appendTo: '#tabGeral',
-    source: function(request, response){
-      $.ajax({
-        url: '../controller/RATController.php',
-        type: 'POST',
-        dataType: 'text',
-        data: {
-          termo: request.term,
-          action: "autocompleteprojeto"
-        }
-      }).done(function(data){
-        if(data.length > 0){
-          data = data.split(',');
-          response( $.each(data, function(key, item){
-            return({
-              label: item
-            });
-          }));
-        }
-      });
-    }
-  });
+$('#txbResponsavel').autocomplete({
+  minLength: 1,
+  autoFocus: true,
+  delay: 300,
+  position: {
+    my: 'left top',
+    at: 'right top'
+  },
+  appendTo: '#tabGeral',
+  source: function(request, response){
+    $.ajax({
+      url: '../controller/RATController.php',
+      type: 'POST',
+      dataType: 'text',
+      data: {
+        termo: request.term,
+        action: "autocompleteresponsavel"
+      }
+    }).done(function(data){
+      if(data.length > 0){
+        data = data.split(',');
+        response( $.each(data, function(key, item){
+          return({
+            label: item
+          });
+        }));
+      }
+    });
+  }
+});
 
-  $('#txbProduto').autocomplete({
-    minLength: 1,
-    autoFocus: true,
-    delay: 300,
-    position: {
-      my: 'left top',
-      at: 'right top'
-    },
-    appendTo: '#tabGeral',
-    source: function(request, response){
-      $.ajax({
-        url: '../controller/RATController.php',
-        type: 'POST',
-        dataType: 'text',
-        data: {
-          termo: request.term,
-          action: "autocompleteproduto"
-        }
-      }).done(function(data){
-        if(data.length > 0){
-          data = data.split(',');
-          response( $.each(data, function(key, item){
-            return({
-              label: item
-            });
-          }));
-        }
-      });
-    }
-  });
+$('#txbProjeto').autocomplete({
+  minLength: 1,
+  autoFocus: true,
+  delay: 300,
+  position: {
+    my: 'left top',
+    at: 'right top'
+  },
+  appendTo: '#tabGeral',
+  source: function(request, response){
+    $.ajax({
+      url: '../controller/RATController.php',
+      type: 'POST',
+      dataType: 'text',
+      data: {
+        termo: request.term,
+        action: "autocompleteprojeto"
+      }
+    }).done(function(data){
+      if(data.length > 0){
+        data = data.split(',');
+        response( $.each(data, function(key, item){
+          return({
+            label: item
+          });
+        }));
+      }
+    });
+  }
+});
 
-  $('#tdFaturamento').autocomplete({
-    minLength: 1,
-    autoFocus: true,
-    delay: 300,
-    position: {
-      my: 'left top',
-      at: 'right top'
-    },
-    appendTo: '#tabGeral',
-    source: function(request, response){
-      $.ajax({
-        url: '../controller/RATController.php',
-        type: 'POST',
-        dataType: 'text',
-        data: {
-          termo: request.term,
-          action: "autocompleteproduto"
-        }
-      }).done(function(data){
-        if(data.length > 0){
-          data = data.split(',');
-          response( $.each(data, function(key, item){
-            return({
-              label: item
-            });
-          }));
-        }
-      });
-    }
-  });
+$('#txbProduto').autocomplete({
+  minLength: 1,
+  autoFocus: true,
+  delay: 300,
+  position: {
+    my: 'left top',
+    at: 'right top'
+  },
+  appendTo: '#tabGeral',
+  source: function(request, response){
+    $.ajax({
+      url: '../controller/RATController.php',
+      type: 'POST',
+      dataType: 'text',
+      data: {
+        termo: request.term,
+        action: "autocompleteproduto"
+      }
+    }).done(function(data){
+      if(data.length > 0){
+        data = data.split(',');
+        response( $.each(data, function(key, item){
+          return({
+            label: item
+          });
+        }));
+      }
+    });
+  }
+});
+
+$('#tdFaturamento').autocomplete({
+  minLength: 1,
+  autoFocus: true,
+  delay: 300,
+  position: {
+    my: 'left top',
+    at: 'right top'
+  },
+  appendTo: '#tabGeral',
+  source: function(request, response){
+    $.ajax({
+      url: '../controller/RATController.php',
+      type: 'POST',
+      dataType: 'text',
+      data: {
+        termo: request.term,
+        action: "autocompleteproduto"
+      }
+    }).done(function(data){
+      if(data.length > 0){
+        data = data.split(',');
+        response( $.each(data, function(key, item){
+          return({
+            label: item
+          });
+        }));
+      }
+    });
+  }
+});
 
 });
 
@@ -455,9 +577,86 @@ function validaCamposDespesa(dtDespesa, dsDespesa, idDespesa, vlDespesa, qtDespe
 
 }
 
+function validaCamposAlterarDespesa(seqDespesa, dtDespesa, dsDespesa, idDespesa, vlDespesa, qtDespesa, totDespesa, cdFaturamento, dsOberservacao){
+
+  var msgErro = "";
+
+  if(seqDespesa === ""){
+    msgErro = msgErro + "<b>Código da Despesa</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(typeof dtDespesa === "undefined"){
+    msgErro = msgErro + "<b>Data de Despesa</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  if(typeof idDespesa === "undefined"){
+    msgErro = msgErro + "<b>Tipo da Despesa</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  if(typeof vlDespesa === "undefined"){
+    msgErro = msgErro + "<b>Valor da Unitário</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  if(typeof qtDespesa === "undefined"){
+    msgErro = msgErro + "<b>Quantidade</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  if(typeof totDespesa === "undefined"){
+    msgErro = msgErro + "<b>Total</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  if(typeof dsOberservacao === "undefined"){
+    msgErro = msgErro + "<b>Observação</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  if(typeof cdFaturamento === "undefined"){
+    msgErro = msgErro + "<b>Faturamento</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  if(typeof dsDespesa === "undefined"){
+    msgErro = msgErro + "<b>Descrição da despesa</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  return msgErro;
+
+}
+
+
 function validaCamposAtividade(dtAtividade, hrInicial, hrFinal, hrTotal, dsAtividade){
 
   var msgErro = "";
+  if(dtAtividade === ""){
+    msgErro = msgErro + "<b>Data de Atividade</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  if(hrInicial === ""){
+    msgErro = msgErro + "<b>Hora Inicial</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
+  if(hrFinal === ""){
+    msgErro = msgErro + "<b>Hora Final</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(hrTotal === ""){
+    msgErro = msgErro + "<b>Hora Total</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if(dsAtividade === ""){
+    msgErro = msgErro + "<b>Descrição da atividade</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+  if (hrInicial >= hrFinal){
+    msgErro = msgErro + "<b>Hora Inicial</b> deve ser antes que a hora final<br/>";
+  }
+
+  return msgErro;
+
+
+}
+
+function validaCamposAlterarAtividade(codAtividade, dtAtividade, hrInicial, hrFinal, hrTotal, dsAtividade){
+
+  var msgErro = "";
+  if(codAtividade === ""){
+    msgErro = msgErro + "<b>Código da Atividade</b> é um campo de preenchimento obrigatorio<br/>";
+  }
+
   if(dtAtividade === ""){
     msgErro = msgErro + "<b>Data de Atividade</b> é um campo de preenchimento obrigatorio<br/>";
   }
@@ -614,6 +813,128 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
 
 }
 
+function alterarRat(txbAlterarCodRat, txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtividade, dataDespesa, txbDataRAT) {
+  var cliente, responsavel, projeto, atividade;
+
+  cliente = txbCliente.split("-");
+  responsavel = txbResponsavel.split("-");
+  projeto = txbProjeto.split("-");
+  produto = txbProduto.split("-");
+
+  $.ajax({
+      //Tipo de envio POST ou GET
+      type: "POST",
+      dataType: "text",
+      data: {
+        codigo: txbAlterarCodRat,
+        cliente: cliente[0],
+        responsavel: responsavel[0],
+        projeto: projeto[0],
+        produto: produto[0],
+        datarat: txbDataRAT,
+        action: "alterarrat"
+      },
+
+      url: "../controller/RATController.php",
+
+      //Se der tudo ok no envio...
+      success: function (dados) {
+        jbkrAlert.sucesso('RAT', 'RAT alterado com sucesso!');
+        $("#formGeral #btnCancelar").trigger("click");
+
+        /*voltar pra tela de consulta
+        $.ajax({
+          type: "POST",
+          dataType: "text",
+          url: "ConsultaRATView.php",
+          success: function(callback){
+            $("#divPrincipal").html(callback);
+            consultaRAT();
+          }
+        });
+        */
+      }
+
+    });
+
+  for (var i = 0; i < dataAtividade.length; i++) {
+    atividade = dataAtividade[i];
+
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+          codigo: txbAlterarCodRat,
+          atividade: atividade.codAtividade,
+          dtAtividade: atividade.dtAtividade,
+          hrInicial: atividade.hrInicial,
+          hrFinal: atividade.hrFinal,
+          hrTotal: atividade.hrTotal,
+          dsAtividade: atividade.dsAtividade,
+          idFaturar: atividade.idFaturar,
+          action: "alteraratividade"
+        },
+
+        url: "../controller/RATController.php"
+
+      });
+
+  }
+
+  for (var j = 0; j < dataDespesa.length; j++) {
+    despesa = dataDespesa[j];
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+          codigo: txbAlterarCodRat,
+          despesa: despesa.seqDespesa,
+          cdDespesa: despesa.cdDespesa,
+          dtDespesa: despesa.dtDespesa,
+          idDespesa: despesa.idDespesa,
+          vlDespesa: despesa.vlDespesa,
+          qtDespesa: despesa.qtDespesa,
+          totDespesa: despesa.totDespesa,
+          cdFaturamento: despesa.cdFaturamento,
+          dsOberservacao: despesa.dsOberservacao,
+          action: "alterardespesa"
+        },
+
+        url: "../controller/RATController.php"
+
+      });
+
+  }
+
+  var enviar = confirm('Deseja enviar o RAT por e-mail ao responsável?');
+  if (enviar){
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+          cliente: cliente[0],
+          responsavel: responsavel[0],
+          action: "enviaemailrat"
+        },
+
+        url: "../controller/RATController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+
+        }
+
+      });
+  }
+  else {
+    alert("E-mail não enviado.");
+  }
+
+}
+
 function buscaDescricaoDespesa(flgadd){
   $.ajax({
       //Tipo de envio POST ou GET
@@ -737,9 +1058,9 @@ function horaAtual() {
   return String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds());
 }
 
-/*$("select[name='idDespesa']").bind("DOMSubtreeModified",function(){
+$("select[name='idDespesa']").bind("DOMSubtreeModified",function(){
   buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
-});*/
+});
 
 $("select[name='dsDespesa']").change(function() {
   buscaTipoDespesa($(this).find(":selected").val(),$(this).parent().parent().find("select[name='idDespesa']"));
@@ -911,4 +1232,79 @@ function calculaTotal(e){
   total = vlUni * qtdDespesa;
 
   $(e).parent().find("td[name='totDespesa']").text(total);
+}
+
+function aplicaMascaraRat(){
+  $(".tdData").inputmask("date");
+  $(".tdHora").inputmask("99:99");
+}
+
+function removeMascaraRat(){
+  $(".tdData").inputmask("remove");
+}
+
+function excluiAtividade(codAti){
+  $(this).parents('tr:first').remove();
+  
+  var txbAlterarCodRat = $("#txbAlterarCodRat").val();
+  alert(codAti);
+
+  var excluir = confirm('Deseja excluir a atividade PERMANENTEMENTE?');
+  if (excluir){
+
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+          codigo: txbAlterarCodRat,
+          atividade: codAti,
+          action: "excluiratividade"
+        },
+
+        url: "../controller/RATController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+         $(this).parents('tr').detach();
+       }
+     });
+  }
+  
+  else {
+   return;
+ }
+ 
+}
+
+function excluiDespesa(codDsp){
+  alert(codDsp);
+  var txbAlterarCodRat = $("#txbAlterarCodRat").val();
+
+  var excluir = confirm('Deseja excluir a despesa PERMANENTEMENTE?');
+  if (excluir){
+
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+          codigo: txbAlterarCodRat,
+          despesa: codDsp,
+          action: "excluirdespesa"
+        },
+
+        url: "../controller/RATController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+          $(this).parents('tr').not('.fix').detach();
+        }
+      });
+  }
+  
+  else {
+   return;
+ }
+
 }

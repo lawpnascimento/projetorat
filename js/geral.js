@@ -78,12 +78,17 @@ function formularioModoInserir(){
 function formularioModoAtualizar(){
   $("#btnCadastrar").css("display","none");
   $("#btnBuscar").css("display","none");
-  $("#btnLancarRAT").css("display","none");
   $("#btnExcluir").css("display","inline-block");
   $("#btnAtualizar").css("display","inline-block");
+
+  $("#btnLancarRAT").css("display","none");
   $("#btnAlterarRAT").css("display","inline-block");
+
   $("#txbAlterarCodRat").css("display","inline-block");
   $("#labelAlterarCodRat").css("display","inline-block");
+
+  $("#panelTitleLancarRAT").css("display","none");
+  $("#panelTitleAlterarRAT").css("display","inline-block");
 }
 
 function validaSomenteNumerico(form, campo) {

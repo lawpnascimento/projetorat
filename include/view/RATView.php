@@ -19,7 +19,8 @@ require_once("../../estrutura/iniciar_sessao.php");
   <div class="container-fluid">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="panel-title">Lançar RAT</div>
+        <div class="panel-title" id="panelTitleLancarRAT">Lançar RAT</div>
+        <div class="panel-title" id="panelTitleAlterarRAT" style="display:none;">Editar RAT</div>
       </div>
       <div id="content" align="left">
         <ul id="tabs" class="nav nav-pills nav-justified" data-tabs="tabs">

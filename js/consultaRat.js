@@ -590,27 +590,28 @@ function alteraRAT(tdCodRAT, tdSitRAT){
                 tipFat = "";
 
               grid = grid + '<tr>';
-              grid = grid + '<input type="hidden" value="' + atividade.codAti + '"/>';
+              grid = grid + '<td id="codAtividade" name="codAtividade" style="display:none;">' + atividade.codAti + '</td>';
               grid = grid + '<td id="tdDataAtividade" contenteditable="true" class="tdData">' + atividade.datAti + '</td>';
               grid = grid + '<td id="tdHoraInicial" contenteditable="true" name="tdHrInicial" class="tdHora">' + atividade.horIni + '</td>';
               grid = grid + '<td id="tdHoraFinal" contenteditable="true" name="tdHrFinal" class="tdHora">' + atividade.horFin + '</td>';
               grid = grid + '<td id="tdHoraTotal" bgcolor="#EBEBE4" contenteditable="false" name="tdHrTotal" readonly>' + atividade.horTot + '</td>';
               grid = grid + '<td id="tdDescricaoAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 200)">' + atividade.desAti + '</td>';
-              grid = grid + '<td id="tdFatAtividade" class="checkbox col-sm-1"> <label><input type="checkbox" value="' + atividade.tipFat + '" ' + tipFat + '   >Faturar</label></td>';
+              grid = grid + '<td id="tdFatAtividade" class="checkbox col-sm-1"> <label><input type="checkbox" value="' + atividade.tipFat + '" ' + tipFat + '>Faturar</label></td>';
               grid = grid + '<td id="tdButtonsAtividade">';
               grid = grid + '<span class="table-up glyphicon glyphicon-arrow-up"></span>';
               grid = grid + '<span class="table-down glyphicon glyphicon-arrow-down"></span>';
-              grid = grid + '<span class="table-remove glyphicon glyphicon-remove" onClick="ExcluiAtividade(' + atividade.codAti + ')"></span>';
+              grid = grid + '<span class="table-remove glyphicon glyphicon-remove" onClick="excluiAtividade(' + atividade.codAti + ')"></span>';
               grid = grid + '</td>';
               grid = grid + '</tr>';
-            }
 
+            }
             $("#tbAtividades #tbodyAtividades").html(grid);
+            aplicaMascaraRat();
           }
 
         });
 
-        $.ajax({
+    $.ajax({
           //Tipo de envio POST ou GET
           type: "POST",
           dataType: "text",
@@ -643,7 +644,9 @@ function alteraRAT(tdCodRAT, tdSitRAT){
                 nn = "selected";
 
               grid = grid + '<tr class="fix">';
+              grid = grid + '<td id="seqDespesa" name="seqDespesa" style="display:none;">' + despesa.seqDsp + '</td>';
               grid = grid + '<td id="tdDataDespesa" contenteditable="true" class="tdData">' + despesa.datDsp + '</td>';
+              //grid = grid + '<td id="tdDsDespesa" contenteditable="false"><select class="selectDsDespesa" style="width:100%;" name="dsDespesa" onChange="buscaTipoDespesaConsulta(this);" onblur="buscaValorUnitarioDespesaConsulta(this);"><option value='+ despesa.codDesDsp +' selected>'+ despesa.desDsp +'</option></select></td>';
               grid = grid + '<td id="tdDsDespesa" contenteditable="false"><select class="selectDsDespesa" style="width:100%;" name="dsDespesa" onChange="buscaTipoDespesaConsulta(this);" onblur="buscaValorUnitarioDespesaConsulta(this);"></select></td>';
               grid = grid + '<td id="tdTipoDespesa" bgcolor="#EBEBE4" contenteditable="false" readonly><select class="selectTipoDespesa" style="width:100%;" name="idDespesa"></select></td>';
               grid = grid + '<td id="tdVlUni" bgcolor="#EBEBE4" contenteditable="false"readonly  name="tdVlUni">' + despesa.vlrUni + '</td>';
@@ -658,53 +661,16 @@ function alteraRAT(tdCodRAT, tdSitRAT){
               grid = grid + '</select>';
               grid = grid + '</td>';
               grid = grid + '<td id="tdObsDespesa" contenteditable="true" onkeypress="return (this.innerText.length <= 200)">' + despesa.obsDsp + '</td>';
-
-                  /*<td id="tdTotDespesa" bgcolor="#EBEBE4" contenteditable="false" name="totDespesa"></td>
-                  <td id="tdFatDespesa" contenteditable="false">
-                    <select style="width:100%;" id="cdFaturamento">
-                      <option value="1"> FR </option>
-                      <option value="2"> FN </option>
-                      <option value="3"> NR </option>
-                      <option value="4"> NN </option>
-                    </select>
-                  </td>
-                  <td id="tdObsDespesa" contenteditable="true" onkeypress="return (this.innerText.length <= 200)"></td>
-                  <td id="tdButtonsDespesa">
-                    <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                    <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                  </td>
-                </tr>
-                <!-- Linha que será adicionada -->
-                <tr class="hide" >
-                  <td id="tdDataDespesa" contenteditable="true" class="tdData"></td>
-                  <td id="tdDsDespesa">
-                    <select class="selectDsDespesa" style="width:100%;" name="dsDespesa"></select>
-                  </td>
-                  <td id="tdTipoDespesa" bgcolor="#EBEBE4" contenteditable="false" readonly>
-                    <select class="selectTipoDespesa" style="width:100%;" name="idDespesa"></select>
-                  </td>
-                  <td id="tdVlUni" bgcolor="#EBEBE4" contenteditable="false" readonly name="tdVlUni"></td>
-                  <td id="tdQtdDespesa" contenteditable="true" name="tdQtdDespesa" class="tdNumerico"></td>
-                  <td id="tdTotDespesa" bgcolor="#EBEBE4" contenteditable="false" name="totDespesa"></td>
-                  <td id="tdFatDespesa">
-                    <select style="width:100%;" id="cdFaturamento">
-                      <option value="1"> FR </option>
-                      <option value="2"> FN </option>
-                      <option value="3"> NR </option>
-                      <option value="4"> NN </option>
-                    </select>
-                  </td>
-                  <td id="tdObsDespesa" contenteditable="true" onkeypress="return (this.innerText.length <= 200)"></td>
-                  <td id="tdButtonsDespesa">
-                    <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                    <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                    <span class="table-remove glyphicon glyphicon-remove"></span>
-                  </td>
-                </tr>
-              </tbody>*/
+              grid = grid + '<td id="tdButtonsDespesa">';
+              grid = grid + '<span class="table-up glyphicon glyphicon-arrow-up"></span>';
+              grid = grid + '<span class="table-down glyphicon glyphicon-arrow-down"></span>';
+              grid = grid + '<span class="table-remove glyphicon glyphicon-remove" onClick="excluiDespesa(' + despesa.seqDsp + ')"></span>';
+              grid = grid + '</td>';
+              grid = grid + '</tr>';
 
             }
             $("#tbDespesa #tbodyDespesas").html(grid);
+            aplicaMascaraRat();
           }
 
         });
@@ -736,12 +702,3 @@ function aplicaCorRAT(){
   });
 }
 */
-
-function excluiAtividade(codAti){
-  alert(codAti);
-
-}
-
-function alteraRat(){
-
-}

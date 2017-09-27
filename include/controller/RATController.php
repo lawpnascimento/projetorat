@@ -222,6 +222,98 @@ switch($_POST["action"]){
 			
 	break;
 
+	case 'alterarrat':
+
+		$model = new RATModel();
+		$model->setCodigo($_POST["codigo"]);
+		$model->setUsuario($_SESSION["codUsu"]);
+		$model->setCliente($_POST["cliente"]);
+		$model->setResponsavel($_POST["responsavel"]);
+		$model->setProjeto($_POST["projeto"]);
+		$model->setProduto($_POST["produto"]);
+		$model->setDtRAT($_POST["datarat"]);
+
+		$persistencia = new RATPersistencia();
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->alterarRat();
+
+		echo $retorno;
+
+		break;
+
+	case 'alteraratividade':
+		$model = new RATModel();
+
+		$persistencia = new RATPersistencia();
+
+		$model->setCodigo($_POST["codigo"]);
+		$model->setAtividade($_POST["atividade"]);
+		$model->setUsuario($_SESSION["codUsu"]);
+		$model->setDtAtividade($_POST["dtAtividade"]);
+		$model->setHrInicial($_POST["hrInicial"]);
+		$model->setHrFinal($_POST["hrFinal"]);
+		$model->setHrTotal($_POST["hrTotal"]);
+		$model->setDsAtividade($_POST["dsAtividade"]);
+		$model->setIdFaturar($_POST["idFaturar"]);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->alterarAtividade();
+
+		break;
+
+	case 'alterardespesa':
+		$model = new RATModel();
+
+		$persistencia = new RATPersistencia();
+
+		$model->setCodigo($_POST["codigo"]);
+		$model->setDespesa($_POST["despesa"]);
+		$model->setUsuario($_SESSION["codUsu"]);
+		$model->setCdDespesa($_POST["cdDespesa"]);
+		$model->setDtDespesa($_POST["dtDespesa"]);
+		$model->setIdDespesa($_POST["idDespesa"]);
+		$model->setVlDespesa($_POST["vlDespesa"]);
+		$model->setQtDespesa($_POST["qtDespesa"]);
+		$model->setTotDespesa($_POST["totDespesa"]);
+		$model->setCdFaturamento($_POST["cdFaturamento"]);
+		$model->setDsOberservacao($_POST["dsOberservacao"]);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->alterarDespesa();
+
+		break;
+
+		case 'excluiratividade':
+		$model = new RATModel();
+
+		$persistencia = new RATPersistencia();
+
+		$model->setCodigo($_POST["codigo"]);
+		$model->setAtividade($_POST["atividade"]);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->excluirAtividade();
+
+		break;
+
+		case 'excluirdespesa':
+		$model = new RATModel();
+
+		$persistencia = new RATPersistencia();
+
+		$model->setCodigo($_POST["codigo"]);
+		$model->setDespesa($_POST["despesa"]);
+
+		$persistencia->setModel($model);
+
+		$retorno = $persistencia->excluirDespesa();
+
+		break;
 }
 
 

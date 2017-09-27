@@ -27,14 +27,25 @@ CREATE TABLE IF NOT EXISTS `chat` (
   `sent` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `recd` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.chat: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.chat: ~12 rows (aproximadamente)
 DELETE FROM `chat`;
 /*!40000 ALTER TABLE `chat` DISABLE KEYS */;
 INSERT INTO `chat` (`id`, `from`, `to`, `message`, `sent`, `recd`) VALUES
 	(13, '2', '1', 'hey', '2017-04-14 12:13:57', 1),
-	(14, '1', '2', 'aaaaaaaa', '2017-04-14 12:15:04', 1);
+	(14, '1', '2', 'aaaaaaaa', '2017-04-14 12:15:04', 1),
+	(15, '3', '1', 'teste', '2017-09-17 20:55:48', 1),
+	(16, '2', '1', 'teste', '2017-09-17 20:56:23', 1),
+	(17, '1', '2', 'oi', '2017-09-17 20:56:33', 1),
+	(18, '2', '2', 'ola', '2017-09-17 20:57:02', 1),
+	(19, '2', '1', 'oi lucas', '2017-09-17 20:57:16', 1),
+	(20, '2', '1', 'ola', '2017-09-17 20:59:30', 1),
+	(21, '1', '10', 'oi consultor', '2017-09-17 21:01:45', 1),
+	(22, '1', '10', 'teste', '2017-09-17 21:06:13', 1),
+	(23, '11', '1', 'teste', '2017-09-21 21:05:29', 1),
+	(24, '1', '11', 'preciso resolver xxx', '2017-09-21 21:06:06', 1),
+	(25, '11', '1', 'ok, qual que Ã©?', '2017-09-21 21:06:23', 1);
 /*!40000 ALTER TABLE `chat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.chat_lastactivity
@@ -44,16 +55,19 @@ CREATE TABLE IF NOT EXISTS `chat_lastactivity` (
   `user` varchar(255) NOT NULL,
   `time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.chat_lastactivity: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.chat_lastactivity: ~7 rows (aproximadamente)
 DELETE FROM `chat_lastactivity`;
 /*!40000 ALTER TABLE `chat_lastactivity` DISABLE KEYS */;
 INSERT INTO `chat_lastactivity` (`id`, `user`, `time`) VALUES
-	(1, '2', 1492183522),
-	(2, '1', 1494890102),
-	(3, '3', 1492172315),
-	(4, '', 1492485126);
+	(1, '2', 1505692891),
+	(2, '1', 1506044654),
+	(3, '3', 1505692580),
+	(4, '', 1505692821),
+	(5, '10', 1505693295),
+	(6, 'userid', 1505691507),
+	(7, '11', 1506039191);
 /*!40000 ALTER TABLE `chat_lastactivity` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.sample_friends
@@ -64,14 +78,16 @@ CREATE TABLE IF NOT EXISTS `sample_friends` (
   `user2` int(11) NOT NULL,
   `confirmed` char(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Copiando dados para a tabela dbprojetorat.sample_friends: ~2 rows (aproximadamente)
 DELETE FROM `sample_friends`;
 /*!40000 ALTER TABLE `sample_friends` DISABLE KEYS */;
 INSERT INTO `sample_friends` (`id`, `user1`, `user2`, `confirmed`) VALUES
 	(1, 1, 2, 's'),
-	(2, 1, 3, 's');
+	(2, 1, 3, 's'),
+	(3, 1, 10, 's'),
+	(4, 1, 11, 's');
 /*!40000 ALTER TABLE `sample_friends` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbatividade
@@ -97,11 +113,11 @@ CREATE TABLE IF NOT EXISTS `tbatividade` (
 DELETE FROM `tbatividade`;
 /*!40000 ALTER TABLE `tbatividade` DISABLE KEYS */;
 INSERT INTO `tbatividade` (`codAti`, `RAT_codRAT`, `Usuario_codUsu`, `datAti`, `horIni`, `horFin`, `horTot`, `desAti`, `tipFat`) VALUES
-	(1, 1, 1, '2017-09-15', '08:00:00', '12:00:00', '04:50:00', 'Teste Manha', 1),
-	(2, 1, 1, '2017-09-15', '13:00:00', '18:00:00', '04:50:00', 'Teste Tarde', 1),
-	(3, 2, 1, '2017-09-15', '08:00:00', '12:00:00', '04:00:00', 'Teste Manha', 1),
-	(4, 3, 10, '2017-09-15', '08:00:00', '12:00:00', '04:00:00', 'Desc', 1),
-	(5, 4, 10, '2017-09-16', '08:00:00', '12:00:00', '04:00:00', 'manha', 1);
+	(1, 1, 1, '2017-09-19', '13:30:00', '18:00:00', '04:30:00', 'tarde', 1),
+	(2, 1, 1, '2017-09-19', '08:00:00', '12:00:00', '04:00:00', 'manha', 1),
+	(3, 2, 10, '2017-09-19', '08:00:00', '12:00:00', '04:00:00', 'desc ati', 1),
+	(4, 3, 1, '2017-09-19', '08:00:00', '12:00:00', '04:00:00', 'desc ati', 1),
+	(5, 4, 10, '2017-09-19', '08:00:00', '12:00:00', '04:00:00', 'desc', 1);
 /*!40000 ALTER TABLE `tbatividade` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbcidade
@@ -1380,20 +1396,18 @@ CREATE TABLE IF NOT EXISTS `tbdespesarat` (
   CONSTRAINT `fk_tbdespesarat_tbfatdespesa` FOREIGN KEY (`Fatdespesa_codTipFat`) REFERENCES `tbfatdespesa` (`codFatDsp`),
   CONSTRAINT `fk_tbdespesarat_tbrat` FOREIGN KEY (`RAT_codRAT`) REFERENCES `tbrat` (`codRat`),
   CONSTRAINT `fk_tbdespesarat_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbdespesarat: ~7 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbdespesarat: ~6 rows (aproximadamente)
 DELETE FROM `tbdespesarat`;
 /*!40000 ALTER TABLE `tbdespesarat` DISABLE KEYS */;
 INSERT INTO `tbdespesarat` (`seqDsp`, `Despesa_codDsp`, `RAT_codRAT`, `Fatdespesa_codTipFat`, `Usuario_codUsu`, `datDsp`, `obsDsp`, `qtdDsp`, `totDsp`) VALUES
-	(1, 1, 1, 1, 1, '2017-09-15', 'Teste FR', 10, 9.00),
-	(2, 1, 1, 2, 1, '2017-09-15', 'Teste FN', 10, 9.00),
-	(3, 1, 1, 3, 1, '2017-09-15', 'Teste NR', 10, 9.00),
-	(4, 1, 2, 3, 1, '2017-09-15', 'Teste NR', 20, 18.00),
-	(5, 1, 2, 2, 1, '2017-09-15', 'Teste FN', 20, 18.00),
-	(6, 1, 2, 1, 1, '2017-09-15', 'Teste FR', 20, 18.00),
-	(7, 1, 3, 1, 10, '2017-09-15', 'Teste FR', 10, 9.00),
-	(8, 1, 4, 1, 10, '2017-09-16', 'obser', 1, 0.90);
+	(1, 1, 1, 1, 1, '2017-09-19', 'teste fr', 100, 90.00),
+	(2, 1, 1, 2, 1, '2017-09-19', 'teste fn', 100, 90.00),
+	(3, 1, 1, 3, 1, '2017-09-19', 'teste nr', 100, 90.00),
+	(4, 1, 2, 1, 10, '2017-09-19', 'obs', 10, 9.00),
+	(5, 1, 3, 1, 1, '2017-09-19', 'obs', 100, 90.00),
+	(6, 1, 4, 1, 10, '2017-09-19', 'obs fr', 100, 90.00);
 /*!40000 ALTER TABLE `tbdespesarat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbempresa
@@ -1488,15 +1502,18 @@ CREATE TABLE IF NOT EXISTS `tbfaturamento` (
   KEY `fk_tbfaturamento_tbusuario` (`Usuario_codUsu`),
   CONSTRAINT `fk_tbfaturamento_tbrat` FOREIGN KEY (`RAT_codRAT`) REFERENCES `tbrat` (`codRat`),
   CONSTRAINT `fk_tbfaturamento_tbusuario` FOREIGN KEY (`Usuario_codUsu`) REFERENCES `tbusuario` (`codUsu`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbfaturamento: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbfaturamento: ~5 rows (aproximadamente)
 DELETE FROM `tbfaturamento`;
 /*!40000 ALTER TABLE `tbfaturamento` DISABLE KEYS */;
 INSERT INTO `tbfaturamento` (`codFat`, `RAT_codRAT`, `Usuario_codUsu`, `datFec`) VALUES
-	(1, 1, 1, '2017-09-15'),
-	(2, 2, 1, '2017-09-16'),
-	(3, 3, 10, '2017-09-15');
+	(1, 1, 1, '2017-09-17'),
+	(2, 2, 10, '2017-09-18'),
+	(3, 3, 1, '2017-09-18'),
+	(4, 4, 10, '2017-09-19'),
+	(5, 3, 1, '2017-09-19'),
+	(6, 2, 10, '2017-09-19');
 /*!40000 ALTER TABLE `tbfaturamento` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbhistoricoemail
@@ -1598,10 +1615,10 @@ CREATE TABLE IF NOT EXISTS `tbrat` (
 DELETE FROM `tbrat`;
 /*!40000 ALTER TABLE `tbrat` DISABLE KEYS */;
 INSERT INTO `tbrat` (`codRat`, `Usuario_codUsu`, `Cliente_codCli`, `Responsavel_codRes`, `Projeto_codPrj`, `Produto_codPro`, `Situacao_codSit`, `datRat`) VALUES
-	(1, 1, 1, 1, 1, 1, 4, '2017-09-15'),
-	(2, 1, 1, 1, 1, 1, 4, '2017-09-15'),
-	(3, 10, 2, 1, 1, 1, 2, '2017-09-15'),
-	(4, 10, 2, 2, 2, 2, 2, '2017-09-16');
+	(1, 1, 1, 1, 1, 1, 1, '2017-09-19'),
+	(2, 10, 2, 1, 1, 1, 4, '2017-09-19'),
+	(3, 1, 2, 2, 1, 1, 4, '2017-09-19'),
+	(4, 10, 2, 1, 1, 2, 4, '2017-09-19');
 /*!40000 ALTER TABLE `tbrat` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbresponsavel
@@ -1640,15 +1657,18 @@ CREATE TABLE IF NOT EXISTS `tbresumoatividade` (
   KEY `fk_tbresumoatividade_tbrat` (`RAT_codRAT`),
   CONSTRAINT `fk_tbresumoatividade_tbfaturamento` FOREIGN KEY (`Faturamento_codFat`) REFERENCES `tbfaturamento` (`codFat`),
   CONSTRAINT `fk_tbresumoatividade_tbrat` FOREIGN KEY (`RAT_codRat`) REFERENCES `tbrat` (`codRat`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbresumoatividade: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbresumoatividade: ~5 rows (aproximadamente)
 DELETE FROM `tbresumoatividade`;
 /*!40000 ALTER TABLE `tbresumoatividade` DISABLE KEYS */;
 INSERT INTO `tbresumoatividade` (`codRsmAti`, `Faturamento_codFat`, `RAT_codRAT`, `SumHorTot`, `SumFatTot`, `SumBasCalCom`, `SumComTot`, `SumVlrLiq`) VALUES
-	(1, 1, 1, '08:00:00', 1335.52, 1200.00, 120.00, 1215.52),
+	(1, 1, 1, '08:30:00', 1418.99, 1275.00, 127.50, 1291.49),
 	(2, 2, 2, '04:00:00', 667.76, 600.00, 60.00, 607.76),
-	(3, 3, 3, '04:00:00', 667.76, 600.00, 60.00, 607.76);
+	(3, 3, 3, '04:00:00', 667.76, 600.00, 60.00, 607.76),
+	(4, 4, 4, '04:00:00', 667.76, 600.00, 60.00, 607.76),
+	(5, 5, 3, '04:00:00', 667.76, 600.00, 60.00, 607.76),
+	(6, 5, 2, '04:00:00', 667.76, 600.00, 60.00, 607.76);
 /*!40000 ALTER TABLE `tbresumoatividade` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbresumodespesa
@@ -1667,15 +1687,18 @@ CREATE TABLE IF NOT EXISTS `tbresumodespesa` (
   KEY `fk_tbresumodespesa_tbrat` (`RAT_codRAT`),
   CONSTRAINT `fk_tbresumodespesa_tbfaturamento` FOREIGN KEY (`Faturamento_codFat`) REFERENCES `tbfaturamento` (`codFat`),
   CONSTRAINT `fk_tbresumodespesa_tbrat` FOREIGN KEY (`RAT_codRAT`) REFERENCES `tbrat` (`codRat`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela dbprojetorat.tbresumodespesa: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela dbprojetorat.tbresumodespesa: ~5 rows (aproximadamente)
 DELETE FROM `tbresumodespesa`;
 /*!40000 ALTER TABLE `tbresumodespesa` DISABLE KEYS */;
 INSERT INTO `tbresumodespesa` (`codRsmDsp`, `Faturamento_codFat`, `RAT_codRAT`, `TotDspFat`, `TotDspRem`, `TotDspFR`, `TotDspFN`, `TotDspNR`) VALUES
-	(1, 1, 1, 18.00, 18.00, 9.00, 9.00, 9.00),
-	(2, 2, 2, 36.00, 36.00, 18.00, 18.00, 18.00),
-	(3, 3, 3, 9.00, 9.00, 9.00, NULL, NULL);
+	(1, 1, 1, 180.00, 180.00, 90.00, 90.00, 90.00),
+	(2, 2, 2, 9.00, 9.00, 9.00, NULL, NULL),
+	(3, 3, 3, 90.00, 90.00, 90.00, NULL, NULL),
+	(4, 4, 4, 90.00, 90.00, 90.00, NULL, NULL),
+	(5, 5, 3, 90.00, 90.00, 90.00, NULL, NULL),
+	(6, 5, 2, 9.00, 9.00, 9.00, NULL, NULL);
 /*!40000 ALTER TABLE `tbresumodespesa` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela dbprojetorat.tbsituacaorat
@@ -1730,15 +1753,16 @@ CREATE TABLE IF NOT EXISTS `tbusuario` (
   PRIMARY KEY (`codUsu`),
   KEY `Usuario_FKIndex1` (`Papel_codPap`),
   CONSTRAINT `fk_tbusuario_tbpapel` FOREIGN KEY (`Papel_codPap`) REFERENCES `tbpapel` (`codPap`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- Copiando dados para a tabela dbprojetorat.tbusuario: ~3 rows (aproximadamente)
 DELETE FROM `tbusuario`;
 /*!40000 ALTER TABLE `tbusuario` DISABLE KEYS */;
 INSERT INTO `tbusuario` (`codUsu`, `Papel_codPap`, `nomUsu`, `sobrenomeUsu`, `senUsu`, `codSit`, `desEml`, `perComCli`, `perComInt`) VALUES
-	(1, 1, 'Lucas', 'Nascimento', 'admin', 1, 'lawpnascimento@gmail.com', 10, 10),
+	(1, 1, 'Lucas', 'Nascimento', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'lawpnascimento@gmail.com', 10, 10),
 	(2, 2, 'Nome', 'Sobrenome', 'teste', 1, 'teste@teste.com2', 15, 15),
-	(10, 2, 'Consultor', 'Teste', 'teste', 1, 'teste@teste.com', 10, 10);
+	(10, 2, 'Consultor', 'Teste', 'teste', 1, 'teste@teste.com', 10, 10),
+	(11, 2, 'cript', 'cript', '0d5e0df947b201ffb3a1001069c2143a975efee3', 1, 'cript@cript.com', 12, 12);
 /*!40000 ALTER TABLE `tbusuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

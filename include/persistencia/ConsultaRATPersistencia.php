@@ -254,6 +254,7 @@ class ConsultaRATPersistencia{
 
 		$sSql = "SELECT dsprat.seqDsp seqDsp
 							    ,DATE_FORMAT(datDsp, '%d-%m-%Y') datDsp
+							    ,dsp.codDsp codDesDsp
 							    ,dsp.desDsp desDsp
 								,tipdsp.desTipDsp desTipDsp
 								,dsp.vlrUni vlrUni
@@ -285,6 +286,7 @@ class ConsultaRATPersistencia{
 
 			$retorno = $retorno . '{"seqDsp": "'.$linha["seqDsp"].'"
 														, "datDsp" : "'.$linha["datDsp"].'"
+														, "codDesDsp" : "'.$linha["codDesDsp"].'"
 													    , "desDsp" : "'.$linha["desDsp"].'"
 													    , "desTipDsp" : "'.$linha["desTipDsp"].'"
 													    , "vlrUni" : "'.$linha["vlrUni"].'"
