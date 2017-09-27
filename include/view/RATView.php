@@ -44,6 +44,10 @@ require_once("../../estrutura/iniciar_sessao.php");
                   <label id="labelAlterarCodRat" for="alterarcodrat" style="display:none;">Editando RAT Código</label>
                   <input id="txbAlterarCodRat" type="text" class="form-control" name="txbAlterarCodRat" style="display:none;" readonly></input>
                 </div>
+                <div class="col-md-2">
+                  <label id="labelAlterarCodRat" for="alterarcodrat" style="display:none;">RAT Atual</label>
+                  <input id="txbAlterarCodRat" type="text" class="form-control" name="txbAlterarCodRat" style="display:none;" readonly></input>
+                </div>
               </div>
               <div id="formGeralCancelar">
                 <div class="form-group">

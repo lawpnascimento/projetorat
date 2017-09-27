@@ -788,6 +788,8 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
 
   var enviar = confirm('Deseja enviar o RAT por e-mail ao responsável?');
   if (enviar){
+    nmRelatorio = "RAT_" + dataAtual() + '_' +  horaAtual();
+
     $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
@@ -795,6 +797,7 @@ function lancarRat(txbCliente, txbResponsavel, txbProjeto, txbProduto,  dataAtiv
         data: {
           cliente: cliente[0],
           responsavel: responsavel[0],
+          nmRelatorio: nmRelatorio,
           action: "enviaemailrat"
         },
 
@@ -1023,7 +1026,7 @@ function buscaValorUnitarioDespesa(idDespesa, element){
     });
 }
 
-function gerarRelatorio(txbConsultor, txbCliente, txbResponsavel){
+/*function gerarRelatorio(txbConsultor, txbCliente, txbResponsavel){
 
   nmRelatorio = "RAT_" + dataAtual() + '_' +  horaAtual();
 
@@ -1046,7 +1049,7 @@ function gerarRelatorio(txbConsultor, txbCliente, txbResponsavel){
 
     });
 
-}
+}*/
 
 function dataAtual() {
   var date = new Date();
@@ -1244,7 +1247,6 @@ function removeMascaraRat(){
 }
 
 function excluiAtividade(codAti){
-  $(this).parents('tr:first').remove();
   
   var txbAlterarCodRat = $("#txbAlterarCodRat").val();
   alert(codAti);

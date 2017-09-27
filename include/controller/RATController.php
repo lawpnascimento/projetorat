@@ -211,15 +211,26 @@ switch($_POST["action"]){
 		break;
 
 	case 'enviaemailrat':
+
 		$persistencia = new RATPersistencia();
 
 		$codRat = $persistencia->buscaCodigoRatInserido();
 
 		$persistencia->enviaEmailRAT($_SESSION["codUsu"]
-									,$codRat);
+									,$codRat
+									,$_POST["nmRelatorio"]);
 
 		$persistencia->atualizaEnvioRAT($codRat);
 			
+	break;
+
+	case 'buscacodigoratinserido':
+		$persistencia = new RATPersistencia();
+
+		$codRat = $persistencia->buscaCodigoRatInserido();
+
+		echo $codRat;
+
 	break;
 
 	case 'alterarrat':

@@ -17,8 +17,8 @@ class RATModel {
 	private $hrInicial;
 	private $hrFinal;
 	private $hrTotal;
-    private $dsAtividade;
-    private $idFaturar;
+	private $dsAtividade;
+	private $idFaturar;
 	private $dtDespesa;
 	private $idDespesa;
 	private $vlDespesa;
@@ -27,13 +27,14 @@ class RATModel {
 	private $cdFaturamento;
 	private $dsOberservacao;
 	private $cdDespesa;
+	private $nmRelatorio;
 
 	public function setCodigo($codigo){
-	  $this->codigo = $codigo;
+		$this->codigo = $codigo;
 	}
 
 	public function getCodigo(){
-	  return $this->codigo;
+		return $this->codigo;
 	}
 
 	public function setUsuario($usuario){
@@ -163,70 +164,76 @@ class RATModel {
 	}
 
 	public function getDtDespesa() {
-      return $this->dtDespesa;
-  }
+		return $this->dtDespesa;
+	}
 
-  public function setDtDespesa($dtDespesa) {
-      $this->dtDespesa = $dtDespesa;
-  }
+	public function setDtDespesa($dtDespesa) {
+		$this->dtDespesa = $dtDespesa;
+	}
 
-  public function getIdDespesa() {
-      return $this->idDespesa;
-  }
+	public function getIdDespesa() {
+		return $this->idDespesa;
+	}
 
-  public function setIdDespesa($idDespesa) {
-      $this->idDespesa = $idDespesa;
-  }
+	public function setIdDespesa($idDespesa) {
+		$this->idDespesa = $idDespesa;
+	}
 
-  public function getVlDespesa() {
-      return $this->vlDespesa;
-  }
+	public function getVlDespesa() {
+		return $this->vlDespesa;
+	}
 
-  public function setVlDespesa($vlDespesa) {
-      $this->vlDespesa = $vlDespesa;
-  }
+	public function setVlDespesa($vlDespesa) {
+		$this->vlDespesa = $vlDespesa;
+	}
 
-  public function getQtDespesa() {
-      return $this->qtDespesa;
-  }
+	public function getQtDespesa() {
+		return $this->qtDespesa;
+	}
 
-  public function setQtDespesa($qtDespesa) {
-      $this->qtDespesa = $qtDespesa;
-  }
+	public function setQtDespesa($qtDespesa) {
+		$this->qtDespesa = $qtDespesa;
+	}
 
-  public function getTotDespesa() {
-      return $this->totDespesa;
-  }
+	public function getTotDespesa() {
+		return $this->totDespesa;
+	}
 
-  public function setTotDespesa($totDespesa) {
-      $this->totDespesa = $totDespesa;
-  }
+	public function setTotDespesa($totDespesa) {
+		$this->totDespesa = $totDespesa;
+	}
 
-  public function getCdFaturamento() {
-      return $this->cdFaturamento;
-  }
+	public function getCdFaturamento() {
+		return $this->cdFaturamento;
+	}
 
-  public function setCdFaturamento($cdFaturamento) {
-      $this->cdFaturamento = $cdFaturamento;
-  }
+	public function setCdFaturamento($cdFaturamento) {
+		$this->cdFaturamento = $cdFaturamento;
+	}
 
-  public function getDsOberservacao() {
-      return $this->dsOberservacao;
-  }
+	public function getDsOberservacao() {
+		return $this->dsOberservacao;
+	}
 
-  public function setDsOberservacao($dsOberservacao) {
-      $this->dsOberservacao = $dsOberservacao;
-  }
+	public function setDsOberservacao($dsOberservacao) {
+		$this->dsOberservacao = $dsOberservacao;
+	}
 
 	public function getCdDespesa() {
-      return $this->cdDespesa;
-  }
+		return $this->cdDespesa;
+	}
 
-  public function setCdDespesa($cdDespesa) {
-      $this->cdDespesa = $cdDespesa;
-  }
+	public function setCdDespesa($cdDespesa) {
+		$this->cdDespesa = $cdDespesa;
+	}
 
+	public function getNmRelatorio() {
+		return $this->nmRelatorio;
+	}
 
+	public function setNmRelatorio($NmRelatorio) {
+		$this->nmRelatorio = $nmRelatorio;
+	}
 
 }
 ?>

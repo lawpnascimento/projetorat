@@ -3,6 +3,9 @@
 session_start();
 require_once("../../estrutura/conexao.php");
 require_once("../../estrutura/conf_email.php");
+require_once("../../phpjasper/vendor/autoload.php");
+
+use JasperPHP\JasperPHP;
 
 class RATPersistencia{
 	protected $model;
@@ -376,7 +379,7 @@ class RATPersistencia{
 		,". $idFaturar .")";
 
 		$this->getConexao()->query($sSql);
-		echo $sSql;
+
 		$this->getConexao()->fechaConexao();
 
 	}
@@ -519,10 +522,13 @@ class RATPersistencia{
 		$this->getConexao()->fechaConexao();
 	}
 
-	public function enviaEmailRAT($codUsu, $codRAT){
+	public function enviaEmailRAT($codUsu, $codRAT, $nmRelatorio){
 		$this->getConexao()->conectaBanco();
 
 		$sSql = "SELECT rat.codRat
+		,usu.codUsu codUsu
+		,cli.codCli codCli
+		,res.codRes codRes
 		,CONCAT(usu.nomUsu, ' ' ,sobrenomeUsu) nomUsu
 		,usu.desEml desEml
 		,cli.desRazaoSocial desRazaoSocial
@@ -543,6 +549,8 @@ class RATPersistencia{
 		while ($linha = mysql_fetch_assoc($resultado)) {
 
 			$nomeUsuario = $linha["nomUsu"];
+			$codCli = $linha["codCli"];
+			$codRes = $linha["codRes"];
 			$emailUsuario = $linha["desEml"];
 			$razaoSocial = $linha["desRazaoSocial"];
 			$nomeResponsavel = $linha["nomRes"];
@@ -556,8 +564,42 @@ class RATPersistencia{
 
 		$this->getConexao()->fechaConexao();
 
+		$input = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\templates\EnvioRAT.jrxml';
+		$output = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\templates\pdf\\' . $nmRelatorio;
+		$jdbc_dir = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
+
+		$options = [
+			'format' => ['pdf'],
+			'locale' => 'en',
+			'params' => ['txbRat' => $codRAT,
+			'txbConsultor' => $codUsu,
+			'txbCliente' => $codCli,
+			'txbResponsavel' => $codRes],
+			'db_connection' => [
+				'driver' => 'mysql',
+				'host' => 'localhost',
+				'port' => '3306',
+				'database' => 'dbprojetorat',
+				'username' => 'root',
+				'password' => 'root',
+				'jdbc_driver' => 'com.mysql.jdbc.Driver',
+				'jdbc_url' => 'jdbc:mysql://localhost:3306/dbprojetorat',
+				'jdbc_dir' => $jdbc_dir
+			]
+		];
+
+		$jasper = new JasperPHP;
+
+		$jasper->process(
+			$input,
+			$output,
+			$options
+		)->execute();
+
+		$anexo =  'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\templates\pdf\\' .  $nmRelatorio . ".pdf";
+
 		$email = new Email();
-		$email->enviaEmail($emailResponsavel,$mensagem,$assunto,$emailUsuario);
+		$email->enviaEmail($emailResponsavel,$mensagem,$assunto,$emailUsuario,$anexo);
 	}
 
 	public function alterarRat(){

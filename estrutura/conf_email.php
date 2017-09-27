@@ -6,17 +6,18 @@ class Email{
   private $senha;
 
   public function __construct() {
-      $this->remetente    = 'projetoratsis@gmail.com';
-      $this->host = 'smtp.gmail.com';
-      $this->porta   = '587';
-      $this->senha   = 'projetorat123';
-      $this->smtp   = 'tls';
+    $this->remetente    = 'projetoratsis@gmail.com';
+    $this->host = 'smtp.gmail.com';
+    $this->porta   = '587';
+    $this->senha   = 'projetorat123';
+    $this->smtp   = 'tls';
   }
 
-  public function enviaEmail($email, $mensagem, $assunto, $cc){
+  public function enviaEmail($email, $mensagem, $assunto, $cc, $anexo){
     global $error;
 
-    require_once("../../lib/PHPMailer/PHPMailerAutoload.php");
+    //require_once("../../lib/PHPMailer/PHPMailerAutoload.php");
+    require_once('C:/xampp/htdocs/projetorat/trunk/lib/PHPMailer/PHPMailerAutoload.php');
 
     define('GUSER', $this->remetente);	// <-- Insira aqui o seu GMail
     define('GPWD', $this->senha);		// <-- Insira aqui a senha do seu GMail
@@ -35,12 +36,13 @@ class Email{
     $mail->Body = $mensagem;
     $mail->AddAddress($email);
     $mail->AddCC($cc);
+    $mail->addAttachment($anexo, "RAT.pdf");
 
     if(!$mail->Send()) {
       $error = 'Mail error: '.$mail->ErrorInfo;
       return false;
     } else
-      return true;
+    return true;
 
     if (!empty($error)) echo $error;
 

@@ -8,8 +8,8 @@ $txbCliente = $_POST["txbCliente"];
 $txbResponsavel = $_POST["txbResponsavel"];
 $nmRelatorio = $_POST["nmRelatorio"];
 
-$input = __DIR__ . '\EnvioRAT.jrxml';
-$output = __DIR__ . '\\pdf\\' . $nmRelatorio;
+$input = __DIR__ . '..\..\phpjasper\vendor\geekcom\phpjasper\templates\EnvioRAT.jrxml';
+$output = __DIR__ . '..\..\phpjasper\vendor\geekcom\phpjasper\templates\pdf' . $nmRelatorio;
 
 //$jdbc_dir = 'D:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
 $jdbc_dir = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
