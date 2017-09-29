@@ -62,6 +62,7 @@ switch($_POST["action"]){
 	case 'autocompleteresponsavel':
 		$model = new RATModel();
 
+	    $model->setCliente($_POST["cliente"]);
 		$model->setTermo($_POST["termo"]);
 
 		$persistencia = new RATPersistencia();
@@ -221,6 +222,18 @@ switch($_POST["action"]){
 									,$_POST["nmRelatorio"]);
 
 		$persistencia->atualizaEnvioRAT($codRat);
+			
+	break;
+
+	case 'enviaemailratalterado':
+
+		$persistencia = new RATPersistencia();
+
+		$persistencia->enviaEmailRAT($_SESSION["codUsu"]
+									,$_POST["codigo"]
+									,$_POST["nmRelatorio"]);
+
+		$persistencia->atualizaEnvioRAT($_POST["codigo"]);
 			
 	break;
 

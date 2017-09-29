@@ -396,6 +396,7 @@ $('#txbResponsavel').autocomplete({
       dataType: 'text',
       data: {
         termo: request.term,
+        cliente: $("#txbCliente").val().split("-")[0],
         action: "autocompleteresponsavel"
       }
     }).done(function(data){
@@ -913,14 +914,18 @@ function alterarRat(txbAlterarCodRat, txbCliente, txbResponsavel, txbProjeto, tx
 
   var enviar = confirm('Deseja enviar o RAT por e-mail ao responsável?');
   if (enviar){
+    nmRelatorio = "RAT_" + dataAtual() + '_' +  horaAtual();
+
     $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
+          codigo: txbAlterarCodRat,
           cliente: cliente[0],
           responsavel: responsavel[0],
-          action: "enviaemailrat"
+          nmRelatorio: nmRelatorio,
+          action: "enviaemailratalterado"
         },
 
         url: "../controller/RATController.php",
@@ -1049,31 +1054,31 @@ function buscaValorUnitarioDespesa(idDespesa, element){
 
     });
 
-}*/
+  }*/
 
-function dataAtual() {
-  var date = new Date();
-  return String(date.getDate()) + String(date.getMonth()) + String(date.getFullYear());
-}
+  function dataAtual() {
+    var date = new Date();
+    return String(date.getDate()) + String(date.getMonth()) + String(date.getFullYear());
+  }
 
-function horaAtual() {
-  var date = new Date();
-  return String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds());
-}
+  function horaAtual() {
+    var date = new Date();
+    return String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds());
+  }
 
-$("select[name='idDespesa']").bind("DOMSubtreeModified",function(){
-  buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
-});
+  $("select[name='idDespesa']").bind("DOMSubtreeModified",function(){
+    buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
+  });
 
-$("select[name='dsDespesa']").change(function() {
-  buscaTipoDespesa($(this).find(":selected").val(),$(this).parent().parent().find("select[name='idDespesa']"));
+  $("select[name='dsDespesa']").change(function() {
+    buscaTipoDespesa($(this).find(":selected").val(),$(this).parent().parent().find("select[name='idDespesa']"));
 
-});
+  });
 
-$("select[name='idDespesa']").change(function() {
-  buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
+  $("select[name='idDespesa']").change(function() {
+    buscaValorUnitarioDespesa($(this).find(":selected").val(),$(this).parent().parent().find("td[name='tdVlUni']"));
 
-});
+  });
 
 //multiplica quantidade da despesa pelo seu valor unitário
 $("td[name='tdQtdDespesa']").blur(function() {
@@ -1247,9 +1252,8 @@ function removeMascaraRat(){
 }
 
 function excluiAtividade(codAti){
-  
+
   var txbAlterarCodRat = $("#txbAlterarCodRat").val();
-  alert(codAti);
 
   var excluir = confirm('Deseja excluir a atividade PERMANENTEMENTE?');
   if (excluir){
@@ -1280,7 +1284,7 @@ function excluiAtividade(codAti){
 }
 
 function excluiDespesa(codDsp){
-  alert(codDsp);
+
   var txbAlterarCodRat = $("#txbAlterarCodRat").val();
 
   var excluir = confirm('Deseja excluir a despesa PERMANENTEMENTE?');

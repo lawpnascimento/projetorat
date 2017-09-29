@@ -101,11 +101,13 @@ class RATPersistencia{
 
 	public function buscaResponsavelAutoComplete(){
 		$this->getConexao()->conectaBanco();
+		$cliente = $this->getModel()->getCliente();
 		$termo = $this->getModel()->getTermo();
 
-		$sSql = "SELECT CONCAT(codRes,'-',nomRes) nomRes
-		FROM tbresponsavel
-		WHERE nomRes LIKE '%". $termo ."%'";
+		$sSql = "SELECT CONCAT(res.codRes,'-',res.nomRes) nomRes
+		FROM tbresponsavel res
+		WHERE res.Cliente_codCli = '". $cliente ."'
+		AND res.nomRes LIKE '%". $termo ."%'";
 
 		$resultado = mysql_query($sSql);
 
