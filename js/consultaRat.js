@@ -78,11 +78,12 @@ $("#document").ready(function(){
   $("#formConsultaRAT #btnAlterar").click(function(){
     var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
     if (trSelecionado == true){
+      var tdUsuRAT = $("#grdConsultaRAT tr.highlight").closest("tr").find("td:eq(1)").text().split("-");
       var tdCodRAT = $("#grdConsultaRAT tr.highlight").find('td:first').text();
       var tdSitRAT = $("#grdConsultaRAT tr.highlight").find('td:last').text().slice(0,1);
 
       if (tdSitRAT == 1 || tdSitRAT == 6){
-        alteraRAT(tdCodRAT, tdSitRAT);
+        alteraRAT(tdCodRAT, tdSitRAT, tdUsuRAT);
       } else {
        jbkrAlert.alerta('Alerta', "O RAT deve estar com a situação '1 - Digitado' ou '6 - Reprovado' para ser alterado.");
      }
@@ -519,163 +520,184 @@ function enviaEmailRAT(tdUsuRAT, tdCodRAT){
 
 }
 
-function alteraRAT(tdCodRAT, tdSitRAT){
+function alteraRAT(tdCodRAT, tdSitRAT, tdUsuRAT){
  var trSelecionado = $("#grdConsultaRAT tr").hasClass('highlight');
 
  $.ajax({
-
-  type: "POST",
-  dataType: "text",
-
-  url: "RATView.php",
-
-  success: function(callback){
-    $("#divPrincipal").html(callback);
-    formularioModoAtualizar();
-
-    $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-          codigo: tdCodRAT,
-          situacao: tdSitRAT,
-          action: "alterar"
+          usuariorat: tdUsuRAT[0],
+          action: "validaalterar"
         },
 
         url: "../controller/ConsultaRATController.php",
 
+        //Se der tudo ok no envio...
         success: function (dados) {
           var json = $.parseJSON(dados);
-          var rat = null;
 
-          for (var j = 0; j < json.length; j++) {
-            rat = json[j];
+          if (json.status == 2) {
+            jbkrAlert.alerta('Alerta', json.mensagem);
+          }else if(json.status == 1 ) {
+            $.ajax({
 
-            $("#txbCliente").val(rat.codCli);
-            $("#txbResponsavel").val(rat.codRes);
-            $("#txbProjeto").val(rat.codPrj);
-            $("#txbProduto").val(rat.codPro);
-            $("#txbDataRAT").val(rat.datRat);
-            $("#txbAlterarCodRat").val(rat.codRat);
+              type: "POST",
+              dataType: "text",
+
+              url: "RATView.php",
+
+              success: function(callback){
+                $("#divPrincipal").html(callback);
+                formularioModoAtualizar();
+
+            $.ajax({
+                //Tipo de envio POST ou GET
+                type: "POST",
+                dataType: "text",
+                data: {
+                  codigo: tdCodRAT,
+                  situacao: tdSitRAT,
+                  action: "alterar"
+                },
+
+                url: "../controller/ConsultaRATController.php",
+
+                success: function (dados) {
+                  var json = $.parseJSON(dados);
+                  var rat = null;
+
+                  for (var j = 0; j < json.length; j++) {
+                    rat = json[j];
+
+                    $("#txbCliente").val(rat.codCli);
+                    $("#txbResponsavel").val(rat.codRes);
+                    $("#txbProjeto").val(rat.codPrj);
+                    $("#txbProduto").val(rat.codPro);
+                    $("#txbDataRAT").val(rat.datRat);
+                    $("#txbAlterarCodRat").val(rat.codRat);
+                  }
+
+                }
+
+            });
+
+            $.ajax({
+                //Tipo de envio POST ou GET
+                type: "POST",
+                dataType: "text",
+                data: {
+                  codigo: tdCodRAT,
+                  action: "buscaatividade"
+                },
+
+                url: "../controller/ConsultaRATController.php",
+
+                success: function (dados) {
+                  var json = $.parseJSON(dados);
+                  var atividade = null;
+
+                  var grid = "";
+                  var tipFat = null;
+                  for (var j = 0; j < json.length; j++) {
+                    atividade = json[j];
+
+                    if(atividade.tipFat == 1)
+                      tipFat = "checked";
+                    else
+                      tipFat = "";
+
+                    grid = grid + '<tr>';
+                    grid = grid + '<td id="codAtividade" name="codAtividade" style="display:none;">' + atividade.codAti + '</td>';
+                    grid = grid + '<td id="tdDataAtividade" contenteditable="true" class="tdData">' + atividade.datAti + '</td>';
+                    grid = grid + '<td id="tdHoraInicial" contenteditable="true" name="tdHrInicial" class="tdHora">' + atividade.horIni + '</td>';
+                    grid = grid + '<td id="tdHoraFinal" contenteditable="true" name="tdHrFinal" class="tdHora">' + atividade.horFin + '</td>';
+                    grid = grid + '<td id="tdHoraTotal" bgcolor="#EBEBE4" contenteditable="false" name="tdHrTotal" readonly>' + atividade.horTot + '</td>';
+                    grid = grid + '<td id="tdDescricaoAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 200)">' + atividade.desAti + '</td>';
+                    grid = grid + '<td id="tdFatAtividade" class="checkbox col-sm-1"> <label><input type="checkbox" value="' + atividade.tipFat + '" ' + tipFat + '>Faturar</label></td>';
+                    grid = grid + '<td id="tdButtonsAtividade">';
+                    grid = grid + '<span class="table-up glyphicon glyphicon-arrow-up"></span>';
+                    grid = grid + '<span class="table-down glyphicon glyphicon-arrow-down"></span>';
+                    grid = grid + '<span class="table-remove glyphicon glyphicon-remove" onClick="excluiAtividade(' + atividade.codAti + ')"></span>';
+                    grid = grid + '</td>';
+                    grid = grid + '</tr>';
+
+                  }
+                  $("#tbAtividades #tbodyAtividades").html(grid);
+                  aplicaMascaraRat();
+                }
+
+            });
+
+            $.ajax({
+              //Tipo de envio POST ou GET
+              type: "POST",
+              dataType: "text",
+              data: {
+                codigo: tdCodRAT,
+                action: "buscadespesa"
+              },
+
+              url: "../controller/ConsultaRATController.php",
+
+              success: function (dados) {
+                var json = $.parseJSON(dados);
+                var despesa = null;
+                var grid = "";
+                var fr = null;
+                var fn = null;
+                var nr = null;
+                var nn = null;
+
+                for (var j = 0; j < json.length; j++) {
+                  despesa = json[j];
+
+                  if(despesa.codFatDsp == 1)
+                    fr = "selected";
+                  else if(despesa.codFatDsp == 2)
+                    fn = "selected";
+                  else if(despesa.codFatDsp == 3)
+                    nr = "selected";
+                  else if(despesa.codFatDsp == 4)
+                    nn = "selected";
+
+                  grid = grid + '<tr class="fix">';
+                  grid = grid + '<td id="seqDespesa" name="seqDespesa" style="display:none;">' + despesa.seqDsp + '</td>';
+                  grid = grid + '<td id="tdDataDespesa" contenteditable="true" class="tdData">' + despesa.datDsp + '</td>';
+                  //grid = grid + '<td id="tdDsDespesa" contenteditable="false"><select class="selectDsDespesa" style="width:100%;" name="dsDespesa" onChange="buscaTipoDespesaConsulta(this);" onblur="buscaValorUnitarioDespesaConsulta(this);"><option value='+ despesa.codDesDsp +' selected>'+ despesa.desDsp +'</option></select></td>';
+                  grid = grid + '<td id="tdDsDespesa" contenteditable="false"><select class="selectDsDespesa" style="width:100%;" name="dsDespesa" onChange="buscaTipoDespesaConsulta(this);" onblur="buscaValorUnitarioDespesaConsulta(this);"></select></td>';
+                  grid = grid + '<td id="tdTipoDespesa" bgcolor="#EBEBE4" contenteditable="false" readonly><select class="selectTipoDespesa" style="width:100%;" name="idDespesa"></select></td>';
+                  grid = grid + '<td id="tdVlUni" bgcolor="#EBEBE4" contenteditable="false"readonly  name="tdVlUni">' + despesa.vlrUni + '</td>';
+                  grid = grid + '<td id="tdQtdDespesa" contenteditable="true" name="tdQtdDespesa" class="tdNumerico" onkeyup="javascript:calculaTotal(this);">' + despesa.qtdDsp + '</td>';
+                  grid = grid + '<td id="tdTotDespesa" bgcolor="#EBEBE4" contenteditable="false" name="totDespesa">' + despesa.totDsp + '</td>';
+                  grid = grid + '<td id="tdFatDespesa" contenteditable="false">';
+                  grid = grid + '<select style="width:100%;" id="cdFaturamento">';
+                  grid = grid + '<option value="1" ' + fr + '> FR </option>';
+                  grid = grid + '<option value="2" ' + fn + '> FN </option>';
+                  grid = grid + '<option value="3" ' + nr + '> NR </option>';
+                  grid = grid + '<option value="4" ' + nn + '> NN </option>';
+                  grid = grid + '</select>';
+                  grid = grid + '</td>';
+                  grid = grid + '<td id="tdObsDespesa" contenteditable="true" onkeypress="return (this.innerText.length <= 200)">' + despesa.obsDsp + '</td>';
+                  grid = grid + '<td id="tdButtonsDespesa">';
+                  grid = grid + '<span class="table-up glyphicon glyphicon-arrow-up"></span>';
+                  grid = grid + '<span class="table-down glyphicon glyphicon-arrow-down"></span>';
+                  grid = grid + '<span class="table-remove glyphicon glyphicon-remove" onClick="excluiDespesa(' + despesa.seqDsp + ')"></span>';
+                  grid = grid + '</td>';
+                  grid = grid + '</tr>';
+
+                }
+                $("#tbDespesa #tbodyDespesas").html(grid);
+                aplicaMascaraRat();
+              }
+
+            });
           }
-
+         });
         }
-
-      });
-
-    $.ajax({
-          //Tipo de envio POST ou GET
-          type: "POST",
-          dataType: "text",
-          data: {
-            codigo: tdCodRAT,
-            action: "buscaatividade"
-          },
-
-          url: "../controller/ConsultaRATController.php",
-
-          success: function (dados) {
-            var json = $.parseJSON(dados);
-            var atividade = null;
-
-            var grid = "";
-            var tipFat = null;
-            for (var j = 0; j < json.length; j++) {
-              atividade = json[j];
-
-              if(atividade.tipFat == 1)
-                tipFat = "checked";
-              else
-                tipFat = "";
-
-              grid = grid + '<tr>';
-              grid = grid + '<td id="codAtividade" name="codAtividade" style="display:none;">' + atividade.codAti + '</td>';
-              grid = grid + '<td id="tdDataAtividade" contenteditable="true" class="tdData">' + atividade.datAti + '</td>';
-              grid = grid + '<td id="tdHoraInicial" contenteditable="true" name="tdHrInicial" class="tdHora">' + atividade.horIni + '</td>';
-              grid = grid + '<td id="tdHoraFinal" contenteditable="true" name="tdHrFinal" class="tdHora">' + atividade.horFin + '</td>';
-              grid = grid + '<td id="tdHoraTotal" bgcolor="#EBEBE4" contenteditable="false" name="tdHrTotal" readonly>' + atividade.horTot + '</td>';
-              grid = grid + '<td id="tdDescricaoAtividade" contenteditable="true" onkeypress="return (this.innerText.length <= 200)">' + atividade.desAti + '</td>';
-              grid = grid + '<td id="tdFatAtividade" class="checkbox col-sm-1"> <label><input type="checkbox" value="' + atividade.tipFat + '" ' + tipFat + '>Faturar</label></td>';
-              grid = grid + '<td id="tdButtonsAtividade">';
-              grid = grid + '<span class="table-up glyphicon glyphicon-arrow-up"></span>';
-              grid = grid + '<span class="table-down glyphicon glyphicon-arrow-down"></span>';
-              grid = grid + '<span class="table-remove glyphicon glyphicon-remove" onClick="excluiAtividade(' + atividade.codAti + ')"></span>';
-              grid = grid + '</td>';
-              grid = grid + '</tr>';
-
-            }
-            $("#tbAtividades #tbodyAtividades").html(grid);
-            aplicaMascaraRat();
-          }
-
-        });
-
-    $.ajax({
-          //Tipo de envio POST ou GET
-          type: "POST",
-          dataType: "text",
-          data: {
-            codigo: tdCodRAT,
-            action: "buscadespesa"
-          },
-
-          url: "../controller/ConsultaRATController.php",
-
-          success: function (dados) {
-            var json = $.parseJSON(dados);
-            var despesa = null;
-            var grid = "";
-            var fr = null;
-            var fn = null;
-            var nr = null;
-            var nn = null;
-
-            for (var j = 0; j < json.length; j++) {
-              despesa = json[j];
-
-              if(despesa.codFatDsp == 1)
-                fr = "selected";
-              else if(despesa.codFatDsp == 2)
-                fn = "selected";
-              else if(despesa.codFatDsp == 3)
-                nr = "selected";
-              else if(despesa.codFatDsp == 4)
-                nn = "selected";
-
-              grid = grid + '<tr class="fix">';
-              grid = grid + '<td id="seqDespesa" name="seqDespesa" style="display:none;">' + despesa.seqDsp + '</td>';
-              grid = grid + '<td id="tdDataDespesa" contenteditable="true" class="tdData">' + despesa.datDsp + '</td>';
-              //grid = grid + '<td id="tdDsDespesa" contenteditable="false"><select class="selectDsDespesa" style="width:100%;" name="dsDespesa" onChange="buscaTipoDespesaConsulta(this);" onblur="buscaValorUnitarioDespesaConsulta(this);"><option value='+ despesa.codDesDsp +' selected>'+ despesa.desDsp +'</option></select></td>';
-              grid = grid + '<td id="tdDsDespesa" contenteditable="false"><select class="selectDsDespesa" style="width:100%;" name="dsDespesa" onChange="buscaTipoDespesaConsulta(this);" onblur="buscaValorUnitarioDespesaConsulta(this);"></select></td>';
-              grid = grid + '<td id="tdTipoDespesa" bgcolor="#EBEBE4" contenteditable="false" readonly><select class="selectTipoDespesa" style="width:100%;" name="idDespesa"></select></td>';
-              grid = grid + '<td id="tdVlUni" bgcolor="#EBEBE4" contenteditable="false"readonly  name="tdVlUni">' + despesa.vlrUni + '</td>';
-              grid = grid + '<td id="tdQtdDespesa" contenteditable="true" name="tdQtdDespesa" class="tdNumerico" onkeyup="javascript:calculaTotal(this);">' + despesa.qtdDsp + '</td>';
-              grid = grid + '<td id="tdTotDespesa" bgcolor="#EBEBE4" contenteditable="false" name="totDespesa">' + despesa.totDsp + '</td>';
-              grid = grid + '<td id="tdFatDespesa" contenteditable="false">';
-              grid = grid + '<select style="width:100%;" id="cdFaturamento">';
-              grid = grid + '<option value="1" ' + fr + '> FR </option>';
-              grid = grid + '<option value="2" ' + fn + '> FN </option>';
-              grid = grid + '<option value="3" ' + nr + '> NR </option>';
-              grid = grid + '<option value="4" ' + nn + '> NN </option>';
-              grid = grid + '</select>';
-              grid = grid + '</td>';
-              grid = grid + '<td id="tdObsDespesa" contenteditable="true" onkeypress="return (this.innerText.length <= 200)">' + despesa.obsDsp + '</td>';
-              grid = grid + '<td id="tdButtonsDespesa">';
-              grid = grid + '<span class="table-up glyphicon glyphicon-arrow-up"></span>';
-              grid = grid + '<span class="table-down glyphicon glyphicon-arrow-down"></span>';
-              grid = grid + '<span class="table-remove glyphicon glyphicon-remove" onClick="excluiDespesa(' + despesa.seqDsp + ')"></span>';
-              grid = grid + '</td>';
-              grid = grid + '</tr>';
-
-            }
-            $("#tbDespesa #tbodyDespesas").html(grid);
-            aplicaMascaraRat();
-          }
-
-        });
-  }
-});
+      }
+    });
 
 }
 
