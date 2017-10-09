@@ -10,7 +10,8 @@ $("#document").ready(function() {
     var txbCep = $("#txbCep").val();
     var txbCidade = $("#txbCidade").val();
     var seqCidade = txbCidade.split("-");
-    var seqEstado = seqEstado.split("-");
+    var txbEstado = $("#txbEstado").val();
+    var seqEstado = txbEstado.split("-");
     var txbTelefone = $("#txbTelefone").val(); 
 
     var msgErro = validaCampos(txbRazaoSocial, txbNomeFantasia, txbCnpj, txbInscricao, txbCep, txbCidade, txbTelefone);

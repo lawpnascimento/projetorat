@@ -36,7 +36,7 @@ class ProjetoPersistencia{
         $valorHoraFat = $this->getModel()->getValorHoraFat();
         $obsProjeto = $this->getModel()->getObsProjeto();
 		
-		$sSql = "INSERT INTO tbprojeto (nomPrj, Produto_codPro, Cliente_codCli, datIni, vlrHorCom,vlrComFat, obsPrj)
+		$sSql = "INSERT INTO tbprojeto (nomPrj, Produto_codPro, Cliente_codCli, datIni, vlrHorCom,vlrHorFat, obsPrj)
                           VALUES ('". $projeto ."'
                                  ,'". $produto ."'
                                  ,'". $cliente ."'

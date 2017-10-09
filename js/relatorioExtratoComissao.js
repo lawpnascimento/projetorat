@@ -113,7 +113,7 @@ function gerarRelatorio(txbDatIni, txbDatFin, txbConsultor, txbCliente){
 
 function downLoadExtratoComissao(nmRelatorio){
 
-  window.open("http://localhost/projetorat/trunk/estrutura/downloadFile.php?nmRelatorio=" + nmRelatorio , "_blank");
+  window.open("http://NB-LUCAS02/projetorat/trunk/estrutura/downloadFile.php?nmRelatorio=" + nmRelatorio , "_blank");
 
 }
 
@@ -137,7 +137,7 @@ function validaCampos(txbDatIni, txbDatFin){
     msgErro = msgErro + "<b>Data Final</b> é um campo de preenchimento obrigatorio<br/>";
   }
   else if (txbDatIni > txbDatFin){
-    msgErro = msgErro + "<b>Data Inicial</b> deve ser antes que a hora final<br/>";
+    msgErro = msgErro + "<b>Data Inicial</b> deve ser anterior a data final<br/>";
   }
   return msgErro;
 

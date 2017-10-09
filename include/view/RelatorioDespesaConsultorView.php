@@ -29,7 +29,7 @@
               </div>
               <div class="form-group">
                 <div class="col-md-3">
-                  <label for="consultor">Consultor</label>
+                  <label for="consultor">Usuario</label>
                   <input id="txbConsultor" type="text" class="form-control" name="txbConsultor" placeholder="Nome" maxlength="50"></input>
                 </div>
               </div>  
