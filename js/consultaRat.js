@@ -492,6 +492,8 @@ function verificaPapelUsuario(){
 }
 
 function enviaEmailRAT(tdUsuRAT, tdCodRAT){
+  nmRelatorio = "RAT_" + dataAtual() + '_' +  horaAtual();
+
   $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
@@ -499,6 +501,7 @@ function enviaEmailRAT(tdUsuRAT, tdCodRAT){
         data: {
           usuariorat: tdUsuRAT[0],
           codigorat: tdCodRAT,
+          nmRelatorio: nmRelatorio,
           action: "enviaemailrat"
         },
 
@@ -700,6 +703,16 @@ function alteraRAT(tdCodRAT, tdSitRAT, tdUsuRAT){
     });
 
 }
+
+function dataAtual() {
+    var date = new Date();
+    return String(date.getDate()) + String(date.getMonth()) + String(date.getFullYear());
+  }
+
+function horaAtual() {
+    var date = new Date();
+    return String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds());
+  }
 
 /*
 function aplicaCorRAT(){

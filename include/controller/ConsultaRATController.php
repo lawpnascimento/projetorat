@@ -126,7 +126,7 @@ switch($_POST["action"]){
 
 		$persistencia->setModel($model);
 
-		$persistencia->enviaEmailRAT();
+		$persistencia->enviaEmailRAT($_POST["nmRelatorio"]);
 
 		$persistencia->atualizaEnvioRAT();
 

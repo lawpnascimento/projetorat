@@ -228,10 +228,10 @@ class FaturamentoPersistencia{
 
 		$sSql = "SELECT rat.codRat		
 										,(SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(`horTot`)))) sumHorTot
-										,SUM((prj.vlrHorFat * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 0)))) sumFatTot
+										,SUM((prj.vlrHorFat * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumFatTot
 										,SUM((prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumBasCalCom
-										,SUM(CONCAT('0.',usu.perComCli) * (prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 0)))) sumComTot
-										,SUM((prj.vlrHorFat * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 0))) - CONCAT('0.',usu.perComCli) * (prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 0)))) sumVlrLiq
+										,SUM(CONCAT('0.',usu.perComCli) * (prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumComTot
+										,SUM((prj.vlrHorFat * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1))) - CONCAT('0.',usu.perComCli) * (prj.vlrHorCom * cast(time_to_sec(horTot) / (60 * 60) as decimal(10, 1)))) sumVlrLiq
 								 	 FROM tbrat rat
 								 	 JOIN tbatividade ati
 								 	 	ON ati.RAT_codRAT = rat.codRat

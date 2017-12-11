@@ -24,7 +24,7 @@ class Email{
 
     $mail = new PHPMailer();
     $mail->IsSMTP();		// Ativar SMTP
-    $mail->SMTPDebug = 1;		// Debugar: 1 = erros e mensagens, 2 = mensagens apenas
+    $mail->SMTPDebug = 3;		// Debugar: 1 = erros e mensagens, 2 = mensagens apenas
     $mail->SMTPAuth = true;		// Autenticação ativada
     $mail->SMTPSecure = $this->smtp;;	// SSL REQUERIDO pelo GMail
     $mail->Host = $this->host;	// SMTP utilizado
@@ -37,6 +37,13 @@ class Email{
     $mail->AddAddress($email);
     $mail->AddCC($cc);
     $mail->addAttachment($anexo, "RAT.pdf");
+    $mail->SMTPOptions = array(
+      'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+      )
+    );
 
     if(!$mail->Send()) {
       $error = 'Mail error: '.$mail->ErrorInfo;

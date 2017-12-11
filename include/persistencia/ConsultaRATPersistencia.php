@@ -2,6 +2,9 @@
 
 require_once("../../estrutura/conexao.php");
 require_once("../../estrutura/conf_email.php");
+require_once("../../phpjasper/vendor/autoload.php");
+
+use JasperPHP\JasperPHP;
 
 class ConsultaRATPersistencia{
 	protected $model;
@@ -375,13 +378,15 @@ class ConsultaRATPersistencia{
 		$this->getConexao()->fechaConexao();
 	}
 
-	public function enviaEmailRAT(){
+	public function enviaEmailRAT($nmRelatorio){
 	  $this->getConexao()->conectaBanco();
 
-	  $usuRAT = $this->getModel()->getUsuario();
+	  $codUsu = $this->getModel()->getUsuario();
 	  $codRAT = $this->getModel()->getCodigo();
 
-      $sSql = "SELECT rat.codRat
+      $sSql = "SELECT rat.codRat codRat
+      		 		  ,cli.codCli codCli
+      				  ,res.codRes codRes
       				  ,CONCAT(usu.nomUsu, ' ' ,sobrenomeUsu) nomUsu
       				  ,usu.desEml desEml
 					  ,cli.desRazaoSocial desRazaoSocial
@@ -395,13 +400,15 @@ class ConsultaRATPersistencia{
 				 JOIN tbresponsavel res
 				   ON res.codRes = rat.Responsavel_codRes
 				 WHERE rat.codRat = " . $codRAT . "
-				 AND usu.codUsu = " . $usuRAT;
+				 AND usu.codUsu = " . $codUsu;
 
       $resultado = mysql_query($sSql);
 
       while ($linha = mysql_fetch_assoc($resultado)) {
 
       	  $nomeUsuario = $linha["nomUsu"];
+      	  $codCli = $linha["codCli"];
+      	  $codRes = $linha["codRes"];
           $emailUsuario = $linha["desEml"];
           $razaoSocial = $linha["desRazaoSocial"];
           $nomeResponsavel = $linha["nomRes"];
@@ -415,8 +422,42 @@ class ConsultaRATPersistencia{
 
 	  $this->getConexao()->fechaConexao();
 
+		$input = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\templates\EnvioRAT.jrxml';
+		$output = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\templates\pdf\\' . $nmRelatorio;
+		$jdbc_dir = 'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\bin\jasperstarter\jdbc';
+
+		$options = [
+			'format' => ['pdf'],
+			'locale' => 'en',
+			'params' => ['txbRat' => $codRAT,
+			'txbConsultor' => $codUsu,
+			'txbCliente' => $codCli,
+			'txbResponsavel' => $codRes],
+			'db_connection' => [
+				'driver' => 'mysql',
+				'host' => 'localhost',
+				'port' => '3306',
+				'database' => 'dbprojetorat',
+				'username' => 'root',
+				'password' => 'root',
+				'jdbc_driver' => 'com.mysql.jdbc.Driver',
+				'jdbc_url' => 'jdbc:mysql://localhost:3306/dbprojetorat',
+				'jdbc_dir' => $jdbc_dir
+			]
+		];
+
+		$jasper = new JasperPHP;
+
+		$jasper->process(
+			$input,
+			$output,
+			$options
+		)->execute();
+
+		$anexo =  'C:\xampp\htdocs\projetorat\trunk\phpjasper\vendor\geekcom\phpjasper\templates\pdf\\' .  $nmRelatorio . ".pdf";
+
       $email = new Email();
-      $email->enviaEmail($emailResponsavel,$mensagem,$assunto,$emailUsuario);
+      $email->enviaEmail($emailResponsavel,$mensagem,$assunto,$emailUsuario,$anexo);
   	}
 
 	public function atualizaEnvioRAT(){

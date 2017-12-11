@@ -81,7 +81,7 @@ function gerarRelatorio(txbDatIni, txbDatFin, txbConsultor){
 
 function downLoadExtratoDespesaConsultor(nmRelatorio){
 
-  window.open("http://NB-LUCAS02/projetorat/trunk/estrutura/downloadFile.php?nmRelatorio=" + nmRelatorio , "_blank");
+  window.open("http://localhost/projetorat/trunk/estrutura/downloadFile.php?nmRelatorio=" + nmRelatorio , "_blank");
 
 }
 
