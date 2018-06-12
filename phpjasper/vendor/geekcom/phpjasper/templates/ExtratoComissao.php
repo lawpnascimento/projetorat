@@ -3,7 +3,6 @@ require_once("../../../autoload.php");
 
 use JasperPHP\JasperPHP;
 
-
 $txbDatIni = $_POST["txbDatIni"];
 $txbDatFin = $_POST["txbDatFin"];
 $txbConsultor = $_POST["txbConsultor"];

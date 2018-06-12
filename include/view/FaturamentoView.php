@@ -65,7 +65,7 @@
     </div>
 
         <legend class="scheduler-border">RAT a serem faturados</legend>
-        <div class="panel panel-default" style="overflow-y: scroll; height:200px !important;">
+        <div class="panel panel-default" style="overflow-y: scroll; height:100px !important;">
               <!-- Tabela da consulta -->
               <table id="tableFatRAT" class="table table-condensed table-bordered">
                 <thead>
