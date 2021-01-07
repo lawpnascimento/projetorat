@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PROJETO RAT</title>
+	<title>PROJETO RAT - Heroku</title>
 	<meta charset="utf-8">
 	<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
