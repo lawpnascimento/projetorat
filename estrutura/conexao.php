@@ -8,11 +8,11 @@ class Conexao {
     private $conexao;
 
     public function __construct() {
-        $this->hostBanco    = 'localhost';
-        $this->usuarioBanco = 'root';
-        $this->senhaBanco   = 'root';
+        $this->hostBanco    = 'us-cdbr-east-02.cleardb.com';
+        $this->usuarioBanco = 'badb62c5e08d78';
+        $this->senhaBanco   = 'df0925e3';
         $this->portaBanco   = '3306';
-        $this->dataBase     = 'dbprojetorat';
+        $this->dataBase     = 'heroku_ec083eedceea9f4';
     }
 
     public function conectaBanco() {
